@@ -13,12 +13,12 @@
 hero:
   eyebrow: "NOAA COASTWATCH WEST COAST NODE"
 
-  title: "Satellite Data for the Coastal Ocean"
+  title: "Providing Satellite Data for the Coastal Ocean"
 
   description: >-
-    Explore satellite-derived oceanographic datasets,
-    environmental monitoring tools, and scientific
-    resources for the U.S. West Coast.
+    View and download over 800 regional and global 
+    datasets, including satellite data, model output, 
+    and in-situ measurements.
 
   background_image: "images/productivity.png"
 
@@ -57,8 +57,10 @@ resources_section:
   cards:
     - title: "ERDDAP Data Server"
       description: >-
-        Access, subset, visualize, and download satellite
-        and environmental datasets in a variety of formats.
+        The ERDDAP data server provides a simple, consistent way 
+        to subset and download environmental datasets in common 
+        file formats with options to make graphs and maps.
+
       buttons:
         - label: "Access ERDDAP"
           url: "https://coastwatch.pfeg.noaa.gov/erddap/index.html"
@@ -78,9 +80,11 @@ resources_section:
 
     - title: "Software & Tools"
       description: >-
-        Discover software, R and Python packages, and
-        resources for accessing and analyzing
-        oceanographic data.
+        Explore tools for accessing and analyzing 
+        satellite and oceanographic data via ERDDAP, 
+        including R and Python packages and the CoastWatch 
+        Utilities software for different data formats.
+
       buttons:
         - label: "Explore Software"
           url: "tools.qmd"
