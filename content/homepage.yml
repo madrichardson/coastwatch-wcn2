@@ -1,0 +1,101 @@
+
+# ==========================================================
+# COASTWATCH WEST COAST NODE — HOMEPAGE CONTENT
+# ==========================================================
+# Editable through Pages CMS.
+# Layout and styling are controlled by index.qmd and styles.css.
+
+
+# ----------------------------------------------------------
+# Hero section
+# ----------------------------------------------------------
+
+hero:
+  eyebrow: "NOAA COASTWATCH WEST COAST NODE"
+
+  title: "Satellite Data for the Coastal Ocean"
+
+  description: >-
+    Explore satellite-derived oceanographic datasets,
+    environmental monitoring tools, and scientific
+    resources for the U.S. West Coast.
+
+  background_image: "images/productivity.png"
+
+  buttons:
+    - label: "Explore Data Catalog"
+      url: "data_catalog.qmd"
+      style: "primary"
+
+    - label: "Access ERDDAP"
+      url: "https://coastwatch.pfeg.noaa.gov/erddap/index.html"
+      style: "secondary"
+
+
+# ----------------------------------------------------------
+# News & Events section
+# ----------------------------------------------------------
+# News announcements are managed separately in:
+# content/news.yml
+
+news_section:
+  eyebrow: "STAY INFORMED"
+  title: "News & Events"
+  archive_label: "View News Archive"
+  archive_url: "news_archive.qmd"
+  max_items: 3
+
+
+# ----------------------------------------------------------
+# Resources section
+# ----------------------------------------------------------
+
+resources_section:
+  eyebrow: "DATA & RESOURCES"
+  title: "Explore CoastWatch Resources"
+
+  cards:
+    - title: "ERDDAP Data Server"
+      description: >-
+        Access, subset, visualize, and download satellite
+        and environmental datasets in a variety of formats.
+      buttons:
+        - label: "Access ERDDAP"
+          url: "https://coastwatch.pfeg.noaa.gov/erddap/index.html"
+          style: "primary"
+        - label: "Learn More"
+          url: "data_server.qmd"
+          style: "secondary"
+
+    - title: "Dataset Monitoring"
+      description: >-
+        Explore the availability and update status of
+        datasets hosted on the CoastWatch ERDDAP server.
+      buttons:
+        - label: "View Dataset Monitor"
+          url: "dataset_monitor.qmd"
+          style: "primary"
+
+    - title: "Software & Tools"
+      description: >-
+        Discover software, R and Python packages, and
+        resources for accessing and analyzing
+        oceanographic data.
+      buttons:
+        - label: "Explore Software"
+          url: "tools.qmd"
+          style: "primary"
+
+    - title: "Training & Tutorials"
+      description: >-
+        Learn how to work with satellite oceanographic
+        datasets through tutorials, examples, and
+        training resources.
+      buttons:
+        - label: "Training Resources"
+          url: "training.qmd"
+          style: "primary"
+        - label: "Code Gallery"
+          url: "code_gallery.qmd"
+          style: "secondary"
+

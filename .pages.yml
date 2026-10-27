@@ -1,9 +1,27 @@
 
+# ==========================================================
+# COASTWATCH WEST COAST NODE — PAGES CMS CONFIGURATION
+# ==========================================================
+
+# ----------------------------------------------------------
+# Media management
+# ----------------------------------------------------------
+
 media:
   input: images
   output: /images
 
+
+# ----------------------------------------------------------
+# Editable website content
+# ----------------------------------------------------------
+
 content:
+
+  # ========================================================
+  # NEWS & EVENTS
+  # ========================================================
+
   - name: news
     label: News & Events
     type: file
@@ -34,36 +52,156 @@ content:
           - name: expiration
             label: Expiration Date
             type: date
-```
 
-If `.pages.yml` already has other collections, don't replace them or duplicate the top-level `media:` and `content:` keys.
 
-## 4. Make sure Quarto can read YAML
+  # ========================================================
+  # HOMEPAGE
+  # ========================================================
 
-Install PyYAML in your Python environment:
+  - name: homepage
+    label: Homepage
+    type: file
+    path: content/homepage.yml
 
-```bash
-python -m pip install pyyaml pandas ipython
-```
+    fields:
 
-And include these dependencies in `requirements.txt` for GitHub Actions:
+      # ----------------------------------------------------
+      # Hero section
+      # ----------------------------------------------------
 
-```text
-pyyaml
-pandas
-ipython
-```
+      - name: hero
+        label: Hero Section
+        type: object
 
-## 5. Test the homepage
+        fields:
+          - name: eyebrow
+            label: Eyebrow Text
+            type: string
 
-```bash
-quarto preview
-```
+          - name: title
+            label: Hero Title
+            type: string
+            required: true
 
-You should see the three most recent non-expired announcements from `content/news.yml`, styled using the new homepage CSS.
+          - name: description
+            label: Hero Description
+            type: text
 
-When you connect the new repository to Pages CMS, colleagues will be able to add, edit, and remove announcements through the CMS interface. Those edits will be committed to GitHub, and your deployment workflow will rebuild the website.
+          - name: background_image
+            label: Background Image
+            type: image
 
-**This should be our standard approach for the rebuild:** keep editable content in YAML, use Quarto to generate the HTML, and reserve Python scripts and automated data files for the parts of the website that genuinely require them.
+          - name: buttons
+            label: Hero Buttons
+            type: object
+            list: true
 
-Next, we can make the hero heading, description, and resource cards editable through Pages CMS too, without changing their visual design.
+            fields:
+              - name: label
+                label: Button Label
+                type: string
+                required: true
+
+              - name: url
+                label: Button URL
+                type: string
+                required: true
+
+              - name: style
+                label: Button Style
+                type: select
+                options:
+                  values:
+                    - value: primary
+                      label: Primary
+                    - value: secondary
+                      label: Secondary
+
+
+      # ----------------------------------------------------
+      # News & Events section settings
+      # ----------------------------------------------------
+
+      - name: news_section
+        label: News Section Settings
+        type: object
+
+        fields:
+          - name: eyebrow
+            label: Eyebrow Text
+            type: string
+
+          - name: title
+            label: Section Title
+            type: string
+
+          - name: archive_label
+            label: Archive Link Label
+            type: string
+
+          - name: archive_url
+            label: Archive URL
+            type: string
+
+          - name: max_items
+            label: Number of News Items
+            type: number
+
+
+      # ----------------------------------------------------
+      # Resources section
+      # ----------------------------------------------------
+
+      - name: resources_section
+        label: Resources Section
+        type: object
+
+        fields:
+          - name: eyebrow
+            label: Eyebrow Text
+            type: string
+
+          - name: title
+            label: Section Title
+            type: string
+
+          - name: cards
+            label: Resource Cards
+            type: object
+            list: true
+
+            fields:
+              - name: title
+                label: Card Title
+                type: string
+                required: true
+
+              - name: description
+                label: Description
+                type: text
+
+              - name: buttons
+                label: Card Buttons
+                type: object
+                list: true
+
+                fields:
+                  - name: label
+                    label: Button Label
+                    type: string
+                    required: true
+
+                  - name: url
+                    label: Button URL
+                    type: string
+                    required: true
+
+                  - name: style
+                    label: Button Style
+                    type: select
+                    options:
+                      values:
+                        - value: primary
+                          label: Primary
+                        - value: secondary
+                          label: Secondary
