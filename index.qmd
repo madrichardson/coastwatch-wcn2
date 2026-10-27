@@ -1,7 +1,224 @@
+
 ---
-title: "website"
+pagetitle: "CoastWatch West Coast Node"
+anchor-sections: false
+format:
+  html:
+    toc: false
+    page-layout: full
 ---
 
-This is a Quarto website.
+::: {.cw-homepage}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+<!-- ==========================================
+     HERO SECTION
+     ========================================== -->
+
+::: {.cw-hero}
+
+::: {.cw-hero-content}
+
+<div class="cw-eyebrow">
+  NOAA COASTWATCH WEST COAST NODE
+</div>
+
+# Providing Satellite Data for the Coastal Ocean
+
+View and download over 800 regional and global datasets, including satellite data, model output, and in-situ measurements.
+
+<div class="cw-hero-actions">
+  <a href="data_catalog.qmd" class="cw-btn cw-btn-light">
+    Explore Data Catalog
+  </a>
+
+  <a href="https://coastwatch.pfeg.noaa.gov/erddap/index.html"
+     class="cw-btn cw-btn-outline"
+     target="_blank" rel="noopener noreferrer">
+    Access ERDDAP
+  </a>
+</div>
+
+:::
+
+:::
+
+
+<!-- ==========================================
+     NEWS & EVENTS
+     ========================================== -->
+
+::: {.cw-section}
+
+::: {.cw-section-header}
+
+::: {.cw-section-heading}
+
+<span class="cw-section-label">STAY INFORMED</span>
+
+## News & Events
+
+:::
+
+<a href="news_archive.qmd" class="cw-section-link">View News Archive &rarr;</a>
+
+:::
+
+```{python}
+import pandas as pd
+import yaml
+from datetime import date
+from html import escape
+from IPython.display import display, HTML
+
+# Load news announcements from YAML
+with open("content/news.yml", "r", encoding="utf-8") as file:
+    news_data = yaml.safe_load(file) or {}
+
+df = pd.DataFrame(news_data.get("news", []))
+
+if not df.empty:
+    # Parse publication dates
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df = df[df["date"].notna()]
+
+    # Hide expired announcements from homepage
+    today = pd.Timestamp(date.today())
+
+    if "expiration" in df.columns:
+        df["expiration"] = pd.to_datetime(
+            df["expiration"],
+            errors="coerce"
+        )
+
+        df = df[
+            df["expiration"].isna()
+            | (df["expiration"] >= today)
+        ]
+
+    # Sort newest first and show latest three
+    df = df.sort_values("date", ascending=False).head(3)
+
+html = '<div class="cw-news-grid">'
+
+for _, row in df.iterrows():
+    title = escape(str(row["title"]))
+    description = str(row.get("description") or "")
+    formatted_date = row["date"].strftime("%B %d, %Y")
+
+    html += f"""
+    <article class="cw-news-card">
+      <div class="cw-news-card-body">
+        <span class="cw-news-date">{formatted_date}</span>
+        <h3>{title}</h3>
+        <div class="cw-news-description">
+          {description}
+        </div>
+      </div>
+    </article>
+    """
+
+html += "</div>"
+
+display(HTML(html))
+```
+
+:::
+
+
+
+<!-- ==========================================
+     EXPLORE RESOURCES
+     ========================================== -->
+
+::: {.cw-section .cw-resources-section}
+
+::: {.cw-section-header}
+
+::: {.cw-section-heading}
+
+<span class="cw-section-label">DATA & RESOURCES</span>
+
+## Explore CoastWatch Resources
+
+:::
+
+:::
+
+::: {.cw-resource-grid}
+
+::: {.cw-resource-card}
+
+### ERDDAP Data Server
+
+The ERDDAP data server provides a simple, consistent way to subset and download environmental datasets in common file formats with options to make graphs and maps.
+
+<div class="cw-resource-links">
+  <a href="https://coastwatch.pfeg.noaa.gov/erddap/index.html"
+     class="cw-resource-btn"
+     target="_blank" rel="noopener noreferrer">
+    Access ERDDAP
+  </a>
+
+  <a href="data_server.qmd"
+     class="cw-resource-btn cw-resource-btn-secondary">
+    Learn More
+  </a>
+</div>
+
+:::
+
+::: {.cw-resource-card}
+
+### Dataset Monitoring
+
+Explore the availability and update status of datasets hosted on the CoastWatch ERDDAP server.
+
+<div class="cw-resource-links">
+  <a href="dataset_monitor.qmd"
+     class="cw-resource-btn">
+    View Dataset Monitor
+  </a>
+</div>
+
+:::
+
+::: {.cw-resource-card}
+
+### Software & Tools
+
+Explore tools for accessing and analyzing satellite and oceanographic data via ERDDAP, including R and Python packages and the CoastWatch Utilities software for different data formats.
+
+<div class="cw-resource-links">
+  <a href="tools.qmd"
+     class="cw-resource-btn">
+    Explore Software
+  </a>
+</div>
+
+:::
+
+::: {.cw-resource-card}
+
+### Training & Tutorials
+
+Learn how to work with satellite oceanographic datasets through tutorials, examples, and training resources.
+
+<div class="cw-resource-links">
+  <a href="training.qmd"
+     class="cw-resource-btn">
+    Training Resources
+  </a>
+
+  <a href="code_gallery.qmd"
+     class="cw-resource-btn cw-resource-btn-secondary">
+    Code Gallery
+  </a>
+</div>
+
+:::
+
+:::
+
+:::
+
+:::

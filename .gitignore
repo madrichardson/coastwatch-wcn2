@@ -1,2 +1,12 @@
 /.quarto/
 **/*.quarto_ipynb
+
+# macOS
+.DS_Store
+
+# Quarto temporary files
+.quarto/
+
+# Python
+__pycache__/
+*.pyc

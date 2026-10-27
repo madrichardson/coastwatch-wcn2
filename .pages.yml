@@ -1,0 +1,69 @@
+
+media:
+  input: images
+  output: /images
+
+content:
+  - name: news
+    label: News & Events
+    type: file
+    path: content/news.yml
+
+    fields:
+      - name: news
+        label: News Announcements
+        type: object
+        list: true
+
+        fields:
+          - name: title
+            label: Announcement Title
+            type: string
+            required: true
+
+          - name: description
+            label: Description
+            type: text
+            required: true
+
+          - name: date
+            label: Publication Date
+            type: date
+            required: true
+
+          - name: expiration
+            label: Expiration Date
+            type: date
+```
+
+If `.pages.yml` already has other collections, don't replace them or duplicate the top-level `media:` and `content:` keys.
+
+## 4. Make sure Quarto can read YAML
+
+Install PyYAML in your Python environment:
+
+```bash
+python -m pip install pyyaml pandas ipython
+```
+
+And include these dependencies in `requirements.txt` for GitHub Actions:
+
+```text
+pyyaml
+pandas
+ipython
+```
+
+## 5. Test the homepage
+
+```bash
+quarto preview
+```
+
+You should see the three most recent non-expired announcements from `content/news.yml`, styled using the new homepage CSS.
+
+When you connect the new repository to Pages CMS, colleagues will be able to add, edit, and remove announcements through the CMS interface. Those edits will be committed to GitHub, and your deployment workflow will rebuild the website.
+
+**This should be our standard approach for the rebuild:** keep editable content in YAML, use Quarto to generate the HTML, and reserve Python scripts and automated data files for the parts of the website that genuinely require them.
+
+Next, we can make the hero heading, description, and resource cards editable through Pages CMS too, without changing their visual design.
