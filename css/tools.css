@@ -1,0 +1,227 @@
+
+/* ==========================================================
+   COASTWATCH — SOFTWARE TOOLS & RESOURCES
+   ========================================================== */
+
+.cw-tools {
+  --tools-navy: #123B5D;
+  --tools-blue: #176A91;
+  --tools-teal: #168C96;
+  --tools-light: #EAF3F7;
+  --tools-border: #DCE5EB;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #263746;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-tools-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+  padding: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 3.5rem;
+}
+
+.cw-tools-hero::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  right: -100px;
+  top: -180px;
+  pointer-events: none;
+}
+
+.cw-tools-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+}
+
+.cw-tools-eyebrow {
+  display: block;
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8rem;
+}
+
+.cw-tools-hero h1 {
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.cw-tools-hero p {
+  color: #DCEAF2;
+  font-size: 1.08rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ==========================================================
+   SECTION HEADING
+   ========================================================== */
+
+.cw-tools-section-heading {
+  margin-bottom: 2rem;
+}
+
+.cw-tools-section-label {
+  display: block;
+  color: var(--tools-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.cw-tools-section-heading h2 {
+  color: var(--tools-navy);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0 0 0.6rem;
+}
+
+.cw-tools-section-heading p {
+  color: #586D7A;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0;
+}
+
+/* ==========================================================
+   RESOURCE CARDS
+   ========================================================== */
+
+.cw-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.cw-tool-card {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid var(--tools-border);
+  border-top: 4px solid var(--tools-teal);
+  border-radius: 13px;
+  padding: 1.8rem;
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cw-tool-card:nth-child(even) {
+  border-top-color: var(--tools-blue);
+}
+
+.cw-tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(18, 59, 93, 0.10);
+}
+
+.cw-tool-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.3rem;
+}
+
+.cw-tool-category {
+  background: var(--tools-light);
+  color: var(--tools-blue);
+  border-radius: 5px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.cw-tool-language {
+  color: #637B89;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.cw-tool-card h3 {
+  color: var(--tools-navy);
+  font-size: 1.3rem;
+  font-weight: 750;
+  margin: 0 0 0.8rem;
+}
+
+.cw-tool-description {
+  color: #526878;
+  line-height: 1.75;
+  font-size: 0.96rem;
+  margin: 0 0 1.6rem;
+}
+
+.cw-tool-card-footer {
+  margin-top: auto;
+  padding-top: 0.6rem;
+}
+
+.cw-tool-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--tools-blue);
+  color: #FFFFFF !important;
+  padding: 0.7rem 1.1rem;
+  border-radius: 7px;
+  text-decoration: none !important;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.cw-tool-button:hover {
+  background: var(--tools-navy);
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 850px) {
+
+  .cw-tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .cw-tools {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cw-tools-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-tool-card {
+    padding: 1.4rem;
+  }
+
+}
