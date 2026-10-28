@@ -1,0 +1,341 @@
+/* ==========================================================
+   COASTWATCH DATA CATALOG
+   ========================================================== */
+
+.cw-catalog {
+  --catalog-navy: #123B5D;
+  --catalog-blue: #176A91;
+  --catalog-teal: #168C96;
+  --catalog-border: #DCE5EB;
+  --catalog-light: #EAF3F7;
+
+  color: #263746;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* Introduction */
+
+.cw-catalog-intro {
+  max-width: 900px;
+  margin-bottom: 2.5rem;
+}
+
+.cw-catalog-eyebrow {
+  color: var(--catalog-teal);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.cw-catalog-intro h1 {
+  color: var(--catalog-navy);
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  margin: 0.45rem 0 1rem;
+}
+
+.cw-catalog-intro p {
+  line-height: 1.8;
+  color: #475D6C;
+}
+
+.cw-catalog a {
+  color: var(--catalog-blue);
+}
+
+/* Main filter panel */
+
+.cw-catalog-panel {
+  background: #FFFFFF;
+  border: 1px solid var(--catalog-border);
+  border-radius: 16px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow: 0 8px 30px rgba(18, 59, 93, 0.055);
+}
+
+.cw-catalog-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cw-catalog-panel-head h2,
+.cw-catalog-results-heading h2 {
+  color: var(--catalog-navy);
+  font-size: 1.45rem;
+  margin: 0.35rem 0;
+}
+
+.cw-catalog-panel-head p {
+  color: #586D7A;
+  margin: 0.4rem 0 0;
+}
+
+/* Reset button */
+
+.cw-catalog-reset {
+  background: #FFFFFF;
+  color: var(--catalog-blue);
+  border: 1px solid var(--catalog-blue);
+  border-radius: 7px;
+  padding: 0.65rem 1rem;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cw-catalog-reset:hover {
+  background: var(--catalog-light);
+}
+
+/* Search */
+
+.cw-catalog-search-wrap {
+  margin-bottom: 1.3rem;
+}
+
+.cw-catalog-search-wrap label,
+.cw-catalog-filter label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--catalog-navy);
+  margin-bottom: 0.4rem;
+}
+
+.cw-catalog-search-wrap input,
+.cw-catalog-filter select {
+  width: 100%;
+  min-height: 43px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #C6D6E0;
+  border-radius: 7px;
+  background: #FFFFFF;
+  color: #263746;
+  box-sizing: border-box;
+}
+
+.cw-catalog-search-wrap input:focus,
+.cw-catalog-filter select:focus {
+  outline: 2px solid var(--catalog-teal);
+  outline-offset: 1px;
+}
+
+/* Progressive filters */
+
+.cw-catalog-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cw-catalog-filter[hidden] {
+  display: none !important;
+}
+
+/* Results heading */
+
+.cw-catalog-results-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-top: 1px solid var(--catalog-border);
+  padding-top: 1.4rem;
+  margin-bottom: 0.8rem;
+}
+
+#catalogCount {
+  color: #5B7280;
+  font-size: 0.9rem;
+}
+
+/* Dataset table */
+
+.cw-catalog-table-wrap {
+  overflow-x: auto;
+}
+
+.cw-catalog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.cw-catalog-table th {
+  background: var(--catalog-navy);
+  color: #FFFFFF;
+  text-align: left;
+  padding: 0.9rem 1rem;
+}
+
+.cw-catalog-table th:first-child {
+  border-radius: 7px 0 0 0;
+}
+
+.cw-catalog-table th:last-child {
+  border-radius: 0 7px 0 0;
+}
+
+.cw-catalog-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--catalog-border);
+  vertical-align: middle;
+}
+
+.cw-catalog-table th:nth-child(1) {
+  width: 65%;
+}
+
+.cw-catalog-table th:nth-child(2) {
+  width: 15%;
+}
+
+.cw-catalog-table th:nth-child(3) {
+  width: 20%;
+}
+
+.cw-catalog-data-row:nth-of-type(4n + 1) {
+  background: #F7FAFC;
+}
+
+/* Ensure hidden rows remain hidden */
+
+.cw-catalog-data-row[hidden],
+.cw-catalog-detail-row[hidden],
+.cw-catalog-empty[hidden] {
+  display: none !important;
+}
+
+/* Dataset title and expand button */
+
+.cw-catalog-toggle {
+  border: 0;
+  background: none;
+  color: var(--catalog-blue);
+  padding: 0;
+  text-align: left;
+  font-weight: 650;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.cw-catalog-toggle:hover {
+  text-decoration: underline;
+}
+
+.cw-catalog-chevron {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 1.1rem;
+  transition: transform 0.2s;
+}
+
+.cw-catalog-toggle[aria-expanded="true"] .cw-catalog-chevron {
+  transform: rotate(180deg);
+}
+
+/* Product labels */
+
+.cw-catalog-product {
+  display: inline-block;
+  background: var(--catalog-light);
+  color: var(--catalog-navy);
+  padding: 0.25rem 0.6rem;
+  border-radius: 5px;
+  font-size: 0.83rem;
+  font-weight: 650;
+}
+
+/* ERDDAP access links */
+
+.cw-catalog-access-link {
+  font-size: 0.9rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.cw-catalog-access-dropdown {
+  max-width: 100%;
+  width: 170px;
+  border: 1px solid #C6D6E0;
+  border-radius: 6px;
+  padding: 0.45rem;
+  background: #FFFFFF;
+  color: var(--catalog-navy);
+  cursor: pointer;
+}
+
+.cw-catalog-unavailable {
+  color: #6B7D87;
+  font-size: 0.85rem;
+}
+
+/* Expanded dataset descriptions */
+
+.cw-catalog-detail-row {
+  background: #F1F7FA;
+}
+
+.cw-catalog-detail-content {
+  padding: 0.3rem 0.5rem;
+  line-height: 1.7;
+  color: #435969;
+}
+
+.cw-catalog-detail-content p {
+  margin: 0 0 0.8rem;
+}
+
+.cw-catalog-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.3rem;
+  font-size: 0.86rem;
+}
+
+/* Empty results */
+
+.cw-catalog-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #536A79;
+}
+
+/* Accessibility */
+
+.cw-catalog-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Responsive layout */
+
+@media (max-width: 767px) {
+
+  .cw-catalog {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cw-catalog-panel-head {
+    flex-direction: column;
+  }
+
+  .cw-catalog-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-catalog-table {
+    min-width: 640px;
+  }
+
+}

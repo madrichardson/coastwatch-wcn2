@@ -205,3 +205,97 @@ content:
                           label: Primary
                         - value: secondary
                           label: Secondary
+  
+  # ========================================================
+  # DATA CATALOG
+  # ========================================================
+
+  - name: data_catalog
+    label: Data Catalog
+    type: file
+    path: content/data_catalog.yml
+
+    fields:
+      - name: datasets
+        label: Datasets
+        type: object
+        list: true
+
+        fields:
+          - name: title
+            label: Dataset Title
+            type: string
+            required: true
+
+          - name: product
+            label: Data Product
+            type: string
+            required: true
+
+          - name: description
+            label: Dataset Description
+            type: text
+
+          - name: dates
+            label: Date Coverage
+            type: string
+
+          - name: resolution
+            label: Resolution
+            type: string
+
+          - name: region
+            label: Region
+            type: string
+
+          - name: sensor_type
+            label: Sensor Type
+            type: string
+
+          - name: time_series_type
+            label: Time Series Type
+            type: string
+
+          - name: geostationary
+            label: Geostationary
+            type: select
+            options:
+              values: ["Yes", "No"]
+
+          - name: blended
+            label: Blended Product
+            type: select
+            options:
+              values: ["Yes", "No"]
+
+          - name: gap_filled
+            label: Gap Filled
+            type: select
+            options:
+              values: ["Yes", "No"]
+
+          - name: derived_product
+            label: Derived Product
+            type: select
+            options:
+              values: ["Yes", "No"]
+
+          - name: composite
+            label: Composite
+            type: string
+
+          - name: access
+            label: ERDDAP Access Links
+            type: object
+            list: true
+
+            fields:
+              - name: label
+                label: Link Label
+                type: string
+                required: true
+
+              - name: url
+                label: ERDDAP URL
+                type: string
+                required: true

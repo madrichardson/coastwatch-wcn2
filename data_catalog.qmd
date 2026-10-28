@@ -1,0 +1,545 @@
+
+---
+title: "Data Catalog"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: data_catalog.css
+---
+
+::: {.cw-catalog}
+
+::: {.cw-catalog-intro}
+<span class="cw-catalog-eyebrow">EXPLORE OCEAN DATA</span>
+
+# Data Catalog
+
+The West Coast Node ERDDAP data server hosts over 1,700 datasets. This catalog highlights datasets commonly used by CoastWatch users. Search by name or narrow the list by product, sensor, region, and other characteristics.
+
+Explore the [complete ERDDAP dataset listing](https://coastwatch.pfeg.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000), or check the [Dataset Monitoring Dashboard](dataset_monitor.qmd) for dataset status.
+:::
+
+::: {.cw-catalog-panel}
+
+<div class="cw-catalog-panel-head">
+  <div>
+    <span class="cw-catalog-eyebrow">FIND A DATASET</span>
+    <h2>Filter the catalog</h2>
+    <p>Choose a data product, then refine your results. You can also search across dataset titles and descriptions.</p>
+  </div>
+  <button type="button" id="catalogReset" class="cw-catalog-reset">Reset filters</button>
+</div>
+
+<div class="cw-catalog-search-wrap">
+  <label for="catalogSearch">Search datasets</label>
+  <input type="search" id="catalogSearch" placeholder="Search by dataset name, description, or product…" autocomplete="off">
+</div>
+
+<div class="cw-catalog-filters" id="catalogFilters">
+
+  <div class="cw-catalog-filter" data-step="0">
+    <label for="productFilter">1. Data product</label>
+    <select id="productFilter" data-field="product">
+      <option value="">All products</option>
+    </select>
+  </div>
+
+  <div class="cw-catalog-filter" data-step="1" hidden>
+    <label for="sensorTypeFilter">2. Sensor type</label>
+    <select id="sensorTypeFilter" data-field="sensor">
+      <option value="">All sensor types</option>
+    </select>
+  </div>
+
+  <div class="cw-catalog-filter" data-step="2" hidden>
+    <label for="regionFilter">3. Region</label>
+    <select id="regionFilter" data-field="region">
+      <option value="">All regions</option>
+    </select>
+  </div>
+
+  <div class="cw-catalog-filter" data-step="3" hidden>
+    <label for="timeSeriesFilter">4. Time series type</label>
+    <select id="timeSeriesFilter" data-field="timeseries">
+      <option value="">All time series types</option>
+    </select>
+  </div>
+
+  <div class="cw-catalog-filter" data-step="4" hidden>
+    <label for="geoFilter">5. Geostationary</label>
+    <select id="geoFilter" data-field="geo">
+      <option value="">Either</option>
+    </select>
+  </div>
+
+  <div class="cw-catalog-filter" data-step="5" hidden>
+    <label for="blendFilter">6. Blended product</label>
+    <select id="blendFilter" data-field="blended">
+      <option value="">Either</option>
+    </select>
+  </div>
+
+  <div class="cw-catalog-filter" data-step="6" hidden>
+    <label for="gapFilter">7. Gap-filled</label>
+    <select id="gapFilter" data-field="gapfilled">
+      <option value="">Either</option>
+    </select>
+  </div>
+
+  <div class="cw-catalog-filter" data-step="7" hidden>
+    <label for="derivedFilter">8. Derived product (optical property)</label>
+    <select id="derivedFilter" data-field="derived">
+      <option value="">Either</option>
+    </select>
+  </div>
+
+</div>
+
+<div class="cw-catalog-results-heading">
+  <h2>Available datasets</h2>
+  <span id="catalogCount" aria-live="polite">Loading datasets…</span>
+</div>
+
+<div class="cw-catalog-table-wrap">
+
+<table id="catalogTable" class="cw-catalog-table">
+  <thead>
+    <tr>
+      <th scope="col">Dataset</th>
+      <th scope="col">Product</th>
+      <th scope="col">Access</th>
+    </tr>
+  </thead>
+  <tbody>
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from pathlib import Path
+from urllib.parse import urlparse
+from IPython.display import HTML, display
+
+# ----------------------------------------------------------
+# Load the Pages CMS-managed YAML catalog
+# ----------------------------------------------------------
+
+catalog_path = Path("content/data_catalog.yml")
+
+with catalog_path.open(encoding="utf-8") as file:
+    catalog = yaml.safe_load(file) or {}
+
+datasets = catalog.get("datasets", []) or []
+
+
+def safe(value):
+    """Escape editable text for HTML content and attributes."""
+    return escape(
+        str(value if value is not None else ""),
+        quote=True
+    )
+
+
+def field(item, name):
+    """Return a catalog field as a clean string."""
+    return str(item.get(name) or "").strip()
+
+
+def safe_url(value):
+    """Accept only HTTP and HTTPS access links."""
+    value = str(value or "").strip()
+    parsed = urlparse(value)
+
+    if parsed.scheme in {"http", "https"} and parsed.netloc:
+        return value
+
+    return ""
+
+
+# ----------------------------------------------------------
+# Build dataset rows
+# ----------------------------------------------------------
+
+rows = []
+
+for i, item in enumerate(datasets):
+
+    title = safe(field(item, "title"))
+    product = safe(field(item, "product"))
+    description = safe(field(item, "description"))
+    dates = safe(field(item, "dates"))
+    resolution = safe(field(item, "resolution"))
+    composite = safe(field(item, "composite"))
+
+    # Values used by JavaScript filters
+    attributes = {
+        "product": field(item, "product"),
+        "sensor": field(item, "sensor_type"),
+        "region": field(item, "region"),
+        "timeseries": field(item, "time_series_type"),
+        "geo": field(item, "geostationary"),
+        "blended": field(item, "blended"),
+        "gapfilled": field(item, "gap_filled"),
+        "derived": field(item, "derived_product"),
+    }
+
+    data_attrs = " ".join(
+        f'data-{name}="{safe(value)}"'
+        for name, value in attributes.items()
+    )
+
+    # ------------------------------------------------------
+    # ERDDAP access links
+    # ------------------------------------------------------
+
+    access_links = []
+
+    for link in item.get("access", []) or []:
+        url = safe_url(link.get("url"))
+
+        if url:
+            access_links.append(
+                (
+                    safe(link.get("label") or "Open dataset"),
+                    safe(url)
+                )
+            )
+
+    if len(access_links) == 1:
+
+        label, url = access_links[0]
+
+        access_html = (
+            f'<a class="cw-catalog-access-link" '
+            f'href="{url}" '
+            f'target="_blank" '
+            f'rel="noopener noreferrer">'
+            f'{label} ↗</a>'
+        )
+
+    elif access_links:
+
+        options = "".join(
+            f'<option value="{url}">{label}</option>'
+            for label, url in access_links
+        )
+
+        access_html = (
+            f'<label class="cw-catalog-sr-only" '
+            f'for="access-{i}">Dataset access options</label>'
+            f'<select id="access-{i}" '
+            f'class="cw-catalog-access-dropdown" '
+            f'aria-label="Access {title}">'
+            f'<option value="">Choose access…</option>'
+            f'{options}'
+            f'</select>'
+        )
+
+    else:
+
+        access_html = (
+            '<span class="cw-catalog-unavailable">'
+            'Not available'
+            '</span>'
+        )
+
+    # ------------------------------------------------------
+    # Expandable description and metadata
+    # ------------------------------------------------------
+
+    details = []
+
+    if description:
+        details.append(f"<p>{description}</p>")
+
+    metadata = [
+        ("Dates", dates),
+        ("Resolution", resolution),
+        ("Sensor", safe(field(item, "sensor_type"))),
+        ("Region", safe(field(item, "region"))),
+        ("Composite", composite),
+    ]
+
+    meta_html = "".join(
+        f"<span><strong>{label}:</strong> {value}</span>"
+        for label, value in metadata
+        if value
+    )
+
+    if meta_html:
+        details.append(
+            f'<div class="cw-catalog-metadata">'
+            f'{meta_html}'
+            f'</div>'
+        )
+
+    detail_html = (
+        "".join(details)
+        if details
+        else "No description available."
+    )
+
+    # ------------------------------------------------------
+    # Main row + expandable detail row
+    # ------------------------------------------------------
+
+    rows.append(
+        f"""
+<tr class="cw-catalog-data-row" {data_attrs}>
+  <td>
+    <button
+      type="button"
+      class="cw-catalog-toggle"
+      aria-expanded="false"
+      aria-controls="catalog-detail-{i}"
+    >
+      {title}
+      <span aria-hidden="true" class="cw-catalog-chevron">⌄</span>
+    </button>
+  </td>
+  <td>
+    <span class="cw-catalog-product">{product}</span>
+  </td>
+  <td>
+    {access_html}
+  </td>
+</tr>
+
+<tr
+  class="cw-catalog-detail-row"
+  id="catalog-detail-{i}"
+  hidden
+>
+  <td colspan="3">
+    <div class="cw-catalog-detail-content">
+      {detail_html}
+    </div>
+  </td>
+</tr>
+"""
+    )
+
+display(HTML("\n".join(rows)))
+```
+  </tbody>
+</table>
+
+<div id="catalogEmpty" class="cw-catalog-empty" hidden>
+  No datasets match these filters. Try changing your selections or resetting the filters.
+</div>
+
+</div>
+
+:::
+:::
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const rows = Array.from(
+    document.querySelectorAll("#catalogTable .cw-catalog-data-row")
+  );
+
+  const selects = Array.from(
+    document.querySelectorAll("#catalogFilters select")
+  );
+
+  const wrappers = Array.from(
+    document.querySelectorAll("#catalogFilters .cw-catalog-filter")
+  );
+
+  const search = document.getElementById("catalogSearch");
+  const count = document.getElementById("catalogCount");
+  const empty = document.getElementById("catalogEmpty");
+  const reset = document.getElementById("catalogReset");
+
+  // --------------------------------------------------------
+  // Populate filter options from the YAML-backed table
+  // --------------------------------------------------------
+
+  selects.forEach(select => {
+
+    const key = select.dataset.field;
+
+    const values = [
+      ...new Set(
+        rows
+          .map(row => (row.dataset[key] || "").trim())
+          .filter(Boolean)
+      )
+    ].sort((a, b) =>
+      a.localeCompare(b, undefined, { sensitivity: "base" })
+    );
+
+    values.forEach(value => {
+      select.add(new Option(value, value));
+    });
+
+  });
+
+  // --------------------------------------------------------
+  // Apply all active filters
+  // --------------------------------------------------------
+
+  function update() {
+
+    const term = search.value.trim().toLocaleLowerCase();
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+
+      const detail = row.nextElementSibling;
+
+      const matchesFilters = selects.every(select =>
+        !select.value ||
+        (row.dataset[select.dataset.field] || "").trim() === select.value
+      );
+
+      const text = [
+        row.cells[0].textContent,
+        row.dataset.product,
+        detail?.textContent || ""
+      ].join(" ").toLocaleLowerCase();
+
+      const visible =
+        matchesFilters &&
+        (!term || text.includes(term));
+
+      row.hidden = !visible;
+
+      if (!visible && detail) {
+        detail.hidden = true;
+
+        row.querySelector(".cw-catalog-toggle")
+          ?.setAttribute("aria-expanded", "false");
+      }
+
+      if (visible) {
+        visibleCount++;
+      }
+
+    });
+
+    count.textContent =
+      `${visibleCount} of ${rows.length} datasets`;
+
+    empty.hidden = visibleCount !== 0;
+  }
+
+  // --------------------------------------------------------
+  // Progressive filter steps
+  // --------------------------------------------------------
+
+  function updateSteps(changedIndex = -1) {
+
+    if (
+      changedIndex >= 0 &&
+      !selects[changedIndex].value
+    ) {
+      for (
+        let i = changedIndex + 1;
+        i < selects.length;
+        i++
+      ) {
+        selects[i].value = "";
+      }
+    }
+
+    wrappers.forEach((wrapper, index) => {
+      wrapper.hidden =
+        index > 0 && !selects[index - 1].value;
+    });
+
+  }
+
+  selects.forEach((select, index) => {
+
+    select.addEventListener("change", () => {
+      updateSteps(index);
+      update();
+    });
+
+  });
+
+  // --------------------------------------------------------
+  // Search box
+  // --------------------------------------------------------
+
+  search.addEventListener("input", update);
+
+  // --------------------------------------------------------
+  // Reset filters
+  // --------------------------------------------------------
+
+  reset.addEventListener("click", () => {
+
+    selects.forEach(select => {
+      select.value = "";
+    });
+
+    search.value = "";
+
+    updateSteps();
+    update();
+
+  });
+
+  // --------------------------------------------------------
+  // Expand and collapse dataset details
+  // --------------------------------------------------------
+
+  rows.forEach(row => {
+
+    const toggle = row.querySelector(".cw-catalog-toggle");
+    const detail = row.nextElementSibling;
+
+    toggle?.addEventListener("click", () => {
+
+      const expanding = detail.hidden;
+
+      detail.hidden = !expanding;
+
+      toggle.setAttribute(
+        "aria-expanded",
+        String(expanding)
+      );
+
+    });
+
+  });
+
+  // --------------------------------------------------------
+  // Open ERDDAP links
+  // --------------------------------------------------------
+
+  document
+    .querySelectorAll(".cw-catalog-access-dropdown")
+    .forEach(select => {
+
+      select.addEventListener("change", () => {
+
+        if (select.value) {
+
+          window.open(
+            select.value,
+            "_blank",
+            "noopener,noreferrer"
+          );
+
+          select.value = "";
+        }
+
+      });
+
+    });
+
+  // Initialize
+  updateSteps();
+  update();
+
+});
+</script>
