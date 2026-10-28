@@ -1,4 +1,3 @@
-
 ---
 pagetitle: "Data Catalog"
 anchor-sections: false
@@ -22,9 +21,10 @@ The West Coast Node ERDDAP data server hosts over 1,700 datasets.
 
 On this catalog page, we’ve highlighted the most commonly used datasets by our users. To help you quickly find the dataset you need, use the interactive filter tool below — just answer a few short questions about the product type, sensor, region, and more.
 
-To explore the full list of all available datasets, visit the [**ERDDAP Server**](https://coastwatch.pfeg.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000).
+To explore the full list of all available datasets, visit the [ERDDAP Server](https://coastwatch.pfeg.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000).
 
-To explore the status of these datasets, visit the [Dataset Monitoring Dashboard](dataset_monitor.qmd)
+To explore the status of these datasets, visit the [Dataset Monitoring Dashboard](dataset_monitor.qmd).
+
 :::
 
 ::: {.cw-catalog-panel}
@@ -60,56 +60,64 @@ To explore the status of these datasets, visit the [Dataset Monitoring Dashboard
 <div class="cw-catalog-filter" data-step="0">
 <label for="productFilter">1. Data product</label>
 <select id="productFilter" data-field="product">
-<option value="">All products</option>
+<option value="">-- Select --</option>
+<option value="All">All</option>
 </select>
 </div>
 
 <div class="cw-catalog-filter" data-step="1" hidden>
 <label for="sensorTypeFilter">2. Sensor type</label>
 <select id="sensorTypeFilter" data-field="sensor">
-<option value="">All sensor types</option>
+<option value="">-- Select --</option>
+<option value="All">All</option>
 </select>
 </div>
 
 <div class="cw-catalog-filter" data-step="2" hidden>
 <label for="regionFilter">3. Region</label>
 <select id="regionFilter" data-field="region">
-<option value="">All regions</option>
+<option value="">-- Select --</option>
+<option value="All">All</option>
 </select>
 </div>
 
 <div class="cw-catalog-filter" data-step="3" hidden>
 <label for="timeSeriesFilter">4. Time series type</label>
 <select id="timeSeriesFilter" data-field="timeseries">
-<option value="">All time series types</option>
+<option value="">-- Select --</option>
+<option value="All">All</option>
 </select>
 </div>
 
 <div class="cw-catalog-filter" data-step="4" hidden>
 <label for="geoFilter">5. Geostationary</label>
 <select id="geoFilter" data-field="geo">
-<option value="">Either</option>
+<option value="">-- Select --</option>
+<option value="All">All</option>
 </select>
 </div>
 
 <div class="cw-catalog-filter" data-step="5" hidden>
 <label for="blendFilter">6. Blended product</label>
 <select id="blendFilter" data-field="blended">
-<option value="">Either</option>
+<option value="">-- Select --</option>
+<option value="All">All</option>
 </select>
 </div>
 
 <div class="cw-catalog-filter" data-step="6" hidden>
 <label for="gapFilter">7. Gap-filled</label>
 <select id="gapFilter" data-field="gapfilled">
-<option value="">Either</option>
+<option value="">-- Select --</option>
+<option value="All">All</option>
 </select>
 </div>
 
 <div class="cw-catalog-filter" data-step="7" hidden>
 <label for="derivedFilter">8. Derived product (optical property)</label>
 <select id="derivedFilter" data-field="derived">
-<option value="">Either</option>
+<option value="">-- Select --</option>
+<option value="All">All</option>
 </select>
 </div>
 
@@ -148,7 +156,6 @@ import yaml
 from html import escape
 from pathlib import Path
 from urllib.parse import urlparse
-from IPython.display import display, HTML
 
 # ==========================================================
 # LOAD DATA CATALOG YAML
@@ -355,7 +362,6 @@ hidden
 """
     )
 
-# Print raw HTML rows for Quarto
 print("\n".join(rows))
 ```
 
@@ -423,7 +429,7 @@ No datasets match these filters. Try changing your selections or resetting the f
         ...new Set(
           rows
             .map(row => (row.dataset[key] || "").trim())
-            .filter(Boolean)
+            .filter(value => value && value !== "All")
         )
       ].sort((a, b) =>
         a.localeCompare(
@@ -459,7 +465,8 @@ No datasets match these filters. Try changing your selections or resetting the f
 
           const selected = select.value;
 
-          if (!selected) {
+          // No selection or "All" means no restriction.
+          if (selected === "" || selected === "All") {
             return true;
           }
 
@@ -521,9 +528,12 @@ No datasets match these filters. Try changing your selections or resetting the f
 
     function updateSteps(changedIndex = -1) {
 
+      // If the user returns a filter to "-- Select --",
+      // clear all subsequent filters.
+
       if (
         changedIndex >= 0 &&
-        !selects[changedIndex].value
+        selects[changedIndex].value === ""
       ) {
 
         for (
@@ -536,6 +546,9 @@ No datasets match these filters. Try changing your selections or resetting the f
 
       }
 
+      // A filter becomes visible once the previous
+      // filter has a selection, including "All".
+
       wrappers.forEach((wrapper, index) => {
 
         if (index === 0) {
@@ -544,7 +557,7 @@ No datasets match these filters. Try changing your selections or resetting the f
         }
 
         wrapper.hidden =
-          !selects[index - 1].value;
+          selects[index - 1].value === "";
 
       });
 
@@ -557,8 +570,10 @@ No datasets match these filters. Try changing your selections or resetting the f
     selects.forEach((select, index) => {
 
       select.addEventListener("change", () => {
+
         updateSteps(index);
         updateTable();
+
       });
 
     });
@@ -583,6 +598,28 @@ No datasets match these filters. Try changing your selections or resetting the f
       });
 
       search.value = "";
+
+      // Collapse any expanded dataset descriptions.
+
+      rows.forEach(row => {
+
+        const detail = row.nextElementSibling;
+        const toggle = row.querySelector(
+          ".cw-catalog-toggle"
+        );
+
+        if (detail) {
+          detail.hidden = true;
+        }
+
+        if (toggle) {
+          toggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+        }
+
+      });
 
       updateSteps();
       updateTable();
@@ -657,7 +694,7 @@ No datasets match these filters. Try changing your selections or resetting the f
 
   }
 
-  // Run after HTML is available
+  // Run after HTML is available.
 
   if (document.readyState === "loading") {
 
