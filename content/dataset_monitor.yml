@@ -1,35 +1,788 @@
-
-import pandas as pd
-import yaml
-from pathlib import Path
-
-csv_path = Path("spreadsheets/erddap-dataset-monitoring.csv")
-output_path = Path("content/dataset_monitor.yml")
-
-df = pd.read_csv(csv_path)
-df.columns = df.columns.str.strip()
-
-df = df.rename(columns={"dataset_ID": "datasetID"})
-
-for col in ["datasetID", "label", "category"]:
-    df[col] = df[col].fillna("").astype(str).str.strip()
-
-df = df[df["datasetID"] != ""]
-df = df.drop_duplicates(subset="datasetID", keep="first")
-
-datasets = df[
-    ["datasetID", "label", "category"]
-].to_dict(orient="records")
-
-output_path.parent.mkdir(parents=True, exist_ok=True)
-
-with open(output_path, "w", encoding="utf-8") as f:
-    yaml.safe_dump(
-        {"datasets": datasets},
-        f,
-        sort_keys=False,
-        allow_unicode=True,
-        width=100
-    )
-
-print(f"Saved {len(datasets)} datasets to {output_path}")
+datasets:
+- datasetID: nesdisVHNsstDaily
+  label: SST, NOAA-SNPP VIIRS, Near Real-Time, Global, Level 3, 0.0375°, 2020-present, EXPERIMENTAL, Daily
+  category: SST
+- datasetID: erdMH1sstd1day_R2022NRTMasked
+  label: SST, AQUA_MODIS, Masked, R2022 NRT, NASA GSFC OBPG, Global, 0.04166°, 2019-present, Daily
+  category: SST
+- datasetID: erdMH1sstd1day_R2022SQMasked
+  label: SST, AQUA_MODIS, Masked, R2022 SQ, NASA GSFC OBPG, Global, 0.04166°, 2019-present, Daily
+  category: SST
+- datasetID: erdMH1sstd8day_R2022SQMasked
+  label: SST, AQUA_MODIS, Masked, R2022 SQ, NASA GSFC OBPG, Global, 0.04166°, 2019-present, 8 Day
+  category: SST
+- datasetID: erdMH1sstdmday_R2022SQMasked
+  label: SST, AQUA_MODIS, Masked, R2022 SQ, NASA GSFC OBPG, Global, 0.04166°, 2019-present, Monthly
+  category: SST
+- datasetID: noaacwLEOACSPOSSTL3SCDaily
+  label: Sea-Surface Temperature, NOAA ACSPO Daily Global 0.02° Gridded Super-collated SST and Thermal
+    Fronts Reanalysis, 2012-present, Daily (L3S-LEO Kelvin)
+  category: SST
+- datasetID: jplMURSST41
+  label: Multi-scale Ultra-high Resolution (MUR) SST Analysis fv04.1, Global, 0.01°, 2002-present, Daily
+  category: SST
+- datasetID: jplMURSST41mday
+  label: Multi-scale Ultra-high Resolution (MUR) SST Analysis fv04.1, Global, 0.01°, 2002-present, Monthly
+  category: SST
+- datasetID: jplMURSST41anom1day
+  label: Multi-scale Ultra-high Resolution (MUR) SST Analysis Anomaly fv04.1, Global, 0.01°, 2002-present,
+    Daily
+  category: SST
+- datasetID: jplMURSST41anommday
+  label: Multi-scale Ultra-high Resolution (MUR) SST Analysis Anomaly fv04.1, Global, 0.01°, 2002-present,
+    Monthly
+  category: SST
+- datasetID: NOAA_DHW_monthly
+  label: SST and SST Anomaly, NOAA Global Coral Bleaching Monitoring, 5km, V.3.1, Monthly, 1985-Present
+  category: SST
+- datasetID: nceiPH53sstn1day
+  label: AVHRR Pathfinder Version 5.3 L3-Collated (L3C) SST, Global, 0.0417°, 1981-present, Nighttime
+    (1 Day Composite)
+  category: SST
+- datasetID: erdPH53sstn8day
+  label: SST, Pathfinder Ver 5.3 (L3C), Night, Global, 0.0417°, 1981-present, Science Quality (8 Day Composite)
+  category: SST
+- datasetID: erdPH53sstnmday
+  label: SST, Pathfinder Ver 5.3 (L3C), Night, Global, 0.0417°, 1981-present, Science Quality (Monthly
+    Composite)
+  category: SST
+- datasetID: nceiPH53sstd1day
+  label: AVHRR Pathfinder Version 5.3 L3-Collated (L3C) SST, Global, 0.0417°, 1981-present, Daytime (1
+    Day Composite)
+  category: SST
+- datasetID: erdPH53sstd8day
+  label: SST, Pathfinder Ver 5.3 (L3C), Day, Global, 0.0417°, 1981-present, Science Quality (8 Day Composite)
+  category: SST
+- datasetID: erdPH53sstdmday
+  label: SST, Pathfinder Ver 5.3 (L3C), Day, Global, 0.0417°, 1981-present, Science Quality (Monthly Composite)
+  category: SST
+- datasetID: ncdcOisst21Agg
+  label: SST, Daily Optimum Interpolation (OI), AVHRR Only, Version 2.1, Final, Global, 0.25°, 1981-present
+  category: SST
+- datasetID: ncdcOisst21NrtAgg
+  label: SST, Daily Optimum Interpolation (OI), AVHRR Only, Version 2.1, Preliminary, Global, 0.25°, 2020-present
+  category: SST
+- datasetID: erdVHsstaWS3day
+  label: VIIRS SST Day and Night 3 Day Composite
+  category: SST
+- datasetID: erdMWsstd1day
+  label: SST, Aqua MODIS, NPP, 0.0125°, West US, Day time (11 microns), 2002-present (1 Day Composite)
+  category: SST
+- datasetID: erdMWsstd3day
+  label: SST, Aqua MODIS, NPP, 0.0125°, West US, Day time (11 microns), 2002-present (3 Day Composite)
+  category: SST
+- datasetID: erdMWsstd8day
+  label: SST, Aqua MODIS, NPP, 0.0125°, West US, Day time (11 microns), 2002-present (8 Day Composite)
+  category: SST
+- datasetID: erdMWsstd14day
+  label: SST, Aqua MODIS, NPP, 0.0125°, West US, Day time (11 microns), 2002-present (14 Day Composite)
+  category: SST
+- datasetID: erdMWsstdmday
+  label: SST, Aqua MODIS, NPP, 0.0125°, West US, Day time (11 microns), 2002-present (Monthly Composite)
+  category: SST
+- datasetID: goes_west
+  label: Sea-Surface Temperature, Fronts, NOAA GOES-West (G-18), Hourly, NRT, 0.02 degree (~2 km)
+  category: SST
+- datasetID: nesdisVHNSQchlaDaily
+  label: Chlorophyll, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNSQchlaWeekly
+  label: Chlorophyll, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNSQchlaMonthly
+  label: Chlorophyll, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: nesdisVHNchlaDaily
+  label: Chlorophyll, NOAA S-NPP VIIRS, Near Real-Time, Global 4km, Level 3, 2017-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNchlaWeekly
+  label: Chlorophyll, NOAA S-NPP VIIRS, Near Real-Time, Global 4km, Level 3, 2017-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNnoaa20chlaDaily
+  label: Chlorophyll, NOAA NOAA-20 VIIRS, Near Real-Time, Global 4km, Level 3, 2017-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNnoaa20chlaDaily_Lon0360
+  label: Chlorophyll, NOAA NOAA-20 VIIRS, Near Real-Time, Global 4km, Level 3, 2017-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnoaa20chlaWeekly
+  label: Chlorophyll, NOAA NOAA-20 VIIRS, Near Real-Time, Global 4km, Level 3, 2017-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNnoaa20chlaWeekly_Lon0360
+  label: Chlorophyll, NOAA NOAA-20 VIIRS, Near Real-Time, Global 4km, Level 3, 2017-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: erdMH1chla1day
+  label: Chlorophyll-a, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (1 Day Composite)
+  category: Ocean Color
+- datasetID: erdMH1chla8day
+  label: Chlorophyll-a, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (8 Day Composite)
+  category: Ocean Color
+- datasetID: erdMH1chlamday
+  label: Chlorophyll-a, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (Monthly Composite)
+  category: Ocean Color
+- datasetID: erdSW2018chla1day
+  label: Chlorophyll-a, Orbview-2 SeaWiFS, R2018.0, 0.1°, Global, 1997-2010 (1 Day Composite)
+  category: Ocean Color
+- datasetID: erdSW2018chla8day
+  label: Chlorophyll-a, Orbview-2 SeaWiFS, R2018.0, 0.1°, Global, 1997-2010 (8 Day Composite)
+  category: Ocean Color
+- datasetID: erdSW2018chlamday
+  label: Chlorophyll-a, Orbview-2 SeaWiFS, R2018.0, 0.1°, Global, 1997-2010 (Monthly Composite)
+  category: Ocean Color
+- datasetID: erdVH2018chla1day
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, Chlorophyll a, OCI Algorithm, R2018, 2012-present,
+    Daily
+  category: Ocean Color
+- datasetID: erdVH2018chla8day
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, Chlorophyll a, OCI Algorithm, R2018, 2012-present,
+    8-Day
+  category: Ocean Color
+- datasetID: erdVH2018chlamday
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, Chlorophyll a, OCI Algorithm, R2018, 2012-present,
+    Monthly
+  category: Ocean Color
+- datasetID: nesdisVHNnoaaSNPPnoaa20NRTchlaGapfilledDaily
+  label: Chlorophyll (Gap-filled DINEOF), NOAA S-NPP NOAA-20, VIIRS, Near Real-Time, Global 9km, 2020-present,
+    Daily
+  category: Ocean Color
+- datasetID: nesdisVHNnoaaSNPPnoaa20chlaGapfilledDaily
+  label: Chlorophyll (Gap-filled DINEOF), NOAA S-NPP NOAA-20, VIIRS, Science Quality, Global 9km, 2018-recent,
+    Daily
+  category: Ocean Color
+- datasetID: pmlEsaCCI60OceanColorDaily
+  label: ESA CCI Ocean Colour Product (CCI ALL-v6.0-DAILY), 0.041666668°, 1997-present
+  category: Ocean Color
+- datasetID: pmlEsaCCI60OceanColor5Day
+  label: ESA CCI Ocean Colour Product (CCI ALL-v6.0-5DAY), 0.041666668°, 1997-present
+  category: Ocean Color
+- datasetID: pmlEsaCCI60OceanColor8Day
+  label: ESA CCI Ocean Colour Product (CCI ALL-v6.0-8DAY), 0.041666668°, 1997-present
+  category: Ocean Color
+- datasetID: pmlEsaCCI60OceanColorMonthly
+  label: ESA CCI Ocean Colour Product (CCI ALL-v6.0-MONTHLY), 0.041666668°, 1997-2022
+  category: Ocean Color
+- datasetID: erdVHNchla1day
+  label: Chlorophyll a, North Pacific, NOAA VIIRS, 750m resolution, 2015-present (1 Day Composite)
+  category: Ocean Color
+- datasetID: erdVHNchla3day
+  label: Chlorophyll a, North Pacific, NOAA VIIRS, 750m resolution, 2015-present (3 Day Composite)
+  category: Ocean Color
+- datasetID: erdVHNchla8day
+  label: Chlorophyll a, North Pacific, NOAA VIIRS, 750m resolution, 2015-present (8 Day Composite)
+  category: Ocean Color
+- datasetID: erdVHNchlamday
+  label: Chlorophyll a, North Pacific, NOAA VIIRS, 750m resolution, 2015-present (Monthly Composite)
+  category: Ocean Color
+- datasetID: erdMWchla1day
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.0125°, West US, EXPERIMENTAL, 2002-present (1 Day Composite)
+  category: Ocean Color
+- datasetID: erdMWchla3day
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.0125°, West US, EXPERIMENTAL, 2002-present (3 Day Composite)
+  category: Ocean Color
+- datasetID: erdMWchla8day
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.0125°, West US, EXPERIMENTAL, 2002-present (8 Day Composite)
+  category: Ocean Color
+- datasetID: erdMWchla14day
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.0125°, West US, EXPERIMENTAL, 2002-present (14 Day Composite)
+  category: Ocean Color
+- datasetID: erdMWchlamday
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.0125°, West US, EXPERIMENTAL, 2002-present (Monthly Composite)
+  category: Ocean Color
+- datasetID: erdMBchla1day
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.025 degrees, Pacific Ocean, 2006-present, EXPERIMENTAL (1 Day
+    Composite)
+  category: Ocean Color
+- datasetID: erdMBchla3day
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.025 degrees, Pacific Ocean, 2006-present, EXPERIMENTAL (3 Day
+    Composite)
+  category: Ocean Color
+- datasetID: erdMBchla8day
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.025 degrees, Pacific Ocean, 2006-present, EXPERIMENTAL (8 Day
+    Composite)
+  category: Ocean Color
+- datasetID: erdMBchla14day
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.025 degrees, Pacific Ocean, 2006-present, EXPERIMENTAL (14
+    Day Composite)
+  category: Ocean Color
+- datasetID: erdMBchlamday
+  label: Chlorophyll-a, Aqua MODIS, NPP, 0.025 degrees, Pacific Ocean, 2006-present, EXPERIMENTAL (Monthly
+    Composite)
+  category: Ocean Color
+- datasetID: nesdisVHNSQkd490Daily
+  label: Kd490, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNSQkd490Weekly
+  label: Kd490, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNSQkd490Monthly
+  label: Kd490, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: erdVH2018k4901day
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, K490, R2018, 2012-present, Daily
+  category: Ocean Color
+- datasetID: erdVH2018k4908day
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, K490, R2018, 2012-present, 8-Day
+  category: Ocean Color
+- datasetID: erdVH2018k490mday
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, K490, R2018, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: nesdisVHNSQkdparDaily
+  label: KdPAR, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNSQkdparWeekly
+  label: KdPAR, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNSQkdparMonthly
+  label: KdPAR, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: nesdisVHNkdparDaily
+  label: KdPAR, NOAA S-NPP VIIRS, Near Real-Time, Global 4km, Level 3, 2015-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNkdparWeekly
+  label: KdPAR, NOAA S-NPP VIIRS, Near Real-Time, Global 4km, Level 3, 2015-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw410Daily
+  label: nLw410, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw410Monthly
+  label: nLw410, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw410Weekly
+  label: nLw410, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw410Daily_Lon0360
+  label: nLw410, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw410Monthly_Lon0360
+  label: nLw410, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw410Weekly_Lon0360
+  label: nLw410, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw443Daily
+  label: nLw443, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw443Monthly
+  label: nLw443, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw443Weekly
+  label: nLw443, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw443Daily_Lon0360
+  label: nLw443, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw443Monthly_Lon0360
+  label: nLw443, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw443Weekly_Lon0360
+  label: nLw443, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw486Daily
+  label: nLw486, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw486Monthly
+  label: nLw486, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw486Weekly
+  label: nLw486, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw486Daily_Lon0360
+  label: nLw486, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw486Monthly_Lon0360
+  label: nLw486, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw486Weekly_Lon0360
+  label: nLw486, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw551Daily
+  label: nLw551, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw551Monthly
+  label: nLw551, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw551Weekly
+  label: nLw551, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw551Daily_Lon0360
+  label: nLw551, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw551Monthly_Lon0360
+  label: nLw551, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw551Weekly_Lon0360
+  label: nLw551, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw671Daily
+  label: nLw671, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw671Monthly
+  label: nLw671, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw671Weekly
+  label: nLw671, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw671Daily_Lon0360
+  label: nLw671, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw671Monthly_Lon0360
+  label: nLw671, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Monthly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNSQnLw671Weekly_Lon0360
+  label: nLw671, NOAA S-NPP VIIRS, Science Quality, Global 4km, Level 3, 2012-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnLw410Daily
+  label: nLw410, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNnLw410Weekly
+  label: nLw410, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNnLw410Daily_Lon0360
+  label: nLw410, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnLw410Weekly_Lon0360
+  label: nLw410, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnLw443Daily
+  label: nLw443, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNnLw443Daily_Lon0360
+  label: nLw443, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnLw486Daily
+  label: nLw486, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNnLw486Weekly
+  label: nLw486, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNnLw486Daily_Lon0360
+  label: nLw486, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnLw486Weekly_Lon0360
+  label: nLw486, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnLw551Daily
+  label: nLw551, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNnLw551Weekly
+  label: nLw551, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNnLw551Daily_Lon0360
+  label: nLw551, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnLw551Weekly_Lon0360
+  label: nLw551, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnLw671Daily
+  label: nLw671, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily
+  category: Ocean Color
+- datasetID: nesdisVHNnLw671Weekly
+  label: nLw671, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Weekly
+  category: Ocean Color
+- datasetID: nesdisVHNnLw671Daily_Lon0360
+  label: nLw671, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Daily, Lon0360
+  category: Ocean Color
+- datasetID: nesdisVHNnLw671Weekly_Lon0360
+  label: nLw671, NOAA S-NPP, VIIRS, Near Real-Time, Global 4km, 2017-present, Weekly, Lon0360
+  category: Ocean Color
+- datasetID: erdVH2018poc1day)
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, POC, R2018, 2012-present, Daily
+  category: Ocean Color
+- datasetID: erdVH2018poc8day
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, POC, R2018, 2012-present, 8-Day
+  category: Ocean Color
+- datasetID: erdVH2018pocmday
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, POC, R2018, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: erdVH2018pic1day
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, PIC, R2018, 2012-present, Daily
+  category: Ocean Color
+- datasetID: erdVH2018pic8day
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, PIC, R2018, 2012-present, 8-Day
+  category: Ocean Color
+- datasetID: erdVH2018picmday
+  label: VIIRSN, Suomi-NPP, Level-3 SMI, NASA, Global, 4km, PIC, R2018, 2012-present, Monthly
+  category: Ocean Color
+- datasetID: erdMH1kd4901day
+  label: Diffuse Attenuation K490, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present
+    (1 Day Composite)
+  category: Ocean Color
+- datasetID: erdMH1kd4908day
+  label: Diffuse Attenuation K490, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present
+    (8 Day Composite)
+  category: Ocean Color
+- datasetID: erdMH1kd490mday
+  label: Diffuse Attenuation K490, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present
+    (Monthly Composite)
+  category: Ocean Color
+- datasetID: erdMH1pp1day
+  label: Primary Productivity, Aqua MODIS, NPP, Global, 2003-present, EXPERIMENTAL (1 Day Composite)
+  category: Ocean Color
+- datasetID: erdMH1ppmday
+  label: Primary Productivity, Aqua MODIS, NPP, Global, 2003-present, EXPERIMENTAL (Monthly Composite)
+  category: Ocean Color
+- datasetID: erdMPIC1day
+  label: MODIS Aqua, Level-3 SMI, Global, 4km, Particulate Inorganic Carbon, 2003-present (1 Day Composite)
+  category: Ocean Color
+- datasetID: erdMPOC8day
+  label: MODIS Aqua, Level-3 SMI, Global, 4km, Particulate Organic Carbon, 2003-present (8 Day Composite)
+  category: Ocean Color
+- datasetID: erdMPOCmday
+  label: MODIS Aqua, Level-3 SMI, Global, 4km, Particulate Organic Carbon, 2003-present (Monthly Composite)
+  category: Ocean Color
+- datasetID: erdMPIC8day
+  label: MODIS Aqua, Level-3 SMI, Global, 4km, Particulate Inorganic Carbon, 2003-present (8 Day Composite)
+  category: Ocean Color
+- datasetID: erdMPICmday
+  label: MODIS Aqua, Level-3 SMI, Global, 4km, Particulate Inorganic Carbon, 2003-present (Monthly Composite)
+  category: Ocean Color
+- datasetID: erdMH1par01day
+  label: Photosynthetically Available Radiation, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality,
+    2003-present (1 Day Composite)
+  category: Ocean Color
+- datasetID: erdMH1par08day
+  label: Photosynthetically Available Radiation, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality,
+    2003-present (8 Day Composite)
+  category: Ocean Color
+- datasetID: erdMH1par0mday
+  label: Photosynthetically Available Radiation, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality,
+    2003-present (Monthly Composite)
+  category: Ocean Color
+- datasetID: erdQAwind1day
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (1 Day)
+  category: Wind
+- datasetID: erdQAwind14day
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (14 Day)
+  category: Wind
+- datasetID: erdQAwind3day
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (3 Day)
+  category: Wind
+- datasetID: erdQAwind8day
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (8 Day)
+  category: Wind
+- datasetID: erdQAwindmday
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (Monthly)
+  category: Wind
+- datasetID: erdQAwind1day_LonPM180
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (1 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQAwind14day_LonPM180
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (14 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQAwind3day_LonPM180
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (3 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQAwind8day_LonPM180
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (8 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQAwindmday_LonPM180
+  label: Wind, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (Monthly), Lon+/-180
+  category: Wind
+- datasetID: erdQBwind1day
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (1 Day)
+  category: Wind
+- datasetID: erdQBwind14day
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (14 Day)
+  category: Wind
+- datasetID: erdQBwind3day
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (3 Day)
+  category: Wind
+- datasetID: erdQBwind8day
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (8 Day)
+  category: Wind
+- datasetID: erdQBwindmday
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (Monthly)
+  category: Wind
+- datasetID: erdQBwind1day_LonPM180
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (1 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQBwind14day_LonPM180
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (14 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQBwind3day_LonPM180
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (3 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQBwind8day_LonPM180
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (8 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQBwindmday_LonPM180
+  label: Wind, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (Monthly), Lon+/-180
+  category: Wind
+- datasetID: erdQAstress1day
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (1 Day)
+  category: Wind
+- datasetID: erdQAstress14day
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (14 Day)
+  category: Wind
+- datasetID: erdQAstress3day
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (3 Day)
+  category: Wind
+- datasetID: erdQAstress8day
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (8 Day)
+  category: Wind
+- datasetID: erdQAstressmday
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (Monthly)
+  category: Wind
+- datasetID: erdQAstress1day_LonPM180
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (1 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQAstress14day_LonPM180
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (14 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQAstress3day_LonPM180
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (3 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQAstress8day_LonPM180
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (8 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQAstressmday_LonPM180
+  label: Wind Stress, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (Monthly), Lon+/-180
+  category: Wind
+- datasetID: erdQBstress1day
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (1 Day)
+  category: Wind
+- datasetID: erdQBstress14day
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (14 Day)
+  category: Wind
+- datasetID: erdQBstress3day
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (3 Day)
+  category: Wind
+- datasetID: erdQBstress8day
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (8 Day)
+  category: Wind
+- datasetID: erdQBstressmday
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (Monthly)
+  category: Wind
+- datasetID: erdQBstress1day_LonPM180
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (1 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQBstress14day_LonPM180
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (14 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQBstress3day_LonPM180
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (3 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQBstress8day_LonPM180
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (8 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQBstressmday_LonPM180
+  label: Wind Stress, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (Monthly), Lon+/-180
+  category: Wind
+- datasetID: erdQAekm1day
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (1 Day)
+  category: Wind
+- datasetID: erdQAekm14day
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (14 Day)
+  category: Wind
+- datasetID: erdQAekm3day
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (3 Day)
+  category: Wind
+- datasetID: erdQAekm8day
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (8 Day)
+  category: Wind
+- datasetID: erdQAekmmday
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (Monthly)
+  category: Wind
+- datasetID: erdQAekm1day_LonPM180
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (1 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQAekm14day_LonPM180
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (14 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQAekm3day_LonPM180
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (3 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQAekm8day_LonPM180
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (8 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQAekmmday_LonPM180
+  label: Wind Diffusivity Current, Metop-A ASCAT, 0.25°, Global, Near Real Time, 2009-present (Monthly),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQBekm1day
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (1 Day)
+  category: Wind
+- datasetID: erdQBekm14day
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (14 Day)
+  category: Wind
+- datasetID: erdQBekm3day
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (3 Day)
+  category: Wind
+- datasetID: erdQBekm8day
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (8 Day)
+  category: Wind
+- datasetID: erdQBekmmday
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (Monthly)
+  category: Wind
+- datasetID: erdQBekm1day_LonPM180
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (1 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQBekm14day_LonPM180
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (14 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQBekm3day_LonPM180
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (3 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQBekm8day_LonPM180
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (8 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQBekmmday_LonPM180
+  label: Wind Diffusivity Current, Metop-B ASCAT, 0.25°, Global, Near Real Time, 2013-present (Monthly),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQCwindproducts4hrAscending
+  label: Merge Windspeed, Stress, Curl, Divergence, and Ekman Upwelling, Metop-C ASCAT,0.25 degree, Global,
+    Near Real Time, 2020-present, 4 hour
+  category: Wind
+- datasetID: erdQCwindproducts4hrDecending
+  label: Merge Windspeed, Stress, Curl, Divergence, and Ekman Upwelling, Metop-C ASCAT, 0.25 degree, Global,
+    Near Real Time, 2020-present, 4 hour
+  category: Wind
+- datasetID: erdQCwindproducts1day
+  label: Merge Windspeed, Stress, Curl, Divergence, and Ekman Upwelling, Metop-C ASCAT, 0.25 degree, Global,
+    Near Real Time, 2020-present, 1-Day Composite
+  category: Wind
+- datasetID: erdQCwindproducts3day
+  label: Merge Windspeed, Stress, Curl, Divergence, and Ekman Upwelling, Metop-C ASCAT, 0.25 degree, Global,
+    Near Real Time, 2020-present, 3-Day Composite
+  category: Wind
+- datasetID: erdQCwindproducts7day
+  label: Merge Windspeed, Stress, Curl, Divergence, and Ekman Upwelling, Metop-C ASCAT, 0.25 degree, Global,
+    Near Real Time, 2020-present, 7-Day Composite
+  category: Wind
+- datasetID: erdQCwindproductsMonthly
+  label: Merge Windspeed, Stress, Curl, Divergence, and Ekman Upwelling, Metop-C ASCAT, 0.25 degree, Global,
+    Near Real Time, 2020-present, Monthly Composite
+  category: Wind
+- datasetID: erdQSwind1day
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (1 Day)
+  category: Wind
+- datasetID: erdQSwind3day
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (3 Day)
+  category: Wind
+- datasetID: erdQSwind8day
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (8 Day)
+  category: Wind
+- datasetID: erdQSwindmday
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (Monthly)
+  category: Wind
+- datasetID: erdQSwind4day
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 2007-2007 (4 Day)
+  category: Wind
+- datasetID: erdQSwind1day_LonPM180
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (1 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQSwind3day_LonPM180
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (3 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQSwind8day_LonPM180
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (8 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQSwind4day_LonPM180
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 2007-2007 (4 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQSwindmday_LonPM180
+  label: Wind, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (Monthly), Lon+/-180
+  category: Wind
+- datasetID: erdQSstress1day
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (1 Day)
+  category: Wind
+- datasetID: erdQSstress14day
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (14 Day)
+  category: Wind
+- datasetID: erdQSstress3day
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (3 Day)
+  category: Wind
+- datasetID: erdQSstress8day
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (8 Day)
+  category: Wind
+- datasetID: erdQSstressmday
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (Monthly)
+  category: Wind
+- datasetID: erdQSstress1day_LonPM180
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (1 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQSstress14day_LonPM180
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (14 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQSstress3day_LonPM180
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (3 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQSstress8day_LonPM180
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (8 Day), Lon+/-180
+  category: Wind
+- datasetID: erdQSstressmday_LonPM180
+  label: Wind Stress, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (Monthly), Lon+/-180
+  category: Wind
+- datasetID: erdQSekm1day
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (1 Day)
+  category: Wind
+- datasetID: erdQSekm14day
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (14 Day)
+  category: Wind
+- datasetID: erdQSekm3day
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (3 Day)
+  category: Wind
+- datasetID: erdQSekm8day
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (8 Day)
+  category: Wind
+- datasetID: erdQSekmmday
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (Monthly)
+  category: Wind
+- datasetID: erdQSekm1day_LonPM180
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (1 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQSekm14day_LonPM180
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (14 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQSekm3day_LonPM180
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (3 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQSekm8day_LonPM180
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (8 Day),
+    Lon+/-180
+  category: Wind
+- datasetID: erdQSekmmday_LonPM180
+  label: Wind Diffusivity Current, QuikSCAT SeaWinds, 0.125°, Global, Science Quality, 1999-2009 (Monthly),
+    Lon+/-180
+  category: Wind
+- datasetID: coastwatchSMOSv662SSS1day
+  label: Sea Surface Salinity, Miras SMOS, Near Real-Time, Global 0.25°, 2010-present, Daily
+  category: Salinity
+- datasetID: coastwatchSMOSv662SSS3day
+  label: Sea Surface Salinity, Miras SMOS, Near Real-Time, Global 0.25°, 2010-present, 3 Day Composite
+  category: Salinity
+- datasetID: noaacwSMAPsssDaily
+  label: Sea Surface Salinity, SMAP, Near Real-Time, Global 0.25°, 2015-present, Daily
+  category: Salinity
+- datasetID: iprcAquariusOISSS7day
+  label: IPRC, Aquarius, Optimally Interpolated Salinity, 0.5°;, Global, 7-Day, 2011-2015, v4.0
+  category: Salinity
+- datasetID: nesdisSSH1day
+  label: NOAA CoastWatch, Sea Surface Height Anomalies and Geostrophic Currents from Altimetry, Global,
+    2017-present, EXPERIMENTAL
+  category: Sea Level and Geostrophic Currents
+- datasetID: erdTAssh1day
+  label: Sea Surface Height, Absolute, Aviso, 0.25 degrees, Global, 1992-2012, Science Quality (1 Day
+    Composite)
+  category: Sea Level and Geostrophic Currents
+- datasetID: erdTAsshmday
+  label: Sea Surface Height, Absolute, Aviso, 0.25 degrees, Global, 1992-2010, Science Quality (Monthly
+    Composite)
+  category: Sea Level and Geostrophic Currents
+- datasetID: erdTAgeo1day
+  label: Currents, Geostrophic, Aviso, 0.25 degrees, Global, 1992-2012 (1 Day Composite)
+  category: Sea Level and Geostrophic Currents
+- datasetID: erdTAgeomday
+  label: Currents, Geostrophic, Aviso, 0.25 degrees, Global, 1992-2009 (Monthly Composite)
+  category: Sea Level and Geostrophic Currents

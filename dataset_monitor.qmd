@@ -26,6 +26,7 @@ Monitor the availability and update status of selected datasets hosted on the Co
 ```{python}
 #| echo: false
 #| output: asis
+#| warning: false
 
 import html
 import pandas as pd
@@ -35,19 +36,23 @@ from pathlib import Path
 from urllib.parse import quote
 from urllib.request import urlopen
 from io import BytesIO
+from IPython.display import display, HTML
 
-# -------------------------------------------------------
+
+# ==========================================================
 # LOAD EDITABLE DATASET WATCHLIST
-# -------------------------------------------------------
+# ==========================================================
 
-watchlist = yaml.safe_load(
-    Path("content/dataset_monitor.yml").read_text(encoding="utf-8")
-) or {}
+watchlist_path = Path("content/dataset_monitor.yml")
+
+with open(watchlist_path, "r", encoding="utf-8") as file:
+    watchlist = yaml.safe_load(file) or {}
 
 watch = pd.DataFrame(watchlist.get("datasets", []))
 
 for col in ("datasetID", "label", "category"):
-    if col not in watch:
+
+    if col not in watch.columns:
         watch[col] = ""
 
     watch[col] = (
@@ -59,17 +64,22 @@ for col in ("datasetID", "label", "category"):
 
 watch = (
     watch.loc[watch["datasetID"] != ""]
-    .drop_duplicates("datasetID")
+    .drop_duplicates(subset="datasetID", keep="first")
     .copy()
 )
 
-watch.loc[watch["label"] == "", "label"] = watch["datasetID"]
-watch.loc[watch["category"] == "", "category"] = "Other"
+watch.loc[
+    watch["label"] == "", "label"
+] = watch["datasetID"]
+
+watch.loc[
+    watch["category"] == "", "category"
+] = "Other"
 
 
-# -------------------------------------------------------
-# RETRIEVE LIVE ERDDAP STATUS AT BUILD TIME
-# -------------------------------------------------------
+# ==========================================================
+# RETRIEVE ERDDAP STATUS DATA
+# ==========================================================
 
 status_url = (
     "https://coastwatch.pfeg.noaa.gov/erddap/"
@@ -77,16 +87,21 @@ status_url = (
 )
 
 fetch_error = None
+status_available = False
 
 try:
+
     with urlopen(status_url, timeout=30) as response:
         status = pd.read_csv(BytesIO(response.read()))
 
     status.columns = status.columns.str.strip()
 
-    if "datasetID" not in status or "outOfDate" not in status:
+    required_columns = {"datasetID", "outOfDate"}
+
+    if not required_columns.issubset(status.columns):
         raise ValueError(
-            "ERDDAP response lacks required status columns"
+            "ERDDAP status table is missing required columns. "
+            f"Available columns: {list(status.columns)}"
         )
 
     status["datasetID"] = (
@@ -96,7 +111,10 @@ try:
         .str.strip()
     )
 
-    status = status.drop_duplicates("datasetID")
+    status = status.drop_duplicates(
+        subset="datasetID",
+        keep="first"
+    )
 
     df = watch.merge(
         status,
@@ -104,18 +122,21 @@ try:
         how="left"
     )
 
+    status_available = True
+
 except Exception as exc:
-    # Do not treat unavailable ERDDAP data as healthy.
+
     fetch_error = str(exc)
 
     df = watch.copy()
+
     df["outOfDate"] = float("nan")
     df["maxTime"] = pd.NA
 
 
-# -------------------------------------------------------
-# CLASSIFY STATUS
-# -------------------------------------------------------
+# ==========================================================
+# CLASSIFY DATASET STATUS
+# ==========================================================
 
 scores = pd.to_numeric(
     df["outOfDate"],
@@ -123,7 +144,11 @@ scores = pd.to_numeric(
 )
 
 
-def classify(value):
+def classify_status(value):
+
+    if not status_available:
+        return "Unavailable"
+
     if pd.isna(value):
         return "Not Flagged"
 
@@ -136,13 +161,14 @@ def classify(value):
     return "Outdated"
 
 
-df["status"] = scores.apply(classify)
+df["status"] = scores.apply(classify_status)
 
 priority = {
     "Outdated": 0,
     "Delayed": 1,
     "OK": 2,
-    "Not Flagged": 3
+    "Not Flagged": 3,
+    "Unavailable": 4
 }
 
 df["priority"] = df["status"].map(priority)
@@ -153,77 +179,120 @@ df = df.sort_values(
 )
 
 
-# -------------------------------------------------------
-# HTML HELPERS AND COUNTS
-# -------------------------------------------------------
+# ==========================================================
+# HTML HELPERS
+# ==========================================================
 
 def esc(value):
     return html.escape(str(value), quote=True)
 
 
+def safe_text(value, default="Not listed"):
+
+    if pd.isna(value):
+        return default
+
+    value = str(value).strip()
+
+    return esc(value) if value else default
+
+
 counts = df["status"].value_counts()
 
+html_parts = []
 
-# -------------------------------------------------------
+
+def add(content):
+    html_parts.append(content)
+
+
+# ==========================================================
 # STATUS OVERVIEW
-# -------------------------------------------------------
+# ==========================================================
 
-print('<div class="cw-monitor-summary">')
+add("""
+<div class="cw-monitor-summary">
 
-print("""
-<div class="cw-monitor-summary-head">
-  <div>
-    <span class="cw-monitor-eyebrow">
-      MONITORING OVERVIEW
-    </span>
-    <h2>Dataset update status</h2>
-  </div>
+  <div class="cw-monitor-summary-head">
+
+    <div>
+      <span class="cw-monitor-eyebrow">
+        MONITORING OVERVIEW
+      </span>
+
+      <h2>Dataset update status</h2>
+    </div>
 """)
 
-print(
-    '<span class="cw-monitor-total">'
-    f'{len(df)} monitored datasets'
-    '</span></div>'
-)
+add(f"""
+    <span class="cw-monitor-total">
+      {len(df)} monitored datasets
+    </span>
 
-print('<div class="cw-monitor-stats">')
+  </div>
 
-for key, label, css in [
+  <div class="cw-monitor-stats">
+""")
+
+
+status_cards = [
     ("Outdated", "Outdated", "outdated"),
     ("Delayed", "Delayed", "delayed"),
     ("OK", "OK", "ok"),
-    ("Not Flagged", "Not Flagged", "unflagged"),
-]:
+    ("Not Flagged", "Not Flagged", "unflagged")
+]
+
+for key, label, css_class in status_cards:
+
     count = int(counts.get(key, 0))
 
-    print(f"""
-    <div class="cw-monitor-stat {css}">
+    add(f"""
+    <div class="cw-monitor-stat {css_class}">
       <strong>{count}</strong>
       <span>{label}</span>
     </div>
     """)
 
-print("</div>")
+add("</div>")
+
+
+# ==========================================================
+# ERDDAP ERROR MESSAGE
+# ==========================================================
 
 if fetch_error:
-    print("""
-    <p class="cw-monitor-error" role="alert">
-      ERDDAP status information could not be retrieved
-      during this build. Dataset statuses are unavailable
-      and have not been verified as current.
-    </p>
+
+    add(f"""
+    <div class="cw-monitor-error" role="alert">
+      <strong>ERDDAP status information unavailable.</strong>
+
+      <p>
+        The status table could not be retrieved during
+        this website build. Dataset names and categories
+        are still available, but their update statuses
+        could not be verified.
+      </p>
+
+      <details>
+        <summary>Technical details</summary>
+        <code>{esc(fetch_error)}</code>
+      </details>
+    </div>
     """)
 
 
-# -------------------------------------------------------
+# ==========================================================
 # FILTER CONTROLS
-# -------------------------------------------------------
+# ==========================================================
 
-print("""
+add("""
 <div class="cw-monitor-controls">
 
   <div>
-    <label for="monitorSearch">Search datasets</label>
+    <label for="monitorSearch">
+      Search datasets
+    </label>
+
     <input
       id="monitorSearch"
       type="search"
@@ -235,56 +304,82 @@ print("""
     <label for="categoryFilter">
       Satellite data product
     </label>
+
     <select id="categoryFilter">
       <option value="all">All products</option>
     </select>
   </div>
 
   <div>
-    <label for="statusFilter">Status</label>
+    <label for="statusFilter">
+      Status
+    </label>
+
     <select id="statusFilter">
       <option value="all">All statuses</option>
     </select>
   </div>
 
-  <button id="monitorReset" type="button">
+  <button
+    id="monitorReset"
+    type="button"
+  >
     Reset filters
   </button>
 
 </div>
 
 <div class="cw-monitor-legend">
+
   <span>
     <b>Out-of-date score:</b>
     &lt;1 OK · 1–&lt;2 Delayed · ≥2 Outdated
   </span>
+
   <span>
     Not Flagged = no score in the ERDDAP status table
   </span>
-</div>
 
 </div>
 
-<div class="cw-monitor-results">
-
-  <div class="cw-monitor-results-head">
-    <h2>Monitored datasets</h2>
-    <span id="monitorCount" aria-live="polite"></span>
-  </div>
-
-  <div id="monitorGrid" class="cw-monitor-grid">
+</div>
 """)
 
 
-# -------------------------------------------------------
-# BUILD DATASET CARDS
-# -------------------------------------------------------
+# ==========================================================
+# RESULTS SECTION
+# ==========================================================
+
+add("""
+<div class="cw-monitor-results">
+
+  <div class="cw-monitor-results-head">
+
+    <h2>Monitored datasets</h2>
+
+    <span
+      id="monitorCount"
+      aria-live="polite"
+    ></span>
+
+  </div>
+
+  <div
+    id="monitorGrid"
+    class="cw-monitor-grid"
+  >
+""")
+
+
+# ==========================================================
+# GENERATE DATASET CARDS
+# ==========================================================
 
 for _, row in df.iterrows():
 
     dataset_id = str(row["datasetID"])
 
-    url = (
+    dataset_url = (
         "https://coastwatch.pfeg.noaa.gov/erddap/info/"
         + quote(dataset_id, safe="")
         + "/index.html"
@@ -292,7 +387,14 @@ for _, row in df.iterrows():
 
     label = esc(row["label"])
     category = esc(row["category"])
+
     status_text = str(row["status"])
+
+    status_class = (
+        status_text
+        .lower()
+        .replace(" ", "-")
+    )
 
     score = pd.to_numeric(
         pd.Series([row["outOfDate"]]),
@@ -305,21 +407,21 @@ for _, row in df.iterrows():
         else "Not listed"
     )
 
-    latest = row.get("maxTime")
-
-    latest_text = (
-        esc(latest)
-        if pd.notna(latest) and str(latest).strip()
-        else "Not listed"
+    latest_text = safe_text(
+        row.get("maxTime")
     )
 
     search_text = esc(
-        (str(row["label"]) + " " + dataset_id).lower()
+        (
+            str(row["label"])
+            + " "
+            + dataset_id
+            + " "
+            + str(row["category"])
+        ).lower()
     )
 
-    status_class = status_text.lower().replace(" ", "-")
-
-    print(f"""
+    add(f"""
     <article
       class="cw-monitor-item {status_class}"
       data-category="{category}"
@@ -331,7 +433,7 @@ for _, row in df.iterrows():
 
         <h3>
           <a
-            href="{esc(url)}"
+            href="{esc(dataset_url)}"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -345,6 +447,7 @@ for _, row in df.iterrows():
         </p>
 
         <div class="cw-monitor-meta">
+
           <span>
             <b>Out-of-date score:</b>
             {score_text}
@@ -354,11 +457,13 @@ for _, row in df.iterrows():
             <b>Latest available data:</b>
             {latest_text}
           </span>
+
         </div>
 
       </div>
 
       <div class="cw-monitor-tags">
+
         <span class="cw-monitor-category">
           {category}
         </span>
@@ -366,24 +471,43 @@ for _, row in df.iterrows():
         <span class="cw-monitor-badge">
           {esc(status_text)}
         </span>
+
       </div>
 
     </article>
     """)
 
 
-print("""
+# ==========================================================
+# CLOSE RESULTS SECTION
+# ==========================================================
+
+add("""
   </div>
 
-  <p id="monitorEmpty" class="cw-monitor-empty" hidden>
+  <p
+    id="monitorEmpty"
+    class="cw-monitor-empty"
+    hidden
+  >
     No datasets match the current filters.
   </p>
 
 </div>
 """)
+
+
+# ==========================================================
+# DISPLAY HTML
+# ==========================================================
+
+display(HTML("\n".join(html_parts)))
 ```
 
-<!-- INTERACTIVE FILTERING -->
+
+<!-- ======================================================
+     INTERACTIVE FILTERING
+     ====================================================== -->
 
 ```{=html}
 <script>
@@ -392,6 +516,7 @@ print("""
   function init() {
 
     const grid = document.getElementById("monitorGrid");
+
     if (!grid) return;
 
     const rows = [
@@ -405,25 +530,55 @@ print("""
     const empty = document.getElementById("monitorEmpty");
     const reset = document.getElementById("monitorReset");
 
-    // Populate category options from dataset metadata.
+
+    // =====================================================
+    // POPULATE CATEGORY FILTER
+    // =====================================================
+
     const categories = [
-      ...new Set(rows.map(row => row.dataset.category))
+      ...new Set(
+        rows.map(row => row.dataset.category)
+      )
     ].sort();
 
     categories.forEach(value => {
       category.add(new Option(value, value));
     });
 
-    // Populate status options.
-    ["Outdated", "Delayed", "OK", "Not Flagged"].forEach(value => {
-      if (rows.some(row => row.dataset.status === value)) {
+
+    // =====================================================
+    // POPULATE STATUS FILTER
+    // =====================================================
+
+    const statuses = [
+      "Outdated",
+      "Delayed",
+      "OK",
+      "Not Flagged",
+      "Unavailable"
+    ];
+
+    statuses.forEach(value => {
+
+      if (
+        rows.some(
+          row => row.dataset.status === value
+        )
+      ) {
         status.add(new Option(value, value));
       }
+
     });
+
+
+    // =====================================================
+    // FILTER DATASETS
+    // =====================================================
 
     function update() {
 
       const term = search.value.trim().toLowerCase();
+
       let visible = 0;
 
       rows.forEach(row => {
@@ -437,7 +592,8 @@ print("""
           row.dataset.status === status.value;
 
         const searchMatch =
-          !term || row.dataset.search.includes(term);
+          !term ||
+          row.dataset.search.includes(term);
 
         const show =
           categoryMatch &&
@@ -446,33 +602,66 @@ print("""
 
         row.hidden = !show;
 
-        if (show) visible++;
+        if (show) {
+          visible++;
+        }
+
       });
 
       count.textContent =
         `${visible} of ${rows.length} datasets shown`;
 
       empty.hidden = visible !== 0;
+
     }
 
+
+    // =====================================================
+    // EVENT LISTENERS
+    // =====================================================
+
     category.addEventListener("change", update);
+
     status.addEventListener("change", update);
+
     search.addEventListener("input", update);
 
+
+    // =====================================================
+    // RESET FILTERS
+    // =====================================================
+
     reset.addEventListener("click", () => {
+
       category.value = "all";
       status.value = "all";
       search.value = "";
+
       update();
+
     });
 
+
+    // =====================================================
+    // INITIALIZE
+    // =====================================================
+
     update();
+
   }
 
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      init
+    );
+
   } else {
+
     init();
+
   }
 
 })();
