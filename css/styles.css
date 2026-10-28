@@ -1,0 +1,629 @@
+/* ==========================================================
+   COASTWATCH WEST COAST NODE — SITE-WIDE STYLES
+   ========================================================== */
+/* 1. Design tokens */
+:root {
+  --noaa-navy: #123B5D;
+  --noaa-blue: #176A91;
+  --noaa-teal: #168C96;
+  --noaa-light-blue: #EAF3F7;
+  --noaa-light-gray: #F5F7F9;
+  --noaa-text: #263746;
+  --noaa-border: #DCE5EB;
+  --bs-primary: #176A91;
+  --bs-link-color: #176A91;
+  --bs-link-hover-color: #123B5D;
+}
+/* 2. Typography */
+body {
+  color: var(--noaa-text);
+  line-height: 1.65;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: var(--noaa-navy);
+  font-weight: 600;
+}
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: 1.65rem;
+  margin-bottom: 1rem;
+}
+/* 3. Navigation */
+.navbar {
+  background-color: var(--noaa-navy) !important;
+  border-bottom: none;
+  padding: 0.7rem 1.5rem;
+}
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: #ffffff !important;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: #A7E0E4 !important;
+}
+.navbar .navbar-brand img {
+  max-height: 55px;
+}
+.navbar .dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid var(--noaa-border);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(18, 59, 93, 0.12);
+}
+.navbar .dropdown-item {
+  color: var(--noaa-navy);
+}
+.navbar .dropdown-item:hover {
+  background-color: var(--noaa-light-blue);
+  color: var(--noaa-blue);
+}
+/* 4. Links and buttons */
+main a {
+  color: var(--noaa-blue);
+}
+main a:hover {
+  color: var(--noaa-navy);
+}
+.btn-primary {
+  background-color: var(--noaa-blue);
+  border-color: var(--noaa-blue);
+  color: #ffffff;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.btn-primary:hover {
+  background-color: var(--noaa-navy);
+  border-color: var(--noaa-navy);
+  color: #ffffff;
+}
+/* 5. Shared cards, forms, and tables */
+.card {
+  background-color: #ffffff;
+  border: 1px solid var(--noaa-border);
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(18, 59, 93, 0.06);
+}
+.card:hover {
+  box-shadow: 0 6px 18px rgba(18, 59, 93, 0.10);
+}
+.form-control,
+.form-select {
+  border: 1px solid var(--noaa-border);
+  border-radius: 6px;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--noaa-teal);
+  box-shadow: 0 0 0 0.2rem rgba(22, 140, 150, 0.15);
+}
+.table thead {
+  background-color: var(--noaa-light-blue);
+}
+.table th {
+  color: var(--noaa-navy);
+  font-weight: 600;
+}
+/* ==========================================================
+   HOMEPAGE — all page-specific classes use cw- prefix
+   ========================================================== */
+/* 6. Homepage layout and hero */
+.cw-homepage {
+  --cw-navy: var(--noaa-navy);
+  --cw-blue: var(--noaa-blue);
+  --cw-teal: var(--noaa-teal);
+  --cw-light-blue: var(--noaa-light-blue);
+  --cw-gray: var(--noaa-light-gray);
+  --cw-border: var(--noaa-border);
+  --cw-text: var(--noaa-text);
+  width: 100%;
+  color: var(--cw-text);
+}
+.cw-hero {
+  background-color: var(--noaa-navy);
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(18, 59, 93, 0.96) 0%,
+      rgba(18, 59, 93, 0.85) 35%,
+      rgba(18, 59, 93, 0.50) 65%,
+      rgba(18, 59, 93, 0.15) 100%
+    ),
+    url("../images/productivity.png");
+  background-size: cover, cover;
+  background-position: center, 70% center;
+  background-repeat: no-repeat;
+  border-radius: 14px;
+  padding: 2.5rem 3rem;
+  margin: 1.5rem 0 2.5rem;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+.cw-hero-content {
+  max-width: 700px;
+  position: relative;
+  z-index: 1;
+}
+.cw-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C7E8F0;
+  margin-bottom: 0.75rem;
+}
+.cw-hero h1 {
+  color: #ffffff !important;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  max-width: 650px;
+  margin: 0 0 1rem;
+}
+.cw-hero p {
+  color: #E6F0F5;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 630px;
+  margin-bottom: 1.5rem;
+}
+.cw-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+/* 7. Hero buttons */
+.cw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.25rem;
+  border-radius: 7px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease,
+              color 0.2s ease,
+              border-color 0.2s ease;
+}
+.cw-btn-light {
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  color: var(--cw-navy) !important;
+}
+.cw-btn-light:hover {
+  background: var(--cw-light-blue);
+  border-color: var(--cw-light-blue);
+}
+.cw-btn-outline {
+  background-color: #DCEEF5;
+  border: 1px solid #DCEEF5;
+  color: var(--noaa-navy) !important;
+}
+.cw-btn-outline:hover {
+  background-color: #B9DDEB;
+  border-color: #B9DDEB;
+  color: var(--noaa-navy) !important;
+}
+/* 8. Section headings */
+.cw-section {
+  margin: 0 0 3rem;
+}
+.cw-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.cw-section-label {
+  display: block;
+  color: var(--cw-blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.4rem;
+}
+.cw-section-header h2,
+.cw-section-heading h2 {
+  color: var(--cw-navy);
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 0;
+  border: none;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.cw-section-link {
+  color: var(--cw-blue) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cw-section-link:hover {
+  color: var(--cw-navy) !important;
+  text-decoration: underline;
+}
+/* 9. News & Events */
+.cw-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+.cw-news-card {
+  background-color: #ffffff;
+  border: 1px solid var(--noaa-border);
+  border-top: 4px solid var(--noaa-blue);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease,
+              transform 0.2s ease;
+}
+.cw-news-card:nth-child(3n + 2) {
+  border-top-color: var(--noaa-teal);
+}
+.cw-news-card:nth-child(3n + 3) {
+  border-top-color: #4D8CB3;
+}
+.cw-news-card:hover {
+  box-shadow: 0 8px 24px rgba(18, 59, 93, 0.09);
+  transform: translateY(-3px);
+}
+.cw-news-card-body {
+  padding: 1.6rem;
+}
+.cw-news-date {
+  display: block;
+  color: var(--cw-blue);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+.cw-news-card h3 {
+  color: var(--cw-navy);
+  font-size: 1.12rem;
+  line-height: 1.45;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+.cw-news-description {
+  color: #52616E;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.cw-news-description p:last-child {
+  margin-bottom: 0;
+}
+.cw-news-description a {
+  color: var(--cw-blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+/* 10. Resource cards */
+.cw-resources-section {
+  padding-bottom: 1rem;
+}
+.cw-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+/* Resource cards */
+.cw-resource-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #EAF3F7;
+  border: 1px solid #D1E3EB;
+  border-radius: 12px;
+  padding: 1.8rem;
+  transition: box-shadow 0.2s ease,
+              transform 0.2s ease;
+}
+.cw-resource-card:hover {
+  box-shadow: 0 8px 24px rgba(18, 59, 93, 0.10);
+  transform: translateY(-2px);
+}
+/* Remove extra spacing from Quarto headings */
+.cw-resource-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.85rem;
+}
+/* Resource card descriptions */
+.cw-resource-card p {
+  color: #52616E;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+/* Align buttons along the bottom */
+.cw-resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+/* Resource card buttons */
+.cw-resource-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.15rem;
+  background-color: var(--noaa-blue);
+  border: 1px solid var(--noaa-blue);
+  border-radius: 6px;
+  color: #ffffff !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background-color 0.2s ease;
+}
+.cw-resource-btn:hover {
+  background-color: var(--noaa-navy);
+  border-color: var(--noaa-navy);
+  color: #ffffff !important;
+}
+.cw-resource-btn-secondary {
+  background-color: transparent;
+  border-color: var(--noaa-blue);
+  color: var(--noaa-blue) !important;
+}
+.cw-resource-btn-secondary:hover {
+  background-color: var(--noaa-light-blue);
+  border-color: var(--noaa-navy);
+  color: var(--noaa-navy) !important;
+}
+/* Keyboard focus indicators */
+.cw-btn:focus-visible,
+.cw-resource-btn:focus-visible {
+  outline: 3px solid var(--noaa-teal);
+  outline-offset: 3px;
+}
+/* ==========================================================
+   RESPONSIVE STYLES
+   ========================================================== */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    padding-top: 1rem;
+  }
+  .cw-hero {
+    padding: 2.5rem 2rem;
+  }
+  .cw-news-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .cw-hero {
+    padding: 2rem 1.5rem;
+    margin: 1rem 0 2.5rem;
+    border-radius: 12px;
+    background-position: center, 70% center;
+  }
+  .cw-hero h1 {
+    font-size: 2rem;
+  }
+  .cw-hero p {
+    font-size: 1rem;
+  }
+  .cw-section {
+    margin-bottom: 3rem;
+  }
+  .cw-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .cw-news-grid,
+  .cw-resource-grid {
+    grid-template-columns: 1fr;
+  }
+  .cw-resource-card {
+    padding: 1.5rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cw-news-card,
+  .cw-resource-card,
+  .cw-btn {
+    transition: none;
+  }
+  .cw-news-card:hover {
+    transform: none;
+  }
+}
+
+
+/* ==========================================================
+   COASTWATCH SITE FOOTER
+   ========================================================== */
+
+/* Keep short pages from leaving the footer halfway up */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#quarto-content {
+  flex: 1 0 auto;
+}
+
+.cw-site-footer {
+  margin-top: auto;
+}
+
+/* Full-width footer regardless of Quarto's content container */
+
+.cw-site-footer {
+  width: 100%;
+  max-width: none;
+  margin: 4rem 0 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #123B5D;
+  color: #FFFFFF;
+}
+
+/* Centered inner content */
+
+.cw-site-footer-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 1.75rem;
+  box-sizing: border-box;
+}
+
+/* NOAA branding */
+
+.cw-site-footer-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.cw-site-footer-logo {
+  display: block;
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.cw-site-footer-identity {
+  text-align: left;
+}
+
+.cw-site-footer-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #FFFFFF;
+}
+
+.cw-site-footer-tagline {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #C7DFEA;
+}
+
+/* Organization links */
+
+.cw-site-footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cw-site-footer-links a {
+  color: #E0EDF4;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.cw-site-footer-links a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Divider */
+
+.cw-site-footer-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  margin: 0 0 1.5rem;
+}
+
+/* Legal links */
+
+.cw-site-footer-legal {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.cw-site-footer-legal a {
+  color: #C7DFEA;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.cw-site-footer-legal a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+/* Copyright */
+
+.cw-site-footer-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  color: #B7CFDC;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.cw-site-footer-bottom a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.cw-site-footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive layout */
+
+@media (max-width: 767px) {
+
+  .cw-site-footer-inner {
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+
+  .cw-site-footer-brand {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cw-site-footer-identity {
+    text-align: center;
+  }
+
+  .cw-site-footer-name {
+    font-size: 1.05rem;
+  }
+
+  .cw-site-footer-links {
+    gap: 0.75rem 1.25rem;
+  }
+
+  .cw-site-footer-bottom {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+}

@@ -6,7 +6,7 @@ jupyter: python3
 format:
   html:
     toc: false
-    css: data_catalog.css
+    css: css/data_catalog.css
 ---
 
 ::: {.cw-catalog}
