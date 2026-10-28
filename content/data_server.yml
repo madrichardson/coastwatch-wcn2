@@ -32,7 +32,7 @@ features:
         Use the web interface or make RESTful requests directly
         from MATLAB, R, Python, or webpages.
 
-    - title: "Create maps and graphs"
+    - title: "Make customized maps and graphs"
       description: >-
         Generate PNG and PDF graphics on the fly from gridded
         and tabular scientific datasets for use in reports
