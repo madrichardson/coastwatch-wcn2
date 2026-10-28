@@ -6,6 +6,8 @@ website:
   title: "CoastWatch West Coast Node"
   favicon: images/coastwatch.png
   page-navigation: true
+  website:
+  site-url: https://madrichardson.github.io/coastwatch-wcn2/
 
   navbar:
     logo: images/coastwatch_logo.png
