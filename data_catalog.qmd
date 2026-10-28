@@ -1,6 +1,6 @@
 
 ---
-title: "Data Catalog"
+pagetitle: "Data Catalog"
 anchor-sections: false
 page-layout: full
 jupyter: python3
@@ -13,6 +13,7 @@ format:
 ::: {.cw-catalog}
 
 ::: {.cw-catalog-intro}
+
 <span class="cw-catalog-eyebrow">EXPLORE OCEAN DATA</span>
 
 # Data Catalog
@@ -20,100 +21,122 @@ format:
 The West Coast Node ERDDAP data server hosts over 1,700 datasets. This catalog highlights datasets commonly used by CoastWatch users. Search by name or narrow the list by product, sensor, region, and other characteristics.
 
 Explore the [complete ERDDAP dataset listing](https://coastwatch.pfeg.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000), or check the [Dataset Monitoring Dashboard](dataset_monitor.qmd) for dataset status.
+
 :::
 
 ::: {.cw-catalog-panel}
 
+<!-- ======================================================
+     FILTER PANEL HEADER
+     ====================================================== -->
+
 <div class="cw-catalog-panel-head">
-  <div>
-    <span class="cw-catalog-eyebrow">FIND A DATASET</span>
-    <h2>Filter the catalog</h2>
-    <p>Choose a data product, then refine your results. You can also search across dataset titles and descriptions.</p>
-  </div>
-  <button type="button" id="catalogReset" class="cw-catalog-reset">Reset filters</button>
+<div>
+<span class="cw-catalog-eyebrow">FIND A DATASET</span>
+<h2>Filter the catalog</h2>
+<p>Choose a data product, then refine your results. You can also search across dataset titles and descriptions.</p>
+</div>
+<button type="button" id="catalogReset" class="cw-catalog-reset">Reset filters</button>
 </div>
 
+<!-- ======================================================
+     SEARCH BOX
+     ====================================================== -->
+
 <div class="cw-catalog-search-wrap">
-  <label for="catalogSearch">Search datasets</label>
-  <input type="search" id="catalogSearch" placeholder="Search by dataset name, description, or product…" autocomplete="off">
+<label for="catalogSearch">Search datasets</label>
+<input type="search" id="catalogSearch" placeholder="Search by dataset name, description, or product…" autocomplete="off">
 </div>
+
+<!-- ======================================================
+     PROGRESSIVE FILTERS
+     ====================================================== -->
 
 <div class="cw-catalog-filters" id="catalogFilters">
 
-  <div class="cw-catalog-filter" data-step="0">
-    <label for="productFilter">1. Data product</label>
-    <select id="productFilter" data-field="product">
-      <option value="">All products</option>
-    </select>
-  </div>
+<div class="cw-catalog-filter" data-step="0">
+<label for="productFilter">1. Data product</label>
+<select id="productFilter" data-field="product">
+<option value="">All products</option>
+</select>
+</div>
 
-  <div class="cw-catalog-filter" data-step="1" hidden>
-    <label for="sensorTypeFilter">2. Sensor type</label>
-    <select id="sensorTypeFilter" data-field="sensor">
-      <option value="">All sensor types</option>
-    </select>
-  </div>
+<div class="cw-catalog-filter" data-step="1" hidden>
+<label for="sensorTypeFilter">2. Sensor type</label>
+<select id="sensorTypeFilter" data-field="sensor">
+<option value="">All sensor types</option>
+</select>
+</div>
 
-  <div class="cw-catalog-filter" data-step="2" hidden>
-    <label for="regionFilter">3. Region</label>
-    <select id="regionFilter" data-field="region">
-      <option value="">All regions</option>
-    </select>
-  </div>
+<div class="cw-catalog-filter" data-step="2" hidden>
+<label for="regionFilter">3. Region</label>
+<select id="regionFilter" data-field="region">
+<option value="">All regions</option>
+</select>
+</div>
 
-  <div class="cw-catalog-filter" data-step="3" hidden>
-    <label for="timeSeriesFilter">4. Time series type</label>
-    <select id="timeSeriesFilter" data-field="timeseries">
-      <option value="">All time series types</option>
-    </select>
-  </div>
+<div class="cw-catalog-filter" data-step="3" hidden>
+<label for="timeSeriesFilter">4. Time series type</label>
+<select id="timeSeriesFilter" data-field="timeseries">
+<option value="">All time series types</option>
+</select>
+</div>
 
-  <div class="cw-catalog-filter" data-step="4" hidden>
-    <label for="geoFilter">5. Geostationary</label>
-    <select id="geoFilter" data-field="geo">
-      <option value="">Either</option>
-    </select>
-  </div>
+<div class="cw-catalog-filter" data-step="4" hidden>
+<label for="geoFilter">5. Geostationary</label>
+<select id="geoFilter" data-field="geo">
+<option value="">Either</option>
+</select>
+</div>
 
-  <div class="cw-catalog-filter" data-step="5" hidden>
-    <label for="blendFilter">6. Blended product</label>
-    <select id="blendFilter" data-field="blended">
-      <option value="">Either</option>
-    </select>
-  </div>
+<div class="cw-catalog-filter" data-step="5" hidden>
+<label for="blendFilter">6. Blended product</label>
+<select id="blendFilter" data-field="blended">
+<option value="">Either</option>
+</select>
+</div>
 
-  <div class="cw-catalog-filter" data-step="6" hidden>
-    <label for="gapFilter">7. Gap-filled</label>
-    <select id="gapFilter" data-field="gapfilled">
-      <option value="">Either</option>
-    </select>
-  </div>
+<div class="cw-catalog-filter" data-step="6" hidden>
+<label for="gapFilter">7. Gap-filled</label>
+<select id="gapFilter" data-field="gapfilled">
+<option value="">Either</option>
+</select>
+</div>
 
-  <div class="cw-catalog-filter" data-step="7" hidden>
-    <label for="derivedFilter">8. Derived product (optical property)</label>
-    <select id="derivedFilter" data-field="derived">
-      <option value="">Either</option>
-    </select>
-  </div>
+<div class="cw-catalog-filter" data-step="7" hidden>
+<label for="derivedFilter">8. Derived product (optical property)</label>
+<select id="derivedFilter" data-field="derived">
+<option value="">Either</option>
+</select>
+</div>
 
 </div>
+
+<!-- ======================================================
+     RESULTS HEADER
+     ====================================================== -->
 
 <div class="cw-catalog-results-heading">
-  <h2>Available datasets</h2>
-  <span id="catalogCount" aria-live="polite">Loading datasets…</span>
+<h2>Available datasets</h2>
+<span id="catalogCount" aria-live="polite">Loading datasets…</span>
 </div>
+
+<!-- ======================================================
+     DATASET TABLE
+     ====================================================== -->
 
 <div class="cw-catalog-table-wrap">
 
 <table id="catalogTable" class="cw-catalog-table">
-  <thead>
-    <tr>
-      <th scope="col">Dataset</th>
-      <th scope="col">Product</th>
-      <th scope="col">Access</th>
-    </tr>
-  </thead>
-  <tbody>
+<thead>
+<tr>
+<th scope="col">Dataset</th>
+<th scope="col">Product</th>
+<th scope="col">Access</th>
+</tr>
+</thead>
+<tbody>
+
 ```{python}
 #| echo: false
 #| output: asis
@@ -122,11 +145,11 @@ import yaml
 from html import escape
 from pathlib import Path
 from urllib.parse import urlparse
-from IPython.display import HTML, display
+from IPython.display import display, HTML
 
-# ----------------------------------------------------------
-# Load the Pages CMS-managed YAML catalog
-# ----------------------------------------------------------
+# ==========================================================
+# LOAD DATA CATALOG YAML
+# ==========================================================
 
 catalog_path = Path("content/data_catalog.yml")
 
@@ -137,7 +160,7 @@ datasets = catalog.get("datasets", []) or []
 
 
 def safe(value):
-    """Escape editable text for HTML content and attributes."""
+    """Escape text for HTML."""
     return escape(
         str(value if value is not None else ""),
         quote=True
@@ -145,12 +168,12 @@ def safe(value):
 
 
 def field(item, name):
-    """Return a catalog field as a clean string."""
+    """Retrieve a field from the YAML dataset."""
     return str(item.get(name) or "").strip()
 
 
 def safe_url(value):
-    """Accept only HTTP and HTTPS access links."""
+    """Only allow HTTP and HTTPS links."""
     value = str(value or "").strip()
     parsed = urlparse(value)
 
@@ -160,9 +183,9 @@ def safe_url(value):
     return ""
 
 
-# ----------------------------------------------------------
-# Build dataset rows
-# ----------------------------------------------------------
+# ==========================================================
+# GENERATE DATASET TABLE ROWS
+# ==========================================================
 
 rows = []
 
@@ -175,7 +198,10 @@ for i, item in enumerate(datasets):
     resolution = safe(field(item, "resolution"))
     composite = safe(field(item, "composite"))
 
-    # Values used by JavaScript filters
+    # ------------------------------------------------------
+    # Filter attributes
+    # ------------------------------------------------------
+
     attributes = {
         "product": field(item, "product"),
         "sensor": field(item, "sensor_type"),
@@ -199,6 +225,7 @@ for i, item in enumerate(datasets):
     access_links = []
 
     for link in item.get("access", []) or []:
+
         url = safe_url(link.get("url"))
 
         if url:
@@ -248,13 +275,15 @@ for i, item in enumerate(datasets):
         )
 
     # ------------------------------------------------------
-    # Expandable description and metadata
+    # Expandable description
     # ------------------------------------------------------
 
     details = []
 
     if description:
-        details.append(f"<p>{description}</p>")
+        details.append(
+            f'<p>{description}</p>'
+        )
 
     metadata = [
         ("Dates", dates),
@@ -272,9 +301,9 @@ for i, item in enumerate(datasets):
 
     if meta_html:
         details.append(
-            f'<div class="cw-catalog-metadata">'
-            f'{meta_html}'
-            f'</div>'
+            '<div class="cw-catalog-metadata">'
+            + meta_html
+            + '</div>'
         )
 
     detail_html = (
@@ -284,262 +313,362 @@ for i, item in enumerate(datasets):
     )
 
     # ------------------------------------------------------
-    # Main row + expandable detail row
+    # Dataset row and detail row
     # ------------------------------------------------------
 
     rows.append(
         f"""
 <tr class="cw-catalog-data-row" {data_attrs}>
-  <td>
-    <button
-      type="button"
-      class="cw-catalog-toggle"
-      aria-expanded="false"
-      aria-controls="catalog-detail-{i}"
-    >
-      {title}
-      <span aria-hidden="true" class="cw-catalog-chevron">⌄</span>
-    </button>
-  </td>
-  <td>
-    <span class="cw-catalog-product">{product}</span>
-  </td>
-  <td>
-    {access_html}
-  </td>
+<td>
+<button
+type="button"
+class="cw-catalog-toggle"
+aria-expanded="false"
+aria-controls="catalog-detail-{i}"
+>
+{title}
+<span aria-hidden="true" class="cw-catalog-chevron">⌄</span>
+</button>
+</td>
+<td>
+<span class="cw-catalog-product">{product}</span>
+</td>
+<td>
+{access_html}
+</td>
 </tr>
 
 <tr
-  class="cw-catalog-detail-row"
-  id="catalog-detail-{i}"
-  hidden
+class="cw-catalog-detail-row"
+id="catalog-detail-{i}"
+hidden
 >
-  <td colspan="3">
-    <div class="cw-catalog-detail-content">
-      {detail_html}
-    </div>
-  </td>
+<td colspan="3">
+<div class="cw-catalog-detail-content">
+{detail_html}
+</div>
+</td>
 </tr>
 """
     )
 
-display(HTML("\n".join(rows)))
+# Print raw HTML rows for Quarto
+print("\n".join(rows))
 ```
-  </tbody>
+
+</tbody>
 </table>
 
 <div id="catalogEmpty" class="cw-catalog-empty" hidden>
-  No datasets match these filters. Try changing your selections or resetting the filters.
+No datasets match these filters. Try changing your selections or resetting the filters.
 </div>
 
 </div>
 
 :::
+
 :::
 
+<!-- ========================================================
+     JAVASCRIPT — ALL INSIDE THIS QMD
+     ======================================================== -->
+
+```{=html}
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+(function () {
 
-  const rows = Array.from(
-    document.querySelectorAll("#catalogTable .cw-catalog-data-row")
-  );
+  function initializeCatalog() {
 
-  const selects = Array.from(
-    document.querySelectorAll("#catalogFilters select")
-  );
+    // ------------------------------------------------------
+    // Find catalog elements
+    // ------------------------------------------------------
 
-  const wrappers = Array.from(
-    document.querySelectorAll("#catalogFilters .cw-catalog-filter")
-  );
+    const table = document.getElementById("catalogTable");
+    const search = document.getElementById("catalogSearch");
+    const count = document.getElementById("catalogCount");
+    const empty = document.getElementById("catalogEmpty");
+    const reset = document.getElementById("catalogReset");
 
-  const search = document.getElementById("catalogSearch");
-  const count = document.getElementById("catalogCount");
-  const empty = document.getElementById("catalogEmpty");
-  const reset = document.getElementById("catalogReset");
+    if (!table || !search || !count || !empty || !reset) {
+      console.warn("Data catalog elements not found.");
+      return;
+    }
 
-  // --------------------------------------------------------
-  // Populate filter options from the YAML-backed table
-  // --------------------------------------------------------
-
-  selects.forEach(select => {
-
-    const key = select.dataset.field;
-
-    const values = [
-      ...new Set(
-        rows
-          .map(row => (row.dataset[key] || "").trim())
-          .filter(Boolean)
-      )
-    ].sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: "base" })
+    const rows = Array.from(
+      table.querySelectorAll("tr.cw-catalog-data-row")
     );
 
-    values.forEach(value => {
-      select.add(new Option(value, value));
+    const selects = Array.from(
+      document.querySelectorAll("#catalogFilters select")
+    );
+
+    const wrappers = Array.from(
+      document.querySelectorAll(
+        "#catalogFilters .cw-catalog-filter"
+      )
+    );
+
+    // ------------------------------------------------------
+    // Populate filter dropdowns from YAML-backed rows
+    // ------------------------------------------------------
+
+    selects.forEach(select => {
+
+      const key = select.dataset.field;
+
+      const values = [
+        ...new Set(
+          rows
+            .map(row => (row.dataset[key] || "").trim())
+            .filter(Boolean)
+        )
+      ].sort((a, b) =>
+        a.localeCompare(
+          b,
+          undefined,
+          { sensitivity: "base" }
+        )
+      );
+
+      values.forEach(value => {
+        select.add(new Option(value, value));
+      });
+
     });
 
-  });
+    // ------------------------------------------------------
+    // Apply filters and search
+    // ------------------------------------------------------
 
-  // --------------------------------------------------------
-  // Apply all active filters
-  // --------------------------------------------------------
+    function updateTable() {
 
-  function update() {
+      const term = search.value
+        .trim()
+        .toLocaleLowerCase();
 
-    const term = search.value.trim().toLocaleLowerCase();
-    let visibleCount = 0;
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+
+        const detail = row.nextElementSibling;
+
+        const matchesFilters = selects.every(select => {
+
+          const selected = select.value;
+
+          if (!selected) {
+            return true;
+          }
+
+          const value = (
+            row.dataset[select.dataset.field] || ""
+          ).trim();
+
+          return value === selected;
+
+        });
+
+        const searchableText = [
+          row.cells[0]?.textContent || "",
+          row.dataset.product || "",
+          detail?.textContent || ""
+        ]
+          .join(" ")
+          .toLocaleLowerCase();
+
+        const visible =
+          matchesFilters &&
+          (!term || searchableText.includes(term));
+
+        row.hidden = !visible;
+
+        if (!visible && detail) {
+
+          detail.hidden = true;
+
+          const toggle = row.querySelector(
+            ".cw-catalog-toggle"
+          );
+
+          if (toggle) {
+            toggle.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+          }
+
+        }
+
+        if (visible) {
+          visibleCount++;
+        }
+
+      });
+
+      count.textContent =
+        `${visibleCount} of ${rows.length} datasets`;
+
+      empty.hidden = visibleCount !== 0;
+
+    }
+
+    // ------------------------------------------------------
+    // Progressive filter visibility
+    // ------------------------------------------------------
+
+    function updateSteps(changedIndex = -1) {
+
+      if (
+        changedIndex >= 0 &&
+        !selects[changedIndex].value
+      ) {
+
+        for (
+          let i = changedIndex + 1;
+          i < selects.length;
+          i++
+        ) {
+          selects[i].value = "";
+        }
+
+      }
+
+      wrappers.forEach((wrapper, index) => {
+
+        if (index === 0) {
+          wrapper.hidden = false;
+          return;
+        }
+
+        wrapper.hidden =
+          !selects[index - 1].value;
+
+      });
+
+    }
+
+    // ------------------------------------------------------
+    // Filter events
+    // ------------------------------------------------------
+
+    selects.forEach((select, index) => {
+
+      select.addEventListener("change", () => {
+        updateSteps(index);
+        updateTable();
+      });
+
+    });
+
+    // ------------------------------------------------------
+    // Search
+    // ------------------------------------------------------
+
+    search.addEventListener(
+      "input",
+      updateTable
+    );
+
+    // ------------------------------------------------------
+    // Reset
+    // ------------------------------------------------------
+
+    reset.addEventListener("click", () => {
+
+      selects.forEach(select => {
+        select.value = "";
+      });
+
+      search.value = "";
+
+      updateSteps();
+      updateTable();
+
+    });
+
+    // ------------------------------------------------------
+    // Expand and collapse dataset descriptions
+    // ------------------------------------------------------
 
     rows.forEach(row => {
 
+      const toggle = row.querySelector(
+        ".cw-catalog-toggle"
+      );
+
       const detail = row.nextElementSibling;
 
-      const matchesFilters = selects.every(select =>
-        !select.value ||
-        (row.dataset[select.dataset.field] || "").trim() === select.value
-      );
-
-      const text = [
-        row.cells[0].textContent,
-        row.dataset.product,
-        detail?.textContent || ""
-      ].join(" ").toLocaleLowerCase();
-
-      const visible =
-        matchesFilters &&
-        (!term || text.includes(term));
-
-      row.hidden = !visible;
-
-      if (!visible && detail) {
-        detail.hidden = true;
-
-        row.querySelector(".cw-catalog-toggle")
-          ?.setAttribute("aria-expanded", "false");
+      if (!toggle || !detail) {
+        return;
       }
 
-      if (visible) {
-        visibleCount++;
-      }
+      toggle.addEventListener("click", () => {
+
+        const expanding = detail.hidden;
+
+        detail.hidden = !expanding;
+
+        toggle.setAttribute(
+          "aria-expanded",
+          String(expanding)
+        );
+
+      });
 
     });
 
-    count.textContent =
-      `${visibleCount} of ${rows.length} datasets`;
+    // ------------------------------------------------------
+    // ERDDAP access dropdowns
+    // ------------------------------------------------------
 
-    empty.hidden = visibleCount !== 0;
-  }
-
-  // --------------------------------------------------------
-  // Progressive filter steps
-  // --------------------------------------------------------
-
-  function updateSteps(changedIndex = -1) {
-
-    if (
-      changedIndex >= 0 &&
-      !selects[changedIndex].value
-    ) {
-      for (
-        let i = changedIndex + 1;
-        i < selects.length;
-        i++
-      ) {
-        selects[i].value = "";
-      }
-    }
-
-    wrappers.forEach((wrapper, index) => {
-      wrapper.hidden =
-        index > 0 && !selects[index - 1].value;
-    });
-
-  }
-
-  selects.forEach((select, index) => {
-
-    select.addEventListener("change", () => {
-      updateSteps(index);
-      update();
-    });
-
-  });
-
-  // --------------------------------------------------------
-  // Search box
-  // --------------------------------------------------------
-
-  search.addEventListener("input", update);
-
-  // --------------------------------------------------------
-  // Reset filters
-  // --------------------------------------------------------
-
-  reset.addEventListener("click", () => {
-
-    selects.forEach(select => {
-      select.value = "";
-    });
-
-    search.value = "";
-
-    updateSteps();
-    update();
-
-  });
-
-  // --------------------------------------------------------
-  // Expand and collapse dataset details
-  // --------------------------------------------------------
-
-  rows.forEach(row => {
-
-    const toggle = row.querySelector(".cw-catalog-toggle");
-    const detail = row.nextElementSibling;
-
-    toggle?.addEventListener("click", () => {
-
-      const expanding = detail.hidden;
-
-      detail.hidden = !expanding;
-
-      toggle.setAttribute(
-        "aria-expanded",
-        String(expanding)
-      );
-
-    });
-
-  });
-
-  // --------------------------------------------------------
-  // Open ERDDAP links
-  // --------------------------------------------------------
-
-  document
-    .querySelectorAll(".cw-catalog-access-dropdown")
-    .forEach(select => {
+    document.querySelectorAll(
+      ".cw-catalog-access-dropdown"
+    ).forEach(select => {
 
       select.addEventListener("change", () => {
 
-        if (select.value) {
+        const url = select.value;
+
+        if (url) {
 
           window.open(
-            select.value,
+            url,
             "_blank",
             "noopener,noreferrer"
           );
 
-          select.value = "";
+          select.selectedIndex = 0;
+
         }
 
       });
 
     });
 
-  // Initialize
-  updateSteps();
-  update();
+    // ------------------------------------------------------
+    // Initialize
+    // ------------------------------------------------------
 
-});
+    updateSteps();
+    updateTable();
+
+  }
+
+  // Run after HTML is available
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initializeCatalog
+    );
+
+  } else {
+
+    initializeCatalog();
+
+  }
+
+})();
 </script>
+```
