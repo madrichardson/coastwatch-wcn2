@@ -13,17 +13,37 @@ format:
 
 ::: {.cw-catalog-intro}
 
+<div class="cw-catalog-hero">
+<div class="cw-catalog-hero-main">
+
 <span class="cw-catalog-eyebrow">EXPLORE OCEAN DATA</span>
 
-# Data Catalog
+<h1>Data Catalog</h1>
 
-The West Coast Node ERDDAP data server hosts over 1,700 datasets.
+<p class="cw-catalog-hero-lead">
+Discover commonly used satellite-derived oceanographic datasets through our interactive data catalog.
+</p>
 
-On this catalog page, we’ve highlighted the most commonly used datasets by our users. To help you quickly find the dataset you need, use the interactive filter tool below — just answer a few short questions about the product type, sensor, region, and more.
+<p class="cw-catalog-hero-description">
+Search and filter datasets by product type, sensor, region, and other characteristics to find the data best suited to your needs.
+</p>
 
-To explore the full list of all available datasets, visit the [ERDDAP Server](https://coastwatch.pfeg.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000).
+<div class="cw-catalog-hero-actions">
+<a href="https://coastwatch.pfeg.noaa.gov/erddap/info/index.html?page=1&amp;itemsPerPage=1000" class="cw-catalog-hero-btn cw-catalog-hero-btn-primary" target="_blank" rel="noopener noreferrer">Explore ERDDAP</a>
+<a href="dataset_monitor.html" class="cw-catalog-hero-btn cw-catalog-hero-btn-secondary">Dataset Monitoring</a>
+</div>
 
-To explore the status of these datasets, visit the [Dataset Monitoring Dashboard](dataset_monitor.qmd).
+</div>
+
+<div class="cw-catalog-hero-aside">
+<div class="cw-catalog-stat-label">WEST COAST NODE ERDDAP</div>
+<div class="cw-catalog-stat-number">1,700+</div>
+<div class="cw-catalog-stat-text">Oceanographic datasets hosted</div>
+<div class="cw-catalog-stat-divider"></div>
+<p>Use the interactive filters below to explore a curated selection of commonly used datasets.</p>
+</div>
+
+</div>
 
 :::
 

@@ -1,3 +1,4 @@
+
 /* ==========================================================
    COASTWATCH DATA CATALOG
    ========================================================== */
@@ -15,11 +16,32 @@
   padding: 2rem 1.5rem 4rem;
 }
 
-/* Introduction */
+.cw-catalog a {
+  color: var(--catalog-blue);
+}
+
+/* ==========================================================
+   DATA CATALOG HERO
+   ========================================================== */
 
 .cw-catalog-intro {
-  max-width: 900px;
+  max-width: none;
   margin-bottom: 2.5rem;
+}
+
+.cw-catalog-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(260px, 0.8fr);
+  gap: 2.5rem;
+  align-items: center;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  background: linear-gradient(
+    115deg,
+    #EAF3F7 0%,
+    #F4F9FB 100%
+  );
+  border: 1px solid var(--catalog-border);
+  border-radius: 18px;
 }
 
 .cw-catalog-eyebrow {
@@ -29,22 +51,129 @@
   letter-spacing: 0.12em;
 }
 
-.cw-catalog-intro h1 {
+.cw-catalog-hero-main h1 {
   color: var(--catalog-navy);
-  font-size: clamp(2.1rem, 4vw, 3.2rem);
-  margin: 0.45rem 0 1rem;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1.15;
+  margin: 0.65rem 0 1.25rem;
 }
 
-.cw-catalog-intro p {
-  line-height: 1.8;
-  color: #475D6C;
+.cw-catalog-hero-lead {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.65;
+  color: #2C526B;
+  margin: 0 0 0.8rem;
 }
 
-.cw-catalog a {
-  color: var(--catalog-blue);
+.cw-catalog-hero-description {
+  color: #536A79;
+  line-height: 1.75;
+  margin: 0 0 1.75rem;
+  max-width: 680px;
 }
 
-/* Main filter panel */
+/* ==========================================================
+   HERO ACTION BUTTONS
+   ========================================================== */
+
+.cw-catalog-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.cw-catalog-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 7px;
+  font-weight: 650;
+  font-size: 0.95rem;
+  text-decoration: none !important;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.cw-catalog-hero-btn:hover {
+  transform: translateY(-2px);
+}
+
+.cw-catalog-hero-btn-primary {
+  background: var(--catalog-blue);
+  color: #FFFFFF !important;
+  border: 1px solid var(--catalog-blue);
+}
+
+.cw-catalog-hero-btn-primary:hover {
+  background: var(--catalog-navy);
+  border-color: var(--catalog-navy);
+  color: #FFFFFF !important;
+}
+
+.cw-catalog-hero-btn-secondary {
+  background: transparent;
+  color: var(--catalog-blue) !important;
+  border: 1px solid var(--catalog-blue);
+}
+
+.cw-catalog-hero-btn-secondary:hover {
+  background: #FFFFFF;
+  color: var(--catalog-navy) !important;
+}
+
+/* ==========================================================
+   HERO DATASET STATISTIC
+   ========================================================== */
+
+.cw-catalog-hero-aside {
+  background: #FFFFFF;
+  border: 1px solid var(--catalog-border);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 18px rgba(18, 59, 93, 0.04);
+}
+
+.cw-catalog-stat-label {
+  color: var(--catalog-teal);
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+}
+
+.cw-catalog-stat-number {
+  color: var(--catalog-navy);
+  font-size: clamp(2.8rem, 4vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0.6rem 0 0.2rem;
+}
+
+.cw-catalog-stat-text {
+  color: #36576C;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.cw-catalog-stat-divider {
+  height: 1px;
+  background: var(--catalog-border);
+  margin: 1.4rem 0;
+}
+
+.cw-catalog-hero-aside p {
+  color: #617887;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==========================================================
+   MAIN FILTER PANEL
+   ========================================================== */
 
 .cw-catalog-panel {
   background: #FFFFFF;
@@ -72,9 +201,12 @@
 .cw-catalog-panel-head p {
   color: #586D7A;
   margin: 0.4rem 0 0;
+  line-height: 1.7;
 }
 
-/* Reset button */
+/* ==========================================================
+   RESET BUTTON
+   ========================================================== */
 
 .cw-catalog-reset {
   background: #FFFFFF;
@@ -85,13 +217,24 @@
   font-weight: 650;
   white-space: nowrap;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .cw-catalog-reset:hover {
   background: var(--catalog-light);
+  border-color: var(--catalog-navy);
 }
 
-/* Search */
+.cw-catalog-reset:focus-visible {
+  outline: 2px solid var(--catalog-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   DATASET SEARCH
+   ========================================================== */
 
 .cw-catalog-search-wrap {
   margin-bottom: 1.3rem;
@@ -116,15 +259,23 @@
   background: #FFFFFF;
   color: #263746;
   box-sizing: border-box;
+  font: inherit;
 }
 
 .cw-catalog-search-wrap input:focus,
 .cw-catalog-filter select:focus {
   outline: 2px solid var(--catalog-teal);
   outline-offset: 1px;
+  border-color: var(--catalog-teal);
 }
 
-/* Progressive filters */
+.cw-catalog-search-wrap input::placeholder {
+  color: #81939E;
+}
+
+/* ==========================================================
+   PROGRESSIVE FILTERS
+   ========================================================== */
 
 .cw-catalog-filters {
   display: grid;
@@ -133,11 +284,17 @@
   margin-bottom: 2rem;
 }
 
+.cw-catalog-filter {
+  min-width: 0;
+}
+
 .cw-catalog-filter[hidden] {
   display: none !important;
 }
 
-/* Results heading */
+/* ==========================================================
+   RESULTS HEADING
+   ========================================================== */
 
 .cw-catalog-results-heading {
   display: flex;
@@ -153,11 +310,15 @@
 #catalogCount {
   color: #5B7280;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
-/* Dataset table */
+/* ==========================================================
+   DATASET TABLE
+   ========================================================== */
 
 .cw-catalog-table-wrap {
+  width: 100%;
   overflow-x: auto;
 }
 
@@ -172,6 +333,7 @@
   color: #FFFFFF;
   text-align: left;
   padding: 0.9rem 1rem;
+  font-weight: 700;
 }
 
 .cw-catalog-table th:first-child {
@@ -204,7 +366,13 @@
   background: #F7FAFC;
 }
 
-/* Ensure hidden rows remain hidden */
+.cw-catalog-data-row:hover {
+  background: #F0F6F9;
+}
+
+/* ==========================================================
+   HIDDEN ROWS AND ELEMENTS
+   ========================================================== */
 
 .cw-catalog-data-row[hidden],
 .cw-catalog-detail-row[hidden],
@@ -212,7 +380,9 @@
   display: none !important;
 }
 
-/* Dataset title and expand button */
+/* ==========================================================
+   DATASET TITLE AND EXPAND BUTTON
+   ========================================================== */
 
 .cw-catalog-toggle {
   border: 0;
@@ -223,24 +393,34 @@
   font-weight: 650;
   cursor: pointer;
   line-height: 1.5;
+  font: inherit;
 }
 
 .cw-catalog-toggle:hover {
+  color: var(--catalog-navy);
   text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cw-catalog-toggle:focus-visible {
+  outline: 2px solid var(--catalog-teal);
+  outline-offset: 3px;
 }
 
 .cw-catalog-chevron {
   display: inline-block;
   margin-left: 0.5rem;
   font-size: 1.1rem;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 
 .cw-catalog-toggle[aria-expanded="true"] .cw-catalog-chevron {
   transform: rotate(180deg);
 }
 
-/* Product labels */
+/* ==========================================================
+   PRODUCT LABELS
+   ========================================================== */
 
 .cw-catalog-product {
   display: inline-block;
@@ -252,12 +432,19 @@
   font-weight: 650;
 }
 
-/* ERDDAP access links */
+/* ==========================================================
+   ERDDAP ACCESS LINKS
+   ========================================================== */
 
 .cw-catalog-access-link {
   font-size: 0.9rem;
   font-weight: 650;
   white-space: nowrap;
+  text-decoration: none;
+}
+
+.cw-catalog-access-link:hover {
+  text-decoration: underline;
 }
 
 .cw-catalog-access-dropdown {
@@ -269,6 +456,13 @@
   background: #FFFFFF;
   color: var(--catalog-navy);
   cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.cw-catalog-access-dropdown:focus {
+  outline: 2px solid var(--catalog-teal);
+  outline-offset: 1px;
 }
 
 .cw-catalog-unavailable {
@@ -276,7 +470,9 @@
   font-size: 0.85rem;
 }
 
-/* Expanded dataset descriptions */
+/* ==========================================================
+   EXPANDED DATASET DESCRIPTIONS
+   ========================================================== */
 
 .cw-catalog-detail-row {
   background: #F1F7FA;
@@ -299,26 +495,56 @@
   font-size: 0.86rem;
 }
 
-/* Empty results */
+.cw-catalog-metadata strong {
+  color: var(--catalog-navy);
+}
+
+/* ==========================================================
+   EMPTY RESULTS
+   ========================================================== */
 
 .cw-catalog-empty {
   text-align: center;
   padding: 2.5rem 1rem;
   color: #536A79;
+  background: #F7FAFC;
+  border: 1px solid var(--catalog-border);
+  border-radius: 8px;
+  margin-top: 1rem;
 }
 
-/* Accessibility */
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
 
 .cw-catalog-sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  border: 0;
 }
 
-/* Responsive layout */
+/* ==========================================================
+   RESPONSIVE LAYOUT
+   ========================================================== */
+
+@media (max-width: 850px) {
+
+  .cw-catalog-hero {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .cw-catalog-hero-aside {
+    padding: 1.5rem;
+  }
+
+}
 
 @media (max-width: 767px) {
 
@@ -336,6 +562,46 @@
 
   .cw-catalog-table {
     min-width: 640px;
+  }
+
+  .cw-catalog-hero {
+    padding: 1.75rem;
+  }
+
+}
+
+@media (max-width: 575px) {
+
+  .cw-catalog-hero {
+    padding: 1.5rem;
+  }
+
+  .cw-catalog-hero-main h1 {
+    font-size: 2.2rem;
+  }
+
+  .cw-catalog-hero-lead {
+    font-size: 1.05rem;
+  }
+
+  .cw-catalog-hero-actions {
+    flex-direction: column;
+  }
+
+  .cw-catalog-hero-btn {
+    width: 100%;
+  }
+
+  .cw-catalog-hero-aside {
+    padding: 1.25rem;
+  }
+
+  .cw-catalog-stat-number {
+    font-size: 2.8rem;
+  }
+
+  .cw-catalog-panel {
+    padding: 1.25rem;
   }
 
 }
