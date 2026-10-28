@@ -1,0 +1,205 @@
+---
+pagetitle: "Software Tools & Resources"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/tools.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from IPython.display import display, HTML
+
+with open("content/tools.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+hero = data.get("hero", {})
+section = data.get("section", {})
+resources = data.get("resources", [])
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def render_resource(resource):
+    title = safe(resource.get("title"))
+    category = safe(resource.get("category"))
+    language = safe(resource.get("language"))
+    description = safe(resource.get("description"))
+    url = safe(resource.get("url"))
+    button = safe(resource.get("button_label", "View Resource"))
+
+    return f"""
+    <article class="cw-tool-card"
+             data-category="{category}">
+
+      <div class="cw-tool-card-top">
+        <span class="cw-tool-category">{category}</span>
+        <span class="cw-tool-language">{language}</span>
+      </div>
+
+      <h3>{title}</h3>
+
+      <p class="cw-tool-description">{description}</p>
+
+      <div class="cw-tool-card-footer">
+        <a href="{url}"
+           class="cw-tool-button"
+           target="_blank"
+           rel="noopener noreferrer">
+          {button} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+    </article>
+    """
+
+categories = sorted({
+    str(r.get("category"))
+    for r in resources
+    if r.get("category")
+})
+
+category_options = "".join(
+    f'<option value="{safe(c)}">{safe(c)}</option>'
+    for c in categories
+)
+
+cards = "".join(render_resource(r) for r in resources)
+
+html = f"""
+<div class="cw-tools">
+
+  <section class="cw-tools-hero">
+    <div class="cw-tools-hero-content">
+
+      <span class="cw-tools-eyebrow">
+        {safe(hero.get("eyebrow"))}
+      </span>
+
+      <h1>{safe(hero.get("title"))}</h1>
+
+      <p>{safe(hero.get("description"))}</p>
+
+    </div>
+  </section>
+
+  <section class="cw-tools-directory">
+
+    <div class="cw-tools-section-heading">
+      <span class="cw-tools-section-label">
+        {safe(section.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(section.get("title"))}</h2>
+
+      <p>{safe(section.get("description"))}</p>
+    </div>
+
+    <div class="cw-tools-toolbar">
+
+      <div class="cw-tools-search">
+        <label for="toolSearch">Search tools</label>
+        <input
+          id="toolSearch"
+          type="search"
+          placeholder="Search software, packages, or descriptions..."
+        >
+      </div>
+
+      <div class="cw-tools-filter">
+        <label for="toolCategory">Category</label>
+        <select id="toolCategory">
+          <option value="All">All categories</option>
+          {category_options}
+        </select>
+      </div>
+
+      <button id="resetTools" class="cw-tools-reset"
+              type="button">
+        Reset filters
+      </button>
+
+    </div>
+
+    <div class="cw-tools-results">
+      <span id="toolCount">{len(resources)} resources</span>
+    </div>
+
+    <div class="cw-tools-grid" id="toolGrid">
+      {cards}
+    </div>
+
+    <p id="toolsEmpty" class="cw-tools-empty" hidden>
+      No resources match your search.
+    </p>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const search = document.getElementById("toolSearch");
+  const category = document.getElementById("toolCategory");
+  const reset = document.getElementById("resetTools");
+  const cards = document.querySelectorAll(".cw-tool-card");
+  const count = document.getElementById("toolCount");
+  const empty = document.getElementById("toolsEmpty");
+
+  if (!search || !category || !reset) return;
+
+  function filterTools() {
+
+    const query = search.value.trim().toLowerCase();
+    const selected = category.value;
+
+    let visible = 0;
+
+    cards.forEach(card => {
+
+      const matchesSearch =
+        card.textContent.toLowerCase().includes(query);
+
+      const matchesCategory =
+        selected === "All" ||
+        card.dataset.category === selected;
+
+      const show = matchesSearch && matchesCategory;
+
+      card.hidden = !show;
+
+      if (show) visible++;
+
+    });
+
+    count.textContent =
+      `${visible} of ${cards.length} resources`;
+
+    empty.hidden = visible !== 0;
+  }
+
+  search.addEventListener("input", filterTools);
+  category.addEventListener("change", filterTools);
+
+  reset.addEventListener("click", () => {
+    search.value = "";
+    category.value = "All";
+    filterTools();
+  });
+
+  filterTools();
+
+});
+</script>
