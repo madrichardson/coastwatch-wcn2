@@ -1,0 +1,274 @@
+
+---
+pagetitle: "ERDDAP Data Server"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/data_server.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+from pathlib import Path
+from html import escape
+from urllib.parse import urlparse, parse_qs
+import yaml
+from IPython.display import HTML, display
+
+with Path("content/data_server.yml").open(encoding="utf-8") as stream:
+    content = yaml.safe_load(stream) or {}
+
+def e(value):
+    return escape(str(value or ""), quote=True)
+
+def link_button(button, variant="primary"):
+    if not isinstance(button, dict) or not button.get("url"):
+        return ""
+
+    css = (
+        "cw-erddap-btn-primary"
+        if variant == "primary"
+        else "cw-erddap-btn-secondary"
+    )
+
+    url = str(button["url"])
+    external = url.startswith(("https://", "http://"))
+    href = url[:-4] + ".html" if url.endswith(".qmd") else url
+
+    extra = (
+        ' target="_blank" rel="noopener noreferrer"'
+        if external else ""
+    )
+
+    return (
+        f'<a class="cw-erddap-btn {css}" '
+        f'href="{e(href)}"{extra}>'
+        f'{e(button.get("label", "Learn more"))}</a>'
+    )
+
+def render_links(links):
+    if not links:
+        return ""
+
+    items = []
+
+    for item in links:
+        if not isinstance(item, dict) or not item.get("url"):
+            continue
+
+        url = str(item["url"])
+        href = url[:-4] + ".html" if url.endswith(".qmd") else url
+        external = url.startswith(("https://", "http://"))
+
+        extra = (
+            ' target="_blank" rel="noopener noreferrer"'
+            if external else ""
+        )
+
+        items.append(
+            f'<li><a href="{e(href)}"{extra}>'
+            f'{e(item.get("label", url))}</a></li>'
+        )
+
+    return (
+        '<ul class="cw-erddap-links">'
+        + "".join(items)
+        + "</ul>"
+        if items else ""
+    )
+
+def video_embed(url):
+    parsed = urlparse(str(url or ""))
+    video_id = ""
+
+    if parsed.hostname in ("youtu.be", "www.youtu.be"):
+        video_id = parsed.path.strip("/").split("/")[0]
+
+    elif parsed.hostname in (
+        "youtube.com",
+        "www.youtube.com",
+        "m.youtube.com",
+        "www.youtube-nocookie.com",
+    ):
+        if parsed.path == "/watch":
+            video_id = parse_qs(parsed.query).get("v", [""])[0]
+        elif parsed.path.startswith(("/embed/", "/shorts/")):
+            video_id = parsed.path.split("/")[2]
+
+    if not video_id or not all(
+        c.isalnum() or c in "_-" for c in video_id
+    ):
+        return ""
+
+    return f'''
+    <div class="cw-erddap-video">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/{e(video_id)}"
+        title="ERDDAP tutorial"
+        loading="lazy"
+        allowfullscreen
+      ></iframe>
+    </div>
+    '''
+
+hero = content.get("hero", {})
+features = content.get("features", {})
+learning = content.get("learning", {})
+
+parts = ['<main class="cw-erddap">']
+
+# HERO
+
+parts.append(f'''
+<section class="cw-erddap-hero">
+  <span class="cw-erddap-eyebrow">
+    {e(hero.get("eyebrow", "DATA ACCESS & SERVICES"))}
+  </span>
+
+  <h1>{e(hero.get("title", "ERDDAP Data Server"))}</h1>
+
+  <p>{e(hero.get("description", ""))}</p>
+
+  <div class="cw-erddap-actions">
+    {link_button(hero.get("primary_button"), "primary")}
+    {link_button(hero.get("secondary_button"), "secondary")}
+  </div>
+</section>
+''')
+
+# FEATURE CARDS
+
+parts.append(f'''
+<section class="cw-erddap-section">
+  <span class="cw-erddap-eyebrow">
+    {e(features.get("eyebrow", "WHY ERDDAP"))}
+  </span>
+
+  <h2>{e(features.get("title", "Getting data is easy"))}</h2>
+
+  <div class="cw-erddap-feature-grid">
+''')
+
+for index, card in enumerate(features.get("cards", []), start=1):
+    parts.append(f'''
+    <article class="cw-erddap-feature">
+      <span class="cw-erddap-feature-number">{index:02d}</span>
+      <h3>{e(card.get("title"))}</h3>
+      <p>{e(card.get("description"))}</p>
+    </article>
+    ''')
+
+parts.append("</div></section>")
+
+# ERDDAP BASICS
+
+parts.append(f'''
+<section class="cw-erddap-section cw-erddap-learning">
+  <span class="cw-erddap-eyebrow">
+    {e(learning.get("eyebrow", "LEARN & EXPLORE"))}
+  </span>
+
+  <h2>{e(learning.get("title", "ERDDAP basics"))}</h2>
+
+  <p class="cw-erddap-section-desc">
+    {e(learning.get("description", ""))}
+  </p>
+
+  <div class="cw-erddap-accordions">
+''')
+
+for section in learning.get("sections", []):
+
+    kind = section.get("kind", "links")
+
+    parts.append(f'''
+    <details class="cw-erddap-accordion">
+      <summary>
+        {e(section.get("title"))}
+        <span class="cw-erddap-plus" aria-hidden="true">+</span>
+      </summary>
+
+      <div class="cw-erddap-accordion-content">
+    ''')
+
+    for paragraph in section.get("paragraphs", []):
+        parts.append(f"<p>{e(paragraph)}</p>")
+
+    if kind == "request":
+
+        if section.get("url_pattern"):
+            parts.append(f'''
+            <div class="cw-erddap-code">
+              <code>{e(section["url_pattern"])}</code>
+            </div>
+            ''')
+
+        terms = section.get("terms", [])
+
+        if terms:
+            parts.append('<dl class="cw-erddap-terms">')
+
+            for term in terms:
+                parts.append(f'''
+                <div>
+                  <dt>{e(term.get("name"))}</dt>
+                  <dd>{e(term.get("description"))}</dd>
+                </div>
+                ''')
+
+            parts.append("</dl>")
+
+    elif kind == "formats":
+
+        parts.append('<div class="cw-erddap-format-grid">')
+
+        for group in section.get("format_groups", []):
+
+            extensions = [
+                x.strip()
+                for x in str(group.get("extensions", "")).split(",")
+                if x.strip()
+            ]
+
+            chips = "".join(
+                f"<code>{e(ext)}</code>"
+                for ext in extensions
+            )
+
+            parts.append(f'''
+            <div>
+              <h4>{e(group.get("title"))}</h4>
+              <div class="cw-erddap-format-chips">
+                {chips}
+              </div>
+            </div>
+            ''')
+
+        parts.append("</div>")
+
+    elif kind == "video":
+
+        if section.get("heading"):
+            parts.append(
+                f'<h4>{e(section["heading"])}</h4>'
+            )
+
+        if section.get("description"):
+            parts.append(
+                f'<p>{e(section["description"])}</p>'
+            )
+
+        parts.append(video_embed(section.get("youtube_url")))
+
+    parts.append(render_links(section.get("links", [])))
+    parts.append("</div></details>")
+
+parts.append("</div></section></main>")
+
+display(HTML("\n".join(parts)))
+```

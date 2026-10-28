@@ -330,3 +330,147 @@ content:
             label: Satellite Data Product
             type: string
             required: true
+  
+  # ========================================================
+  # ERDDAP DATA SERVER
+  # ========================================================
+
+  - name: data_server
+    label: ERDDAP Data Server
+    type: file
+    path: content/data_server.yml
+
+    fields:
+      - name: hero
+        label: Introduction
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow Text
+            type: string
+          - name: title
+            label: Page Title
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+          - name: primary_button
+            label: Primary Button
+            type: object
+            fields:
+              - name: label
+                type: string
+              - name: url
+                type: string
+          - name: secondary_button
+            label: Secondary Button
+            type: object
+            fields:
+              - name: label
+                type: string
+              - name: url
+                type: string
+
+      - name: features
+        label: ERDDAP Features
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: cards
+            label: Feature Cards
+            type: object
+            list: true
+            fields:
+              - name: title
+                type: string
+              - name: description
+                type: text
+
+      - name: learning
+        label: ERDDAP Basics
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: sections
+            label: Expandable Sections
+            type: object
+            list: true
+            fields:
+              - name: title
+                type: string
+                required: true
+
+              - name: kind
+                label: Section Type
+                type: select
+                options:
+                  values:
+                    - value: links
+                      label: Resource Links
+                    - value: request
+                      label: URL Request Explanation
+                    - value: formats
+                      label: File Formats
+                    - value: video
+                      label: Video
+
+              - name: paragraphs
+                label: Paragraphs
+                type: string
+                list: true
+
+              - name: links
+                label: Resource Links
+                type: object
+                list: true
+                fields:
+                  - name: label
+                    type: string
+                  - name: url
+                    type: string
+
+              - name: url_pattern
+                label: Example URL Pattern
+                type: string
+
+              - name: terms
+                label: URL Components
+                type: object
+                list: true
+                fields:
+                  - name: name
+                    type: string
+                  - name: description
+                    type: text
+
+              - name: format_groups
+                label: File Format Groups
+                type: object
+                list: true
+                fields:
+                  - name: title
+                    type: string
+                  - name: extensions
+                    label: Comma-Separated Extensions
+                    type: text
+
+              - name: heading
+                label: Video Heading
+                type: string
+
+              - name: description
+                label: Video Description
+                type: text
+
+              - name: youtube_url
+                label: YouTube URL
+                type: string

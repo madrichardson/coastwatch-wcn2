@@ -1,0 +1,135 @@
+
+hero:
+  eyebrow: "DATA ACCESS & SERVICES"
+  title: "ERDDAP Data Server"
+  description: >-
+    Access, subset, visualize, and download oceanographic
+    datasets through a consistent web interface or directly
+    from your analysis scripts.
+
+  primary_button:
+    label: "Open ERDDAP"
+    url: "https://coastwatch.pfeg.noaa.gov/erddap/index.html"
+
+  secondary_button:
+    label: "Browse datasets"
+    url: "https://coastwatch.pfeg.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000"
+
+
+features:
+  eyebrow: "WHY ERDDAP"
+  title: "Getting data is easy"
+
+  cards:
+    - title: "Access data your way"
+      description: >-
+        ERDDAP provides a simple, consistent way to download
+        datasets in the format and spatial and temporal
+        coverage you need.
+
+    - title: "Built for people and programs"
+      description: >-
+        Use the web interface or make RESTful requests directly
+        from MATLAB, R, Python, or webpages.
+
+    - title: "Create maps and graphs"
+      description: >-
+        Generate PNG and PDF graphics on the fly from gridded
+        and tabular scientific datasets for use in reports
+        and webpages.
+
+    - title: "Find the right dataset"
+      description: >-
+        Search metadata by free text or filter using keywords,
+        standard names, and data types.
+
+
+learning:
+  eyebrow: "LEARN & EXPLORE"
+  title: "ERDDAP basics"
+  description: "Expand a topic for direct links, examples, and guidance."
+
+  sections:
+    - title: "Access ERD's ERDDAP Server"
+      kind: links
+      paragraphs:
+        - >-
+          The Environmental Research Division maintains an
+          ERDDAP server with an extensive collection of
+          environmental datasets. CoastWatch data are drawn
+          from the ERD ERDDAP.
+        - >-
+          The links below lead to the gridded and tabular
+          data collections, and to a dataset search page:
+      links:
+        - label: "Gridded Datasets"
+          url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/index.html"
+        - label: "Tabular Datasets"
+          url: "https://coastwatch.pfeg.noaa.gov/erddap/tabledap/index.html"
+        - label: "ERDDAP Home"
+          url: "https://coastwatch.pfeg.noaa.gov/erddap/index.html"
+        - label: "Search"
+          url: "https://coastwatch.pfeg.noaa.gov/erddap/search/index.html"
+
+    - title: "Sending a Data Request to ERDDAP"
+      kind: request
+      paragraphs:
+        - >-
+          The URL specifies your data request. Your query
+          is sent to ERDDAP in a specially formed URL
+          containing the dataset of interest, how you want
+          the data subsetted or graphed, and the file type
+          you want returned.
+        - >-
+          ERDDAP or you can make the URL. Use ERDDAP's
+          Data Access and Make A Graph tools to build it,
+          or generate it directly in a computer program
+          or script.
+      url_pattern: "https://baseURL/datasetID.fileType{?query}"
+      terms:
+        - name: "baseURL"
+          description: "Address of the gridded or tabular data service"
+        - name: "datasetID"
+          description: "Unique identifier of the dataset of interest"
+        - name: "fileType"
+          description: "Type of data file to return"
+        - name: "query"
+          description: "Instructions for subsetting or graphing the data"
+
+    - title: "Standard File Formats"
+      kind: formats
+      format_groups:
+        - title: "Data file types"
+          extensions: >-
+            .asc, .csv, .csvp, .csv0, .das, .dds, .dods,
+            .esriAscii, .fgdc, .graph, .help, .html,
+            .htmlTable, .iso19115, .json, .mat, .nc,
+            .ncHeader, .ncml, .odvTxt, .tsv, .tsvp,
+            .tsv0, .xhtml
+        - title: "Image file types"
+          extensions: >-
+            .geotif, .kml, .pdf, .smallPdf, .largePdf,
+            .png, .smallPng, .largePng, .transPng
+
+    - title: "ERDDAP Tutorial on YouTube"
+      kind: video
+      heading: "Extract ocean surface current data from ERDDAP"
+      description: >-
+        The video demonstrates how to extract ocean surface
+        current data from ERDDAP and use them for simulated
+        particle tracking in the NOAA GNOME model.
+      youtube_url: "https://www.youtube.com/watch?v=18xZoXu1USM"
+
+    - title: "Documentation & Help"
+      kind: links
+      links:
+        - label: "Documentation for gridded datasets"
+          url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html"
+        - label: "Documentation for tabular datasets"
+          url: "https://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html"
+        - label: "Set up your own ERDDAP"
+          url: "https://erddap.github.io/docs/server-admin/deploy-install"
+        - label: "ERDDAP Overview"
+          url: "https://coastwatch.pfeg.noaa.gov/erddap/index.html"
+        - label: "ERDDAP Tutorial"
+          url: "https://coastwatch.pfeg.noaa.gov/projects/erddap/"

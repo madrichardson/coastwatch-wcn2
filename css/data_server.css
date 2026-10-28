@@ -1,0 +1,322 @@
+
+/* ==========================================================
+   COASTWATCH ERDDAP DATA SERVER
+   ========================================================== */
+
+.cw-erddap {
+  --cw-navy: #123B5D;
+  --cw-blue: #176A91;
+  --cw-teal: #168C96;
+  --cw-border: #DCE5EB;
+  --cw-light: #EAF3F7;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #263746;
+}
+
+/* Hero */
+
+.cw-erddap-hero {
+  padding: clamp(1.7rem, 4vw, 3.5rem);
+  background: linear-gradient(115deg, #EAF3F7, #F8FBFD);
+  border: 1px solid var(--cw-border);
+  border-radius: 18px;
+}
+
+.cw-erddap-eyebrow {
+  color: var(--cw-teal);
+  font-size: 0.79rem;
+  letter-spacing: 0.12em;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.cw-erddap-hero h1 {
+  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  line-height: 1.12;
+  color: var(--cw-navy);
+  margin: 0.55rem 0 1rem;
+}
+
+.cw-erddap-hero p {
+  max-width: 850px;
+  font-size: 1.12rem;
+  line-height: 1.75;
+  color: #475D6C;
+  margin: 0 0 1.4rem;
+}
+
+.cw-erddap-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+
+.cw-erddap-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.77rem 1.2rem;
+  border-radius: 7px;
+  text-decoration: none !important;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cw-erddap-btn-primary {
+  background: var(--cw-blue);
+  color: white !important;
+  border: 1px solid var(--cw-blue);
+}
+
+.cw-erddap-btn-primary:hover {
+  background: var(--cw-navy);
+}
+
+.cw-erddap-btn-secondary {
+  background: white;
+  color: var(--cw-blue) !important;
+  border: 1px solid var(--cw-blue);
+}
+
+.cw-erddap-btn-secondary:hover {
+  background: #F0F7FA;
+}
+
+/* Sections */
+
+.cw-erddap-section {
+  margin-top: 3rem;
+}
+
+.cw-erddap-section h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: var(--cw-navy);
+  margin: 0.45rem 0 1.3rem;
+}
+
+.cw-erddap-section-desc {
+  color: #526777;
+  margin: -0.7rem 0 1.3rem;
+}
+
+/* Feature cards */
+
+.cw-erddap-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cw-erddap-feature {
+  background: #FFFFFF;
+  border: 1px solid var(--cw-border);
+  border-radius: 14px;
+  padding: 1.55rem 1.7rem;
+  box-shadow: 0 6px 20px rgba(18, 59, 93, 0.04);
+}
+
+.cw-erddap-feature-number {
+  color: var(--cw-teal);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.cw-erddap-feature h3 {
+  font-size: 1.15rem;
+  color: var(--cw-navy);
+  margin: 0.55rem 0 0.5rem;
+}
+
+.cw-erddap-feature p {
+  color: #526777;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Accordions */
+
+.cw-erddap-accordions {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.cw-erddap-accordion {
+  background: white;
+  border: 1px solid var(--cw-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cw-erddap-accordion[open] {
+  border-color: #B7D4E0;
+  box-shadow: 0 5px 18px rgba(18, 59, 93, 0.045);
+}
+
+.cw-erddap-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  list-style: none;
+  padding: 1.2rem 1.4rem;
+  color: var(--cw-navy);
+  font-weight: 750;
+  font-size: 1.05rem;
+}
+
+.cw-erddap-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.cw-erddap-accordion summary:hover {
+  background: #F7FAFC;
+}
+
+.cw-erddap-plus {
+  color: var(--cw-blue);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.cw-erddap-accordion[open] .cw-erddap-plus {
+  transform: rotate(45deg);
+}
+
+.cw-erddap-accordion-content {
+  padding: 0 1.4rem 1.4rem;
+  border-top: 1px solid #EDF2F5;
+  color: #465D6C;
+  line-height: 1.75;
+}
+
+.cw-erddap-accordion-content p {
+  margin: 1rem 0;
+}
+
+.cw-erddap-accordion-content h4 {
+  color: var(--cw-navy);
+  font-size: 1rem;
+  margin: 1.2rem 0 0.5rem;
+}
+
+/* Resource links */
+
+.cw-erddap-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 1.5rem;
+  padding-left: 1.25rem;
+  margin: 1.1rem 0 0;
+}
+
+.cw-erddap-links a {
+  color: var(--cw-blue);
+  font-weight: 650;
+}
+
+/* URL examples */
+
+.cw-erddap-code {
+  padding: 1rem 1.2rem;
+  background: #F2F7FA;
+  border: 1px solid var(--cw-border);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.cw-erddap-code code {
+  color: var(--cw-navy);
+  white-space: nowrap;
+}
+
+.cw-erddap-terms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 1.5rem;
+  margin: 1rem 0 0;
+}
+
+.cw-erddap-terms dt {
+  font-weight: 750;
+  color: var(--cw-navy);
+}
+
+.cw-erddap-terms dd {
+  margin: 0;
+  color: #526777;
+}
+
+/* File formats */
+
+.cw-erddap-format-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  margin-top: 0.6rem;
+}
+
+.cw-erddap-format-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cw-erddap-format-chips code {
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  background: #EAF3F7;
+  color: var(--cw-navy);
+  font-size: 0.83rem;
+}
+
+/* Video */
+
+.cw-erddap-video {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+  background: #EAF3F7;
+}
+
+.cw-erddap-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Responsive */
+
+@media (max-width: 720px) {
+  .cw-erddap {
+    padding: 1.3rem 1rem 3rem;
+  }
+
+  .cw-erddap-feature-grid,
+  .cw-erddap-format-grid,
+  .cw-erddap-terms,
+  .cw-erddap-links {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-erddap-accordion summary {
+    padding: 1rem;
+  }
+
+  .cw-erddap-accordion-content {
+    padding: 0 1rem 1rem;
+  }
+}
