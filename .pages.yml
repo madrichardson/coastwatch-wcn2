@@ -299,3 +299,34 @@ content:
                 label: ERDDAP URL
                 type: string
                 required: true
+  
+  # ========================================================
+  # DATASET MONITOR
+  # ========================================================
+
+  - name: dataset_monitor
+    label: Dataset Monitor
+    type: file
+    path: content/dataset_monitor.yml
+
+    fields:
+      - name: datasets
+        label: Monitored Datasets
+        type: object
+        list: true
+
+        fields:
+          - name: datasetID
+            label: ERDDAP Dataset ID
+            type: string
+            required: true
+
+          - name: label
+            label: Dataset Display Name
+            type: string
+            required: true
+
+          - name: category
+            label: Satellite Data Product
+            type: string
+            required: true

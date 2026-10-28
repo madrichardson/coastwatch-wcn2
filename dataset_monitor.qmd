@@ -1,0 +1,482 @@
+---
+pagetitle: "ERDDAP Dataset Monitor"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/dataset_monitor.css
+---
+
+::: {.cw-monitor}
+
+::: {.cw-monitor-hero}
+
+<span class="cw-monitor-eyebrow">OCEAN DATA AVAILABILITY</span>
+
+# ERDDAP Dataset Monitor
+
+Monitor the availability and update status of selected datasets hosted on the CoastWatch West Coast Node ERDDAP server. Filter by satellite data product, status, or dataset name.
+
+[Explore all ERDDAP dataset statuses](https://coastwatch.pfeg.noaa.gov/erddap/outOfDateDatasets.html){.cw-monitor-link target="_blank" rel="noopener noreferrer"}
+
+:::
+
+```{python}
+#| echo: false
+#| output: asis
+
+import html
+import pandas as pd
+import yaml
+
+from pathlib import Path
+from urllib.parse import quote
+from urllib.request import urlopen
+from io import BytesIO
+
+# -------------------------------------------------------
+# LOAD EDITABLE DATASET WATCHLIST
+# -------------------------------------------------------
+
+watchlist = yaml.safe_load(
+    Path("content/dataset_monitor.yml").read_text(encoding="utf-8")
+) or {}
+
+watch = pd.DataFrame(watchlist.get("datasets", []))
+
+for col in ("datasetID", "label", "category"):
+    if col not in watch:
+        watch[col] = ""
+
+    watch[col] = (
+        watch[col]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+    )
+
+watch = (
+    watch.loc[watch["datasetID"] != ""]
+    .drop_duplicates("datasetID")
+    .copy()
+)
+
+watch.loc[watch["label"] == "", "label"] = watch["datasetID"]
+watch.loc[watch["category"] == "", "category"] = "Other"
+
+
+# -------------------------------------------------------
+# RETRIEVE LIVE ERDDAP STATUS AT BUILD TIME
+# -------------------------------------------------------
+
+status_url = (
+    "https://coastwatch.pfeg.noaa.gov/erddap/"
+    "outOfDateDatasets.csv"
+)
+
+fetch_error = None
+
+try:
+    with urlopen(status_url, timeout=30) as response:
+        status = pd.read_csv(BytesIO(response.read()))
+
+    status.columns = status.columns.str.strip()
+
+    if "datasetID" not in status or "outOfDate" not in status:
+        raise ValueError(
+            "ERDDAP response lacks required status columns"
+        )
+
+    status["datasetID"] = (
+        status["datasetID"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+    )
+
+    status = status.drop_duplicates("datasetID")
+
+    df = watch.merge(
+        status,
+        on="datasetID",
+        how="left"
+    )
+
+except Exception as exc:
+    # Do not treat unavailable ERDDAP data as healthy.
+    fetch_error = str(exc)
+
+    df = watch.copy()
+    df["outOfDate"] = float("nan")
+    df["maxTime"] = pd.NA
+
+
+# -------------------------------------------------------
+# CLASSIFY STATUS
+# -------------------------------------------------------
+
+scores = pd.to_numeric(
+    df["outOfDate"],
+    errors="coerce"
+)
+
+
+def classify(value):
+    if pd.isna(value):
+        return "Not Flagged"
+
+    if value < 1:
+        return "OK"
+
+    if value < 2:
+        return "Delayed"
+
+    return "Outdated"
+
+
+df["status"] = scores.apply(classify)
+
+priority = {
+    "Outdated": 0,
+    "Delayed": 1,
+    "OK": 2,
+    "Not Flagged": 3
+}
+
+df["priority"] = df["status"].map(priority)
+
+df = df.sort_values(
+    ["priority", "category", "label"],
+    kind="stable"
+)
+
+
+# -------------------------------------------------------
+# HTML HELPERS AND COUNTS
+# -------------------------------------------------------
+
+def esc(value):
+    return html.escape(str(value), quote=True)
+
+
+counts = df["status"].value_counts()
+
+
+# -------------------------------------------------------
+# STATUS OVERVIEW
+# -------------------------------------------------------
+
+print('<div class="cw-monitor-summary">')
+
+print("""
+<div class="cw-monitor-summary-head">
+  <div>
+    <span class="cw-monitor-eyebrow">
+      MONITORING OVERVIEW
+    </span>
+    <h2>Dataset update status</h2>
+  </div>
+""")
+
+print(
+    '<span class="cw-monitor-total">'
+    f'{len(df)} monitored datasets'
+    '</span></div>'
+)
+
+print('<div class="cw-monitor-stats">')
+
+for key, label, css in [
+    ("Outdated", "Outdated", "outdated"),
+    ("Delayed", "Delayed", "delayed"),
+    ("OK", "OK", "ok"),
+    ("Not Flagged", "Not Flagged", "unflagged"),
+]:
+    count = int(counts.get(key, 0))
+
+    print(f"""
+    <div class="cw-monitor-stat {css}">
+      <strong>{count}</strong>
+      <span>{label}</span>
+    </div>
+    """)
+
+print("</div>")
+
+if fetch_error:
+    print("""
+    <p class="cw-monitor-error" role="alert">
+      ERDDAP status information could not be retrieved
+      during this build. Dataset statuses are unavailable
+      and have not been verified as current.
+    </p>
+    """)
+
+
+# -------------------------------------------------------
+# FILTER CONTROLS
+# -------------------------------------------------------
+
+print("""
+<div class="cw-monitor-controls">
+
+  <div>
+    <label for="monitorSearch">Search datasets</label>
+    <input
+      id="monitorSearch"
+      type="search"
+      placeholder="Search dataset name or ID..."
+    >
+  </div>
+
+  <div>
+    <label for="categoryFilter">
+      Satellite data product
+    </label>
+    <select id="categoryFilter">
+      <option value="all">All products</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="statusFilter">Status</label>
+    <select id="statusFilter">
+      <option value="all">All statuses</option>
+    </select>
+  </div>
+
+  <button id="monitorReset" type="button">
+    Reset filters
+  </button>
+
+</div>
+
+<div class="cw-monitor-legend">
+  <span>
+    <b>Out-of-date score:</b>
+    &lt;1 OK · 1–&lt;2 Delayed · ≥2 Outdated
+  </span>
+  <span>
+    Not Flagged = no score in the ERDDAP status table
+  </span>
+</div>
+
+</div>
+
+<div class="cw-monitor-results">
+
+  <div class="cw-monitor-results-head">
+    <h2>Monitored datasets</h2>
+    <span id="monitorCount" aria-live="polite"></span>
+  </div>
+
+  <div id="monitorGrid" class="cw-monitor-grid">
+""")
+
+
+# -------------------------------------------------------
+# BUILD DATASET CARDS
+# -------------------------------------------------------
+
+for _, row in df.iterrows():
+
+    dataset_id = str(row["datasetID"])
+
+    url = (
+        "https://coastwatch.pfeg.noaa.gov/erddap/info/"
+        + quote(dataset_id, safe="")
+        + "/index.html"
+    )
+
+    label = esc(row["label"])
+    category = esc(row["category"])
+    status_text = str(row["status"])
+
+    score = pd.to_numeric(
+        pd.Series([row["outOfDate"]]),
+        errors="coerce"
+    ).iloc[0]
+
+    score_text = (
+        f"{score:.2f}"
+        if pd.notna(score)
+        else "Not listed"
+    )
+
+    latest = row.get("maxTime")
+
+    latest_text = (
+        esc(latest)
+        if pd.notna(latest) and str(latest).strip()
+        else "Not listed"
+    )
+
+    search_text = esc(
+        (str(row["label"]) + " " + dataset_id).lower()
+    )
+
+    status_class = status_text.lower().replace(" ", "-")
+
+    print(f"""
+    <article
+      class="cw-monitor-item {status_class}"
+      data-category="{category}"
+      data-status="{esc(status_text)}"
+      data-search="{search_text}"
+    >
+
+      <div class="cw-monitor-item-body">
+
+        <h3>
+          <a
+            href="{esc(url)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {label}
+          </a>
+        </h3>
+
+        <p class="cw-monitor-id">
+          Dataset ID:
+          <code>{esc(dataset_id)}</code>
+        </p>
+
+        <div class="cw-monitor-meta">
+          <span>
+            <b>Out-of-date score:</b>
+            {score_text}
+          </span>
+
+          <span>
+            <b>Latest available data:</b>
+            {latest_text}
+          </span>
+        </div>
+
+      </div>
+
+      <div class="cw-monitor-tags">
+        <span class="cw-monitor-category">
+          {category}
+        </span>
+
+        <span class="cw-monitor-badge">
+          {esc(status_text)}
+        </span>
+      </div>
+
+    </article>
+    """)
+
+
+print("""
+  </div>
+
+  <p id="monitorEmpty" class="cw-monitor-empty" hidden>
+    No datasets match the current filters.
+  </p>
+
+</div>
+""")
+```
+
+<!-- INTERACTIVE FILTERING -->
+
+```{=html}
+<script>
+(function () {
+
+  function init() {
+
+    const grid = document.getElementById("monitorGrid");
+    if (!grid) return;
+
+    const rows = [
+      ...grid.querySelectorAll(".cw-monitor-item")
+    ];
+
+    const category = document.getElementById("categoryFilter");
+    const status = document.getElementById("statusFilter");
+    const search = document.getElementById("monitorSearch");
+    const count = document.getElementById("monitorCount");
+    const empty = document.getElementById("monitorEmpty");
+    const reset = document.getElementById("monitorReset");
+
+    // Populate category options from dataset metadata.
+    const categories = [
+      ...new Set(rows.map(row => row.dataset.category))
+    ].sort();
+
+    categories.forEach(value => {
+      category.add(new Option(value, value));
+    });
+
+    // Populate status options.
+    ["Outdated", "Delayed", "OK", "Not Flagged"].forEach(value => {
+      if (rows.some(row => row.dataset.status === value)) {
+        status.add(new Option(value, value));
+      }
+    });
+
+    function update() {
+
+      const term = search.value.trim().toLowerCase();
+      let visible = 0;
+
+      rows.forEach(row => {
+
+        const categoryMatch =
+          category.value === "all" ||
+          row.dataset.category === category.value;
+
+        const statusMatch =
+          status.value === "all" ||
+          row.dataset.status === status.value;
+
+        const searchMatch =
+          !term || row.dataset.search.includes(term);
+
+        const show =
+          categoryMatch &&
+          statusMatch &&
+          searchMatch;
+
+        row.hidden = !show;
+
+        if (show) visible++;
+      });
+
+      count.textContent =
+        `${visible} of ${rows.length} datasets shown`;
+
+      empty.hidden = visible !== 0;
+    }
+
+    category.addEventListener("change", update);
+    status.addEventListener("change", update);
+    search.addEventListener("input", update);
+
+    reset.addEventListener("click", () => {
+      category.value = "all";
+      status.value = "all";
+      search.value = "";
+      update();
+    });
+
+    update();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
+})();
+</script>
+```
+
+:::
