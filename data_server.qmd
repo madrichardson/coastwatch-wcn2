@@ -1,12 +1,13 @@
-
 ---
 pagetitle: "ERDDAP Data Server"
+title-block-banner: false
 anchor-sections: false
 page-layout: full
 jupyter: python3
 format:
   html:
     toc: false
+    title-block-style: none
     css: css/data_server.css
 ---
 
@@ -130,7 +131,9 @@ parts.append(f'''
     {e(hero.get("eyebrow", "DATA ACCESS & SERVICES"))}
   </span>
 
-  <h1>{e(hero.get("title", "ERDDAP Data Server"))}</h1>
+  <div class="cw-erddap-hero-title" role="heading" aria-level="1">
+    {e(hero.get("title", "ERDDAP Data Server"))}
+  </div>
 
   <p>{e(hero.get("description", ""))}</p>
 

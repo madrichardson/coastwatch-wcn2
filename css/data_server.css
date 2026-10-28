@@ -84,6 +84,16 @@ body:has(.cw-erddap) #title-block-header {
   margin: 0 0 1.8rem;
 }
 
+.cw-erddap-hero-title {
+  display: block;
+  color: #FFFFFF;
+  font-size: clamp(2.3rem, 4.5vw, 3.65rem);
+  line-height: 1.12;
+  font-weight: 750;
+  margin: 0.65rem 0 1rem;
+  max-width: 900px;
+}
+
 .cw-erddap-actions {
   display: flex;
   gap: 0.85rem;
