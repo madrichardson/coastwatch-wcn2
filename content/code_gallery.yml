@@ -1,0 +1,100 @@
+hero:
+  eyebrow: SATELLITE DATA TRAINING
+  title: Code Gallery
+  description: Examples demonstrating accessing and working with ocean satellite data from ERDDAP servers.
+  button_label: View All Tutorials
+  button_url: https://coastwatch-training.github.io/tutorials/
+section:
+  eyebrow: HANDS-ON EXAMPLES
+  title: Explore Code Tutorials
+  description: Browse practical examples for accessing, processing, and visualizing satellite oceanographic
+    data.
+tutorials:
+- title: Basics of Working with Satellite Data
+  description: Learn how to access ERDDAP data, handle NetCDF files, and create SST maps and time series.
+  image: images/basics.png
+  alt: basic
+  tags:
+  - PYTHON
+  - R
+  - MATLAB
+  python_url: https://coastwatch-training.github.io/tutorials/Tutorial1-basics/python/Tutorial1-basics.html
+  r_url: https://coastwatch-training.github.io/tutorials/Tutorial1-basics/r/Tutorial1-basics.html
+  matlab_url: https://coastwatch-training.github.io/tutorials/Tutorial1-basics/matlab/Tutorial1-basics.html
+- title: Extract Data Within a Boundary
+  description: Learn how to download SST time series data from an ERDDAP server, mask the data to retain
+    only the data within an irregular geographical boundary (polygon), and plot the yearly seasonal cycle
+    within the boundary.
+  image: images/extract_data.png
+  alt: Extract Data Within Boundary
+  tags:
+  - PYTHON
+  - R
+  - MATLAB
+  python_url: https://coastwatch-training.github.io/tutorials/extract-satellite-data-within-boundary/python/extract-satellite-data-within-boundary.html
+  r_url: https://coastwatch-training.github.io/tutorials/extract-satellite-data-within-boundary/r/extract-satellite-data-within-boundary.html
+  matlab_url: https://coastwatch-training.github.io/tutorials/extract-satellite-data-within-boundary/matlab/extract-satellite-data-within-boundary.html
+- title: Matchup Satellite Data to Telemetry Data
+  description: Learn how to extract satellite data around a set of points defined by longitude, latitude,
+    and time coordinates, like that produced by an animal telemetry tag, and ship track, or a glider tract.
+  image: images/telemetry_animal.png
+  alt: Telemetry Data
+  tags:
+  - PYTHON
+  - R
+  python_url: https://coastwatch-training.github.io/tutorials/matchup-satellite-data-to-ATN-animal-tracks/python/satellite_matchups_to_track_locations_xarray_ATN_0731.html
+  r_url: https://coastwatch-training.github.io/tutorials/matchup-satellite-data-to-ATN-animal-tracks/r/matchup-satellite-data-to-ATN_track-locations.html
+  matlab_url: ''
+- title: Compare Time Series from Different Sensors
+  description: Learn how to extract a time-series of monthly satellite chlorophyll data for the period
+    of 1997-present from four different monthly satellite datasets.
+  image: images/timeseries_comparison.png
+  alt: Time Series Comparison
+  tags:
+  - PYTHON
+  - R
+  - MATLAB
+  python_url: https://coastwatch-training.github.io/tutorials/Tutorial2-timeseries-compare-sensors/python/Tutorial2-timeseries-compare-sensors.html
+  r_url: https://coastwatch-training.github.io/tutorials/Tutorial2-timeseries-compare-sensors/r/Tutorial2-timeseries-compare-sensors.html
+  matlab_url: https://coastwatch-training.github.io/tutorials/Tutorial2-timeseries-compare-sensors/matlab/Tutorial2-timeseries-compare-sensors.html
+- title: Match Up Satellite and Buoy Data
+  description: Learn how to match up satellite data to in situ buoy data using rerddap and rxtracto R
+    packages.
+  image: images/satbuoy.png
+  alt: Match Satellite Buoy
+  tags:
+  - R
+  python_url: ''
+  r_url: https://coastwatch-training.github.io/tutorials/matchup-satellite-buoy-data/r/matchup_satellite_buoy_data.html
+  matlab_url: ''
+- title: Define a Marine Habitat
+  description: Learn how to map satellite sea surface temperature and overlay the 17.5¡C and 18.5¡C contours
+    associated with loggerhead turtle bycatch product, TurtleWatch.
+  image: images/marinehab.png
+  alt: Marine Habitat
+  tags:
+  - PYTHON
+  - R
+  python_url: https://coastwatch-training.github.io/tutorials/define_marine_habitat/python/define_marine_habitat.html
+  r_url: https://coastwatch-training.github.io/tutorials/define_marine_habitat/r/define_marine_habitat.html
+  matlab_url: ''
+- title: Convert -180+180 to 0-360 Longitude
+  description: Learn how to use datasets with -180 to +180 longitude values to work within regions that
+    cross the antimeridian.
+  image: images/convert.png
+  alt: Convert Longitude
+  tags:
+  - PYTHON
+  python_url: https://coastwatch-training.github.io/tutorials/convert-180+180-to-0-360-longitude/python/convert-180+180-to-0-360-longitude.html
+  r_url: ''
+  matlab_url: ''
+- title: Create a Virtual Buoy with Satellite Data
+  description: Learn how to create a time series from satellite data to gap-fill or replace buoy data.
+  image: images/virtual_buoy.png
+  alt: Virtual Buoy
+  tags:
+  - PYTHON
+  - R
+  python_url: https://coastwatch-training.github.io/tutorials/create-virtual-buoy-with-satellite-data/python/create-virtual-buoy-with-satellite-data.html
+  r_url: https://coastwatch-training.github.io/tutorials/create-virtual-buoy-with-satellite-data/r/virtual_buoy_example.html
+  matlab_url: ''

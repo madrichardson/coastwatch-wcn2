@@ -1,0 +1,379 @@
+
+/* ==========================================================
+   COASTWATCH — CODE GALLERY
+   ========================================================== */
+
+.cw-gallery {
+  --gallery-navy: #123B5D;
+  --gallery-blue: #176A91;
+  --gallery-teal: #168C96;
+  --gallery-light: #EAF3F7;
+  --gallery-border: #DCE5EB;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #263746;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-gallery-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+  padding: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 3.5rem;
+}
+
+.cw-gallery-hero::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  right: -100px;
+  top: -180px;
+  pointer-events: none;
+}
+
+.cw-gallery-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+}
+
+.cw-gallery-eyebrow {
+  display: block;
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8rem;
+}
+
+.cw-gallery-hero h1 {
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.cw-gallery-hero p {
+  color: #DCEAF2;
+  font-size: 1.08rem;
+  line-height: 1.8;
+  margin: 0 0 1.8rem;
+}
+
+.cw-gallery-hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #FFFFFF;
+  color: var(--gallery-navy) !important;
+  padding: 0.8rem 1.3rem;
+  border-radius: 8px;
+  text-decoration: none !important;
+  font-size: 0.95rem;
+  font-weight: 750;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.cw-gallery-hero-button:hover {
+  background: #EAF3F7;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================
+   SECTION HEADING
+   ========================================================== */
+
+.cw-gallery-section-heading {
+  margin-bottom: 2rem;
+}
+
+.cw-gallery-section-label {
+  display: block;
+  color: var(--gallery-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.cw-gallery-section-heading h2 {
+  color: var(--gallery-navy);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0 0 0.6rem;
+}
+
+.cw-gallery-section-heading p {
+  color: #586D7A;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0;
+}
+
+/* ==========================================================
+   TUTORIAL GRID
+   ========================================================== */
+
+.cw-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+  align-items: stretch;
+}
+
+/* ==========================================================
+   TUTORIAL CARDS
+   ========================================================== */
+
+.cw-gallery-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid var(--gallery-border);
+  border-radius: 14px;
+  box-shadow: 0 6px 22px rgba(18,59,93,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cw-gallery-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(18,59,93,0.11);
+}
+
+/* ==========================================================
+   IMAGE AREA
+   ========================================================== */
+
+.cw-gallery-image-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 250px;
+  padding: 1rem;
+  background: #EAF3F7;
+  border: none;
+  border-bottom: 1px solid var(--gallery-border);
+  cursor: zoom-in;
+}
+
+.cw-gallery-card:nth-child(even) .cw-gallery-image-button {
+  background: #F1F7FA;
+}
+
+.cw-gallery-image-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.25s;
+}
+
+.cw-gallery-image-button:hover img {
+  transform: scale(1.025);
+}
+
+.cw-gallery-zoom {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  padding: 0.4rem 0.7rem;
+  background: rgba(18,59,93,0.9);
+  color: #FFFFFF;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cw-gallery-image-button:hover .cw-gallery-zoom,
+.cw-gallery-image-button:focus-visible .cw-gallery-zoom {
+  opacity: 1;
+}
+
+/* ==========================================================
+   CARD CONTENT
+   ========================================================== */
+
+.cw-gallery-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.6rem;
+}
+
+.cw-gallery-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.cw-gallery-tag {
+  background: var(--gallery-light);
+  color: var(--gallery-blue);
+  padding: 0.3rem 0.65rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.cw-gallery-card h3 {
+  color: var(--gallery-navy);
+  font-size: 1.3rem;
+  font-weight: 750;
+  line-height: 1.4;
+  margin: 0 0 0.8rem;
+}
+
+.cw-gallery-description {
+  color: #526878;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin: 0 0 1.5rem;
+}
+
+/* ==========================================================
+   TUTORIAL LINKS
+   ========================================================== */
+
+.cw-gallery-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gallery-border);
+}
+
+.cw-gallery-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: var(--gallery-blue);
+  color: #FFFFFF !important;
+  padding: 0.65rem 0.9rem;
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: background 0.2s;
+}
+
+.cw-gallery-link:hover {
+  background: var(--gallery-navy);
+}
+
+.cw-gallery-soon {
+  color: #607686;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ==========================================================
+   LIGHTBOX
+   ========================================================== */
+
+.cw-gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: min(96vw, 1400px);
+  max-width: none;
+  max-height: 96vh;
+  margin: auto;
+  padding: 2.5rem 1rem 1rem;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.3);
+}
+
+.cw-gallery-lightbox::backdrop {
+  background: rgba(8,25,40,0.85);
+}
+
+.cw-gallery-lightbox img {
+  display: block;
+  width: 100%;
+  max-height: calc(96vh - 4.5rem);
+  object-fit: contain;
+}
+
+.cw-gallery-lightbox-close {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.6rem;
+  background: transparent;
+  color: var(--gallery-navy);
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.cw-gallery-image-button:focus-visible,
+.cw-gallery-link:focus-visible,
+.cw-gallery-hero-button:focus-visible,
+.cw-gallery-lightbox-close:focus-visible {
+  outline: 3px solid var(--gallery-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 850px) {
+  .cw-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .cw-gallery {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cw-gallery-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-gallery-card-body {
+    padding: 1.3rem;
+  }
+
+  .cw-gallery-image-button {
+    height: 220px;
+  }
+
+  .cw-gallery-zoom {
+    opacity: 1;
+  }
+}
+

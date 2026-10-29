@@ -638,3 +638,57 @@ content:
             type: string
           - name: url
             type: string
+  
+  - name: code_gallery
+    label: Code Gallery
+    type: file
+    path: content/code_gallery.yml
+    fields:
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: button_label
+            type: string
+          - name: button_url
+            type: string
+
+      - name: section
+        label: Tutorial Section
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: text
+
+      - name: tutorials
+        label: Code Tutorials
+        type: object
+        list: true
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: image
+            type: image
+          - name: alt
+            type: string
+          - name: tags
+            type: string
+            list: true
+          - name: python_url
+            type: string
+          - name: r_url
+            type: string
+          - name: matlab_url
+            type: string

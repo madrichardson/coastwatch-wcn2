@@ -1,0 +1,219 @@
+---
+pagetitle: "Code Gallery"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/code_gallery.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from IPython.display import display, HTML
+
+with open("content/code_gallery.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+hero = data.get("hero", {})
+section = data.get("section", {})
+tutorials = data.get("tutorials", [])
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def render_tutorial(tutorial):
+
+    title = safe(tutorial.get("title"))
+    description = safe(tutorial.get("description"))
+    image = safe(tutorial.get("image"))
+    alt = safe(tutorial.get("alt") or tutorial.get("title"))
+
+    tags = tutorial.get("tags") or []
+    if isinstance(tags, str):
+        tags = [tag.strip() for tag in tags.split(",")]
+
+    tags_html = "".join(
+        f'<span class="cw-gallery-tag">{safe(tag)}</span>'
+        for tag in tags
+    )
+
+    links = []
+
+    for key, label in [
+        ("python_url", "Python"),
+        ("r_url", "R"),
+        ("matlab_url", "MATLAB"),
+    ]:
+        url = str(tutorial.get(key) or "").strip()
+
+        if url and url.lower() != "nan":
+            links.append(f"""
+              <a href="{safe(url)}"
+                 class="cw-gallery-link"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                {label} Tutorial
+                <span aria-hidden="true">↗</span>
+              </a>
+            """)
+
+    links_html = "".join(links)
+
+    if not links:
+        links_html = '<span class="cw-gallery-soon">Coming soon</span>'
+
+    return f"""
+    <article class="cw-gallery-card">
+
+      <button
+        type="button"
+        class="cw-gallery-image-button"
+        data-lightbox-src="{image}"
+        data-lightbox-alt="{alt}"
+        aria-label="Enlarge image: {alt}"
+      >
+        <img src="{image}"
+             alt="{alt}"
+             loading="lazy">
+
+        <span class="cw-gallery-zoom">
+          Enlarge image
+        </span>
+      </button>
+
+      <div class="cw-gallery-card-body">
+
+        <div class="cw-gallery-tags">
+          {tags_html}
+        </div>
+
+        <h3>{title}</h3>
+
+        <p class="cw-gallery-description">
+          {description}
+        </p>
+
+        <div class="cw-gallery-card-footer">
+          {links_html}
+        </div>
+
+      </div>
+
+    </article>
+    """
+
+cards = "".join(render_tutorial(t) for t in tutorials)
+
+html = f"""
+<div class="cw-gallery">
+
+  <section class="cw-gallery-hero">
+
+    <div class="cw-gallery-hero-content">
+
+      <span class="cw-gallery-eyebrow">
+        {safe(hero.get("eyebrow"))}
+      </span>
+
+      <h1>{safe(hero.get("title"))}</h1>
+
+      <p>{safe(hero.get("description"))}</p>
+
+      <a
+        href="{safe(hero.get("button_url"))}"
+        class="cw-gallery-hero-button"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {safe(hero.get("button_label"))}
+        <span aria-hidden="true">↗</span>
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="cw-gallery-section">
+
+    <div class="cw-gallery-section-heading">
+
+      <span class="cw-gallery-section-label">
+        {safe(section.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(section.get("title"))}</h2>
+
+      <p>{safe(section.get("description"))}</p>
+
+    </div>
+
+    <div class="cw-gallery-grid">
+      {cards}
+    </div>
+
+  </section>
+
+</div>
+
+<dialog id="cwGalleryLightbox" class="cw-gallery-lightbox">
+  <button
+    type="button"
+    class="cw-gallery-lightbox-close"
+    aria-label="Close enlarged image"
+  >
+    &times;
+  </button>
+  <img id="cwGalleryLightboxImage" alt="">
+</dialog>
+"""
+
+display(HTML(html))
+```
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const dialog = document.getElementById("cwGalleryLightbox");
+  const image = document.getElementById("cwGalleryLightboxImage");
+  const close = dialog?.querySelector(".cw-gallery-lightbox-close");
+
+  if (!dialog || !image || !close) return;
+
+  document.querySelectorAll(".cw-gallery-image-button")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        image.src = button.dataset.lightboxSrc;
+        image.alt = button.dataset.lightboxAlt || "";
+
+        if (!dialog.open) {
+          dialog.showModal();
+        }
+
+      });
+
+    });
+
+  close.addEventListener("click", () => {
+    dialog.close();
+  });
+
+  dialog.addEventListener("click", event => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+
+  dialog.addEventListener("close", () => {
+    image.removeAttribute("src");
+  });
+
+});
+</script>
