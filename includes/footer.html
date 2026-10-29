@@ -1,0 +1,65 @@
+
+<!-- CoastWatch West Coast Node Footer -->
+
+<footer class="cw-site-footer">
+
+  <div class="cw-site-footer-inner">
+
+    <!-- NOAA branding -->
+    <div class="cw-site-footer-brand">
+      <img
+        src="/images/noaa_logo.png"
+        alt="NOAA logo"
+        class="cw-site-footer-logo"
+      >
+
+      <div class="cw-site-footer-identity">
+        <div class="cw-site-footer-name">
+          NOAA CoastWatch West Coast Node
+        </div>
+
+        <div class="cw-site-footer-tagline">
+          Science. Service. Stewardship.
+        </div>
+      </div>
+    </div>
+
+    <!-- Organization links -->
+    <nav class="cw-site-footer-links" aria-label="NOAA organization links">
+      <a href="https://www.fisheries.noaa.gov/">NOAA Fisheries</a>
+      <a href="https://www.star.nesdis.noaa.gov/star/index.php">STAR</a>
+      <a href="https://coastwatch.noaa.gov/cwn/index.html">CoastWatch</a>
+      <a href="https://www.fisheries.noaa.gov/about/southwest-fisheries-science-center">Southwest Fisheries</a>
+      <a href="https://www.fisheries.noaa.gov/about/climate-and-ecosystems-program-southwest-fisheries-science-center">Environmental Research Division</a>
+    </nav>
+
+    <div class="cw-site-footer-divider"></div>
+
+    <!-- Legal links -->
+    <nav class="cw-site-footer-legal" aria-label="Government information links">
+      <a href="https://www.noaa.gov/protecting-your-privacy">Privacy</a>
+      <a href="https://www.noaa.gov/information-technology/foia">FOIA</a>
+      <a href="https://www.noaa.gov/information-technology">Information Quality</a>
+      <a href="https://www.noaa.gov/disclaimer">Disclaimer</a>
+      <a href="https://www.commerce.gov/">Commerce.gov</a>
+    </nav>
+
+    <!-- Copyright -->
+    <div class="cw-site-footer-bottom">
+      <span>© 2026 NOAA CoastWatch West Coast Node</span>
+      <span>Built with <a href="https://quarto.org/">Quarto</a></span>
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const footer = document.querySelector(".cw-site-footer");
+
+  if (footer && footer.parentElement !== document.body) {
+    document.body.appendChild(footer);
+  }
+});
+</script>

@@ -1,0 +1,268 @@
+
+---
+pagetitle: "News Archive"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/news_archive.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+#| warning: false
+
+import yaml
+import pandas as pd
+from html import escape
+from IPython.display import display, HTML
+
+# Read the same content used by the homepage.
+with open("content/news.yml", encoding="utf-8") as f:
+    news_data = yaml.safe_load(f) or {}
+
+items = news_data.get("news", [])
+
+df = pd.DataFrame(items)
+
+if not df.empty:
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df = df[df["date"].notna()].copy()
+    df = df.sort_values("date", ascending=False)
+    df["year"] = df["date"].dt.year.astype(int)
+
+def safe(value):
+    return escape(str(value if value is not None else ""), quote=True)
+
+years = (
+    sorted(df["year"].unique().tolist(), reverse=True)
+    if not df.empty else []
+)
+
+year_options = "".join(
+    f'<option value="{year}">{year}</option>'
+    for year in years
+)
+
+total = len(df)
+
+html = f"""
+<div class="cw-news-archive">
+
+  <section class="cw-news-archive-hero">
+    <div class="cw-news-archive-hero-content">
+      <span class="cw-news-archive-eyebrow">
+        COASTWATCH WEST COAST NODE
+      </span>
+
+      <h1>News Archive</h1>
+
+      <p>
+        Explore CoastWatch updates, scientific publications,
+        dataset releases, job opportunities, and events.
+        Browse past announcements or search for a topic of interest.
+      </p>
+
+    </div>
+  </section>
+
+  <section class="cw-news-archive-directory">
+
+    <div class="cw-news-archive-section-head">
+      <span class="cw-news-archive-label">
+        EXPLORE THE ARCHIVE
+      </span>
+      <h2>Browse News &amp; Events</h2>
+      <p>
+        Search by keyword or select a year to narrow
+        the archive. All announcements are included,
+        including those no longer displayed on the homepage.
+      </p>
+    </div>
+
+    <div class="cw-news-archive-toolbar">
+
+      <div class="cw-news-archive-search">
+        <label for="archiveSearch">Search announcements</label>
+        <input
+          id="archiveSearch"
+          type="search"
+          placeholder="Search titles, descriptions, or topics..."
+        >
+      </div>
+
+      <div class="cw-news-archive-filter">
+        <label for="archiveYear">Year</label>
+        <select id="archiveYear">
+          <option value="All">All years</option>
+          {year_options}
+        </select>
+      </div>
+
+      <button
+        id="archiveReset"
+        class="cw-news-archive-reset"
+        type="button"
+      >
+        Reset filters
+      </button>
+
+    </div>
+
+    <div class="cw-news-archive-results">
+      <span id="archiveCount">
+        Showing {total} of {total} announcements
+      </span>
+    </div>
+
+    <div id="archiveGroups">
+"""
+
+if not df.empty:
+    for year, group in df.groupby("year", sort=False):
+        html += f"""
+        <section class="cw-news-archive-year-group"
+                 data-year="{year}">
+
+          <div class="cw-news-archive-year-heading">
+            <h2>{year}</h2>
+            <span class="cw-news-archive-year-count">
+              {len(group)} announcements
+            </span>
+          </div>
+
+          <div class="cw-news-archive-grid">
+        """
+
+        for _, row in group.iterrows():
+            title = safe(row.get("title", ""))
+            description = str(row.get("description") or "")
+            date_label = row["date"].strftime("%B %d, %Y")
+            date_iso = row["date"].strftime("%Y-%m-%d")
+
+            # Descriptions are trusted, CMS-maintained content.
+            # Preserve embedded links and formatting.
+            html += f"""
+            <article class="cw-news-archive-card"
+                     data-year="{year}">
+
+              <div class="cw-news-archive-card-body">
+
+                <div class="cw-news-archive-card-meta">
+                  <time datetime="{date_iso}">
+                    {date_label}
+                  </time>
+                </div>
+
+                <h3>{title}</h3>
+
+                <div class="cw-news-archive-description">
+                  {description}
+                </div>
+
+              </div>
+            </article>
+            """
+
+        html += """
+          </div>
+        </section>
+        """
+
+html += """
+    </div>
+
+    <div id="archiveEmpty"
+         class="cw-news-archive-empty"
+         hidden>
+      <h3>No matching announcements</h3>
+      <p>
+        Try another keyword or select a different year.
+      </p>
+    </div>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const search = document.getElementById("archiveSearch");
+  const year = document.getElementById("archiveYear");
+  const reset = document.getElementById("archiveReset");
+  const cards = Array.from(
+    document.querySelectorAll(".cw-news-archive-card")
+  );
+  const groups = Array.from(
+    document.querySelectorAll(".cw-news-archive-year-group")
+  );
+  const count = document.getElementById("archiveCount");
+  const empty = document.getElementById("archiveEmpty");
+
+  if (!search || !year || !reset || !count || !empty) return;
+
+  function filterArchive() {
+    const query = search.value.trim().toLowerCase();
+    const selectedYear = year.value;
+
+    let visible = 0;
+
+    cards.forEach(card => {
+      const matchesSearch =
+        card.textContent.toLowerCase().includes(query);
+
+      const matchesYear =
+        selectedYear === "All" ||
+        card.dataset.year === selectedYear;
+
+      const show = matchesSearch && matchesYear;
+
+      card.hidden = !show;
+
+      if (show) visible++;
+    });
+
+    groups.forEach(group => {
+      const visibleCards = group.querySelectorAll(
+        ".cw-news-archive-card:not([hidden])"
+      );
+
+      group.hidden = visibleCards.length === 0;
+
+      const groupCount = group.querySelector(
+        ".cw-news-archive-year-count"
+      );
+
+      if (groupCount) {
+        groupCount.textContent =
+          `${visibleCards.length} announcements`;
+      }
+    });
+
+    count.textContent =
+      `Showing ${visible} of ${cards.length} announcements`;
+
+    empty.hidden = visible !== 0;
+  }
+
+  search.addEventListener("input", filterArchive);
+  year.addEventListener("change", filterArchive);
+
+  reset.addEventListener("click", () => {
+    search.value = "";
+    year.value = "All";
+    filterArchive();
+  });
+
+  filterArchive();
+
+});
+</script>
