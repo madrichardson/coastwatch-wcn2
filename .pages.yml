@@ -906,3 +906,74 @@ content:
           - name: modal_id
             label: Legacy Modal ID
             type: string
+  - name: satellite_courses
+    label: Satellite Courses
+    type: file
+    path: content/satellite_courses.yml
+    fields:
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: description
+            label: Description
+            type: text
+          - name: button_label
+            label: Button Label
+            type: string
+          - name: button_url
+            label: Button URL
+            type: string
+
+      - name: overview
+        label: Course Overview
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: text
+
+      - name: resources
+        label: Learning Resources
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: links
+            label: Resource Links
+            type: object
+            list: true
+            fields:
+              - name: title
+                type: string
+              - name: url
+                type: string
+
+      - name: faq
+        label: Frequently Asked Questions
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: questions
+            label: Questions
+            type: object
+            list: true
+            fields:
+              - name: question
+                type: string
+              - name: answer
+                type: rich-text

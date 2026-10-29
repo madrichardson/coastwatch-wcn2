@@ -1,0 +1,141 @@
+---
+pagetitle: "Satellite Courses"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/satellite_courses.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+import markdown
+from html import escape
+from IPython.display import display, HTML
+
+with open("content/satellite_courses.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+hero = data.get("hero", {})
+overview = data.get("overview", {})
+resources = data.get("resources", {})
+faq = data.get("faq", {})
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def render_markdown(value):
+    text = str(value or "").replace(
+        "(contact_us.qmd)", "(contact_us.html)"
+    )
+    return markdown.markdown(
+        text,
+        extensions=["tables", "sane_lists"]
+    )
+
+resource_links = ""
+
+for resource in resources.get("links", []):
+    resource_links += f"""
+    <a class="cw-course-resource"
+       href="{safe(resource.get('url'))}"
+       target="_blank"
+       rel="noopener noreferrer">
+      <span>{safe(resource.get('title'))}</span>
+      <span aria-hidden="true">↗</span>
+    </a>
+    """
+
+faq_items = ""
+
+for item in faq.get("questions", []):
+    faq_items += f"""
+    <details class="cw-course-faq-item">
+      <summary>
+        <span>{safe(item.get('question'))}</span>
+        <span class="cw-course-faq-icon" aria-hidden="true">+</span>
+      </summary>
+
+      <div class="cw-course-faq-answer">
+        {render_markdown(item.get('answer'))}
+      </div>
+    </details>
+    """
+
+html = f"""
+<div class="cw-courses">
+
+  <section class="cw-courses-hero">
+    <div class="cw-courses-hero-content">
+      <span class="cw-courses-eyebrow">
+        {safe(hero.get('eyebrow'))}
+      </span>
+
+      <h1>{safe(hero.get('title'))}</h1>
+
+      <p>{safe(hero.get('description'))}</p>
+
+      <a href="{safe(hero.get('button_url'))}"
+         class="cw-courses-hero-btn"
+         target="_blank"
+         rel="noopener noreferrer">
+        {safe(hero.get('button_label'))}
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="cw-courses-intro">
+
+    <div class="cw-courses-overview">
+      <span class="cw-courses-section-label">
+        {safe(overview.get('eyebrow'))}
+      </span>
+
+      <h2>{safe(overview.get('title'))}</h2>
+
+      <div class="cw-courses-overview-text">
+        {render_markdown(overview.get('description'))}
+      </div>
+    </div>
+
+    <aside class="cw-courses-resources">
+      <span class="cw-courses-section-label">
+        {safe(resources.get('eyebrow'))}
+      </span>
+
+      <h2>{safe(resources.get('title'))}</h2>
+
+      <div class="cw-courses-resource-list">
+        {resource_links}
+      </div>
+    </aside>
+
+  </section>
+
+  <section class="cw-courses-faq">
+
+    <div class="cw-courses-section-heading">
+      <span class="cw-courses-section-label">
+        {safe(faq.get('eyebrow'))}
+      </span>
+
+      <h2>{safe(faq.get('title'))}</h2>
+    </div>
+
+    <div class="cw-courses-faq-list">
+      {faq_items}
+    </div>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
