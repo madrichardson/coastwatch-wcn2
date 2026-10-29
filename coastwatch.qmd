@@ -147,7 +147,6 @@ html = f"""
       <article class="cw-about-info-card">
 
         <div class="cw-about-info-card-header">
-          <span class="cw-about-info-number">01</span>
           <h3>{safe(national.get("central_title"))}</h3>
         </div>
 
@@ -160,7 +159,6 @@ html = f"""
       <article class="cw-about-info-card">
 
         <div class="cw-about-info-card-header">
-          <span class="cw-about-info-number">02</span>
           <h3>{safe(national.get("regional_title"))}</h3>
         </div>
 
