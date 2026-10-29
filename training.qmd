@@ -1,0 +1,113 @@
+---
+pagetitle: "Learning Resources"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/training.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from IPython.display import display, HTML
+
+with open("content/training.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+hero = data.get("hero", {})
+section = data.get("section", {})
+resources = data.get("resources", [])
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def render_resource(resource, index):
+
+    title = safe(resource.get("title"))
+    description = safe(resource.get("description"))
+    button = safe(resource.get("button_label"))
+    url = safe(resource.get("url"))
+
+    return f"""
+    <article class="cw-training-card">
+
+      <div class="cw-training-card-number">
+        {index:02d}
+      </div>
+
+      <div class="cw-training-card-content">
+
+        <h3>{title}</h3>
+
+        <p>{description}</p>
+
+        <div class="cw-training-card-footer">
+          <a
+            href="{url}"
+            class="cw-training-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {button}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+      </div>
+
+    </article>
+    """
+
+cards = "".join(
+    render_resource(resource, index)
+    for index, resource in enumerate(resources, start=1)
+)
+
+html = f"""
+<div class="cw-training">
+
+  <section class="cw-training-hero">
+
+    <div class="cw-training-hero-content">
+
+      <span class="cw-training-eyebrow">
+        {safe(hero.get("eyebrow"))}
+      </span>
+
+      <h1>{safe(hero.get("title"))}</h1>
+
+      <p>{safe(hero.get("description"))}</p>
+
+    </div>
+
+  </section>
+
+  <section class="cw-training-resources">
+
+    <div class="cw-training-section-heading">
+
+      <span class="cw-training-section-label">
+        {safe(section.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(section.get("title"))}</h2>
+
+    </div>
+
+    <div class="cw-training-grid">
+      {cards}
+    </div>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```

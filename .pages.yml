@@ -599,3 +599,42 @@ content:
             type: text
           - name: paperwork_information
             type: text
+  
+  - name: training
+    label: Learning Resources
+    type: file
+    path: content/training.yml
+    fields:
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: text
+
+      - name: section
+        label: Resources Section
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+
+      - name: resources
+        label: Learning Resources
+        type: object
+        list: true
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: button_label
+            type: string
+          - name: url
+            type: string

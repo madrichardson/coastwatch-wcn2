@@ -1,0 +1,31 @@
+
+hero:
+  eyebrow: "LEARNING & TRAINING"
+  title: "Learning Resources"
+  description: >-
+    Explore CoastWatch training courses, tutorials, and educational
+    materials for working with satellite oceanographic data.
+
+section:
+  eyebrow: "EXPLORE RESOURCES"
+  title: "Training & Educational Materials"
+
+resources:
+  - title: "Satellite Courses"
+    description: >-
+      Are you interested in using oceanographic satellite data in your work but don't know where to start? The NOAA CoastWatch program offers in-person and online courses where participants learn about environmental satellite data and how to easily obtain it. Participants also gain hands on experience working with the data of interest to them. A major goal of the course is to provide scientists who are not regular users of satellite data with the knowledge and tools they need to incorporate satellite data into their research and management projects.
+    button_label: "Information and Course Dates"
+    url: "https://coastwatch-training.github.io/trainings/"
+
+  - title: "Tutorials and Code Examples"
+    description: >-
+      These tutorials demonstrate how to access and work with satellite data using various software systems such as R and Python. The materials provide practical examples of how to retrieve data from ERDDAP and work with it in the specified software.
+    button_label: "CoastWatch Tutorials"
+    url: "https://coastwatch-training.github.io/tutorials/"
+
+  - title: "Course Lectures"
+    description: >-
+      Check out the material used in the satellite course trainings. Slides, transcripts, and narrated videos are publicly available for free.
+    button_label: "CoastWatch Learning Portal"
+    url: "https://coastwatch-training.github.io/lectures/"
+

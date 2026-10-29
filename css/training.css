@@ -1,0 +1,257 @@
+
+/* ==========================================================
+   COASTWATCH — LEARNING RESOURCES
+   ========================================================== */
+
+.cw-training {
+  --training-navy: #123B5D;
+  --training-blue: #176A91;
+  --training-teal: #168C96;
+  --training-light: #EAF3F7;
+  --training-border: #DCE5EB;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #263746;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-training-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+
+  padding: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 3.5rem;
+}
+
+.cw-training-hero::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  right: -100px;
+  top: -180px;
+  pointer-events: none;
+}
+
+.cw-training-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+}
+
+.cw-training-eyebrow {
+  display: block;
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8rem;
+}
+
+.cw-training-hero h1 {
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.cw-training-hero p {
+  color: #DCEAF2;
+  font-size: 1.08rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ==========================================================
+   SECTION HEADING
+   ========================================================== */
+
+.cw-training-section-heading {
+  margin-bottom: 2rem;
+}
+
+.cw-training-section-label {
+  display: block;
+  color: var(--training-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.cw-training-section-heading h2 {
+  color: var(--training-navy);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0;
+}
+
+/* ==========================================================
+   RESOURCE GRID
+   ========================================================== */
+
+.cw-training-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  align-items: stretch;
+}
+
+/* ==========================================================
+   RESOURCE CARDS
+   ========================================================== */
+
+.cw-training-card {
+  display: flex;
+  flex-direction: column;
+
+  background: #FFFFFF;
+  border: 1px solid var(--training-border);
+  border-top: 4px solid var(--training-teal);
+  border-radius: 14px;
+
+  padding: 1.8rem;
+
+  box-shadow: 0 6px 22px rgba(18,59,93,0.05);
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.cw-training-card:nth-child(2) {
+  background: #F1F7FA;
+  border-top-color: var(--training-blue);
+}
+
+.cw-training-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(18,59,93,0.11);
+}
+
+.cw-training-card-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  background: var(--training-light);
+  color: var(--training-blue);
+
+  border-radius: 10px;
+
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+
+  margin-bottom: 1.5rem;
+}
+
+.cw-training-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cw-training-card h3 {
+  color: var(--training-navy);
+  font-size: 1.3rem;
+  font-weight: 750;
+  line-height: 1.35;
+  margin: 0 0 1rem;
+}
+
+.cw-training-card p {
+  color: #526878;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin: 0 0 1.8rem;
+}
+
+/* ==========================================================
+   RESOURCE BUTTONS
+   ========================================================== */
+
+.cw-training-card-footer {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.cw-training-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  background: var(--training-blue);
+  color: #FFFFFF !important;
+
+  padding: 0.75rem 1rem;
+
+  border-radius: 7px;
+  text-decoration: none !important;
+
+  font-weight: 700;
+  font-size: 0.88rem;
+
+  transition: background 0.2s;
+}
+
+.cw-training-button:hover {
+  background: var(--training-navy);
+}
+
+.cw-training-button:focus-visible {
+  outline: 3px solid var(--training-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 1050px) {
+
+  .cw-training-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  .cw-training {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cw-training-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-training-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-training-card {
+    padding: 1.5rem;
+  }
+
+}
+
