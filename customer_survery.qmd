@@ -1,0 +1,192 @@
+
+---
+pagetitle: "Customer Survey"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/customer_survey.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from urllib.parse import urlsplit
+from IPython.display import display, HTML
+
+with open("content/customer_survey.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+hero = data.get("hero", {})
+survey = data.get("survey", {})
+fine = data.get("fine_print", {})
+
+def safe(value):
+    return escape(str(value if value is not None else ""), quote=True)
+
+def safe_url(value):
+    url = str(value or "").strip()
+
+    if url.startswith(("https://", "http://")):
+        return safe(url)
+
+    if url.startswith(("/", "//")):
+        return "#"
+
+    if url.lower().endswith(".qmd"):
+        url = url[:-4] + ".html"
+
+    return safe(url)
+
+def paragraphs(value):
+    return "".join(
+        f"<p>{safe(part.strip())}</p>"
+        for part in str(value or "").split("\n\n")
+        if part.strip()
+    )
+
+sections_html = ""
+
+for section in fine.get("sections", []):
+    sections_html += f"""
+    <div class="cw-survey-info-block">
+      <h3>{safe(section.get("title"))}</h3>
+      {paragraphs(section.get("text"))}
+    </div>
+    """
+
+contact_info = safe(fine.get("contact_information", ""))
+
+html = f"""
+<div class="cw-survey">
+
+  <section class="cw-survey-hero">
+    <div class="cw-survey-hero-content">
+
+      <span class="cw-survey-eyebrow">
+        {safe(hero.get("eyebrow"))}
+      </span>
+
+      <h1>{safe(hero.get("title"))}</h1>
+
+      <p>{safe(hero.get("description"))}</p>
+
+    </div>
+  </section>
+
+  <section class="cw-survey-main">
+
+    <div class="cw-survey-main-content">
+
+      <span class="cw-survey-section-label">
+        {safe(survey.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(survey.get("title"))}</h2>
+
+      <h3 class="cw-survey-welcome">
+        {safe(survey.get("welcome"))}
+      </h3>
+
+      {paragraphs(survey.get("description"))}
+
+      <div class="cw-survey-action">
+        <a
+          href="{safe_url(survey.get("button_url"))}"
+          class="cw-survey-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {safe(survey.get("button_label"))}
+          <span aria-hidden="true">↗</span>
+        </a>
+
+        <span class="cw-survey-action-note">
+          Opens in a new tab
+        </span>
+      </div>
+
+    </div>
+
+    <div class="cw-survey-contact">
+      <div class="cw-survey-contact-icon"
+           aria-hidden="true">?</div>
+
+      <div>
+        <h3>Have a specific question?</h3>
+        <p>{safe(survey.get("note"))}</p>
+
+        <a href="{safe_url(survey.get("contact_url"))}">
+          {safe(survey.get("contact_label"))} →
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="cw-survey-details">
+
+    <div class="cw-survey-details-heading">
+
+      <span class="cw-survey-section-label">
+        {safe(fine.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(fine.get("title"))}</h2>
+
+      <p>{safe(fine.get("introduction"))}</p>
+
+    </div>
+
+    <details class="cw-survey-disclosure">
+
+      <summary>
+        <span>Read survey information and fine print</span>
+        <span class="cw-survey-plus"
+              aria-hidden="true">+</span>
+      </summary>
+
+      <div class="cw-survey-disclosure-body">
+
+        {sections_html}
+
+        <div class="cw-survey-info-block">
+          <h3>Burden Estimate Contact</h3>
+          <p class="cw-survey-address">
+            {contact_info}
+          </p>
+        </div>
+
+        <div class="cw-survey-info-block">
+          <h3>Paperwork Reduction Act</h3>
+          {paragraphs(fine.get("paperwork_notice"))}
+        </div>
+
+        <div class="cw-survey-omb">
+          <strong>{safe(fine.get("omb_label"))}</strong>
+          <span>
+            OMB Control Number:
+            {safe(fine.get("omb_number"))}
+          </span>
+          <span>
+            Expiration:
+            {safe(fine.get("omb_expiration"))}
+          </span>
+        </div>
+
+      </div>
+
+    </details>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```

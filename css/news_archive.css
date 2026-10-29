@@ -76,23 +76,6 @@
   margin: 0;
 }
 
-.cw-news-archive-hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.8rem;
-}
-
-.cw-news-archive-hero-meta span {
-  color: #E5F3F7;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 6px;
-  padding: 0.5rem 0.85rem;
-  font-size: 0.85rem;
-  font-weight: 650;
-}
-
 /* ==========================================================
    SECTION HEADING
    ========================================================== */
