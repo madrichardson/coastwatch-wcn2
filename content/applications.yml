@@ -148,7 +148,7 @@ projects:
   partners: NOAA CoastWatch Regional Nodes and NOAA CoastWatch Central Office.
   description: The CoastWatch West Coast Node offers courses for NOAA scientists and managers, and anybody wanting to learn how to access and use ocean satellite data. The course has been offered each year since 2006.
   funding: NOAA CoastWatch.
-  homepage_url: sat_courses.qmd
+  homepage_url: satellite_courses.qmd
   project_href: ''
 - image: images/code-gallery-training.png
   alt: Code Gallery Image
