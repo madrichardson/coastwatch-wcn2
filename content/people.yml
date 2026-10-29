@@ -1,0 +1,53 @@
+hero:
+  eyebrow: "OUR TEAM"
+  title: "People"
+  description: >-
+    The CoastWatch West Coast Node supports the development and distribution
+    of satellite-derived oceanographic data products, tools, and applications
+    for the satellite data community. The website and resources hosted here
+    are maintained by the people below.
+
+team:
+  eyebrow: "COASTWATCH WEST COAST NODE"
+  title: "Meet Our Team"
+
+  members:
+    - name: "Cara Wilson"
+      role: "Manager, CoastWatch West Coast"
+
+    - name: "Dale Robinson"
+      role: "Development Lead, CoastWatch West Coast"
+
+    - name: "Madison Richardson"
+      role: "Environmental Data Analyst, CoastWatch West Coast"
+
+    - name: "Jonathan Sherman"
+      role: "Research Development Specialist, CoastWatch West Coast"
+
+acknowledgements:
+  title: "Acknowledgements"
+
+  paragraphs:
+    - >-
+      This website was developed to support the activities of the NOAA CoastWatch
+      West Coast Node (WCN) and to provide access to regional satellite data
+      products, tools, and project resources for the satellite data community.
+
+    - >-
+      The website architecture, design, and implementation were developed by
+      <strong>Madison Richardson</strong> using the Quarto publishing system with
+      integrated GitHub version control and automated rendering workflows.
+
+    - >-
+      <strong>Sunny Hospital</strong> provided assistance during the intial
+      setup of the website and contributed materials and project content that
+      are featured throughout the site.
+
+    - >-
+      <strong>Jen Sevadjian</strong> contributed materials and project content
+      that support the resources and applications presented on this site.
+
+    - >-
+      The projects, datasets, and tools featured throughout the website represent
+      the collaborative work of CoastWatch scientists, developers, and partners
+      across NOAA Fisheries and the broader satellite data community.

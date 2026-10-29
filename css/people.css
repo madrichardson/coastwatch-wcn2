@@ -1,0 +1,235 @@
+/* ==========================================================
+   COASTWATCH — PEOPLE PAGE
+   ========================================================== */
+
+.cw-people {
+  --people-navy: #123B5D;
+  --people-blue: #176A91;
+  --people-teal: #168C96;
+  --people-light: #EAF3F7;
+  --people-border: #DCE5EB;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #263746;
+}
+
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-people-hero {
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+
+  border-radius: 18px;
+  padding: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 3.5rem;
+}
+
+.cw-people-hero::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  right: -100px;
+  top: -180px;
+  pointer-events: none;
+}
+
+.cw-people-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 950px;
+}
+
+.cw-people-eyebrow {
+  display: block;
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8rem;
+}
+
+.cw-people-hero h1 {
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.cw-people-hero p {
+  color: #DCEAF2;
+  font-size: 1.08rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+
+/* ==========================================================
+   SECTION HEADINGS
+   ========================================================== */
+
+.cw-people-section {
+  margin-bottom: 3.5rem;
+}
+
+.cw-people-section-heading {
+  margin-bottom: 1.8rem;
+}
+
+.cw-people-section-label {
+  display: block;
+  color: var(--people-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.cw-people-section-heading h2,
+.cw-people-acknowledgements-header h2 {
+  color: var(--people-navy);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0;
+}
+
+
+/* ==========================================================
+   TEAM GRID
+   ========================================================== */
+
+.cw-people-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.cw-person-card {
+  display: flex;
+  background: #FFFFFF;
+  border: 1px solid var(--people-border);
+  border-radius: 13px;
+  overflow: hidden;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cw-person-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(18, 59, 93, 0.10);
+}
+
+.cw-person-accent {
+  width: 6px;
+  flex-shrink: 0;
+  background: var(--people-teal);
+}
+
+.cw-person-card:nth-child(even) .cw-person-accent {
+  background: var(--people-blue);
+}
+
+.cw-person-content {
+  padding: 1.8rem 2rem;
+}
+
+.cw-person-card h3 {
+  color: var(--people-navy);
+  font-size: 1.3rem;
+  font-weight: 750;
+  margin: 0 0 0.5rem;
+}
+
+.cw-person-role {
+  color: #526878;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+
+/* ==========================================================
+   ACKNOWLEDGEMENTS
+   ========================================================== */
+
+.cw-people-acknowledgements {
+  background: var(--people-light);
+  border: 1px solid #D1E3EC;
+  border-radius: 16px;
+  padding: clamp(1.8rem, 4vw, 3rem);
+}
+
+.cw-people-acknowledgements-header {
+  margin-bottom: 1.5rem;
+}
+
+.cw-people-acknowledgements-content {
+  max-width: 1050px;
+}
+
+.cw-people-acknowledgements-content p {
+  color: #526878;
+  font-size: 0.98rem;
+  line-height: 1.85;
+  margin: 0 0 1.2rem;
+}
+
+.cw-people-acknowledgements-content p:last-child {
+  margin-bottom: 0;
+}
+
+.cw-people-acknowledgements-content strong {
+  color: var(--people-blue);
+  font-weight: 750;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 850px) {
+
+  .cw-people-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .cw-people {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cw-people-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-person-content {
+    padding: 1.5rem;
+  }
+
+  .cw-people-acknowledgements {
+    padding: 1.5rem;
+  }
+
+}

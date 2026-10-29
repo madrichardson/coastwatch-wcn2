@@ -1,0 +1,142 @@
+---
+pagetitle: "People"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/people.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from IPython.display import display, HTML
+
+with open("content/people.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+hero = data.get("hero", {})
+team = data.get("team", {})
+members = team.get("members", [])
+acknowledgements = data.get("acknowledgements", {})
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+
+# ----------------------------------------------------------
+# TEAM CARDS
+# ----------------------------------------------------------
+
+cards = ""
+
+for member in members:
+
+    name = safe(member.get("name"))
+    role = safe(member.get("role"))
+
+    cards += f"""
+    <article class="cw-person-card">
+
+      <div class="cw-person-accent"></div>
+
+      <div class="cw-person-content">
+        <h3>{name}</h3>
+        <p class="cw-person-role">{role}</p>
+      </div>
+
+    </article>
+    """
+
+
+# ----------------------------------------------------------
+# ACKNOWLEDGEMENTS
+# ----------------------------------------------------------
+
+# Acknowledgement paragraphs are maintained as trusted
+# HTML content by site editors in content/people.yml.
+ack_paragraphs = ""
+
+for paragraph in acknowledgements.get("paragraphs", []):
+    ack_paragraphs += f"""
+    <p>{paragraph}</p>
+    """
+
+
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
+html = f"""
+<div class="cw-people">
+
+  <!-- HERO -->
+
+  <section class="cw-people-hero">
+
+    <div class="cw-people-hero-content">
+
+      <span class="cw-people-eyebrow">
+        {safe(hero.get("eyebrow"))}
+      </span>
+
+      <h1>{safe(hero.get("title"))}</h1>
+
+      <p>{safe(hero.get("description"))}</p>
+
+    </div>
+
+  </section>
+
+
+  <!-- TEAM -->
+
+  <section class="cw-people-section">
+
+    <div class="cw-people-section-heading">
+
+      <span class="cw-people-section-label">
+        {safe(team.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(team.get("title"))}</h2>
+
+    </div>
+
+    <div class="cw-people-grid">
+      {cards}
+    </div>
+
+  </section>
+
+
+  <!-- ACKNOWLEDGEMENTS -->
+
+  <section class="cw-people-acknowledgements">
+
+    <div class="cw-people-acknowledgements-header">
+
+      <span class="cw-people-section-label">
+        WEBSITE CREDITS
+      </span>
+
+      <h2>{safe(acknowledgements.get("title"))}</h2>
+
+    </div>
+
+    <div class="cw-people-acknowledgements-content">
+      {ack_paragraphs}
+    </div>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
