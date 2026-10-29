@@ -825,3 +825,84 @@ content:
             label: Acknowledgement Paragraphs
             type: text
             list: true
+  - name: applications
+    label: Projects & Applications
+    type: file
+    path: content/applications.yml
+    fields:
+      - name: hero
+        label: Page Introduction
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Page Title
+            type: string
+          - name: description
+            label: Description
+            type: text
+
+      - name: section
+        label: Projects Section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: title
+            label: Section Title
+            type: string
+          - name: description
+            label: Description
+            type: text
+
+      - name: projects
+        label: Projects
+        type: object
+        list: true
+        fields:
+          - name: project_name
+            label: Project Name
+            type: string
+
+          - name: category_title
+            label: Category
+            type: string
+
+          - name: image
+            label: Project Image
+            type: image
+
+          - name: alt
+            label: Image Description
+            type: string
+
+          - name: caption
+            label: Image Caption
+            type: text
+
+          - name: description
+            label: Project Description
+            type: text
+
+          - name: partners
+            label: Partners
+            type: text
+
+          - name: funding
+            label: Funding
+            type: text
+
+          - name: project_href
+            label: Internal Project Page
+            type: string
+
+          - name: homepage_url
+            label: External Project Website
+            type: string
+
+          - name: modal_id
+            label: Legacy Modal ID
+            type: string

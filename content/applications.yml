@@ -1,0 +1,163 @@
+hero:
+  eyebrow: COASTWATCH WEST COAST NODE
+  title: Projects & Applications
+  description: CoastWatch West Coast Node has contributed the following projects.
+section:
+  eyebrow: EXPLORE OUR WORK
+  title: CoastWatch Projects
+  description: Select a project to learn more about its research, partners, funding, and available resources.
+projects:
+- image: images/ecocast.png
+  alt: EcoCast
+  category_title: Dynamic Ocean Management
+  project_name: EcoCast
+  modal_id: modal-ecocast
+  caption: The blue shark is a protected species included in the EcoCast fisheries sustainability tool.
+  partners: San Diego State University, UC Santa Cruz, University of Maryland, Old Dominion University, Stanford University, and NOAA SWFSC Environmental Research Division.
+  description: CoastWatch West Coast Node (WCN) provides satellite data products and a web presence to the EcoCast project. EcoCast is a real-time tool to help fishers and managers allocate fishing effort to optimize the harvest of target fish while minimizing bycatch of protected species. WCN also serves the EcoCast products via ERDDAP.
+  funding: NASA EcoForecasting and Applied Science program (NNH12ZDA001N-ECOF) with additional support from California SeaGrant, NOAA Bycatch Reduction Engineering Program, NOAA West Coast Regional Office, NOAA Integrated Ecosystem Assessment program, StanfordÕs Center for Ocean Solutions, and NOAA CoastWatch.
+  homepage_url: ''
+  project_href: projects/ecocast/ecocast.qmd
+- image: images/loggerhead_turtles.png
+  alt: Turtles
+  category_title: Turtle Conservation
+  project_name: Loggerhead Turtles Bycatch
+  modal_id: modal-turtle
+  caption: A Loggerhead turtle swimming in the waters off Southern California.
+  partners: UC Santa Cruz, NOAA Southwest Fisheries Science Center, Stanford University, ant the University of Maryland.
+  description: The TOTAL (Temperature Observations To Avoid Loggerheads) project uses satellite-based environmental indicators within a dynamic ocean management framework to deliver a tool that helps minimize loggerhead bycatch without causing undue impact on the industry. The CoastWatch West Coast Node provides satellite data products and a web presence for the project.
+  funding: NOAA Fisheries Bycatch Reduction Engineering Program (grant number NA16NMF4720278), with support from NOAA Southwest Fisheries Science Center and NOAA CoastWatch.
+  homepage_url: ''
+  project_href: projects/turtlewatch/turtlewatch.qmd
+- image: images/whalewatch.png
+  alt: WhaleWatch Image
+  category_title: Blue Whale Conservation
+  project_name: WhaleWatch 2.0
+  modal_id: modal-whalewatch
+  caption: A blue whale surfacing in the waters off the California coast within the California Current Ecosystem.
+  partners: A consortium of scientists, managers, and members of the shipping industry. The WhaleWatch 2.0 team is scientists from University of California Santa Cruz and Oregon State University and NOAA's Environmental Resource Division.
+  description: The WhaleWatch 2.0 project produces a daily map product that is a predictive spatial management tool to categorize suitable blue whale habitat within the California Current Ecosystem. The map identifies where whales are most likely to be each day based on current environmental conditions, such as ocean temperature and productivity.
+  funding: The Benioff Ocean Initiative.
+  homepage_url: ''
+  project_href: projects/whalewatch/whalewatch.qmd
+- image: images/sardine_habitat.png
+  alt: Sardine Potential Habitat Image
+  category_title: Habitat Modeling
+  project_name: Sardine Potential Habitat
+  modal_id: modal-sardine
+  caption: Maps of potential sardine habitat (left) and sea surface temperature maps (right).
+  partners: NOAA's Southwest Fisheries Science Center.
+  description: CoastWatch West Coast Node is operationalizing the Pacific sardines predictive habitat model. The model characterizes the relationships between the occurrence of the northern stock of Pacific sardine and the species' preferred habitat, as determine from environment factors measured with satellites. The predicted habitat can be used to schedule the time and location of ship and aerial surveys to create an optimal sampling strategy.
+  funding: NOAA CoastWatch.
+  homepage_url: https://coastwatch.pfeg.noaa.gov/erddap/griddap/sardine_habitat_viirs.graph?potential_habitat%5B(2023-04-04T12:00:00Z)%5D%5B(50.98125):(27.01875)%5D%5B(-129.99375):(-113.00625)%5D&.draw=surface&.vars=longitude%7Clatitude%7Cpotential_habitat&.colorBar=%7C%7C%7C%7C%7C&.bgColor=0xffccccff
+  project_href: ''
+- image: images/primary-productivity.png
+  alt: NetPP Image
+  category_title: 'Primary Productivity '
+  project_name: VIIRS Interim Products
+  modal_id: modal-netpp
+  caption: Global primary productivity from the VIIRS-SNPP netPP product.
+  partners: NOAA CoastWatch Nodes, NOAA Southeast Fisheries Science Center, and NOAA National Marine Fisheries Service.
+  description: NOAA CoastWatch developed interim primary productivity products to bridge the gap created by the upcoming retirement of the MODIS-Aqua sensor, which has supported the legacy global product since 2007. These interim products, driven by VIIRS-SNPP and VIIRS-NOAA20 data using the established VPGM algorithm, provide continuity for users until the next generation of primary productivity products is available.
+  funding: The project was supported by funding from the Portfolio Management Branch of NESDIS, NOAA CoastWatch, and CSU COAST.
+  homepage_url: ''
+  project_href: projects/primary-productivity/netpp.qmd
+- image: images/polarwatch.png
+  alt: PolarWatch Image
+  category_title: Polar Regions Satellite Data
+  project_name: PolarWatch
+  modal_id: modal-polarwatch
+  caption: Sea Ice Cover in the Arctic and the Antarctic.
+  partners: The Alaska Fisheries Science Center (AFSC), the National Ice Center, the National Snow and Ice Center, CoastWatch West Coast Node and Central Office, and the NOAA SWFSC Environmental Research and Fisheries Antarctic Ecosystem Research Divisions.
+  description: PolarWatch extends the CoastWatch program by providing high-latitude satellite observation data to governmental, academic, commercial, and public users in support of broad applications in the Arctic and Southern Oceans.
+  funding: NOAA CoastWatch.
+  homepage_url: https://polarwatch.noaa.gov/
+  project_href: ''
+- image: images/calcofi-monitoring.png
+  alt: CalCOFI Image
+  category_title: Watch My Ocean
+  project_name: CalCOFI Satellite Monitoring & Vessel Tracking
+  modal_id: modal-calcofi
+  caption: CalCOFI Monitoring page part of Watch My Ocean.
+  partners: NOAA CoastWatch Nodes and SWFSC.
+  description: 'Watch My Ocean is an interactive dashboard developed by NOAA CoastWatch West Coast Node that enables users to explore oceanographic conditions using satellite . It supports both regional analysis around CalCOFI stations and vessel-based monitoring, allowing users to examine conditions near NOAA ships in near real time. '
+  funding: NOAA CoastWatch.
+  homepage_url: ''
+  project_href: projects/watch-my-ocean/calcofi.html
+- image: images/poc.png
+  alt: Particulate Organic Carbon Image
+  category_title: POC Algorithm Development
+  project_name: Particulate Organic Carbon
+  modal_id: modal-poc
+  caption: Global POC distribution generated with a potential new algorithm for the SeaWiFS sensor.
+  partners: UC San Diego's Scripps Institution of Oceanography.
+  description: Particulate organic carbon (POC) is a standard global product that is generated for many ocean color sensors. The POC algorithm used as of 2020 is over a decade old and was validated with only limited in situ observations. CoastWatch West Coast Node is supporting the work of researchers from Scripps Institution of Oceanography to develop updated POC algorithms for the SeaWiFS, MODIS, and VIIRS ocean color satellites.
+  funding: NASA Science of TERRA, AQUA, and SUOMI NPP program (80NSSC18K0956) with support from NOAA CoastWatch.
+  homepage_url: https://oceanoptics.ucsd.edu/
+  project_href: ''
+- image: images/ocean_modeling.png
+  alt: WCOFS Image
+  category_title: Ocean Modeling
+  project_name: Advancing WCOFS Modeling
+  modal_id: modal-oceanmodeling
+  caption: WCOFS model output for bathymetry (left) and the model grid (right).
+  partners: UC Santa Cruz, NOAA National Environmental Satellite Data and Information Service, NOAA National Marine Fisheries Service, NOAA Coast Survey Development Lab, Northwest Association of Networked Ocean Observing System, and Central & Northern California Ocean Observing System.
+  description: CoastWatch West Coast Node is a member of a research group working to transition established ecological products that are generated using ocean model output, such as the California-Harmful Algae Risk Mapping (C-HARM) products, to use output from the WCOFS model.
+  funding: U.S. IOOS Coastal and Ocean Modeling Testbed (COMT) program, with support from NOAA CoastWatch.
+  homepage_url: https://comt.ioos.us/projects/wcofs_advancement
+  project_href: ''
+- image: images/charm.png
+  alt: C-HARM Image
+  category_title: Harmful Algal Blooms
+  project_name: C-HARM HABs Forecast
+  modal_id: modal-charm
+  caption: The probability of Pseudo-nitzschia (left) and Cellular Domoic Acid (right) occurrence of the California coast.
+  partners: Central & Northern California Ocean Observing System, Southern California Coastal Ocean Observing System, UC Santa Cruz, UC Los Angeles, RSS Inc, and NOAA National Ocean Service.
+  description: The CoastWatch West Coast Node operationalized the C-HARM harmful algal bloom (HAB) products, which predict the occurrences of Pseudo-nitzschia and the domoic acid toxin using sophisticated circulation models, satellite remote-sensing data, and statistical models.
+  funding: National Aeronautics and Space Administration (NNX13AL28G, NNX14AC42G), US IOOS Coastal Ocean Modeling Testbed (COMT), NOAA ECOHAB, and the Packard Foundation with support from NOAA CoastWatch.
+  homepage_url: https://habs.sccoos.org/hab-forecast
+  project_href: ''
+- image: images/fishstock.png
+  alt: Fisheries Stock Assessment Image
+  category_title: Fisheries Stock Assessment
+  project_name: Alaska Stock Assessment Tool
+  modal_id: modal-fishstock
+  caption: Fisheries management regions in the Bering Sea and the Gulf of Alaska.
+  partners: NOAA Alaska Fisheries Science Center and CoastWatch West Coast Node.
+  description: CoastWatch West Coast Node has created satellite indices for the Alaskan Fishery Management areas to be used in the Ecosystem and Socioeconomic Profiles (ESP), which are submitted as part of the annual Stock Assessment and Fishery Evaluation (SAFE) Reports.
+  funding: NOAA Alaska Fisheries Science Center and CoastWatch West Coast Node.
+  homepage_url: ''
+  project_href: projects/afsc-stock-assessment/AFSC-Stock-Assessment-Tool.qmd
+- image: images/non-traditional-erddap.png
+  alt: Non-Traditional Use of ERDDAP Image
+  category_title: Non-Traditional Use of ERDDAP
+  project_name: Secure ERDDAP Automation
+  modal_id: modal-erddap
+  caption: Metadata queried from a secure ERDDAP tabledap dataset is filtered locally in Python or R, matched to archive slide images, and automatically assembled into a customized PowerPoint presentation.
+  partners: SWFSC, CoastWatch West Code Node, PolarWatch, CoastWatch Central, and JPSS PGRR Program.
+  description: Use ERDDAP as a secure metadata database and image server to automatically generate custom PowerPoint presentations from CoastWatch training slide archives. This project demonstrates how password-protected ERDDAP tabledap datasets can store participant metadata, while file-based datasets host archived slide images, enabling fully automated querying, filtering, and slide compilation workflows in Python or R.
+  funding: NOAA CoastWatch and JPSS PGRR Program.
+  homepage_url: ''
+  project_href: projects/course-slides-erddap/course-slides-erddap.qmd
+- image: images/satcourse.png
+  alt: Satellite Course Image
+  category_title: User Training Courses
+  project_name: CoastWatch Satellite Course
+  modal_id: modal-satcourse
+  caption: Course instructor Dr. Cara Wilson teaching course participants the basics of satellite remote sensing.
+  partners: NOAA CoastWatch Regional Nodes and NOAA CoastWatch Central Office.
+  description: The CoastWatch West Coast Node offers courses for NOAA scientists and managers, and anybody wanting to learn how to access and use ocean satellite data. The course has been offered each year since 2006.
+  funding: NOAA CoastWatch.
+  homepage_url: sat_courses.qmd
+  project_href: ''
+- image: images/code-gallery-training.png
+  alt: Code Gallery Image
+  category_title: 'Tutorials: Using Satellite Data'
+  project_name: Satellite Data Coding Tutorials
+  modal_id: modal-tutorials
+  caption: 'Landing page of the training tutorials provided by the CoastWatch Training website. '
+  partners: NOAA CoastWatch Nodes and participants in the CoastWatch satellite courses.
+  description: Coding tutorials demonstrate how to access, subset, analyze, and visualize CoastWatch satellite data using common programming languages.
+  funding: NOAA CoastWatch.
+  homepage_url: https://coastwatch-training.github.io/tutorials/
+  project_href: ''

@@ -1,0 +1,262 @@
+---
+pagetitle: "CoastWatch Projects"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/applications.css
+resources:
+  - images/**
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from urllib.parse import urlsplit, urlunsplit
+from IPython.display import HTML, display
+
+with open("content/applications.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+hero = data.get("hero", {})
+section = data.get("section", {})
+projects = data.get("projects", [])
+
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+
+def site_url(value):
+    """Convert local Quarto page links to published HTML links."""
+    url = str(value or "").strip()
+    if not url:
+        return ""
+
+    parts = urlsplit(url)
+
+    if not parts.scheme and not parts.netloc:
+        path = parts.path
+        if path.endswith(".qmd"):
+            path = path[:-4] + ".html"
+
+        return urlunsplit((
+            parts.scheme,
+            parts.netloc,
+            path,
+            parts.query,
+            parts.fragment
+        ))
+
+    return url
+
+
+def primary_link(project):
+    internal = str(project.get("project_href") or "").strip()
+    external = str(project.get("homepage_url") or "").strip()
+
+    if internal:
+        return site_url(internal), "View Project", False
+
+    if external:
+        return external, "Visit Project Website", True
+
+    return "", "", False
+
+
+cards = []
+dialogs = []
+
+for i, project in enumerate(projects):
+
+    project_id = f"cw-project-dialog-{i}"
+
+    name = safe(project.get("project_name"))
+    category = safe(project.get("category_title"))
+    image = safe(site_url(project.get("image")))
+    alt = safe(project.get("alt") or project.get("project_name"))
+    caption = safe(project.get("caption"))
+    description = safe(project.get("description"))
+    partners = safe(project.get("partners"))
+    funding = safe(project.get("funding"))
+
+    href, button_label, external = primary_link(project)
+
+    link_html = ""
+
+    if href:
+        target = (
+            ' target="_blank" rel="noopener noreferrer"'
+            if external else ""
+        )
+
+        link_html = f"""
+        <a class="cw-project-primary-link"
+           href="{safe(href)}"{target}>
+          {safe(button_label)}
+          <span aria-hidden="true">↗</span>
+        </a>
+        """
+
+    cards.append(f"""
+    <button
+      type="button"
+      class="cw-project-card"
+      data-dialog="{project_id}"
+      aria-haspopup="dialog"
+      aria-label="Learn more about {name}">
+
+      <div class="cw-project-card-image">
+        <img src="{image}" alt="{alt}" loading="lazy">
+      </div>
+
+      <div class="cw-project-card-content">
+        <span class="cw-project-category">{category}</span>
+        <h3>{name}</h3>
+
+        <span class="cw-project-card-action">
+          Explore project
+          <span aria-hidden="true">→</span>
+        </span>
+      </div>
+    </button>
+    """)
+
+    dialogs.append(f"""
+    <dialog class="cw-project-dialog"
+            id="{project_id}"
+            aria-labelledby="{project_id}-title">
+
+      <div class="cw-project-dialog-header">
+        <div>
+          <span class="cw-project-dialog-category">{category}</span>
+          <h2 id="{project_id}-title">{name}</h2>
+        </div>
+
+        <button type="button"
+                class="cw-project-close"
+                aria-label="Close project details">
+          &times;
+        </button>
+      </div>
+
+      <div class="cw-project-dialog-body">
+
+        <div class="cw-project-dialog-media">
+          <img src="{image}" alt="{alt}">
+          <p class="cw-project-caption">{caption}</p>
+        </div>
+
+        <div class="cw-project-dialog-details">
+
+          <section>
+            <h3>Description</h3>
+            <p>{description}</p>
+          </section>
+
+          <section>
+            <h3>Partners</h3>
+            <p>{partners}</p>
+          </section>
+
+          <section>
+            <h3>Funding</h3>
+            <p>{funding}</p>
+          </section>
+
+          {link_html}
+
+        </div>
+      </div>
+
+    </dialog>
+    """)
+
+
+html = f"""
+<div class="cw-applications">
+
+  <section class="cw-applications-hero">
+    <div class="cw-applications-hero-content">
+
+      <span class="cw-applications-eyebrow">
+        {safe(hero.get("eyebrow"))}
+      </span>
+
+      <h1>{safe(hero.get("title"))}</h1>
+
+      <p>{safe(hero.get("description"))}</p>
+
+    </div>
+  </section>
+
+  <section class="cw-applications-directory">
+
+    <div class="cw-applications-heading">
+
+      <span class="cw-applications-section-label">
+        {safe(section.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(section.get("title"))}</h2>
+
+      <p>{safe(section.get("description"))}</p>
+
+    </div>
+
+    <div class="cw-project-grid">
+      {''.join(cards)}
+    </div>
+
+  </section>
+
+  {''.join(dialogs)}
+
+</div>
+"""
+
+display(HTML(html))
+```
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const cards = document.querySelectorAll(".cw-project-card");
+  const dialogs = document.querySelectorAll(".cw-project-dialog");
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+
+      const id = card.dataset.dialog;
+      const dialog = document.getElementById(id);
+
+      if (dialog) {
+        dialog.showModal();
+      }
+
+    });
+  });
+
+  dialogs.forEach(dialog => {
+
+    const closeButton = dialog.querySelector(".cw-project-close");
+
+    closeButton.addEventListener("click", () => {
+      dialog.close();
+    });
+
+    dialog.addEventListener("click", event => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+
+  });
+
+});
+</script>
