@@ -1,0 +1,399 @@
+
+/* ==========================================================
+   COASTWATCH — ABOUT PAGE
+   ========================================================== */
+
+.cw-about {
+  --about-navy: #123B5D;
+  --about-blue: #176A91;
+  --about-teal: #168C96;
+  --about-light: #EAF3F7;
+  --about-border: #DCE5EB;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #263746;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-about-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+  padding: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 2rem;
+}
+
+.cw-about-hero::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  right: -100px;
+  top: -180px;
+  pointer-events: none;
+}
+
+.cw-about-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+}
+
+.cw-about-hero-eyebrow {
+  display: block;
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8rem;
+}
+
+.cw-about-hero h1 {
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.cw-about-hero p {
+  color: #DCEAF2;
+  font-size: 1.08rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ==========================================================
+   MISSION & USER COMMUNITY
+   ========================================================== */
+
+.cw-about-overview {
+  margin-bottom: 3.5rem;
+}
+
+.cw-about-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.cw-about-overview-card {
+  position: relative;
+  background: var(--about-light);
+  border: 1px solid #D1E3EC;
+  border-radius: 14px;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.cw-about-overview-card:nth-child(even) {
+  background: #F2F7FA;
+}
+
+.cw-about-card-number {
+  display: block;
+  color: var(--about-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+
+.cw-about-overview-card h2 {
+  color: var(--about-navy);
+  font-size: 1.5rem;
+  margin: 0 0 0.9rem;
+}
+
+.cw-about-overview-card p {
+  color: #526878;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ==========================================================
+   SECTION HEADINGS
+   ========================================================== */
+
+.cw-about-section {
+  margin-bottom: 3.5rem;
+}
+
+.cw-about-section-heading {
+  margin-bottom: 2rem;
+}
+
+.cw-about-section-label {
+  display: block;
+  color: var(--about-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.cw-about-section-heading h2,
+.cw-about-feature h2 {
+  color: var(--about-navy);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0 0 0.8rem;
+}
+
+.cw-about-section-heading p {
+  max-width: 950px;
+  color: #526878;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ==========================================================
+   CENTRAL OPERATIONS & REGIONAL NODES
+   ========================================================== */
+
+.cw-about-national-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.cw-about-info-card {
+  background: #FFFFFF;
+  border: 1px solid var(--about-border);
+  border-top: 4px solid var(--about-teal);
+  border-radius: 13px;
+  padding: 1.8rem;
+  box-shadow: 0 6px 22px rgba(18,59,93,0.045);
+}
+
+.cw-about-info-card:nth-child(even) {
+  border-top-color: var(--about-blue);
+}
+
+.cw-about-info-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.cw-about-info-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: var(--about-light);
+  color: var(--about-blue);
+  font-size: 0.8rem;
+  font-weight: 750;
+}
+
+.cw-about-info-card h3 {
+  color: var(--about-navy);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* ==========================================================
+   REGIONAL NETWORK MAP & LINKS
+   ========================================================== */
+
+.cw-about-network {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.cw-about-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F5F9FB;
+  border: 1px solid var(--about-border);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.cw-about-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+}
+
+.cw-about-network-list {
+  background: #FFFFFF;
+  border: 1px solid var(--about-border);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.cw-about-network-list h3 {
+  color: var(--about-navy);
+  font-size: 1.25rem;
+  margin: 0 0 1.2rem;
+}
+
+.cw-about-nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cw-about-node {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--about-navy) !important;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none !important;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+a.cw-about-node:hover {
+  background: var(--about-light);
+  border-color: var(--about-border);
+}
+
+.cw-about-node-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--about-teal);
+}
+
+.cw-about-node-arrow {
+  margin-left: auto;
+  color: var(--about-blue);
+}
+
+.cw-about-node.current {
+  background: var(--about-navy);
+  color: #FFFFFF !important;
+}
+
+.cw-about-node.current .cw-about-node-dot {
+  background: #9ADDE0;
+}
+
+.cw-about-current-label {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #BFE6E8;
+}
+
+/* ==========================================================
+   WEST COAST REGIONAL NODE
+   ========================================================== */
+
+.cw-about-feature {
+  background: var(--about-light);
+  border: 1px solid #D1E3EC;
+  border-left: 5px solid var(--about-teal);
+  border-radius: 14px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 3.5rem;
+}
+
+.cw-about-feature-heading {
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================
+   ENVIRONMENTAL RESEARCH DIVISION
+   ========================================================== */
+
+.cw-about-erd {
+  background: #F7FAFC;
+  border: 1px solid var(--about-border);
+  border-radius: 14px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* ==========================================================
+   RICH TEXT
+   ========================================================== */
+
+.cw-about-richtext {
+  color: #526878;
+  line-height: 1.85;
+  font-size: 0.97rem;
+}
+
+.cw-about-richtext p {
+  margin: 0 0 1rem;
+}
+
+.cw-about-richtext a {
+  color: var(--about-blue);
+  font-weight: 650;
+  text-underline-offset: 3px;
+}
+
+.cw-about-richtext a:hover {
+  color: var(--about-navy);
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 850px) {
+
+  .cw-about-overview-grid,
+  .cw-about-national-grid,
+  .cw-about-network {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .cw-about {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cw-about-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-about-overview-card,
+  .cw-about-info-card,
+  .cw-about-network-list {
+    padding: 1.4rem;
+  }
+
+  .cw-about-node {
+    font-size: 0.85rem;
+  }
+
+  .cw-about-current-label {
+    font-size: 0.65rem;
+  }
+
+}

@@ -1,0 +1,247 @@
+
+---
+pagetitle: "About CoastWatch"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/coastwatch.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from IPython.display import display, HTML
+
+with open("content/coastwatch.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+hero = data.get("hero", {})
+overview = data.get("overview", [])
+national = data.get("national", {})
+west = data.get("west_coast", {})
+erd = data.get("erd", {})
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def render_overview_card(item, index):
+    return f"""
+    <article class="cw-about-overview-card">
+
+      <span class="cw-about-card-number">
+        {index:02d}
+      </span>
+
+      <h2>{safe(item.get("title"))}</h2>
+
+      <p>{safe(item.get("description"))}</p>
+
+    </article>
+    """
+
+def render_node(node):
+    name = safe(node.get("name"))
+    url = str(node.get("url") or "").strip()
+    current = bool(node.get("current"))
+
+    if current:
+        return f"""
+        <div class="cw-about-node current">
+          <span class="cw-about-node-dot"></span>
+          <span>{name}</span>
+          <span class="cw-about-current-label">
+            Current Node
+          </span>
+        </div>
+        """
+
+    if url:
+        return f"""
+        <a class="cw-about-node"
+           href="{safe(url)}"
+           target="_blank"
+           rel="noopener noreferrer">
+
+          <span class="cw-about-node-dot"></span>
+          <span>{name}</span>
+          <span class="cw-about-node-arrow"
+                aria-hidden="true">↗</span>
+
+        </a>
+        """
+
+    return f"""
+    <div class="cw-about-node">
+      <span class="cw-about-node-dot"></span>
+      <span>{name}</span>
+    </div>
+    """
+
+overview_html = "".join(
+    render_overview_card(item, i)
+    for i, item in enumerate(overview, start=1)
+)
+
+nodes_html = "".join(
+    render_node(node)
+    for node in national.get("nodes", [])
+)
+
+html = f"""
+<div class="cw-about">
+
+  <!-- HERO -->
+
+  <section class="cw-about-hero">
+
+    <div class="cw-about-hero-content">
+
+      <span class="cw-about-hero-eyebrow">
+        {safe(hero.get("eyebrow"))}
+      </span>
+
+      <h1>{safe(hero.get("title"))}</h1>
+
+      <p>{safe(hero.get("description"))}</p>
+
+    </div>
+
+  </section>
+
+
+  <!-- MISSION AND USERS -->
+
+  <section class="cw-about-overview">
+
+    <div class="cw-about-overview-grid">
+      {overview_html}
+    </div>
+
+  </section>
+
+
+  <!-- NATIONAL PROGRAM -->
+
+  <section class="cw-about-section">
+
+    <div class="cw-about-section-heading">
+
+      <span class="cw-about-section-label">
+        {safe(national.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(national.get("title"))}</h2>
+
+      <p>{safe(national.get("description"))}</p>
+
+    </div>
+
+    <div class="cw-about-national-grid">
+
+      <article class="cw-about-info-card">
+
+        <div class="cw-about-info-card-header">
+          <span class="cw-about-info-number">01</span>
+          <h3>{safe(national.get("central_title"))}</h3>
+        </div>
+
+        <div class="cw-about-richtext">
+          {national.get("central_description", "")}
+        </div>
+
+      </article>
+
+      <article class="cw-about-info-card">
+
+        <div class="cw-about-info-card-header">
+          <span class="cw-about-info-number">02</span>
+          <h3>{safe(national.get("regional_title"))}</h3>
+        </div>
+
+        <div class="cw-about-richtext">
+          {national.get("regional_description", "")}
+        </div>
+
+      </article>
+
+    </div>
+
+    <div class="cw-about-network">
+
+      <div class="cw-about-map">
+
+        <img
+          src="{safe(national.get("map_image"))}"
+          alt="{safe(national.get("map_alt"))}"
+          loading="lazy"
+        >
+
+      </div>
+
+      <div class="cw-about-network-list">
+
+        <h3>Explore CoastWatch Nodes</h3>
+
+        <div class="cw-about-nodes">
+          {nodes_html}
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WEST COAST NODE -->
+
+  <section class="cw-about-feature">
+
+    <div class="cw-about-feature-heading">
+
+      <span class="cw-about-section-label">
+        {safe(west.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(west.get("title"))}</h2>
+
+    </div>
+
+    <div class="cw-about-richtext">
+      {west.get("description", "")}
+    </div>
+
+  </section>
+
+
+  <!-- ERD -->
+
+  <section class="cw-about-section cw-about-erd">
+
+    <div class="cw-about-section-heading">
+
+      <span class="cw-about-section-label">
+        {safe(erd.get("eyebrow"))}
+      </span>
+
+      <h2>{safe(erd.get("title"))}</h2>
+
+    </div>
+
+    <div class="cw-about-richtext">
+      {erd.get("description", "")}
+    </div>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```

@@ -692,3 +692,84 @@ content:
             type: string
           - name: matlab_url
             type: string
+  
+  - name: coastwatch
+    label: About CoastWatch
+    type: file
+    path: content/coastwatch.yml
+    fields:
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: text
+
+      - name: overview
+        label: Mission & User Community
+        type: object
+        list: true
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+
+      - name: national
+        label: National CoastWatch Program
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: central_title
+            type: string
+          - name: central_description
+            type: rich-text
+          - name: regional_title
+            type: string
+          - name: regional_description
+            type: text
+          - name: map_image
+            type: image
+          - name: map_alt
+            type: string
+          - name: nodes
+            type: object
+            list: true
+            fields:
+              - name: name
+                type: string
+              - name: url
+                type: string
+              - name: current
+                type: boolean
+
+      - name: west_coast
+        label: West Coast Regional Node
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: rich-text
+
+      - name: erd
+        label: Environmental Research Division
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: rich-text
