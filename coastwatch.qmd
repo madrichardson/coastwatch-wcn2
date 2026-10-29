@@ -34,10 +34,6 @@ def render_overview_card(item, index):
     return f"""
     <article class="cw-about-overview-card">
 
-      <span class="cw-about-card-number">
-        {index:02d}
-      </span>
-
       <h2>{safe(item.get("title"))}</h2>
 
       <p>{safe(item.get("description"))}</p>
