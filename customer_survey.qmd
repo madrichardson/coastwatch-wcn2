@@ -1,0 +1,124 @@
+
+---
+pagetitle: "Customer Survey"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/customer_survey.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from IPython.display import display, HTML
+
+with open("content/customer_survey.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+survey = data.get("survey", {})
+fine = data.get("fine_print", {})
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def link(value):
+    url = str(value or "").strip()
+
+    if url.lower().endswith(".qmd"):
+        url = url[:-4] + ".html"
+
+    if not (
+        url.startswith("https://")
+        or url.startswith("http://")
+        or (
+            not url.startswith(("/", "#"))
+            and "://" not in url
+        )
+    ):
+        return "#"
+
+    return safe(url)
+
+paragraphs = "".join(
+    f"<p>{safe(text)}</p>"
+    for text in fine.get("paragraphs", [])
+)
+
+html = f"""
+<div class="cw-survey">
+
+  <section class="cw-survey-card">
+
+    <div class="cw-survey-card-heading">
+      <span class="cw-survey-label">
+        CUSTOMER FEEDBACK
+      </span>
+
+      <h1>{safe(survey.get("title"))}</h1>
+    </div>
+
+    <div class="cw-survey-card-body">
+
+      <h2>{safe(survey.get("welcome"))}</h2>
+
+      <p>{safe(survey.get("description"))}</p>
+
+      <a
+        href="{link(survey.get("button_url"))}"
+        class="cw-survey-button"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {safe(survey.get("button_label"))}
+        <span aria-hidden="true">↗</span>
+      </a>
+
+      <p class="cw-survey-contact">
+        {safe(survey.get("contact_before"))}
+        <a href="{link(survey.get("contact_url"))}">
+          {safe(survey.get("contact_label"))}
+        </a>
+        {safe(survey.get("contact_after"))}
+      </p>
+
+    </div>
+
+  </section>
+
+  <section class="cw-survey-fine-print">
+
+    <div class="cw-survey-fine-heading">
+      <h2>{safe(fine.get("title"))}</h2>
+    </div>
+
+    <div class="cw-survey-fine-content">
+
+      {paragraphs}
+
+      <p class="cw-survey-address">
+        {safe(fine.get("contact"))}
+      </p>
+
+      <p>
+        {safe(fine.get("paperwork_notice"))}
+      </p>
+
+      <p class="cw-survey-paperwork">
+        {safe(fine.get("paperwork_information"))}
+      </p>
+
+    </div>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
