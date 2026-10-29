@@ -34,7 +34,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyyaml pandas ipython jupyter
+          pip install pyyaml pandas ipython jupyter markdown
 
       - name: Render Quarto website
         run: quarto render
