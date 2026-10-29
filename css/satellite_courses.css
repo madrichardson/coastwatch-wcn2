@@ -1,3 +1,4 @@
+
 /* ==========================================================
    COASTWATCH — SATELLITE COURSES
    ========================================================== */
@@ -10,9 +11,17 @@
   --courses-border: #DCE5EB;
 
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
+  box-sizing: border-box;
   color: #263746;
+}
+
+.cw-courses *,
+.cw-courses *::before,
+.cw-courses *::after {
+  box-sizing: border-box;
 }
 
 /* ==========================================================
@@ -38,7 +47,7 @@
   position: absolute;
   width: 350px;
   height: 350px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   right: -100px;
   top: -180px;
@@ -78,6 +87,7 @@
 .cw-courses-hero-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.65rem;
   padding: 0.85rem 1.35rem;
   border-radius: 8px;
@@ -94,34 +104,8 @@
 }
 
 /* ==========================================================
-   OVERVIEW + RESOURCES
+   SHARED SECTION STYLING
    ========================================================== */
-
-.cw-courses-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr);
-  gap: 1.5rem;
-  align-items: stretch;
-  margin-bottom: 3.5rem;
-}
-
-.cw-courses-overview,
-.cw-courses-resources {
-  border: 1px solid var(--courses-border);
-  border-radius: 14px;
-  padding: 2rem;
-}
-
-.cw-courses-overview {
-  background: #FFFFFF;
-  border-top: 4px solid var(--courses-teal);
-  box-shadow: 0 6px 22px rgba(18,59,93,0.045);
-}
-
-.cw-courses-resources {
-  background: var(--courses-light);
-  border-top: 4px solid var(--courses-blue);
-}
 
 .cw-courses-section-label {
   display: block;
@@ -137,7 +121,28 @@
 .cw-courses-faq h2 {
   color: var(--courses-navy);
   font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 750;
   margin: 0 0 1.2rem;
+}
+
+/* ==========================================================
+   OVERVIEW — FULL WIDTH
+   ========================================================== */
+
+.cw-courses-overview {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin: 0 0 1.5rem;
+  padding: 2rem;
+
+  background: #FFFFFF;
+  border: 1px solid var(--courses-border);
+  border-top: 4px solid var(--courses-teal);
+  border-radius: 14px;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
 }
 
 .cw-courses-overview-text {
@@ -150,69 +155,149 @@
   margin: 0;
 }
 
+/* ==========================================================
+   RESOURCES — FULL WIDTH
+   ========================================================== */
+
+.cw-courses-resources {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin: 0 0 3.5rem;
+  padding: 2rem;
+
+  background: var(--courses-light);
+  border: 1px solid var(--courses-border);
+  border-top: 4px solid var(--courses-blue);
+  border-radius: 14px;
+}
+
+/* Three evenly spaced resource links */
+
 .cw-courses-resource-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
 }
 
 .cw-course-resource {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 1.1rem;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 75px;
+  padding: 1.1rem 1.25rem;
+
   background: #FFFFFF;
   border: 1px solid #D1E3EC;
   border-radius: 9px;
+
   color: var(--courses-blue) !important;
   font-size: 0.95rem;
   font-weight: 700;
+  line-height: 1.5;
   text-decoration: none !important;
-  transition: border-color 0.2s, transform 0.2s;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.cw-course-resource span:first-child {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.cw-course-resource span:last-child {
+  flex-shrink: 0;
+  font-size: 1.15rem;
 }
 
 .cw-course-resource:hover {
   border-color: var(--courses-teal);
-  transform: translateX(3px);
+  box-shadow: 0 5px 16px rgba(18, 59, 93, 0.08);
+  transform: translateY(-2px);
 }
 
 /* ==========================================================
-   FAQ
+   FAQ SECTION
    ========================================================== */
 
-.cw-courses-section-heading {
-  margin-bottom: 1.5rem;
+.cw-courses-faq {
+  display: block;
+  width: 100%;
+  min-width: 0;
 }
+
+.cw-courses-section-heading {
+  margin-bottom: 1.8rem;
+}
+
+.cw-courses-section-heading h2 {
+  margin-bottom: 0;
+}
+
+/* ==========================================================
+   FAQ ACCORDION
+   ========================================================== */
 
 .cw-courses-faq-list {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 1rem;
 }
 
 .cw-course-faq-item {
-  background: #FFFFFF;
-  border: 1px solid var(--courses-border);
+  background: #F0F7FA;
+  border: 1px solid #C8DEE8;
+  border-left: 5px solid var(--courses-teal);
   border-radius: 11px;
   overflow: hidden;
-  transition: border-color 0.2s, box-shadow 0.2s;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+
+.cw-course-faq-item:nth-child(even) {
+  background: #EAF3F7;
+  border-left-color: var(--courses-blue);
+}
+
+.cw-course-faq-item:hover {
+  background: #E1F0F5;
+  border-color: #A9CFDC;
 }
 
 .cw-course-faq-item[open] {
+  background: #FFFFFF;
   border-color: #B9D7E4;
-  box-shadow: 0 6px 20px rgba(18,59,93,0.06);
+  border-left-color: var(--courses-teal);
+  box-shadow: 0 6px 20px rgba(18, 59, 93, 0.07);
 }
+
+/* Accordion question */
 
 .cw-course-faq-item summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  padding: 1.25rem 1.5rem;
+  gap: 1.5rem;
+
+  padding: 1.35rem 1.6rem;
+
   color: var(--courses-navy);
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   font-weight: 750;
+  line-height: 1.5;
+
   cursor: pointer;
   list-style: none;
 }
@@ -221,31 +306,55 @@
   display: none;
 }
 
-.cw-course-faq-item summary:hover {
-  background: #F5FAFC;
+.cw-course-faq-item summary::marker {
+  content: "";
 }
 
 .cw-course-faq-item[open] summary {
   background: var(--courses-light);
+  border-bottom: 1px solid var(--courses-border);
 }
 
+/* Plus / minus indicator */
+
 .cw-course-faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+
+  background: #D7EAF1;
   color: var(--courses-blue);
-  font-size: 1.5rem;
-  font-weight: 400;
+  border-radius: 50%;
+
+  font-size: 1.35rem;
+  font-weight: 500;
   line-height: 1;
-  transition: transform 0.2s;
+
+  transition:
+    transform 0.2s,
+    background 0.2s;
 }
 
 .cw-course-faq-item[open] .cw-course-faq-icon {
   transform: rotate(45deg);
+  background: #C5E5E7;
+  color: var(--courses-navy);
 }
 
+/* ==========================================================
+   FAQ ANSWERS
+   ========================================================== */
+
 .cw-course-faq-answer {
-  padding: 1.4rem 1.5rem 1.6rem;
+  padding: 1.5rem 1.6rem 1.8rem;
   color: #526878;
   line-height: 1.8;
   font-size: 0.96rem;
+  background: #FFFFFF;
 }
 
 .cw-course-faq-answer p {
@@ -259,7 +368,17 @@
 .cw-course-faq-answer a {
   color: var(--courses-blue);
   font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
+
+.cw-course-faq-answer a:hover {
+  color: var(--courses-teal);
+}
+
+/* ==========================================================
+   FAQ TABLES
+   ========================================================== */
 
 .cw-course-faq-answer table {
   width: 100%;
@@ -270,7 +389,7 @@
 
 .cw-course-faq-answer th,
 .cw-course-faq-answer td {
-  padding: 0.7rem 0.9rem;
+  padding: 0.75rem 0.9rem;
   border-bottom: 1px solid var(--courses-border);
   text-align: left;
 }
@@ -286,22 +405,53 @@
 }
 
 /* ==========================================================
-   RESPONSIVE
+   ACCESSIBILITY
    ========================================================== */
 
-@media (max-width: 850px) {
-  .cw-courses-intro {
-    grid-template-columns: 1fr;
-  }
+.cw-course-resource:focus-visible,
+.cw-courses-hero-btn:focus-visible,
+.cw-course-faq-item summary:focus-visible {
+  outline: 3px solid var(--courses-teal);
+  outline-offset: 3px;
 }
 
+/* ==========================================================
+   RESPONSIVE — TABLET
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+  .cw-courses-resource-list {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-course-resource {
+    min-height: 60px;
+  }
+
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   ========================================================== */
+
 @media (max-width: 600px) {
+
   .cw-courses {
     padding: 1.5rem 1rem 3rem;
   }
 
   .cw-courses-hero {
     padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .cw-courses-hero h1 {
+    font-size: 2rem;
+  }
+
+  .cw-courses-hero p {
+    font-size: 1rem;
   }
 
   .cw-courses-overview,
@@ -309,12 +459,32 @@
     padding: 1.4rem;
   }
 
+  .cw-courses-resources {
+    margin-bottom: 2.5rem;
+  }
+
+  .cw-courses-resource-list {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .cw-course-resource {
+    padding: 0.9rem 1rem;
+  }
+
   .cw-course-faq-item summary {
-    padding: 1rem;
+    padding: 1.1rem;
+    font-size: 1rem;
   }
 
   .cw-course-faq-answer {
-    padding: 1rem;
+    padding: 1.2rem;
     overflow-x: auto;
   }
+
+  .cw-course-faq-icon {
+    width: 30px;
+    height: 30px;
+  }
+
 }

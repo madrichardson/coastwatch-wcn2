@@ -1,3 +1,4 @@
+
 ---
 pagetitle: "Satellite Courses"
 anchor-sections: false
@@ -38,6 +39,10 @@ def render_markdown(value):
         extensions=["tables", "sane_lists"]
     )
 
+# ----------------------------------------------------------
+# RESOURCE LINKS
+# ----------------------------------------------------------
+
 resource_links = ""
 
 for resource in resources.get("links", []):
@@ -50,6 +55,10 @@ for resource in resources.get("links", []):
       <span aria-hidden="true">↗</span>
     </a>
     """
+
+# ----------------------------------------------------------
+# FAQ ITEMS
+# ----------------------------------------------------------
 
 faq_items = ""
 
@@ -67,11 +76,17 @@ for item in faq.get("questions", []):
     </details>
     """
 
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
 html = f"""
 <div class="cw-courses">
 
+  <!-- HERO -->
   <section class="cw-courses-hero">
     <div class="cw-courses-hero-content">
+
       <span class="cw-courses-eyebrow">
         {safe(hero.get('eyebrow'))}
       </span>
@@ -87,45 +102,51 @@ html = f"""
         {safe(hero.get('button_label'))}
         <span aria-hidden="true">↗</span>
       </a>
+
     </div>
   </section>
 
-  <section class="cw-courses-intro">
+  <!-- OVERVIEW -->
+  <section class="cw-courses-overview">
 
-    <div class="cw-courses-overview">
-      <span class="cw-courses-section-label">
-        {safe(overview.get('eyebrow'))}
-      </span>
+    <span class="cw-courses-section-label">
+      {safe(overview.get('eyebrow'))}
+    </span>
 
-      <h2>{safe(overview.get('title'))}</h2>
+    <h2>{safe(overview.get('title'))}</h2>
 
-      <div class="cw-courses-overview-text">
-        {render_markdown(overview.get('description'))}
-      </div>
+    <div class="cw-courses-overview-text">
+      {render_markdown(overview.get('description'))}
     </div>
-
-    <aside class="cw-courses-resources">
-      <span class="cw-courses-section-label">
-        {safe(resources.get('eyebrow'))}
-      </span>
-
-      <h2>{safe(resources.get('title'))}</h2>
-
-      <div class="cw-courses-resource-list">
-        {resource_links}
-      </div>
-    </aside>
 
   </section>
 
+  <!-- RESOURCES -->
+  <section class="cw-courses-resources">
+
+    <span class="cw-courses-section-label">
+      {safe(resources.get('eyebrow'))}
+    </span>
+
+    <h2>{safe(resources.get('title'))}</h2>
+
+    <div class="cw-courses-resource-list">
+      {resource_links}
+    </div>
+
+  </section>
+
+  <!-- FAQ -->
   <section class="cw-courses-faq">
 
     <div class="cw-courses-section-heading">
+
       <span class="cw-courses-section-label">
         {safe(faq.get('eyebrow'))}
       </span>
 
       <h2>{safe(faq.get('title'))}</h2>
+
     </div>
 
     <div class="cw-courses-faq-list">
