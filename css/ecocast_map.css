@@ -1,0 +1,517 @@
+
+/* ==========================================================
+   ECOCAST MAP PAGE
+   ========================================================== */
+
+.cw-ecocast-map-page {
+  --map-navy: #123B5D;
+  --map-blue: #176A91;
+  --map-teal: #168C96;
+  --map-light: #EAF3F7;
+  --map-border: #DCE5EB;
+}
+
+.cw-ecocast-map-page *,
+.cw-ecocast-map-page *::before,
+.cw-ecocast-map-page *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   ACTIVE NAVIGATION
+   ========================================================== */
+
+.cw-ecocast-map-page .cw-ecocast-tab.is-active {
+  background: var(--map-blue);
+  border-color: var(--map-blue);
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-ecocast-map-hero {
+  padding: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 2.5rem;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+}
+
+.cw-ecocast-map-eyebrow {
+  display: block;
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8rem;
+}
+
+.cw-ecocast-map-hero h1 {
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  padding: 0;
+  border: none !important;
+}
+
+.cw-ecocast-map-hero p {
+  color: #DCEAF2;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ==========================================================
+   MAP VIEWER
+   ========================================================== */
+
+.cw-ecocast-map-section {
+  width: 100%;
+  margin-bottom: 3.5rem;
+  background: #FFFFFF;
+  border: 1px solid var(--map-border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.05);
+}
+
+.cw-ecocast-map-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  padding: 1.7rem 2rem;
+  background: var(--map-light);
+  border-bottom: 1px solid #D1E3EC;
+}
+
+.cw-ecocast-map-toolbar-text {
+  flex: 1 1 350px;
+  min-width: 0;
+}
+
+.cw-ecocast-map-toolbar h2 {
+  color: var(--map-navy);
+  font-size: 1.5rem;
+  font-weight: 750;
+  margin: 0 0 0.4rem;
+  padding: 0;
+  border: none !important;
+}
+
+.cw-ecocast-map-toolbar p {
+  color: #526878;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Date selector */
+
+.cw-ecocast-map-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 190px;
+}
+
+.cw-ecocast-map-control label {
+  color: var(--map-navy);
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+.cw-ecocast-map-select {
+  width: 100%;
+  padding: 0.8rem 2.5rem 0.8rem 1rem;
+
+  background: #FFFFFF;
+  border: 1px solid #B9D2DE;
+  border-radius: 8px;
+
+  color: var(--map-navy);
+  font-size: 0.95rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.cw-ecocast-map-select:focus {
+  outline: 2px solid var(--map-teal);
+  outline-offset: 2px;
+}
+
+/* Map image */
+
+.cw-ecocast-map-viewer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  width: 100%;
+  padding: 1.5rem;
+  background: #F8FBFC;
+}
+
+.cw-ecocast-map-viewer img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* ==========================================================
+   SECTION HEADINGS
+   ========================================================== */
+
+.cw-ecocast-map-section-label {
+  display: block;
+  color: var(--map-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.6rem;
+}
+
+.cw-ecocast-map-section-heading {
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--map-border);
+}
+
+.cw-ecocast-map-section-heading h2 {
+  color: var(--map-navy);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 750;
+  margin: 0;
+  padding: 0;
+  border: none !important;
+}
+
+/* ==========================================================
+   FAQ
+   ========================================================== */
+
+.cw-ecocast-map-faq {
+  margin-bottom: 3.5rem;
+}
+
+.cw-ecocast-map-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.cw-ecocast-map-faq-item {
+  background: #EAF3F7;
+  border: 1px solid #C8DEE8;
+  border-left: 5px solid var(--map-teal);
+  border-radius: 11px;
+  overflow: hidden;
+}
+
+.cw-ecocast-map-faq-item:nth-child(even) {
+  background: #F0F7FA;
+  border-left-color: var(--map-blue);
+}
+
+.cw-ecocast-map-faq-item[open] {
+  background: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(18, 59, 93, 0.06);
+}
+
+.cw-ecocast-map-faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1.25rem 1.5rem;
+  color: var(--map-navy);
+  font-size: 1.05rem;
+  font-weight: 750;
+  line-height: 1.5;
+  cursor: pointer;
+  list-style: none;
+}
+
+.cw-ecocast-map-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.cw-ecocast-map-faq-item summary::marker {
+  content: "";
+}
+
+.cw-ecocast-map-faq-item summary:hover {
+  background: #DDEFF4;
+}
+
+.cw-ecocast-map-faq-item[open] summary {
+  background: var(--map-light);
+  border-bottom: 1px solid var(--map-border);
+}
+
+/* Plus icon */
+
+.cw-ecocast-map-faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+
+  background: #D4E9F0;
+  color: var(--map-blue);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1;
+
+  transition: transform 0.2s;
+}
+
+.cw-ecocast-map-faq-item[open] .cw-ecocast-map-faq-icon {
+  transform: rotate(45deg);
+}
+
+/* FAQ answers */
+
+.cw-ecocast-map-faq-answer {
+  padding: 1.5rem 1.7rem;
+  background: #FFFFFF;
+  color: #526878;
+  font-size: 0.97rem;
+  line-height: 1.85;
+}
+
+.cw-ecocast-map-faq-answer p {
+  margin: 0 0 1rem;
+}
+
+.cw-ecocast-map-faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.cw-ecocast-map-faq-answer a {
+  color: var(--map-blue);
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cw-ecocast-map-faq-answer a:hover {
+  color: var(--map-teal);
+}
+
+.cw-ecocast-map-links {
+  padding-left: 1.4rem;
+  margin: 1rem 0 0;
+}
+
+.cw-ecocast-map-links li {
+  margin-bottom: 0.65rem;
+}
+
+/* Model diagram */
+
+.cw-ecocast-map-model {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: #F8FBFC;
+  border: 1px solid var(--map-border);
+  border-radius: 10px;
+}
+
+.cw-ecocast-map-model img {
+  display: block;
+  width: 100%;
+  max-width: 850px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ==========================================================
+   DATA DOWNLOADS
+   ========================================================== */
+
+.cw-ecocast-map-downloads {
+  padding: 2rem;
+  margin-bottom: 3rem;
+
+  background: var(--map-light);
+  border: 1px solid var(--map-border);
+  border-top: 4px solid var(--map-blue);
+  border-radius: 14px;
+}
+
+.cw-ecocast-map-downloads h2 {
+  color: var(--map-navy);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 750;
+  margin: 0 0 1rem;
+  padding: 0;
+  border: none !important;
+}
+
+.cw-ecocast-map-downloads > p {
+  color: #526878;
+  line-height: 1.8;
+  margin: 0 0 1.5rem;
+}
+
+.cw-ecocast-download-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cw-ecocast-download-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  min-width: 0;
+  min-height: 80px;
+  padding: 1.2rem 1.3rem;
+
+  background: #FFFFFF;
+  border: 1px solid #D1E3EC;
+  border-radius: 9px;
+
+  color: var(--map-blue) !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none !important;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.cw-ecocast-download-link:hover {
+  border-color: var(--map-teal);
+  box-shadow: 0 5px 16px rgba(18, 59, 93, 0.08);
+  transform: translateY(-2px);
+}
+
+.cw-ecocast-download-link span:first-child {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.cw-ecocast-download-link span:last-child {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+
+/* ==========================================================
+   DISCLAIMER
+   ========================================================== */
+
+.cw-ecocast-map-disclaimer {
+  padding: 1.5rem 1.8rem;
+  background: #F5F7F8;
+  border: 1px solid var(--map-border);
+  border-radius: 10px;
+}
+
+.cw-ecocast-map-disclaimer p {
+  color: #687D8B;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.cw-ecocast-map-disclaimer a {
+  color: var(--map-blue);
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.cw-ecocast-map-faq-item summary:focus-visible,
+.cw-ecocast-download-link:focus-visible {
+  outline: 3px solid var(--map-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 850px) {
+
+  .cw-ecocast-download-list {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .cw-ecocast-map-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-ecocast-map-section,
+  .cw-ecocast-map-faq {
+    margin-bottom: 2.5rem;
+  }
+
+  .cw-ecocast-map-toolbar {
+    padding: 1.3rem;
+  }
+
+  .cw-ecocast-map-control {
+    width: 100%;
+  }
+
+  .cw-ecocast-map-viewer {
+    padding: 0.5rem;
+  }
+
+  .cw-ecocast-map-faq-item summary {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .cw-ecocast-map-faq-answer {
+    padding: 1.2rem;
+  }
+
+  .cw-ecocast-map-model {
+    padding: 0.5rem;
+  }
+
+  .cw-ecocast-map-downloads {
+    padding: 1.4rem;
+  }
+
+  .cw-ecocast-map-disclaimer {
+    padding: 1.2rem;
+  }
+
+}
+

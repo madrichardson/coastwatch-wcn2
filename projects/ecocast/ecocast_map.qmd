@@ -1,0 +1,267 @@
+
+---
+pagetitle: "EcoCast Map"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css:
+      - ../../css/ecocast.css
+      - ../../css/ecocast_map.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+import markdown
+from html import escape
+from IPython.display import display, HTML
+
+# If execute-dir: project is enabled, use:
+# "content/ecocast_map.yml"
+with open("../../content/ecocast_map.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def md(value):
+    return markdown.markdown(
+        str(value or ""),
+        extensions=["tables", "sane_lists"]
+    )
+
+hero = data.get("hero", {})
+map_data = data.get("map", {})
+faq = data.get("faq", {})
+downloads = data.get("downloads", {})
+disclaimer = data.get("disclaimer", {})
+
+# ----------------------------------------------------------
+# MAP DATE OPTIONS
+# ----------------------------------------------------------
+
+map_dates = map_data.get("dates", [])
+initial_map = map_dates[0].get("url", "") if map_dates else ""
+
+map_options = ""
+
+for item in map_dates:
+    map_options += f"""
+    <option value="{safe(item.get('url'))}">
+      {safe(item.get('label'))}
+    </option>
+    """
+
+# ----------------------------------------------------------
+# FAQ ITEMS
+# ----------------------------------------------------------
+
+faq_items = ""
+
+for item in faq.get("questions", []):
+
+    extra_content = ""
+
+    if item.get("image"):
+        extra_content += f"""
+        <div class="cw-ecocast-map-model">
+          <img src="{safe(item.get('image'))}"
+               alt="{safe(item.get('image_alt'))}"
+               loading="lazy">
+        </div>
+        """
+
+    if item.get("links"):
+        extra_content += '<ul class="cw-ecocast-map-links">'
+
+        for link in item.get("links", []):
+            label = safe(link.get("label"))
+            url = link.get("url")
+
+            if url:
+                extra_content += f"""
+                <li>
+                  <a href="{safe(url)}"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                    {label}
+                  </a>
+                </li>
+                """
+            else:
+                extra_content += f"<li>{label}</li>"
+
+        extra_content += "</ul>"
+
+    faq_items += f"""
+    <details class="cw-ecocast-map-faq-item">
+
+      <summary>
+        <span>{safe(item.get('question'))}</span>
+        <span class="cw-ecocast-map-faq-icon"
+              aria-hidden="true">+</span>
+      </summary>
+
+      <div class="cw-ecocast-map-faq-answer">
+        {md(item.get('answer'))}
+        {extra_content}
+      </div>
+
+    </details>
+    """
+
+# ----------------------------------------------------------
+# DOWNLOAD LINKS
+# ----------------------------------------------------------
+
+download_links = ""
+
+for item in downloads.get("links", []):
+    download_links += f"""
+    <a class="cw-ecocast-download-link"
+       href="{safe(item.get('url'))}"
+       target="_blank"
+       rel="noopener noreferrer">
+      <span>{safe(item.get('label'))}</span>
+      <span aria-hidden="true">↗</span>
+    </a>
+    """
+
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
+html = f"""
+<div class="cw-ecocast cw-ecocast-map-page">
+
+  <!-- PROJECT NAVIGATION -->
+  <div class="cw-ecocast-topbar">
+
+    <a class="cw-ecocast-brand" href="ecocast.html">
+      <img src="images/ecocast_logo_003366.png"
+           alt="EcoCast logo">
+    </a>
+
+    <nav class="cw-ecocast-tabs"
+         aria-label="EcoCast navigation">
+
+      <a class="cw-ecocast-tab"
+         href="about_ecocast.html">
+        About EcoCast
+      </a>
+
+      <a class="cw-ecocast-tab is-active"
+         href="ecocast_map.html"
+         aria-current="page">
+        EcoCast Map
+      </a>
+
+      <a class="cw-ecocast-tab"
+         href="ecocast_explorer.html">
+        EcoCast Explorer
+      </a>
+
+    </nav>
+
+  </div>
+
+  <!-- PAGE INTRODUCTION -->
+  <section class="cw-ecocast-map-hero">
+
+    <span class="cw-ecocast-map-eyebrow">
+      {safe(hero.get('eyebrow'))}
+    </span>
+
+    <h1>{safe(hero.get('title'))}</h1>
+
+    <p>{safe(hero.get('subtitle'))}</p>
+
+  </section>
+
+  <!-- MAP VIEWER -->
+  <section class="cw-ecocast-map-section">
+
+    <div class="cw-ecocast-map-toolbar">
+
+      <div class="cw-ecocast-map-toolbar-text">
+        <h2>{safe(map_data.get('title'))}</h2>
+        <p>{safe(map_data.get('description'))}</p>
+      </div>
+
+      <div class="cw-ecocast-map-control">
+        <label for="mapSelect">
+          {safe(map_data.get('selector_label'))}
+        </label>
+
+        <select id="mapSelect"
+                class="cw-ecocast-map-select"
+                onchange="document.getElementById('mapFrame').src=this.value">
+          {map_options}
+        </select>
+      </div>
+
+    </div>
+
+    <div class="cw-ecocast-map-viewer">
+
+      <img id="mapFrame"
+           src="{safe(initial_map)}"
+           alt="{safe(map_data.get('image_alt'))}">
+
+    </div>
+
+  </section>
+
+  <!-- FAQ -->
+  <section class="cw-ecocast-map-faq">
+
+    <div class="cw-ecocast-map-section-heading">
+
+      <span class="cw-ecocast-map-section-label">
+        {safe(faq.get('eyebrow'))}
+      </span>
+
+      <h2>{safe(faq.get('title'))}</h2>
+
+    </div>
+
+    <div class="cw-ecocast-map-faq-list">
+      {faq_items}
+    </div>
+
+  </section>
+
+  <!-- DOWNLOADS -->
+  <section class="cw-ecocast-map-downloads">
+
+    <span class="cw-ecocast-map-section-label">
+      {safe(downloads.get('eyebrow'))}
+    </span>
+
+    <h2>{safe(downloads.get('title'))}</h2>
+
+    <p>{safe(downloads.get('description'))}</p>
+
+    <div class="cw-ecocast-download-list">
+      {download_links}
+    </div>
+
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="cw-ecocast-about-disclaimer
+                  cw-ecocast-map-disclaimer">
+    {md(disclaimer.get('text'))}
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
+
