@@ -1120,3 +1120,194 @@ content:
           - name: description
             label: Description
             type: text
+  # ========================================================
+  # ECOCAST — ABOUT
+  # ========================================================
+
+  - name: ecocast_about
+    label: EcoCast — About
+    type: file
+    path: content/ecocast_about.yml
+    fields:
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: subtitle
+            type: text
+
+  # ========================================================
+  # ECOCAST — PRODUCTS
+  # ========================================================
+
+  - name: ecocast_products
+    label: EcoCast — Products
+    type: file
+    path: content/ecocast_products.yml
+    fields:
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: subtitle
+            type: text
+
+  # ========================================================
+  # WHALEWATCH 2.0 — ABOUT
+  # ========================================================
+
+  - name: whalewatch_about
+    label: WhaleWatch 2.0 — About
+    type: file
+    path: content/whalewatch_about.yml
+    fields:
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: subtitle
+            type: text
+
+  # ========================================================
+  # WHALEWATCH 2.0 — PRODUCTS
+  # ========================================================
+
+  - name: whalewatch_products
+    label: WhaleWatch 2.0 — Products
+    type: file
+    path: content/whalewatch_products.yml
+    fields:
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: subtitle
+            type: text
+
+      - name: maps
+        label: Recent Maps
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: selector_label
+            type: string
+          - name: options
+            label: Map Options
+            type: object
+            list: true
+            fields:
+              - name: label
+                type: string
+              - name: url
+                type: string
+
+      - name: indicator
+        label: Shipping Lane Indicator
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: image
+            type: string
+          - name: image_alt
+            type: string
+
+      - name: faqs
+        label: Frequently Asked Questions
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: items
+            label: Questions
+            type: object
+            list: true
+            fields:
+              - name: question
+                type: string
+              - name: answer
+                type: text
+              - name: image
+                type: string
+              - name: image_alt
+                type: string
+
+      - name: disclaimer
+        label: Disclaimer
+        type: object
+        fields:
+          - name: text
+            type: text
+
+  # ========================================================
+  # WHALEWATCH 2.0 — EXPLORER
+  # ========================================================
+
+  - name: whalewatch_explorer
+    label: WhaleWatch 2.0 — Explorer
+    type: file
+    path: content/whalewatch_explorer.yml
+    fields:
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: subtitle
+            type: text
+
+      - name: instructions
+        label: Information & Instructions
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: introduction
+            type: text
+          - name: steps
+            type: string
+            list: true
+
+      - name: explorer
+        label: Interactive Explorer
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: app_url
+            type: string
+          - name: fallback_text
+            type: string
+          - name: link_label
+            type: string
+
+      - name: disclaimer
+        label: Disclaimer
+        type: object
+        fields:
+          - name: text
+            type: text
