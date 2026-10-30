@@ -1,0 +1,46 @@
+# ==========================================================
+# ECOCAST — HOMEPAGE CONTENT
+# ==========================================================
+
+hero:
+  eyebrow: "COASTWATCH PROJECT"
+  title: "EcoCast"
+  subtitle: "An Eco-Informatic Tool for Sustainable Fisheries"
+  image: "images/blue_shark.png"
+  image_alt: "Blue shark swimming underwater"
+  image_caption: "Mark Conlin – NOAA Fisheries / Mark Conlin"
+
+navigation:
+  logo: "images/ecocast_logo_003366.png"
+  logo_alt: "EcoCast logo"
+  links:
+    - label: "About EcoCast"
+      url: "about_ecocast.qmd"
+    - label: "EcoCast Map"
+      url: "ecocast_map.qmd"
+    - label: "EcoCast Explorer"
+      url: "ecocast_explorer.qmd"
+
+cards:
+  - title: "What is EcoCast?"
+    description: >-
+      EcoCast is a real-time tool to help fishers and managers allocate
+      effort to reduce bycatch while optimizing target harvest.
+    button_label: "Learn More"
+    button_url: "about_ecocast.qmd"
+
+  - title: "Finding a good place to fish"
+    description: >-
+      EcoCast maps combine predicted distributions of target and bycatch
+      species to suggest better and worse fishing zones.
+    button_label: "View the Map"
+    button_url: "ecocast_map.qmd"
+
+  - title: "Scenario analysis"
+    description: >-
+      EcoCast Explorer tool gives users an opportunity to explore how
+      species are responding to changing ocean conditions, and how
+      that can influence the EcoCast Map product.
+    button_label: "Run Analysis"
+    button_url: "ecocast_explorer.qmd"
+

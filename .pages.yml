@@ -977,3 +977,67 @@ content:
                 type: string
               - name: answer
                 type: rich-text
+
+  - name: ecocast
+    label: EcoCast Homepage
+    type: file
+    path: content/ecocast.yml
+    fields:
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: subtitle
+            label: Subtitle
+            type: text
+          - name: image
+            label: Hero Image Path
+            type: string
+          - name: image_alt
+            label: Image Description
+            type: string
+          - name: image_caption
+            label: Image Credit
+            type: string
+
+      - name: navigation
+        label: Project Navigation
+        type: object
+        fields:
+          - name: logo
+            label: Logo Path
+            type: string
+          - name: logo_alt
+            label: Logo Description
+            type: string
+          - name: links
+            label: Navigation Links
+            type: object
+            list: true
+            fields:
+              - name: label
+                type: string
+              - name: url
+                type: string
+
+      - name: cards
+        label: Homepage Cards
+        type: object
+        list: true
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: button_label
+            label: Button Label
+            type: string
+          - name: button_url
+            label: Button URL
+            type: string

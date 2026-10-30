@@ -1,0 +1,155 @@
+
+---
+pagetitle: "EcoCast"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: ../../css/ecocast.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from pathlib import PurePosixPath
+from urllib.parse import urlsplit, urlunsplit
+from IPython.display import display, HTML
+
+with open("content/ecocast.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+hero = data.get("hero", {})
+navigation = data.get("navigation", {})
+cards = data.get("cards", [])
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def page_url(value):
+    """Convert internal .qmd links to rendered .html links."""
+    value = str(value or "")
+    parts = urlsplit(value)
+
+    if parts.path.endswith(".qmd"):
+        parts = parts._replace(
+            path=parts.path[:-4] + ".html"
+        )
+
+    return urlunsplit(parts)
+
+def image_url(value):
+    """Resolve image paths relative to the EcoCast directory."""
+    value = str(value or "")
+
+    if value.startswith(("https://", "http://", "/")):
+        return value
+
+    return str(PurePosixPath(value))
+
+# ----------------------------------------------------------
+# NAVIGATION
+# ----------------------------------------------------------
+
+nav_links = ""
+
+for link in navigation.get("links", []):
+    nav_links += f"""
+    <a class="cw-ecocast-tab"
+       href="{safe(page_url(link.get('url')))}">
+      {safe(link.get('label'))}
+    </a>
+    """
+
+# ----------------------------------------------------------
+# PROJECT CARDS
+# ----------------------------------------------------------
+
+card_html = ""
+
+for card in cards:
+    card_html += f"""
+    <article class="cw-ecocast-card">
+
+      <h3>{safe(card.get('title'))}</h3>
+
+      <p>{safe(card.get('description'))}</p>
+
+      <a class="cw-ecocast-card-btn"
+         href="{safe(page_url(card.get('button_url')))}">
+        {safe(card.get('button_label'))}
+        <span aria-hidden="true">→</span>
+      </a>
+
+    </article>
+    """
+
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
+html = f"""
+<div class="cw-ecocast">
+
+  <!-- PROJECT NAVIGATION -->
+  <div class="cw-ecocast-topbar">
+
+    <a class="cw-ecocast-brand" href="ecocast.html">
+      <img
+        src="{safe(image_url(navigation.get('logo')))}"
+        alt="{safe(navigation.get('logo_alt'))}"
+      >
+    </a>
+
+    <nav class="cw-ecocast-tabs"
+         aria-label="EcoCast navigation">
+      {nav_links}
+    </nav>
+
+  </div>
+
+  <!-- HERO -->
+  <section class="cw-ecocast-hero">
+
+    <img
+      src="{safe(image_url(hero.get('image')))}"
+      alt="{safe(hero.get('image_alt'))}"
+      class="cw-ecocast-hero-image"
+    >
+
+    <div class="cw-ecocast-hero-overlay">
+
+      <span class="cw-ecocast-eyebrow">
+        {safe(hero.get('eyebrow'))}
+      </span>
+
+      <h1>{safe(hero.get('title'))}</h1>
+
+      <p>{safe(hero.get('subtitle'))}</p>
+
+    </div>
+
+    <span class="cw-ecocast-image-caption">
+      {safe(hero.get('image_caption'))}
+    </span>
+
+  </section>
+
+  <!-- PROJECT RESOURCES -->
+  <section class="cw-ecocast-section">
+
+    <div class="cw-ecocast-card-grid">
+      {card_html}
+    </div>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```

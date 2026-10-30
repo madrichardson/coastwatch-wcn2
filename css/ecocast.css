@@ -1,0 +1,315 @@
+
+/* ==========================================================
+   COASTWATCH — ECOCAST HOMEPAGE
+   ========================================================== */
+
+.cw-ecocast {
+  --ecocast-navy: #123B5D;
+  --ecocast-blue: #176A91;
+  --ecocast-teal: #168C96;
+  --ecocast-light: #EAF3F7;
+  --ecocast-border: #DCE5EB;
+
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #263746;
+  box-sizing: border-box;
+}
+
+.cw-ecocast *,
+.cw-ecocast *::before,
+.cw-ecocast *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   PROJECT NAVIGATION
+   ========================================================== */
+
+.cw-ecocast-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+
+  background: #FFFFFF;
+  border: 1px solid var(--ecocast-border);
+  border-radius: 12px;
+}
+
+.cw-ecocast-brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.cw-ecocast-brand img {
+  display: block;
+  width: auto;
+  max-width: 190px;
+  max-height: 60px;
+  object-fit: contain;
+}
+
+.cw-ecocast-tabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cw-ecocast-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.7rem 1rem;
+  border-radius: 7px;
+
+  color: var(--ecocast-navy) !important;
+  font-size: 0.93rem;
+  font-weight: 700;
+  text-decoration: none !important;
+
+  transition: background 0.2s, color 0.2s;
+}
+
+.cw-ecocast-tab:hover {
+  background: var(--ecocast-light);
+  color: var(--ecocast-blue) !important;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-ecocast-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 440px;
+  border-radius: 18px;
+  background: var(--ecocast-navy);
+  margin-bottom: 3rem;
+}
+
+.cw-ecocast-hero-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+.cw-ecocast-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(9, 37, 61, 0.90) 0%,
+    rgba(9, 37, 61, 0.66) 42%,
+    rgba(9, 37, 61, 0.12) 100%
+  );
+
+  pointer-events: none;
+}
+
+.cw-ecocast-hero-overlay {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  min-height: 440px;
+  max-width: 780px;
+  padding: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.cw-ecocast-eyebrow {
+  display: block;
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8rem;
+}
+
+.cw-ecocast-hero h1 {
+  color: #FFFFFF;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 750;
+  line-height: 1.12;
+  margin: 0 0 1rem;
+}
+
+.cw-ecocast-hero p {
+  color: #E2EEF4;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.cw-ecocast-image-caption {
+  position: absolute;
+  z-index: 2;
+  right: 1.2rem;
+  bottom: 1rem;
+
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================
+   PROJECT CARDS
+   ========================================================== */
+
+.cw-ecocast-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.cw-ecocast-card {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  padding: 2rem;
+
+  background: #FFFFFF;
+  border: 1px solid var(--ecocast-border);
+  border-top: 4px solid var(--ecocast-teal);
+  border-radius: 13px;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cw-ecocast-card:nth-child(even) {
+  border-top-color: var(--ecocast-blue);
+}
+
+.cw-ecocast-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(18, 59, 93, 0.10);
+}
+
+.cw-ecocast-card h3 {
+  color: var(--ecocast-navy);
+  font-size: 1.3rem;
+  font-weight: 750;
+  line-height: 1.35;
+  margin: 0 0 1rem;
+}
+
+.cw-ecocast-card p {
+  color: #526878;
+  font-size: 0.96rem;
+  line-height: 1.8;
+  margin: 0 0 1.8rem;
+}
+
+.cw-ecocast-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  align-self: flex-start;
+
+  margin-top: auto;
+  padding: 0.75rem 1.15rem;
+
+  background: var(--ecocast-blue);
+  border-radius: 7px;
+
+  color: #FFFFFF !important;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none !important;
+
+  transition: background 0.2s;
+}
+
+.cw-ecocast-card-btn:hover {
+  background: var(--ecocast-navy);
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.cw-ecocast-tab:focus-visible,
+.cw-ecocast-brand:focus-visible,
+.cw-ecocast-card-btn:focus-visible {
+  outline: 3px solid var(--ecocast-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 950px) {
+
+  .cw-ecocast-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .cw-ecocast {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cw-ecocast-topbar {
+    padding: 1rem;
+  }
+
+  .cw-ecocast-tabs {
+    width: 100%;
+  }
+
+  .cw-ecocast-tab {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .cw-ecocast-hero,
+  .cw-ecocast-hero-overlay {
+    min-height: 360px;
+  }
+
+  .cw-ecocast-hero-overlay {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-ecocast-hero h1 {
+    font-size: 2.4rem;
+  }
+
+  .cw-ecocast-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-ecocast-card {
+    padding: 1.5rem;
+  }
+
+}
+
