@@ -20,7 +20,7 @@ from pathlib import PurePosixPath
 from urllib.parse import urlsplit, urlunsplit
 from IPython.display import display, HTML
 
-with open("content/ecocast.yml", encoding="utf-8") as f:
+with open("../../content/ecocast.yml", encoding="utf-8") as f:
     data = yaml.safe_load(f) or {}
 
 hero = data.get("hero", {})
