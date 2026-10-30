@@ -1042,38 +1042,81 @@ content:
             label: Button URL
             type: string
 
-- name: whalewatch
-  label: WhaleWatch 2.0
-  type: file
-  path: content/whalewatch.yml
-  fields:
-    - name: hero
-      type: object
-      fields:
-        - name: eyebrow
-          type: string
-        - name: title
-          type: string
-        - name: subtitle
-          type: string
-        - name: description
-          type: text
-        - name: image
-          type: string
-        - name: image_alt
-          type: string
-        - name: image_caption
-          type: string
+  - name: whalewatch
+    label: WhaleWatch 2.0
+    type: file
+    path: content/whalewatch.yml
+    fields:
+      - name: hero
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: subtitle
+            type: string
+          - name: description
+            type: text
+          - name: image
+            type: string
+          - name: image_alt
+            type: string
+          - name: image_caption
+            type: string
 
-    - name: cards
-      type: object
-      list: true
-      fields:
-        - name: title
-          type: string
-        - name: description
-          type: text
-        - name: button_label
-          type: string
-        - name: button_url
-          type: string
+      - name: cards
+        type: object
+        list: true
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: button_label
+            type: string
+          - name: button_url
+            type: string
+  - name: afsc
+    label: AFSC Stock Assessment Tool
+    type: file
+    path: content/afsc.yml
+    fields:
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: subtitle
+            label: Subtitle
+            type: text
+
+      - name: map
+        label: Management Regions Map
+        type: object
+        fields:
+          - name: title
+            label: Map Title
+            type: string
+          - name: image
+            label: Map Image
+            type: string
+          - name: image_alt
+            label: Image Description
+            type: string
+
+      - name: charts
+        label: Regional Charts
+        type: object
+        fields:
+          - name: title
+            label: Section Title
+            type: string
+          - name: description
+            label: Description
+            type: text
