@@ -1,0 +1,339 @@
+
+---
+pagetitle: "About WhaleWatch 2.0"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css:
+      - ../../css/whalewatch.css
+      - ../../css/whalewatch_about.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+import markdown
+from html import escape
+from IPython.display import display, HTML
+
+# ----------------------------------------------------------
+# LOAD CMS CONTENT
+# ----------------------------------------------------------
+
+with open("../../content/whalewatch_about.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def md(value):
+    return markdown.markdown(
+        str(value or ""),
+        extensions=["tables", "sane_lists"]
+    )
+
+def render_list(items):
+    return "".join(
+        f"<li>{safe(item)}</li>"
+        for item in items
+    )
+
+hero = data.get("hero", {})
+mission = data.get("mission", {})
+species = data.get("species", {})
+team = data.get("team", {})
+funding = data.get("funding", {})
+management = data.get("management", {})
+additional = data.get("additional", {})
+disclaimer = data.get("disclaimer", {})
+
+traditional = management.get("traditional", {})
+dynamic = management.get("dynamic", {})
+importance = management.get("importance", {})
+
+# ----------------------------------------------------------
+# TEAM AND FUNDING
+# ----------------------------------------------------------
+
+team_list = render_list(team.get("organizations", []))
+
+funding_list = ""
+
+for item in funding.get("organizations", []):
+    funding_list += f"""
+    <li>
+      <a href="{safe(item.get('url'))}"
+         target="_blank"
+         rel="noopener noreferrer">
+        {safe(item.get('name'))}
+      </a>
+    </li>
+    """
+
+# ----------------------------------------------------------
+# MANAGEMENT COMPARISON
+# ----------------------------------------------------------
+
+traditional_list = render_list(
+    traditional.get("points", [])
+)
+
+dynamic_list = ""
+
+for point in dynamic.get("points", []):
+    dynamic_list += f"<li>{safe(point)}"
+
+    if point == "Incorporates diverse data sources:":
+        dynamic_list += f"""
+        <ul class="cw-whale-about-nested-list">
+          {render_list(dynamic.get('data_sources', []))}
+        </ul>
+        """
+
+    dynamic_list += "</li>"
+
+highlights_list = render_list(
+    importance.get("highlights", [])
+)
+
+# ----------------------------------------------------------
+# ADDITIONAL INFORMATION
+# ----------------------------------------------------------
+
+additional_sections = ""
+
+for section in additional.get("sections", []):
+
+    items_html = ""
+
+    for item in section.get("items", []):
+        items_html += f"""
+        <li>{md(item.get('text'))}</li>
+        """
+
+    additional_sections += f"""
+    <details class="cw-whale-about-accordion">
+
+      <summary>
+        <span>{safe(section.get('title'))}</span>
+        <span class="cw-whale-about-accordion-icon"
+              aria-hidden="true">+</span>
+      </summary>
+
+      <div class="cw-whale-about-accordion-body">
+        <ul>{items_html}</ul>
+      </div>
+
+    </details>
+    """
+
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
+html = f"""
+<div class="cw-whale cw-whale-about">
+
+  <!-- PROJECT NAVIGATION -->
+  <div class="cw-whale-topbar">
+
+    <nav class="cw-whale-tabs"
+         aria-label="WhaleWatch navigation">
+
+      <a class="cw-whale-tab"
+         href="whalewatch.html">
+        WhaleWatch 2.0
+      </a>
+
+      <a class="cw-whale-tab is-active"
+         href="about-whalewatch.html"
+         aria-current="page">
+        About WhaleWatch 2.0
+      </a>
+
+      <a class="cw-whale-tab"
+         href="whalewatch-products.html">
+        WhaleWatch 2.0 Products
+      </a>
+
+      <a class="cw-whale-tab"
+         href="whalewatch-explorer.html">
+        WhaleWatch 2.0 Explorer
+      </a>
+
+    </nav>
+
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="cw-whale-about-hero">
+
+    <span class="cw-whale-about-eyebrow">
+      {safe(hero.get('eyebrow'))}
+    </span>
+
+    <h1>{safe(hero.get('title'))}</h1>
+
+    <p>{safe(hero.get('subtitle'))}</p>
+
+  </section>
+
+  <!-- MISSION AND VISION — FULL WIDTH -->
+  <section class="cw-whale-about-intro-grid">
+
+    <article class="cw-whale-about-panel cw-whale-about-mission">
+
+      <h2>{safe(mission.get('title'))}</h2>
+
+      <div class="cw-whale-about-prose">
+        {md(mission.get('description'))}
+      </div>
+
+    </article>
+
+  </section>
+
+  <!-- TARGETED SPECIES — FULL WIDTH HORIZONTAL CARD -->
+  <section class="cw-whale-about-intro-grid">
+
+    <article class="cw-whale-about-panel cw-whale-about-species">
+
+      <h2>{safe(species.get('title'))}</h2>
+
+      <figure>
+
+        <img
+          src="{safe(species.get('image'))}"
+          alt="{safe(species.get('image_alt'))}"
+          loading="lazy"
+        >
+
+        <figcaption>
+          {md(species.get('caption'))}
+        </figcaption>
+
+      </figure>
+
+    </article>
+
+  </section>
+
+  <!-- TEAM AND FUNDING -->
+  <section class="cw-whale-about-info-grid">
+
+    <article class="cw-whale-about-panel cw-whale-about-team">
+
+      <h2>{safe(team.get('title'))}</h2>
+
+      <p>{safe(team.get('description'))}</p>
+
+      <ul>{team_list}</ul>
+
+      <p>{safe(team.get('closing'))}</p>
+
+    </article>
+
+    <article class="cw-whale-about-panel cw-whale-about-funding">
+
+      <h2>{safe(funding.get('title'))}</h2>
+
+      <p>{safe(funding.get('description'))}</p>
+
+      <ul>{funding_list}</ul>
+
+    </article>
+
+  </section>
+
+  <!-- DYNAMIC OCEAN MANAGEMENT -->
+  <section class="cw-whale-about-management">
+
+    <div class="cw-whale-about-section-heading">
+
+      <span class="cw-whale-about-section-label">
+        OCEAN MANAGEMENT
+      </span>
+
+      <h2>{safe(management.get('title'))}</h2>
+
+    </div>
+
+    <div class="cw-whale-about-management-intro">
+      {md(management.get('introduction'))}
+    </div>
+
+    <h3 class="cw-whale-about-comparison-title">
+      {safe(management.get('comparison_title'))}
+    </h3>
+
+    <div class="cw-whale-about-comparison-grid">
+
+      <article class="cw-whale-about-comparison-card cw-whale-about-traditional">
+
+        <h4>{safe(traditional.get('title'))}</h4>
+
+        <ul>{traditional_list}</ul>
+
+      </article>
+
+      <article class="cw-whale-about-comparison-card cw-whale-about-dynamic">
+
+        <h4>{safe(dynamic.get('title'))}</h4>
+
+        <ul>{dynamic_list}</ul>
+
+      </article>
+
+    </div>
+
+    <!-- WHY IT MATTERS -->
+    <div class="cw-whale-about-importance">
+
+      <h3>{safe(importance.get('title'))}</h3>
+
+      <div>
+        {md(importance.get('description'))}
+      </div>
+
+      <h4>{safe(importance.get('highlights_title'))}</h4>
+
+      <ul>{highlights_list}</ul>
+
+    </div>
+
+  </section>
+
+  <!-- ADDITIONAL INFORMATION -->
+  <section class="cw-whale-about-additional">
+
+    <div class="cw-whale-about-section-heading">
+
+      <span class="cw-whale-about-section-label">
+        RESOURCES
+      </span>
+
+      <h2>{safe(additional.get('title'))}</h2>
+
+    </div>
+
+    <div class="cw-whale-about-accordion-list">
+      {additional_sections}
+    </div>
+
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="cw-whale-about-disclaimer">
+    {md(disclaimer.get('text'))}
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```

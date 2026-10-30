@@ -1,0 +1,649 @@
+
+/* ==========================================================
+   WHALEWATCH 2.0 PRODUCTS
+   ========================================================== */
+
+.cw-whale-products {
+  --products-navy: #123B5D;
+  --products-blue: #176A91;
+  --products-teal: #168C96;
+  --products-light: #EAF3F7;
+  --products-border: #DCE5EB;
+  --products-text: #526878;
+}
+
+.cw-whale-products *,
+.cw-whale-products *::before,
+.cw-whale-products *::after {
+  box-sizing: border-box;
+}
+
+.cw-whale-products h1,
+.cw-whale-products h2,
+.cw-whale-products h3 {
+  border: none !important;
+  padding-bottom: 0;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-whale-products-hero {
+  position: relative;
+  overflow: hidden;
+
+  padding: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 3rem;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+
+  border-radius: 16px;
+}
+
+.cw-whale-products-hero::after {
+  content: "";
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+  right: -100px;
+  top: -180px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.cw-whale-products-eyebrow {
+  display: block;
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 0.8rem;
+
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+}
+
+.cw-whale-products-hero h1 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0 0 1rem;
+
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+}
+
+.cw-whale-products-hero p {
+  position: relative;
+  z-index: 1;
+
+  max-width: 900px;
+  margin: 0;
+
+  color: #DCEAF2;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+/* ==========================================================
+   SECTION HEADINGS
+   ========================================================== */
+
+.cw-whale-products-section {
+  margin-bottom: 3.5rem;
+  min-width: 0;
+}
+
+.cw-whale-products-heading {
+  margin-bottom: 1.5rem;
+}
+
+.cw-whale-products-section-label {
+  display: block;
+  margin-bottom: 0.6rem;
+
+  color: var(--products-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.cw-whale-products-heading h2 {
+  margin: 0 0 0.8rem;
+
+  color: var(--products-navy);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 750;
+}
+
+.cw-whale-products-heading p {
+  max-width: 1000px;
+  margin: 0;
+
+  color: var(--products-text);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+
+/* ==========================================================
+   RECENT MAP VIEWER
+   ========================================================== */
+
+.cw-whale-products-map-card {
+  overflow: hidden;
+
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+
+  background: #FFFFFF;
+  border: 1px solid var(--products-border);
+  border-top: 4px solid var(--products-teal);
+  border-radius: 14px;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+}
+
+.cw-whale-products-map-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  padding: 1rem 1.5rem;
+
+  background: var(--products-light);
+  border-bottom: 1px solid var(--products-border);
+}
+
+.cw-whale-products-map-toolbar label {
+  margin: 0;
+
+  color: var(--products-navy);
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.cw-whale-products-select {
+  min-width: 190px;
+  max-width: 100%;
+
+  padding: 0.65rem 2.5rem 0.65rem 1rem;
+
+  background-color: #FFFFFF;
+  border: 1px solid #BDD4E0;
+  border-radius: 8px;
+
+  color: var(--products-navy);
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cw-whale-products-select:focus {
+  outline: 2px solid var(--products-teal);
+  outline-offset: 2px;
+}
+
+.cw-whale-products-map-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 1rem;
+
+  background: #FFFFFF;
+}
+
+.cw-whale-products-map-container img {
+  display: block;
+
+  width: 100%;
+  max-width: 750px;
+  height: auto;
+
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+
+/* ==========================================================
+   SHIPPING LANE INDICATOR
+   ========================================================== */
+
+.cw-whale-products-indicator-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem;
+
+  background: #F8FBFC;
+  border: 1px solid var(--products-border);
+  border-top: 4px solid var(--products-blue);
+  border-radius: 14px;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+}
+
+.cw-whale-products-indicator-card img {
+  display: block;
+
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 600px;
+
+  object-fit: contain;
+}
+
+/* ==========================================================
+   FAQ ACCORDIONS
+   ========================================================== */
+
+.cw-whale-products-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.cw-whale-products-accordion {
+  overflow: hidden;
+
+  background: #FFFFFF;
+  border: 1px solid var(--products-border);
+  border-radius: 11px;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.cw-whale-products-accordion[open] {
+  border-color: #B9D7E4;
+  box-shadow: 0 6px 20px rgba(18, 59, 93, 0.06);
+}
+
+.cw-whale-products-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1.3rem 1.5rem;
+
+  color: var(--products-navy);
+  font-size: 1.05rem;
+  font-weight: 750;
+
+  cursor: pointer;
+  list-style: none;
+}
+
+.cw-whale-products-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.cw-whale-products-accordion summary::marker {
+  content: "";
+}
+
+.cw-whale-products-accordion summary:hover {
+  background: #F5FAFC;
+}
+
+.cw-whale-products-accordion[open] summary {
+  background: var(--products-light);
+}
+
+.cw-whale-products-accordion-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
+  background: #DDEEF4;
+  border-radius: 50%;
+
+  color: var(--products-blue);
+  font-size: 1.4rem;
+  font-weight: 400;
+
+  transition: transform 0.2s;
+}
+
+.cw-whale-products-accordion[open]
+.cw-whale-products-accordion-icon {
+  transform: rotate(45deg);
+}
+
+.cw-whale-products-accordion-body {
+  padding: 1.5rem 2rem;
+
+  color: var(--products-text);
+  font-size: 0.97rem;
+  line-height: 1.85;
+}
+
+.cw-whale-products-accordion-body p {
+  margin: 0 0 1rem;
+
+  color: var(--products-text);
+  line-height: 1.85;
+}
+
+.cw-whale-products-accordion-body p:last-child {
+  margin-bottom: 0;
+}
+
+.cw-whale-products-accordion-body a {
+  color: var(--products-blue);
+  font-weight: 650;
+}
+
+.cw-whale-products-faq-figure {
+  max-width: 850px;
+  margin: 1.5rem auto 0;
+}
+
+.cw-whale-products-faq-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.cw-whale-products-faq-figure figcaption {
+  margin-top: 0.6rem;
+
+  color: #687D8B;
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+}
+
+/* ==========================================================
+   DISCLAIMER
+   ========================================================== */
+
+.cw-whale-products-disclaimer {
+  padding: 1.5rem 1.8rem;
+
+  background: #F5F7F8;
+  border: 1px solid var(--products-border);
+  border-radius: 10px;
+}
+
+.cw-whale-products-disclaimer p {
+  margin: 0;
+
+  color: #687D8B;
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+.cw-whale-products-disclaimer a {
+  color: var(--products-blue);
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.cw-whale-products-accordion summary:focus-visible,
+.cw-whale-products a:focus-visible {
+  outline: 3px solid var(--products-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+   ========================================================== */
+
+@media (max-width: 950px) {
+
+  .cw-whale-products-map-container {
+    padding: 1rem;
+  }
+
+  .cw-whale-products-indicator-card {
+    padding: 1.5rem;
+  }
+
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   ========================================================== */
+
+@media (max-width: 650px) {
+
+  .cw-whale-products-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-whale-products-map-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.2rem;
+  }
+
+  .cw-whale-products-select {
+    width: 100%;
+  }
+
+  .cw-whale-products-map-container {
+    padding: 0.6rem;
+  }
+
+  .cw-whale-products-indicator-card {
+    padding: 1rem;
+  }
+
+  .cw-whale-products-accordion summary {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .cw-whale-products-accordion-body {
+    padding: 1.2rem;
+  }
+
+  .cw-whale-products-disclaimer {
+    padding: 1.2rem;
+  }
+
+}
+
+
+/* ==========================================================
+   MAP AND SHIPPING LANE INDICATOR — SIDE BY SIDE
+   ========================================================== */
+
+.cw-whale-products-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.cw-whale-products-dashboard-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Keep both cards aligned */
+
+.cw-whale-products-dashboard-panel .cw-whale-products-heading {
+  min-height: 145px;
+  margin-bottom: 1.5rem;
+}
+
+.cw-whale-products-dashboard-panel .cw-whale-products-heading h2 {
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.3;
+}
+
+/* Map card */
+
+.cw-whale-products-dashboard-panel .cw-whale-products-map-card {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.cw-whale-products-dashboard-panel .cw-whale-products-map-toolbar {
+  min-height: 85px;
+  padding: 1rem 1.2rem;
+}
+
+.cw-whale-products-dashboard-panel .cw-whale-products-map-container {
+  padding: 1rem;
+}
+
+.cw-whale-products-dashboard-panel .cw-whale-products-map-container img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Shipping lane indicator card */
+
+.cw-whale-products-dashboard-panel .cw-whale-products-indicator-card {
+  flex: 1;
+  min-width: 0;
+  padding: 1.5rem;
+}
+
+.cw-whale-products-dashboard-panel .cw-whale-products-indicator-card img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 1050px) {
+
+  .cw-whale-products-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-whale-products-dashboard-panel .cw-whale-products-heading {
+    min-height: 0;
+  }
+
+  .cw-whale-products-dashboard-panel .cw-whale-products-map-card,
+  .cw-whale-products-dashboard-panel .cw-whale-products-indicator-card {
+    max-width: 850px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .cw-whale-products-dashboard-grid {
+    gap: 2.5rem;
+  }
+
+  .cw-whale-products-dashboard-panel .cw-whale-products-map-toolbar {
+    min-height: 0;
+  }
+
+  .cw-whale-products-dashboard-panel .cw-whale-products-indicator-card {
+    padding: 1rem;
+  }
+
+}
+
+
+/* ==========================================================
+   RIGHT COLUMN — INDICATOR AND FAQS
+   ========================================================== */
+
+.cw-whale-products-right-column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2.5rem;
+  min-width: 0;
+}
+
+.cw-whale-products-indicator-section,
+.cw-whale-products-right-column .cw-whale-products-faq-section {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+/* Allow the indicator card to fit its image naturally */
+
+.cw-whale-products-right-column .cw-whale-products-indicator-card {
+  flex: none;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+/* Keep the FAQ heading close to the indicator */
+
+.cw-whale-products-right-column .cw-whale-products-faq-section
+.cw-whale-products-heading {
+  min-height: 0;
+  margin-bottom: 1.2rem;
+}
+
+/* FAQ accordions fill the right column */
+
+.cw-whale-products-right-column .cw-whale-products-accordion-list {
+  width: 100%;
+}
+
+/* Prevent the right column from stretching vertically */
+
+.cw-whale-products-dashboard-grid {
+  align-items: start;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 1050px) {
+
+  .cw-whale-products-right-column {
+    gap: 2rem;
+  }
+
+}

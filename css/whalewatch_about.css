@@ -1,0 +1,640 @@
+
+/* ==========================================================
+   ABOUT WHALEWATCH 2.0
+   ========================================================== */
+
+.cw-whale-about {
+  --about-navy: #123B5D;
+  --about-blue: #176A91;
+  --about-teal: #168C96;
+  --about-light: #EAF3F7;
+  --about-border: #DCE5EB;
+  --about-text: #526878;
+}
+
+.cw-whale-about section,
+.cw-whale-about article,
+.cw-whale-about aside {
+  min-width: 0;
+}
+
+.cw-whale-about h1,
+.cw-whale-about h2,
+.cw-whale-about h3,
+.cw-whale-about h4 {
+  border: none !important;
+  padding-bottom: 0;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-whale-about-hero {
+  position: relative;
+  overflow: hidden;
+
+  padding: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 2.5rem;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+
+  border-radius: 16px;
+}
+
+.cw-whale-about-hero::after {
+  content: "";
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+  right: -100px;
+  top: -180px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.cw-whale-about-eyebrow {
+  display: block;
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 0.8rem;
+
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+}
+
+.cw-whale-about-hero h1 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0 0 1rem;
+
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+}
+
+.cw-whale-about-hero p {
+  position: relative;
+  z-index: 1;
+
+  max-width: 900px;
+  margin: 0;
+
+  color: #DCEAF2;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+/* ==========================================================
+   SHARED PANELS
+   ========================================================== */
+
+.cw-whale-about-panel {
+  padding: 2rem;
+
+  background: #FFFFFF;
+  border: 1px solid var(--about-border);
+  border-radius: 14px;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+}
+
+.cw-whale-about-panel h2 {
+  margin: 0 0 1.4rem;
+
+  color: var(--about-navy);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 750;
+}
+
+.cw-whale-about-panel p,
+.cw-whale-about-panel li {
+  color: var(--about-text);
+  font-size: 0.97rem;
+  line-height: 1.85;
+}
+
+.cw-whale-about-panel a,
+.cw-whale-about-management a,
+.cw-whale-about-additional a {
+  color: var(--about-blue);
+  font-weight: 650;
+}
+
+.cw-whale-about-panel ul {
+  padding-left: 1.4rem;
+  margin: 1rem 0;
+}
+
+.cw-whale-about-panel li {
+  margin-bottom: 0.4rem;
+}
+
+/* ==========================================================
+   MISSION AND TARGETED SPECIES
+   ========================================================== */
+
+.cw-whale-about-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Mission and Vision — full width */
+
+.cw-whale-about-mission {
+  width: 100%;
+  border-top: 4px solid var(--about-teal);
+}
+
+.cw-whale-about-prose p {
+  margin: 0 0 1.3rem;
+}
+
+.cw-whale-about-prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* Targeted Species — horizontal card */
+
+.cw-whale-about-species {
+  width: 100%;
+  background: var(--about-light);
+  border-top: 4px solid var(--about-blue);
+}
+
+.cw-whale-about-species h2 {
+  margin-bottom: 1.5rem;
+}
+
+.cw-whale-about-species figure {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2.5rem;
+  margin: 0;
+}
+
+.cw-whale-about-species img {
+  display: block;
+  width: 45%;
+  max-width: 500px;
+  height: auto;
+  max-height: 300px;
+
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.cw-whale-about-species figcaption {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+
+  color: #526878;
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.cw-whale-about-species figcaption p {
+  margin: 0;
+  font-size: inherit;
+}
+
+/* ==========================================================
+   TEAM AND FUNDING
+   ========================================================== */
+
+.cw-whale-about-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+
+  margin-bottom: 3.5rem;
+}
+
+.cw-whale-about-team {
+  border-top: 4px solid var(--about-teal);
+}
+
+.cw-whale-about-funding {
+  background: #F8FBFC;
+  border-top: 4px solid var(--about-blue);
+}
+
+/* ==========================================================
+   SECTION HEADINGS
+   ========================================================== */
+
+.cw-whale-about-section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.cw-whale-about-section-label {
+  display: block;
+  margin-bottom: 0.6rem;
+
+  color: var(--about-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.cw-whale-about-section-heading h2 {
+  margin: 0;
+
+  color: var(--about-navy);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 750;
+}
+
+/* ==========================================================
+   DYNAMIC OCEAN MANAGEMENT
+   ========================================================== */
+
+.cw-whale-about-management {
+  margin-bottom: 3.5rem;
+}
+
+.cw-whale-about-management-intro {
+  padding: 1.6rem 2rem;
+  margin-bottom: 2.5rem;
+
+  background: var(--about-light);
+  border-left: 5px solid var(--about-teal);
+  border-radius: 10px;
+}
+
+.cw-whale-about-management-intro p {
+  margin: 0;
+
+  color: var(--about-text);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.cw-whale-about-comparison-title {
+  margin: 0 0 1.5rem;
+
+  color: var(--about-navy);
+  font-size: 1.4rem;
+  font-weight: 750;
+}
+
+/* Comparison cards */
+
+.cw-whale-about-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+
+  margin-bottom: 2.5rem;
+}
+
+.cw-whale-about-comparison-card {
+  padding: 2rem;
+
+  background: #FFFFFF;
+  border: 1px solid var(--about-border);
+  border-radius: 14px;
+}
+
+.cw-whale-about-traditional {
+  border-top: 4px solid #8399A8;
+}
+
+.cw-whale-about-dynamic {
+  background: #F1F9FA;
+  border-top: 4px solid var(--about-teal);
+}
+
+.cw-whale-about-comparison-card h4 {
+  margin: 0 0 1.3rem;
+
+  color: var(--about-navy);
+  font-size: 1.2rem;
+  font-weight: 750;
+}
+
+.cw-whale-about-comparison-card ul {
+  padding-left: 1.4rem;
+  margin: 0;
+}
+
+.cw-whale-about-comparison-card li {
+  margin-bottom: 0.8rem;
+
+  color: var(--about-text);
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+.cw-whale-about-comparison-card li:last-child {
+  margin-bottom: 0;
+}
+
+.cw-whale-about-comparison-card li::marker {
+  color: var(--about-teal);
+}
+
+.cw-whale-about-nested-list {
+  margin: 0.7rem 0 0.5rem !important;
+  padding-left: 1.4rem !important;
+}
+
+/* ==========================================================
+   WHY IT MATTERS
+   ========================================================== */
+
+.cw-whale-about-importance {
+  padding: 2rem 2.3rem;
+
+  background: linear-gradient(
+    110deg,
+    #EAF3F7 0%,
+    #F5FAFC 100%
+  );
+
+  border: 1px solid #D1E3EC;
+  border-left: 5px solid var(--about-blue);
+  border-radius: 12px;
+}
+
+.cw-whale-about-importance h3 {
+  margin: 0 0 1rem;
+
+  color: var(--about-navy);
+  font-size: 1.5rem;
+  font-weight: 750;
+}
+
+.cw-whale-about-importance p {
+  color: var(--about-text);
+  line-height: 1.85;
+}
+
+.cw-whale-about-importance h4 {
+  margin: 1.5rem 0 0.8rem;
+
+  color: var(--about-blue);
+  font-size: 1.05rem;
+  font-weight: 750;
+}
+
+.cw-whale-about-importance ul {
+  padding-left: 1.4rem;
+  margin: 0;
+}
+
+.cw-whale-about-importance li {
+  margin-bottom: 0.5rem;
+
+  color: var(--about-text);
+  line-height: 1.75;
+}
+
+/* ==========================================================
+   ADDITIONAL INFORMATION
+   ========================================================== */
+
+.cw-whale-about-additional {
+  margin-bottom: 3rem;
+}
+
+.cw-whale-about-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.cw-whale-about-accordion {
+  overflow: hidden;
+
+  background: #FFFFFF;
+  border: 1px solid var(--about-border);
+  border-radius: 11px;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.cw-whale-about-accordion[open] {
+  border-color: #B9D7E4;
+  box-shadow: 0 6px 20px rgba(18, 59, 93, 0.06);
+}
+
+.cw-whale-about-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1.3rem 1.5rem;
+
+  color: var(--about-navy);
+  font-size: 1.05rem;
+  font-weight: 750;
+
+  cursor: pointer;
+  list-style: none;
+}
+
+.cw-whale-about-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.cw-whale-about-accordion summary::marker {
+  content: "";
+}
+
+.cw-whale-about-accordion summary:hover {
+  background: #F5FAFC;
+}
+
+.cw-whale-about-accordion[open] summary {
+  background: var(--about-light);
+}
+
+.cw-whale-about-accordion-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
+  background: #DDEEF4;
+  border-radius: 50%;
+
+  color: var(--about-blue);
+  font-size: 1.4rem;
+  font-weight: 400;
+
+  transition: transform 0.2s;
+}
+
+.cw-whale-about-accordion[open]
+.cw-whale-about-accordion-icon {
+  transform: rotate(45deg);
+}
+
+.cw-whale-about-accordion-body {
+  padding: 1.5rem 2rem;
+
+  color: var(--about-text);
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+
+.cw-whale-about-accordion-body ul {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.cw-whale-about-accordion-body li {
+  margin-bottom: 0.9rem;
+}
+
+.cw-whale-about-accordion-body li:last-child {
+  margin-bottom: 0;
+}
+
+.cw-whale-about-accordion-body li p {
+  display: inline;
+  margin: 0;
+}
+
+/* ==========================================================
+   DISCLAIMER
+   ========================================================== */
+
+.cw-whale-about-disclaimer {
+  padding: 1.5rem 1.8rem;
+
+  background: #F5F7F8;
+  border: 1px solid var(--about-border);
+  border-radius: 10px;
+}
+
+.cw-whale-about-disclaimer p {
+  margin: 0;
+
+  color: #687D8B;
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+.cw-whale-about-disclaimer a {
+  color: var(--about-blue);
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.cw-whale-about-accordion summary:focus-visible,
+.cw-whale-about a:focus-visible {
+  outline: 3px solid var(--about-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+   ========================================================== */
+
+@media (max-width: 950px) {
+
+  .cw-whale-about-species figure {
+    gap: 1.5rem;
+  }
+
+  .cw-whale-about-species img {
+    width: 45%;
+  }
+
+  .cw-whale-about-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-whale-about-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   ========================================================== */
+
+@media (max-width: 650px) {
+
+  .cw-whale-about-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-whale-about-panel {
+    padding: 1.4rem;
+  }
+
+  .cw-whale-about-species figure {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .cw-whale-about-species img {
+    width: 100%;
+    max-width: 400px;
+    max-height: 250px;
+  }
+
+  .cw-whale-about-species figcaption {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .cw-whale-about-management-intro {
+    padding: 1.4rem;
+  }
+
+  .cw-whale-about-comparison-card {
+    padding: 1.4rem;
+  }
+
+  .cw-whale-about-importance {
+    padding: 1.5rem;
+  }
+
+  .cw-whale-about-accordion summary {
+    padding: 1rem;
+  }
+
+  .cw-whale-about-accordion-body {
+    padding: 1.2rem;
+  }
+
+  .cw-whale-about-disclaimer {
+    padding: 1.2rem;
+  }
+
+}

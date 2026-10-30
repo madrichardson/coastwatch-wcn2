@@ -1,0 +1,26 @@
+
+hero:
+  eyebrow: "WHALEWATCH 2.0 PROJECT"
+  title: "WhaleWatch 2.0 Explorer"
+  subtitle: "Explore historical blue whale habitat predictions and changing ocean conditions in the California Current Ecosystem."
+
+instructions:
+  title: "Information & Instructions"
+  introduction: >-
+    WhaleWatch 2.0 Explorer gives users an opportunity to explore historical trends in the WhaleWatch 2.0 Map product.
+  steps:
+    - "Select historical date of interest."
+    - "Download georeferenced data (raster GRID)."
+    - "Customize the display: use dropdowns to change map extent, or to visualize the shipping lanes used to calculate the WhaleWatch Shipping Lanes Indicator."
+
+explorer:
+  title: "Interactive WhaleWatch 2.0 Explorer"
+  description: "Use the interactive application below to explore historical WhaleWatch 2.0 predictions."
+  app_url: "https://heatherwelch.shinyapps.io/benioff_app/"
+  fallback_text: "If the embedded app does not load,"
+  link_label: "open WhaleWatch 2.0 Explorer"
+
+disclaimer:
+  text: >-
+    The information on this page may be used and redistributed freely, but is not intended for legal use. Neither the data contributors, WhaleWatch 2.0 partner organizations, CoastWatch, NOAA SWFSC, nor any of their employees or contractors, makes any warranty, express or implied, including warranties of merchantability and fitness for a particular purpose, or assumes any legal liability for the accuracy, completeness, or usefulness of this information. Although it is distributed by the NOAA CoastWatch West Coast Regional Node, this product is solely the responsibility of the WhaleWatch 2.0 project and is not associated with NOAA CoastWatch. For official information about WhaleWatch 2.0 contact [Briana Abrahms](mailto:briana.abrahms@noaa.gov?subject=WhaleWatch), [Elliott Hazen](mailto:elliott.hazen@noaa.gov?subject=WhaleWatch), or [Heather Welch](mailto:heather.welch@noaa.gov?subject=WhaleWatch).
+

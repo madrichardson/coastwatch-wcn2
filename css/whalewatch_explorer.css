@@ -1,0 +1,355 @@
+
+/* ==========================================================
+   WHALEWATCH 2.0 EXPLORER
+   ========================================================== */
+
+.cw-whale-explorer {
+  --explorer-navy: #123B5D;
+  --explorer-blue: #176A91;
+  --explorer-teal: #168C96;
+  --explorer-light: #EAF3F7;
+  --explorer-border: #DCE5EB;
+  --explorer-text: #526878;
+}
+
+.cw-whale-explorer *,
+.cw-whale-explorer *::before,
+.cw-whale-explorer *::after {
+  box-sizing: border-box;
+}
+
+.cw-whale-explorer h1,
+.cw-whale-explorer h2,
+.cw-whale-explorer h3 {
+  border: none !important;
+  padding-bottom: 0;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-whale-explorer-hero {
+  position: relative;
+  overflow: hidden;
+
+  padding: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 2.5rem;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+
+  border-radius: 16px;
+}
+
+.cw-whale-explorer-hero::after {
+  content: "";
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+  right: -100px;
+  top: -180px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.cw-whale-explorer-eyebrow {
+  display: block;
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 0.8rem;
+
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+}
+
+.cw-whale-explorer-hero h1 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0 0 1rem;
+
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+}
+
+.cw-whale-explorer-hero p {
+  position: relative;
+  z-index: 1;
+
+  max-width: 900px;
+  margin: 0;
+
+  color: #DCEAF2;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+/* ==========================================================
+   INFORMATION AND INSTRUCTIONS
+   ========================================================== */
+
+.cw-whale-explorer-instructions {
+  margin-bottom: 3rem;
+}
+
+.cw-whale-explorer-accordion {
+  overflow: hidden;
+
+  background: #FFFFFF;
+  border: 1px solid var(--explorer-border);
+  border-top: 4px solid var(--explorer-teal);
+  border-radius: 12px;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+}
+
+.cw-whale-explorer-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1.3rem 1.8rem;
+
+  background: var(--explorer-light);
+
+  color: var(--explorer-navy);
+  font-size: 1.1rem;
+  font-weight: 750;
+
+  cursor: pointer;
+  list-style: none;
+}
+
+.cw-whale-explorer-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.cw-whale-explorer-accordion summary::marker {
+  content: "";
+}
+
+.cw-whale-explorer-accordion summary:hover {
+  background: #DDEEF4;
+}
+
+.cw-whale-explorer-accordion-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
+  background: #D1E7EE;
+  border-radius: 50%;
+
+  color: var(--explorer-blue);
+  font-size: 1.4rem;
+  font-weight: 400;
+
+  transition: transform 0.2s;
+}
+
+.cw-whale-explorer-accordion[open]
+.cw-whale-explorer-accordion-icon {
+  transform: rotate(45deg);
+}
+
+.cw-whale-explorer-accordion-body {
+  padding: 1.5rem 2rem;
+
+  color: var(--explorer-text);
+  font-size: 0.97rem;
+  line-height: 1.85;
+}
+
+.cw-whale-explorer-accordion-body p {
+  margin: 0 0 1.2rem;
+}
+
+.cw-whale-explorer-accordion-body ol {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.cw-whale-explorer-accordion-body li {
+  margin-bottom: 0.65rem;
+}
+
+.cw-whale-explorer-accordion-body li:last-child {
+  margin-bottom: 0;
+}
+
+.cw-whale-explorer-accordion-body li::marker {
+  color: var(--explorer-teal);
+  font-weight: 750;
+}
+
+/* ==========================================================
+   EXPLORER SECTION
+   ========================================================== */
+
+.cw-whale-explorer-section {
+  margin-bottom: 3rem;
+}
+
+.cw-whale-explorer-heading {
+  margin-bottom: 1.5rem;
+}
+
+.cw-whale-explorer-section-label {
+  display: block;
+  margin-bottom: 0.6rem;
+
+  color: var(--explorer-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.cw-whale-explorer-heading h2 {
+  margin: 0 0 0.8rem;
+
+  color: var(--explorer-navy);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 750;
+}
+
+.cw-whale-explorer-heading p {
+  margin: 0;
+
+  color: var(--explorer-text);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* ==========================================================
+   EMBEDDED SHINY APP
+   ========================================================== */
+
+.cw-whale-explorer-app-card {
+  overflow: hidden;
+
+  background: #FFFFFF;
+  border: 1px solid var(--explorer-border);
+  border-top: 4px solid var(--explorer-teal);
+  border-radius: 14px;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+}
+
+.cw-whale-explorer-app-card iframe {
+  display: block;
+
+  width: 100%;
+  height: 850px;
+
+  border: none;
+  background: #FFFFFF;
+}
+
+.cw-whale-explorer-fallback {
+  margin: 1rem 0 0;
+
+  color: var(--explorer-text);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.cw-whale-explorer-fallback a {
+  color: var(--explorer-blue);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   DISCLAIMER
+   ========================================================== */
+
+.cw-whale-explorer-disclaimer {
+  padding: 1.5rem 1.8rem;
+
+  background: #F5F7F8;
+  border: 1px solid var(--explorer-border);
+  border-radius: 10px;
+}
+
+.cw-whale-explorer-disclaimer p {
+  margin: 0;
+
+  color: #687D8B;
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+.cw-whale-explorer-disclaimer a {
+  color: var(--explorer-blue);
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.cw-whale-explorer-accordion summary:focus-visible,
+.cw-whale-explorer a:focus-visible {
+  outline: 3px solid var(--explorer-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+   ========================================================== */
+
+@media (max-width: 950px) {
+
+  .cw-whale-explorer-app-card iframe {
+    height: 750px;
+  }
+
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   ========================================================== */
+
+@media (max-width: 650px) {
+
+  .cw-whale-explorer-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-whale-explorer-accordion summary {
+    padding: 1.1rem 1.2rem;
+  }
+
+  .cw-whale-explorer-accordion-body {
+    padding: 1.2rem;
+  }
+
+  .cw-whale-explorer-app-card iframe {
+    height: 650px;
+  }
+
+  .cw-whale-explorer-disclaimer {
+    padding: 1.2rem;
+  }
+
+}
+

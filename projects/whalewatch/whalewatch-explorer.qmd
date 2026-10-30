@@ -1,0 +1,173 @@
+
+---
+pagetitle: "WhaleWatch 2.0 Explorer"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css:
+      - ../../css/whalewatch.css
+      - ../../css/whalewatch_explorer.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+import markdown
+from html import escape
+from IPython.display import display, HTML
+
+# ----------------------------------------------------------
+# LOAD CMS CONTENT
+# ----------------------------------------------------------
+
+with open("../../content/whalewatch_explorer.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def md(value):
+    return markdown.markdown(
+        str(value or ""),
+        extensions=["tables", "sane_lists"]
+    )
+
+hero = data.get("hero", {})
+instructions = data.get("instructions", {})
+explorer = data.get("explorer", {})
+disclaimer = data.get("disclaimer", {})
+
+# ----------------------------------------------------------
+# INSTRUCTIONS LIST
+# ----------------------------------------------------------
+
+instruction_list = "".join(
+    f"<li>{safe(step)}</li>"
+    for step in instructions.get("steps", [])
+)
+
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
+html = f"""
+<div class="cw-whale cw-whale-explorer">
+
+  <!-- PROJECT NAVIGATION -->
+  <div class="cw-whale-topbar">
+
+    <nav class="cw-whale-tabs" aria-label="WhaleWatch navigation">
+
+      <a class="cw-whale-tab" href="whalewatch.html">
+        WhaleWatch 2.0
+      </a>
+
+      <a class="cw-whale-tab" href="about-whalewatch.html">
+        About WhaleWatch 2.0
+      </a>
+
+      <a class="cw-whale-tab" href="whalewatch-products.html">
+        WhaleWatch 2.0 Products
+      </a>
+
+      <a class="cw-whale-tab is-active"
+         href="whalewatch-explorer.html"
+         aria-current="page">
+        WhaleWatch 2.0 Explorer
+      </a>
+
+    </nav>
+
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="cw-whale-explorer-hero">
+
+    <span class="cw-whale-explorer-eyebrow">
+      {safe(hero.get('eyebrow'))}
+    </span>
+
+    <h1>{safe(hero.get('title'))}</h1>
+
+    <p>{safe(hero.get('subtitle'))}</p>
+
+  </section>
+
+  <!-- INFORMATION AND INSTRUCTIONS -->
+  <section class="cw-whale-explorer-instructions">
+
+    <details class="cw-whale-explorer-accordion" open>
+
+      <summary>
+        <span>{safe(instructions.get('title'))}</span>
+        <span class="cw-whale-explorer-accordion-icon"
+              aria-hidden="true">+</span>
+      </summary>
+
+      <div class="cw-whale-explorer-accordion-body">
+
+        <p>{safe(instructions.get('introduction'))}</p>
+
+        <ol>
+          {instruction_list}
+        </ol>
+
+      </div>
+
+    </details>
+
+  </section>
+
+  <!-- INTERACTIVE EXPLORER -->
+  <section class="cw-whale-explorer-section">
+
+    <div class="cw-whale-explorer-heading">
+
+      <span class="cw-whale-explorer-section-label">
+        INTERACTIVE TOOL
+      </span>
+
+      <h2>{safe(explorer.get('title'))}</h2>
+
+      <p>{safe(explorer.get('description'))}</p>
+
+    </div>
+
+    <div class="cw-whale-explorer-app-card">
+
+      <iframe
+        src="{safe(explorer.get('app_url'))}"
+        title="WhaleWatch 2.0 Interactive Explorer"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <p class="cw-whale-explorer-fallback">
+      {safe(explorer.get('fallback_text'))}
+      <a href="{safe(explorer.get('app_url'))}"
+         target="_blank"
+         rel="noopener noreferrer">
+        {safe(explorer.get('link_label'))}
+      </a>.
+    </p>
+
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="cw-whale-explorer-disclaimer">
+    {md(disclaimer.get('text'))}
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
+

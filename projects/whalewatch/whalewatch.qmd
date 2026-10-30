@@ -1,0 +1,145 @@
+
+---
+pagetitle: "WhaleWatch"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css:
+      - ../../css/whalewatch.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from IPython.display import display, HTML
+
+# ----------------------------------------------------------
+# LOAD CMS CONTENT
+# ----------------------------------------------------------
+
+with open("../../content/whalewatch.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+hero = data.get("hero", {})
+cards = data.get("cards", [])
+
+# ----------------------------------------------------------
+# PROJECT CARDS
+# ----------------------------------------------------------
+
+card_html = ""
+
+for card in cards:
+
+    card_html += f"""
+    <article class="cw-whale-card">
+
+      <div class="cw-whale-card-content">
+
+        <h3>{safe(card.get('title'))}</h3>
+
+        <p>{safe(card.get('description'))}</p>
+
+      </div>
+
+      <a class="cw-whale-card-btn"
+         href="{safe(card.get('button_url'))}">
+        {safe(card.get('button_label'))}
+        <span aria-hidden="true">→</span>
+      </a>
+
+    </article>
+    """
+
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
+html = f"""
+<div class="cw-whale">
+
+  <!-- PROJECT NAVIGATION -->
+  <div class="cw-whale-topbar">
+
+    <nav class="cw-whale-tabs"
+         aria-label="WhaleWatch navigation">
+
+      <a class="cw-whale-tab is-active"
+         href="whalewatch.html"
+         aria-current="page">
+        WhaleWatch 2.0
+      </a>
+
+      <a class="cw-whale-tab"
+         href="about-whalewatch.html">
+        About WhaleWatch 2.0
+      </a>
+
+      <a class="cw-whale-tab"
+         href="whalewatch-products.html">
+        WhaleWatch 2.0 Products
+      </a>
+
+      <a class="cw-whale-tab"
+         href="whalewatch-explorer.html">
+        WhaleWatch 2.0 Explorer
+      </a>
+
+    </nav>
+
+  </div>
+
+  <!-- HERO IMAGE -->
+  <section class="cw-whale-image-hero">
+
+    <img src="{safe(hero.get('image'))}"
+         alt="{safe(hero.get('image_alt'))}">
+
+    <div class="cw-whale-image-overlay">
+
+      <span class="cw-whale-eyebrow">
+        {safe(hero.get('eyebrow'))}
+      </span>
+
+      <h1>{safe(hero.get('title'))}</h1>
+
+      <p>{safe(hero.get('subtitle'))}</p>
+
+    </div>
+
+  </section>
+
+  <div class="cw-whale-image-caption">
+    {safe(hero.get('image_caption'))}
+  </div>
+
+  <!-- INTRODUCTION -->
+  <section class="cw-whale-intro">
+
+    <div class="cw-whale-intro-accent"></div>
+
+    <p>{safe(hero.get('description'))}</p>
+
+  </section>
+
+  <!-- PROJECT CARDS -->
+  <section class="cw-whale-card-grid">
+
+    {card_html}
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```

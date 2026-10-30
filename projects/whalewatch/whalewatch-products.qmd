@@ -1,0 +1,295 @@
+
+---
+pagetitle: "WhaleWatch 2.0 Products"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css:
+      - ../../css/whalewatch.css
+      - ../../css/whalewatch_products.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+import markdown
+from html import escape
+from IPython.display import display, HTML
+
+# ----------------------------------------------------------
+# LOAD CMS CONTENT
+# ----------------------------------------------------------
+
+with open("../../content/whalewatch_products.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def md(value):
+    return markdown.markdown(
+        str(value or ""),
+        extensions=["tables", "sane_lists"]
+    )
+
+hero = data.get("hero", {})
+maps = data.get("maps", {})
+indicator = data.get("indicator", {})
+faqs = data.get("faqs", {})
+disclaimer = data.get("disclaimer", {})
+
+# ----------------------------------------------------------
+# MAP OPTIONS
+# ----------------------------------------------------------
+
+map_options = maps.get("options", [])
+
+map_options_html = "".join(
+    f'<option value="{safe(item.get("url"))}">{safe(item.get("label"))}</option>'
+    for item in map_options
+)
+
+initial_map = map_options[0].get("url", "") if map_options else ""
+
+# ----------------------------------------------------------
+# FAQ ACCORDIONS
+# ----------------------------------------------------------
+
+faq_html = ""
+
+for item in faqs.get("items", []):
+
+    image_html = ""
+
+    if item.get("image"):
+        image_html = f"""
+        <figure class="cw-whale-products-faq-figure">
+          <img
+            src="{safe(item.get('image'))}"
+            alt="{safe(item.get('image_alt'))}"
+            loading="lazy"
+          >
+          <figcaption>{safe(item.get('image_alt'))}</figcaption>
+        </figure>
+        """
+
+    faq_html += f"""
+    <details class="cw-whale-products-accordion">
+
+      <summary>
+        <span>{safe(item.get('question'))}</span>
+        <span class="cw-whale-products-accordion-icon"
+              aria-hidden="true">+</span>
+      </summary>
+
+      <div class="cw-whale-products-accordion-body">
+        {md(item.get('answer'))}
+        {image_html}
+      </div>
+
+    </details>
+    """
+
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
+html = f"""
+<div class="cw-whale cw-whale-products">
+
+  <!-- PROJECT NAVIGATION -->
+  <div class="cw-whale-topbar">
+
+    <nav class="cw-whale-tabs" aria-label="WhaleWatch navigation">
+
+      <a class="cw-whale-tab" href="whalewatch.html">
+        WhaleWatch 2.0
+      </a>
+
+      <a class="cw-whale-tab" href="about-whalewatch.html">
+        About WhaleWatch 2.0
+      </a>
+
+      <a class="cw-whale-tab is-active"
+         href="whalewatch-products.html"
+         aria-current="page">
+        WhaleWatch 2.0 Products
+      </a>
+
+      <a class="cw-whale-tab" href="whalewatch-explorer.html">
+        WhaleWatch 2.0 Explorer
+      </a>
+
+    </nav>
+
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="cw-whale-products-hero">
+
+    <span class="cw-whale-products-eyebrow">
+      {safe(hero.get('eyebrow'))}
+    </span>
+
+    <h1>{safe(hero.get('title'))}</h1>
+
+    <p>{safe(hero.get('subtitle'))}</p>
+
+  </section>
+
+  <!-- TWO-COLUMN PRODUCTS LAYOUT -->
+  <div class="cw-whale-products-dashboard-grid">
+
+    <!-- LEFT COLUMN: RECENT MAP VIEWER -->
+    <section class="cw-whale-products-dashboard-panel">
+
+      <div class="cw-whale-products-heading">
+
+        <span class="cw-whale-products-section-label">
+          DAILY HABITAT PREDICTIONS
+        </span>
+
+        <h2>{safe(maps.get('title'))}</h2>
+
+        <p>{safe(maps.get('description'))}</p>
+
+      </div>
+
+      <div class="cw-whale-products-map-card">
+
+        <div class="cw-whale-products-map-toolbar">
+
+          <label for="mapSelect">
+            {safe(maps.get('selector_label'))}
+          </label>
+
+          <select id="mapSelect" class="cw-whale-products-select">
+            {map_options_html}
+          </select>
+
+        </div>
+
+        <div class="cw-whale-products-map-container">
+
+          <img
+            id="mapFrame"
+            src="{safe(initial_map)}"
+            alt="Most recent WhaleWatch 2.0 blue whale habitat suitability map"
+          >
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- RIGHT COLUMN: INDICATOR AND FAQS -->
+    <div class="cw-whale-products-dashboard-panel cw-whale-products-right-column">
+
+      <!-- SHIPPING LANE INDICATOR -->
+      <section class="cw-whale-products-indicator-section">
+
+        <div class="cw-whale-products-heading">
+
+          <span class="cw-whale-products-section-label">
+            SHIPPING LANE INDICATOR
+          </span>
+
+          <h2>{safe(indicator.get('title'))}</h2>
+
+        </div>
+
+        <div class="cw-whale-products-indicator-card">
+
+          <img
+            id="lanes-indicator-img"
+            src="{safe(indicator.get('image'))}"
+            data-base-url="{safe(indicator.get('image'))}"
+            alt="{safe(indicator.get('image_alt'))}"
+            loading="lazy"
+          >
+
+        </div>
+
+      </section>
+
+      <!-- FAQS -->
+      <section class="cw-whale-products-faq-section">
+
+        <div class="cw-whale-products-heading">
+
+          <span class="cw-whale-products-section-label">
+            HELP AND INFORMATION
+          </span>
+
+          <h2>{safe(faqs.get('title'))}</h2>
+
+        </div>
+
+        <div class="cw-whale-products-accordion-list">
+          {faq_html}
+        </div>
+
+      </section>
+
+    </div>
+
+  </div>
+
+  <!-- DISCLAIMER -->
+  <section class="cw-whale-products-disclaimer">
+    {md(disclaimer.get('text'))}
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
+
+```{=html}
+<script>
+(function () {
+
+  function initializeWhaleWatchProducts() {
+
+    const mapSelect = document.getElementById("mapSelect");
+    const mapFrame = document.getElementById("mapFrame");
+    const laneImg = document.getElementById("lanes-indicator-img");
+
+    // Update the displayed map when a date is selected
+    if (mapSelect && mapFrame) {
+      mapSelect.addEventListener("change", function () {
+        mapFrame.src = this.value;
+      });
+    }
+
+    // Refresh the shipping lane indicator image
+    if (laneImg) {
+      const baseUrl = laneImg.dataset.baseUrl;
+
+      if (baseUrl) {
+        const separator = baseUrl.includes("?") ? "&" : "?";
+        laneImg.src = baseUrl + separator + "t=" + Date.now();
+      }
+    }
+
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initializeWhaleWatchProducts
+    );
+  } else {
+    initializeWhaleWatchProducts();
+  }
+
+})();
+</script>
+```

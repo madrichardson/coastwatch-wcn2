@@ -1041,3 +1041,39 @@ content:
           - name: button_url
             label: Button URL
             type: string
+
+- name: whalewatch
+  label: WhaleWatch 2.0
+  type: file
+  path: content/whalewatch.yml
+  fields:
+    - name: hero
+      type: object
+      fields:
+        - name: eyebrow
+          type: string
+        - name: title
+          type: string
+        - name: subtitle
+          type: string
+        - name: description
+          type: text
+        - name: image
+          type: string
+        - name: image_alt
+          type: string
+        - name: image_caption
+          type: string
+
+    - name: cards
+      type: object
+      list: true
+      fields:
+        - name: title
+          type: string
+        - name: description
+          type: text
+        - name: button_label
+          type: string
+        - name: button_url
+          type: string

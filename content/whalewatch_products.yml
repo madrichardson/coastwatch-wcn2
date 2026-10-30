@@ -1,0 +1,58 @@
+
+hero:
+  eyebrow: "WHALEWATCH 2.0 PROJECT"
+  title: "WhaleWatch 2.0 Products"
+  subtitle: "Explore daily blue whale habitat predictions and the Channel Islands Shipping Lane Indicator."
+
+maps:
+  title: "Most Recent WhaleWatch 2.0 Maps"
+  description: "Select a recent map to view predicted blue whale habitat suitability in the California Current Ecosystem."
+  selector_label: "Select Map Date:"
+  options:
+    - label: "Today"
+      url: "https://oceanview.pfeg.noaa.gov/WhaleWatch2/latest_week/blwh_flyer_latest.png"
+    - label: "1 Day Ago"
+      url: "https://oceanview.pfeg.noaa.gov/WhaleWatch2/latest/blwh_flyer_latest.png"
+    - label: "2 Days Ago"
+      url: "https://oceanview.pfeg.noaa.gov/WhaleWatch2/latest_week/blwh_flyer_latest_2.png"
+    - label: "3 Days Ago"
+      url: "https://oceanview.pfeg.noaa.gov/WhaleWatch2/latest_week/blwh_flyer_latest_3.png"
+    - label: "4 Days Ago"
+      url: "https://oceanview.pfeg.noaa.gov/WhaleWatch2/latest_week/blwh_flyer_latest_4.png"
+    - label: "5 Days Ago"
+      url: "https://oceanview.pfeg.noaa.gov/WhaleWatch2/latest_week/blwh_flyer_latest_5.png"
+
+indicator:
+  title: "WhaleWatch Channel Islands Shipping Lane Indicator"
+  image: "https://oceanview.pfeg.noaa.gov/WhaleWatch2/indicators/lane_indicator.png"
+  image_alt: "WhaleWatch Channel Islands Shipping Lane Indicator"
+
+faqs:
+  title: "WhaleWatch 2.0 Products FAQs"
+  items:
+    - question: "What is the WhaleWatch 2.0 Map product?"
+      answer: >-
+        The WhaleWatch 2.0 Map product is a predictive spatial management tool that provides information on daily suitable blue whale habitat within the California Current Ecosystem. The map shows where whales are most likely to be each day based on current environmental conditions, such as ocean temperature and productivity.
+
+    - question: "How do I use the WhaleWatch 2.0 Map?"
+      answer: >-
+        <span style="color:red;">Better blue whale habitat</span> is indicated by increasingly <span style="color:red;">red</span> colors, showing where the likelihood of blue whale presence is higher. <span style="color:blue;">Poorer blue whale habitat</span> is indicated by increasingly <span style="color:blue;">blue</span> colors, showing where the likelihood of blue whale presence is lower. If blues whales are present in the area, the map indicates where they are most likely to be.
+
+    - question: "How is the WhaleWatch 2.0 Map product made?"
+      answer: >-
+        Each day the WhaleWatch 2.0 tool generates predictions of the spatial distributions of blue whales based on an ensemble of models predicting blue whale habitat suitability from current ocean conditions. For detailed methodology of model building, see the [study published about the product](https://onlinelibrary.wiley.com/doi/10.1111/ddi.12940). This is an update to the previous [WhaleWatch](https://www.fisheries.noaa.gov/west-coast/marine-mammal-protection/whalewatch) effort that was at 25km resolution and updated monthly (URL).
+
+    - question: "What environmental data are used?"
+      answer: >-
+        Daily ocean conditions such as sea surface temperature, locations of frontal zones, and water column properties are sourced from a near-real-time data-assimilative configuration of the [Regional Ocean Modeling System](https://oceanmodeling.ucsc.edu/ccsnrt/) for the California Current System.
+
+    - question: "What is the Channel Islands Shipping Lane Indicator?"
+      answer: >-
+        This indicator shows daily whale habitat suitability within the primary shipping approach north of the Channel islands and the southern undesignated approach in the Southern California Bight. This type of information allows managers to understand shipstrike risk exposure in shipping lanes within and among years as a function of environmental conditions, allowing for informed decision-making regarding vessel speed reductions.
+      image: "images/shipping_lanes.png"
+      image_alt: "Location of the shipping approaches."
+
+disclaimer:
+  text: >-
+    The information on this page may be used and redistributed freely, but is not intended for legal use. Neither the data contributors, WhaleWatch 2.0 partner organizations, CoastWatch, NOAA SWFSC, nor any of their employees or contractors, makes any warranty, express or implied, including warranties of merchantability and fitness for a particular purpose, or assumes any legal liability for the accuracy, completeness, or usefulness of this information. Although it is distributed by the NOAA CoastWatch West Coast Regional Node, this product is solely the responsibility of the WhaleWatch 2.0 project and is not associated with NOAA CoastWatch. For official information about WhaleWatch 2.0 contact [Briana Abrahms](mailto:briana.abrahms@noaa.gov?subject=WhaleWatch), [Elliott Hazen](mailto:elliott.hazen@noaa.gov?subject=WhaleWatch), or [Heather Welch](mailto:heather.welch@noaa.gov?subject=WhaleWatch).
+
