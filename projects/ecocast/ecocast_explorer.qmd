@@ -1,0 +1,247 @@
+
+---
+pagetitle: "EcoCast Explorer"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css:
+      - ../../css/ecocast.css
+      - ../../css/ecocast_explorer.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+import markdown
+
+from html import escape
+from IPython.display import display, HTML
+
+# ----------------------------------------------------------
+# LOAD CMS CONTENT
+# ----------------------------------------------------------
+
+with open("../../content/ecocast_explorer.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+def md(value):
+    return markdown.markdown(
+        str(value or ""),
+        extensions=["tables", "sane_lists"]
+    )
+
+hero = data.get("hero", {})
+instructions = data.get("instructions", {})
+application = data.get("application", {})
+disclaimer = data.get("disclaimer", {})
+
+# ----------------------------------------------------------
+# INSTRUCTION STEPS
+# ----------------------------------------------------------
+
+instruction_steps = ""
+
+for step in instructions.get("steps", []):
+
+    instruction_steps += f"""
+    <li class="cw-ecocast-explorer-step">
+      <span>{safe(step.get('text'))}</span>
+    """
+
+    if step.get("details"):
+
+        instruction_steps += """
+        <ul class="cw-ecocast-explorer-substeps">
+        """
+
+        for detail in step.get("details", []):
+            instruction_steps += f"""
+            <li>{safe(detail)}</li>
+            """
+
+        instruction_steps += "</ul>"
+
+    instruction_steps += "</li>"
+
+# ----------------------------------------------------------
+# APPLICATION SETTINGS
+# ----------------------------------------------------------
+
+app_url = safe(application.get("url"))
+
+try:
+    app_height = max(
+        400,
+        min(1600, int(application.get("height", 850)))
+    )
+except (ValueError, TypeError):
+    app_height = 850
+
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
+html = f"""
+<div class="cw-ecocast cw-ecocast-explorer-page">
+
+  <!-- PROJECT NAVIGATION -->
+  <div class="cw-ecocast-topbar">
+
+    <a class="cw-ecocast-brand" href="ecocast.html">
+      <img src="images/ecocast_logo_003366.png"
+           alt="EcoCast logo">
+    </a>
+
+    <nav class="cw-ecocast-tabs"
+         aria-label="EcoCast navigation">
+
+      <a class="cw-ecocast-tab"
+         href="about_ecocast.html">
+        About EcoCast
+      </a>
+
+      <a class="cw-ecocast-tab"
+         href="ecocast_map.html">
+        EcoCast Map
+      </a>
+
+      <a class="cw-ecocast-tab is-active"
+         href="ecocast_explorer.html"
+         aria-current="page">
+        EcoCast Explorer
+      </a>
+
+    </nav>
+
+  </div>
+
+  <!-- HERO -->
+  <section class="cw-ecocast-explorer-hero">
+
+    <span class="cw-ecocast-explorer-eyebrow">
+      {safe(hero.get('eyebrow'))}
+    </span>
+
+    <h1>{safe(hero.get('title'))}</h1>
+
+    <p>{safe(hero.get('subtitle'))}</p>
+
+  </section>
+
+  <!-- INFORMATION & INSTRUCTIONS -->
+  <section class="cw-ecocast-explorer-instructions">
+
+    <details class="cw-ecocast-explorer-details">
+
+      <summary>
+
+        <div class="cw-ecocast-explorer-summary-text">
+
+          <span class="cw-ecocast-explorer-section-label">
+            {safe(instructions.get('eyebrow'))}
+          </span>
+
+          <h2>{safe(instructions.get('title'))}</h2>
+
+        </div>
+
+        <span class="cw-ecocast-explorer-expand-icon"
+              aria-hidden="true">+</span>
+
+      </summary>
+
+      <div class="cw-ecocast-explorer-instructions-body">
+
+        <div class="cw-ecocast-explorer-intro">
+          {md(instructions.get('introduction'))}
+        </div>
+
+        <ol class="cw-ecocast-explorer-steps">
+          {instruction_steps}
+        </ol>
+
+      </div>
+
+    </details>
+
+  </section>
+
+  <!-- INTERACTIVE APPLICATION -->
+  <section class="cw-ecocast-explorer-application">
+
+    <div class="cw-ecocast-explorer-app-heading">
+
+      <div class="cw-ecocast-explorer-app-heading-text">
+
+        <span class="cw-ecocast-explorer-section-label">
+          {safe(application.get('eyebrow'))}
+        </span>
+
+        <h2>{safe(application.get('title'))}</h2>
+
+        <p>{safe(application.get('description'))}</p>
+
+      </div>
+
+      <a class="cw-ecocast-explorer-open-btn"
+         href="{app_url}"
+         target="_blank"
+         rel="noopener noreferrer">
+
+        {safe(application.get('button_label'))}
+        <span aria-hidden="true">↗</span>
+
+      </a>
+
+    </div>
+
+    <div class="cw-ecocast-explorer-app-frame">
+
+      <iframe
+        src="{app_url}"
+        title="EcoCast Explorer Interactive Application"
+        width="100%"
+        height="{app_height}"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+    <div class="cw-ecocast-explorer-app-footer">
+
+      <p>{safe(application.get('fallback_text'))}</p>
+
+      <a href="{app_url}"
+         target="_blank"
+         rel="noopener noreferrer">
+        {safe(application.get('button_label'))}
+        <span aria-hidden="true">↗</span>
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="cw-ecocast-about-disclaimer
+                  cw-ecocast-explorer-disclaimer">
+
+    {md(disclaimer.get('text'))}
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
+

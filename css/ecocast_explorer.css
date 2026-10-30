@@ -1,0 +1,490 @@
+
+/* ==========================================================
+   ECOCAST EXPLORER PAGE
+   ========================================================== */
+
+.cw-ecocast-explorer-page {
+  --explorer-navy: #123B5D;
+  --explorer-blue: #176A91;
+  --explorer-teal: #168C96;
+  --explorer-light: #EAF3F7;
+  --explorer-border: #DCE5EB;
+}
+
+.cw-ecocast-explorer-page *,
+.cw-ecocast-explorer-page *::before,
+.cw-ecocast-explorer-page *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   ACTIVE NAVIGATION
+   ========================================================== */
+
+.cw-ecocast-explorer-page .cw-ecocast-tab.is-active {
+  background: var(--explorer-blue);
+  border-color: var(--explorer-blue);
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-ecocast-explorer-hero {
+  position: relative;
+  overflow: hidden;
+
+  padding: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 2.5rem;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+}
+
+.cw-ecocast-explorer-hero::after {
+  content: "";
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  right: -100px;
+  top: -180px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.cw-ecocast-explorer-eyebrow {
+  display: block;
+  position: relative;
+  z-index: 1;
+
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+
+  margin-bottom: 0.8rem;
+}
+
+.cw-ecocast-explorer-hero h1 {
+  position: relative;
+  z-index: 1;
+
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+
+  margin: 0 0 1rem;
+  padding: 0;
+  border: none !important;
+}
+
+.cw-ecocast-explorer-hero p {
+  position: relative;
+  z-index: 1;
+
+  max-width: 900px;
+
+  color: #DCEAF2;
+  font-size: 1.1rem;
+  line-height: 1.75;
+
+  margin: 0;
+}
+
+/* ==========================================================
+   SECTION LABELS
+   ========================================================== */
+
+.cw-ecocast-explorer-section-label {
+  display: block;
+
+  color: var(--explorer-teal);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================
+   INSTRUCTIONS ACCORDION
+   ========================================================== */
+
+.cw-ecocast-explorer-instructions {
+  margin-bottom: 2.5rem;
+}
+
+.cw-ecocast-explorer-details {
+  background: #FFFFFF;
+  border: 1px solid var(--explorer-border);
+  border-left: 5px solid var(--explorer-teal);
+  border-radius: 14px;
+  overflow: hidden;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+}
+
+.cw-ecocast-explorer-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  padding: 1.5rem 2rem;
+
+  background: var(--explorer-light);
+  cursor: pointer;
+  list-style: none;
+
+  transition: background 0.2s;
+}
+
+.cw-ecocast-explorer-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.cw-ecocast-explorer-details summary::marker {
+  content: "";
+}
+
+.cw-ecocast-explorer-details summary:hover {
+  background: #DDEFF4;
+}
+
+.cw-ecocast-explorer-details[open] summary {
+  border-bottom: 1px solid var(--explorer-border);
+}
+
+.cw-ecocast-explorer-summary-text {
+  min-width: 0;
+}
+
+.cw-ecocast-explorer-summary-text h2 {
+  color: var(--explorer-navy);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 750;
+
+  margin: 0;
+  padding: 0;
+  border: none !important;
+}
+
+/* Expand icon */
+
+.cw-ecocast-explorer-expand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 42px;
+  height: 42px;
+
+  background: #D4E9F0;
+  border-radius: 50%;
+
+  color: var(--explorer-blue);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1;
+
+  transition: transform 0.2s;
+}
+
+.cw-ecocast-explorer-details[open]
+.cw-ecocast-explorer-expand-icon {
+  transform: rotate(45deg);
+}
+
+/* Instructions content */
+
+.cw-ecocast-explorer-instructions-body {
+  padding: 2rem 2.5rem;
+  color: #526878;
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.cw-ecocast-explorer-intro {
+  max-width: 1100px;
+  margin-bottom: 1.5rem;
+}
+
+.cw-ecocast-explorer-intro p {
+  margin: 0;
+}
+
+.cw-ecocast-explorer-steps {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.cw-ecocast-explorer-step {
+  padding-left: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.cw-ecocast-explorer-step:last-child {
+  margin-bottom: 0;
+}
+
+.cw-ecocast-explorer-step::marker {
+  color: var(--explorer-teal);
+  font-weight: 750;
+}
+
+.cw-ecocast-explorer-substeps {
+  margin-top: 0.6rem;
+  padding-left: 1.5rem;
+}
+
+.cw-ecocast-explorer-substeps li {
+  margin-bottom: 0.35rem;
+}
+
+/* ==========================================================
+   APPLICATION SECTION
+   ========================================================== */
+
+.cw-ecocast-explorer-application {
+  width: 100%;
+  margin-bottom: 3rem;
+
+  background: #FFFFFF;
+  border: 1px solid var(--explorer-border);
+  border-radius: 14px;
+  overflow: hidden;
+
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.05);
+}
+
+/* Application heading */
+
+.cw-ecocast-explorer-app-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+
+  padding: 1.8rem 2rem;
+
+  background: var(--explorer-light);
+  border-bottom: 1px solid #D1E3EC;
+}
+
+.cw-ecocast-explorer-app-heading-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.cw-ecocast-explorer-app-heading h2 {
+  color: var(--explorer-navy);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 750;
+
+  margin: 0 0 0.6rem;
+  padding: 0;
+  border: none !important;
+}
+
+.cw-ecocast-explorer-app-heading p {
+  color: #526878;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Open application button */
+
+.cw-ecocast-explorer-open-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+
+  padding: 0.85rem 1.25rem;
+
+  background: var(--explorer-blue);
+  border: 1px solid var(--explorer-blue);
+  border-radius: 8px;
+
+  color: #FFFFFF !important;
+  font-size: 0.92rem;
+  font-weight: 750;
+  text-decoration: none !important;
+
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.cw-ecocast-explorer-open-btn:hover {
+  background: var(--explorer-navy);
+  border-color: var(--explorer-navy);
+  transform: translateY(-2px);
+}
+
+/* Embedded Shiny application */
+
+.cw-ecocast-explorer-app-frame {
+  width: 100%;
+  padding: 1rem;
+  background: #F8FBFC;
+}
+
+.cw-ecocast-explorer-app-frame iframe {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+  min-height: 600px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #FFFFFF;
+}
+
+/* Application footer */
+
+.cw-ecocast-explorer-app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  padding: 1.2rem 2rem;
+
+  background: #FFFFFF;
+  border-top: 1px solid var(--explorer-border);
+}
+
+.cw-ecocast-explorer-app-footer p {
+  color: #687D8B;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cw-ecocast-explorer-app-footer a {
+  flex-shrink: 0;
+  color: var(--explorer-blue);
+  font-size: 0.9rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.cw-ecocast-explorer-app-footer a:hover {
+  color: var(--explorer-teal);
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   DISCLAIMER
+   ========================================================== */
+
+.cw-ecocast-explorer-disclaimer {
+  width: 100%;
+  padding: 1.5rem 1.8rem;
+
+  background: #F5F7F8;
+  border: 1px solid var(--explorer-border);
+  border-radius: 10px;
+}
+
+.cw-ecocast-explorer-disclaimer p {
+  color: #687D8B;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.cw-ecocast-explorer-disclaimer a {
+  color: var(--explorer-blue);
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.cw-ecocast-explorer-details summary:focus-visible,
+.cw-ecocast-explorer-open-btn:focus-visible,
+.cw-ecocast-explorer-app-footer a:focus-visible {
+  outline: 3px solid var(--explorer-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+   ========================================================== */
+
+@media (max-width: 850px) {
+
+  .cw-ecocast-explorer-app-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  .cw-ecocast-explorer-app-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   ========================================================== */
+
+@media (max-width: 650px) {
+
+  .cw-ecocast-explorer-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-ecocast-explorer-details summary {
+    padding: 1.2rem 1.4rem;
+  }
+
+  .cw-ecocast-explorer-instructions-body {
+    padding: 1.4rem;
+  }
+
+  .cw-ecocast-explorer-app-heading {
+    padding: 1.4rem;
+  }
+
+  .cw-ecocast-explorer-app-frame {
+    padding: 0.5rem;
+  }
+
+  .cw-ecocast-explorer-app-frame iframe {
+    min-height: 650px;
+  }
+
+  .cw-ecocast-explorer-app-footer {
+    padding: 1.2rem 1.4rem;
+  }
+
+  .cw-ecocast-explorer-disclaimer {
+    padding: 1.2rem;
+  }
+
+}
+

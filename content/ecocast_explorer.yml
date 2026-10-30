@@ -1,0 +1,53 @@
+
+hero:
+  eyebrow: "ECOCAST PROJECT"
+  title: "EcoCast Explorer"
+  subtitle: "Explore how species distributions and management priorities influence EcoCast predictions."
+
+instructions:
+  eyebrow: "GETTING STARTED"
+  title: "Information & Instructions"
+  introduction: >-
+    EcoCast Explorer gives users an opportunity to explore how the EcoCast
+    product works. Users are able to generate predictive maps for specific
+    dates, for single species, and can change the species weightings.
+    This tool gives users the ability to explore how species are responding
+    to changing ocean conditions, and how that can influence the EcoCast
+    Product.
+
+  steps:
+    - text: "Select a historical date to view model output."
+
+    - text: "Adjust species weightings to reflect management priorities:"
+      details:
+        - "Negative values (leatherbacks, blue sharks, sea lions) → bias towards avoiding bycatch."
+        - "Positive values (swordfish) → bias towards catching target species."
+
+    - text: "Customize the display by using dropdowns to filter the EcoCast map, change map extent, or add additional map elements."
+
+application:
+  eyebrow: "INTERACTIVE APPLICATION"
+  title: "Explore the EcoCast Model"
+  description: "Use the interactive application below to explore species predictions, adjust weightings, and generate custom EcoCast maps."
+  url: "https://heatherwelch.shinyapps.io/ecocastapp/"
+  height: 850
+  fallback_text: "If the embedded application does not load, you can open EcoCast Explorer in a separate tab."
+  button_label: "Open EcoCast Explorer"
+
+disclaimer:
+  text: >-
+    The information on this page may be used and redistributed freely,
+    but is not intended for legal use. Neither the data contributors,
+    EcoCast partner organizations, CoastWatch, NOAA SWFSC, nor any of
+    their employees or contractors, makes any warranty, express or
+    implied, including warranties of merchantability and fitness for
+    a particular purpose, or assumes any legal liability for the
+    accuracy, completeness, or usefulness of this information.
+    Although it is distributed by the NOAA CoastWatch West Coast
+    Regional Node, this product is solely the responsibility of the
+    [EcoCast project (.pdf)](https://www.westcoast.fisheries.noaa.gov/publications/fishery_management/hms_program/swordfish2015/ecocast_infosheet.pdf)
+    and is not associated with NOAA CoastWatch. For official information
+    about EcoCast contact
+    [Elliott Hazen](mailto:elliott.hazen@noaa.gov?subject=EcoCast)
+    or [Heather Welch](mailto:heather.welch@noaa.gov?subject=EcoCast).
+
