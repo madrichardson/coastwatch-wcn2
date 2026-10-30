@@ -16,13 +16,17 @@ format:
 #| echo: false
 #| output: asis
 
+import json
 import yaml
 import markdown
+
 from html import escape
 from IPython.display import display, HTML
 
-# If execute-dir: project is enabled, use:
-# "content/ecocast_map.yml"
+# ----------------------------------------------------------
+# LOAD CMS CONTENT
+# ----------------------------------------------------------
+
 with open("../../content/ecocast_map.yml", encoding="utf-8") as f:
     data = yaml.safe_load(f) or {}
 
@@ -45,8 +49,6 @@ disclaimer = data.get("disclaimer", {})
 # MAP NAVIGATION DATA
 # ----------------------------------------------------------
 
-import json
-
 map_dates = map_data.get("dates", [])
 
 initial_map = (
@@ -59,9 +61,12 @@ initial_label = (
     if map_dates else ""
 )
 
-map_dates_json = json.dumps(map_dates).replace(
-    "<", "\\u003c"
-).replace(">", "\\u003e").replace("&", "\\u0026")
+map_dates_json = (
+    json.dumps(map_dates)
+    .replace("<", "\\u003c")
+    .replace(">", "\\u003e")
+    .replace("&", "\\u0026")
+)
 
 # ----------------------------------------------------------
 # FAQ ITEMS
@@ -189,93 +194,105 @@ html = f"""
 
   </section>
 
-  
-<!-- MAP VIEWER -->
-<section class="cw-ecocast-map-section">
+  <!-- TWO-COLUMN CONTENT LAYOUT -->
+  <div class="cw-ecocast-map-content-grid">
 
-  <div class="cw-ecocast-map-toolbar">
+    <!-- LEFT COLUMN: MAP -->
+    <div class="cw-ecocast-map-left">
 
-    <div class="cw-ecocast-map-toolbar-text">
-      <h2>{safe(map_data.get('title'))}</h2>
-      <p>{safe(map_data.get('description'))}</p>
+      <section class="cw-ecocast-map-section">
+
+        <div class="cw-ecocast-map-toolbar">
+
+          <div class="cw-ecocast-map-toolbar-text">
+            <h2>{safe(map_data.get('title'))}</h2>
+            <p>{safe(map_data.get('description'))}</p>
+          </div>
+
+          <span class="cw-ecocast-map-counter" id="mapCounter">
+            1 of {len(map_dates)}
+          </span>
+
+        </div>
+
+        <div class="cw-ecocast-map-viewer">
+
+          <img id="mapFrame"
+               src="{safe(initial_map)}"
+               alt="{safe(map_data.get('image_alt'))}">
+
+        </div>
+
+        <div class="cw-ecocast-map-navigation">
+
+          <button id="mapPrevious"
+                  class="cw-ecocast-map-nav-btn"
+                  type="button">
+            <span aria-hidden="true">←</span>
+            Previous
+          </button>
+
+          <span class="cw-ecocast-map-current" id="mapCurrent">
+            {safe(initial_label)}
+          </span>
+
+          <button id="mapNext"
+                  class="cw-ecocast-map-nav-btn"
+                  type="button">
+            Next
+            <span aria-hidden="true">→</span>
+          </button>
+
+        </div>
+
+      </section>
+
     </div>
 
-    <span class="cw-ecocast-map-counter" id="mapCounter">
-      1 of {len(map_dates)}
-    </span>
+    <!-- RIGHT COLUMN: FAQ + DOWNLOADS -->
+    <div class="cw-ecocast-map-right">
+
+      <!-- FAQ -->
+      <section class="cw-ecocast-map-faq">
+
+        <div class="cw-ecocast-map-section-heading">
+
+          <span class="cw-ecocast-map-section-label">
+            {safe(faq.get('eyebrow'))}
+          </span>
+
+          <h2>{safe(faq.get('title'))}</h2>
+
+        </div>
+
+        <div class="cw-ecocast-map-faq-list">
+          {faq_items}
+        </div>
+
+      </section>
+
+      <!-- DOWNLOADS -->
+      <section class="cw-ecocast-map-downloads">
+
+        <span class="cw-ecocast-map-section-label">
+          {safe(downloads.get('eyebrow'))}
+        </span>
+
+        <h2>{safe(downloads.get('title'))}</h2>
+
+        <p>{safe(downloads.get('description'))}</p>
+
+        <div class="cw-ecocast-download-list">
+          {download_links}
+        </div>
+
+      </section>
+
+    </div>
 
   </div>
 
-  <div class="cw-ecocast-map-viewer">
-
-    <img id="mapFrame"
-         src="{safe(initial_map)}"
-         alt="{safe(map_data.get('image_alt'))}">
-
-  </div>
-
-  <div class="cw-ecocast-map-navigation">
-
-    <button id="mapPrevious"
-            class="cw-ecocast-map-nav-btn"
-            type="button">
-      <span aria-hidden="true">←</span>
-      Previous
-    </button>
-
-    <span class="cw-ecocast-map-current" id="mapCurrent">
-      {safe(initial_label)}
-    </span>
-
-    <button id="mapNext"
-            class="cw-ecocast-map-nav-btn"
-            type="button">
-      Next
-      <span aria-hidden="true">→</span>
-    </button>
-
-  </div>
-
-</section>
-
-
-  <!-- FAQ -->
-  <section class="cw-ecocast-map-faq">
-
-    <div class="cw-ecocast-map-section-heading">
-
-      <span class="cw-ecocast-map-section-label">
-        {safe(faq.get('eyebrow'))}
-      </span>
-
-      <h2>{safe(faq.get('title'))}</h2>
-
-    </div>
-
-    <div class="cw-ecocast-map-faq-list">
-      {faq_items}
-    </div>
-
-  </section>
-
-  <!-- DOWNLOADS -->
-  <section class="cw-ecocast-map-downloads">
-
-    <span class="cw-ecocast-map-section-label">
-      {safe(downloads.get('eyebrow'))}
-    </span>
-
-    <h2>{safe(downloads.get('title'))}</h2>
-
-    <p>{safe(downloads.get('description'))}</p>
-
-    <div class="cw-ecocast-download-list">
-      {download_links}
-    </div>
-
-  </section>
-
-  <!-- DISCLAIMER -->
+  <!-- FULL-WIDTH DISCLAIMER -->
   <section class="cw-ecocast-about-disclaimer
                   cw-ecocast-map-disclaimer">
     {md(disclaimer.get('text'))}
@@ -285,7 +302,6 @@ html = f"""
 """
 
 display(HTML(html))
-
 
 # ----------------------------------------------------------
 # MAP NAVIGATION JAVASCRIPT
@@ -315,25 +331,33 @@ map_script = """
 
     image.src = map.url;
     currentLabel.textContent = map.label;
+
     counter.textContent =
       (currentIndex + 1) + " of " + maps.length;
 
-    previous.disabled = currentIndex === maps.length - 1;
-    next.disabled = currentIndex === 0;
+    previous.disabled =
+      currentIndex === maps.length - 1;
+
+    next.disabled =
+      currentIndex === 0;
   }
 
   previous.addEventListener("click", function () {
+
     if (currentIndex < maps.length - 1) {
       currentIndex++;
       updateMap();
     }
+
   });
 
   next.addEventListener("click", function () {
+
     if (currentIndex > 0) {
       currentIndex--;
       updateMap();
     }
+
   });
 
   updateMap();
@@ -345,6 +369,4 @@ map_script = """
 display(HTML(
     map_script.replace("__MAP_DATA__", map_dates_json)
 ))
-
 ```
-

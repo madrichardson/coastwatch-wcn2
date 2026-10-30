@@ -71,13 +71,37 @@
 }
 
 /* ==========================================================
-   MAP VIEWER — COMPACT CENTERED LAYOUT
+   TWO-COLUMN LAYOUT
+   ========================================================== */
+
+.cw-ecocast-map-content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 3rem;
+}
+
+.cw-ecocast-map-left,
+.cw-ecocast-map-right {
+  min-width: 0;
+  width: 100%;
+}
+
+.cw-ecocast-map-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ==========================================================
+   MAP VIEWER
    ========================================================== */
 
 .cw-ecocast-map-section {
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto 3.5rem;
+  max-width: none;
+  margin: 0;
 
   background: #FFFFFF;
   border: 1px solid var(--map-border);
@@ -93,9 +117,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
 
-  padding: 1.4rem 1.8rem;
+  padding: 1.2rem 1.5rem;
   background: var(--map-light);
   border-bottom: 1px solid #D1E3EC;
 }
@@ -107,7 +131,7 @@
 
 .cw-ecocast-map-toolbar h2 {
   color: var(--map-navy);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 750;
   margin: 0 0 0.4rem;
   padding: 0;
@@ -116,7 +140,7 @@
 
 .cw-ecocast-map-toolbar p {
   color: #526878;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.6;
   margin: 0;
 }
@@ -144,14 +168,15 @@
   align-items: center;
 
   width: 100%;
-  padding: 1.5rem;
+  min-width: 0;
+  padding: 0.8rem;
   background: #F8FBFC;
 }
 
 .cw-ecocast-map-viewer img {
   display: block;
   width: 100%;
-  max-width: 750px;
+  max-width: 100%;
   height: auto;
   object-fit: contain;
   border-radius: 6px;
@@ -165,9 +190,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
 
-  padding: 1.2rem 1.8rem;
+  padding: 1rem 1.2rem;
   background: #FFFFFF;
   border-top: 1px solid var(--map-border);
 }
@@ -176,17 +201,17 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
 
-  min-width: 125px;
-  padding: 0.75rem 1rem;
+  min-width: 105px;
+  padding: 0.65rem 0.9rem;
 
   background: var(--map-blue);
   border: 1px solid var(--map-blue);
   border-radius: 8px;
 
   color: #FFFFFF;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
 
@@ -211,14 +236,20 @@
 
 .cw-ecocast-map-current {
   color: var(--map-navy);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 750;
   text-align: center;
 }
 
 /* ==========================================================
-   SECTION HEADINGS
+   FAQ SECTION
    ========================================================== */
+
+.cw-ecocast-map-faq {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
 
 .cw-ecocast-map-section-label {
   display: block;
@@ -237,25 +268,17 @@
 
 .cw-ecocast-map-section-heading h2 {
   color: var(--map-navy);
-  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-size: clamp(1.5rem, 2.5vw, 1.9rem);
   font-weight: 750;
   margin: 0;
   padding: 0;
   border: none !important;
 }
 
-/* ==========================================================
-   FAQ
-   ========================================================== */
-
-.cw-ecocast-map-faq {
-  margin-bottom: 3.5rem;
-}
-
 .cw-ecocast-map-faq-list {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.75rem;
 }
 
 .cw-ecocast-map-faq-item {
@@ -282,9 +305,9 @@
   justify-content: space-between;
   gap: 1rem;
 
-  padding: 1.25rem 1.5rem;
+  padding: 1.1rem 1.2rem;
   color: var(--map-navy);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 750;
   line-height: 1.5;
   cursor: pointer;
@@ -308,7 +331,7 @@
   border-bottom: 1px solid var(--map-border);
 }
 
-/* Plus icon */
+/* FAQ plus icon */
 
 .cw-ecocast-map-faq-icon {
   display: inline-flex;
@@ -316,13 +339,13 @@
   justify-content: center;
   flex-shrink: 0;
 
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
 
   background: #D4E9F0;
   color: var(--map-blue);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 500;
   line-height: 1;
 
@@ -336,11 +359,11 @@
 /* FAQ answers */
 
 .cw-ecocast-map-faq-answer {
-  padding: 1.5rem 1.7rem;
+  padding: 1.3rem 1.4rem;
   background: #FFFFFF;
   color: #526878;
-  font-size: 0.97rem;
-  line-height: 1.85;
+  font-size: 0.95rem;
+  line-height: 1.8;
 }
 
 .cw-ecocast-map-faq-answer p {
@@ -377,7 +400,8 @@
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
-  padding: 1.5rem;
+  padding: 1rem;
+
   background: #F8FBFC;
   border: 1px solid var(--map-border);
   border-radius: 10px;
@@ -386,7 +410,7 @@
 .cw-ecocast-map-model img {
   display: block;
   width: 100%;
-  max-width: 850px;
+  max-width: 100%;
   height: auto;
   object-fit: contain;
 }
@@ -396,8 +420,10 @@
    ========================================================== */
 
 .cw-ecocast-map-downloads {
-  padding: 2rem;
-  margin-bottom: 3rem;
+  width: 100%;
+  min-width: 0;
+  padding: 1.5rem;
+  margin: 0;
 
   background: var(--map-light);
   border: 1px solid var(--map-border);
@@ -407,7 +433,7 @@
 
 .cw-ecocast-map-downloads h2 {
   color: var(--map-navy);
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
   font-weight: 750;
   margin: 0 0 1rem;
   padding: 0;
@@ -416,14 +442,15 @@
 
 .cw-ecocast-map-downloads > p {
   color: #526878;
-  line-height: 1.8;
-  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0 0 1.2rem;
 }
 
 .cw-ecocast-download-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
 }
 
 .cw-ecocast-download-link {
@@ -433,15 +460,14 @@
   gap: 1rem;
 
   min-width: 0;
-  min-height: 80px;
-  padding: 1.2rem 1.3rem;
+  padding: 1rem 1.1rem;
 
   background: #FFFFFF;
   border: 1px solid #D1E3EC;
   border-radius: 9px;
 
   color: var(--map-blue) !important;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
   line-height: 1.5;
   text-decoration: none !important;
@@ -473,7 +499,9 @@
    ========================================================== */
 
 .cw-ecocast-map-disclaimer {
+  width: 100%;
   padding: 1.5rem 1.8rem;
+
   background: #F5F7F8;
   border: 1px solid var(--map-border);
   border-radius: 10px;
@@ -506,10 +534,15 @@
    RESPONSIVE — TABLET
    ========================================================== */
 
-@media (max-width: 850px) {
+@media (max-width: 1000px) {
 
-  .cw-ecocast-download-list {
+  .cw-ecocast-map-content-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cw-ecocast-map-section {
+    max-width: 850px;
+    margin: 0 auto;
   }
 
 }
@@ -524,13 +557,12 @@
     padding: 2rem 1.5rem;
   }
 
-  .cw-ecocast-map-section,
-  .cw-ecocast-map-faq {
-    margin-bottom: 2.5rem;
+  .cw-ecocast-map-content-grid {
+    gap: 2rem;
   }
 
   .cw-ecocast-map-toolbar {
-    padding: 1.2rem;
+    padding: 1rem;
     align-items: flex-start;
   }
 
@@ -539,7 +571,7 @@
   }
 
   .cw-ecocast-map-navigation {
-    padding: 1rem;
+    padding: 0.8rem;
     gap: 0.5rem;
   }
 
@@ -555,7 +587,7 @@
 
   .cw-ecocast-map-faq-item summary {
     padding: 1rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .cw-ecocast-map-faq-answer {
