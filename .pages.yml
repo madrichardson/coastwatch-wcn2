@@ -1120,14 +1120,199 @@ content:
           - name: description
             label: Description
             type: text
+
   # ========================================================
   # ECOCAST — ABOUT
   # ========================================================
 
-  - name: ecocast_about
+  - name: about_ecocast
     label: EcoCast — About
     type: file
-    path: content/ecocast_about.yml
+    path: content/about_ecocast.yml
+    fields:
+      - name: navigation
+        label: Project Navigation
+        type: object
+        fields:
+          - name: logo
+            label: Logo Path
+            type: string
+          - name: logo_alt
+            label: Logo Description
+            type: string
+
+      - name: hero
+        label: Page Header
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: subtitle
+            type: text
+
+      - name: mission
+        label: Mission and Vision
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: paragraphs
+            label: Mission Paragraphs
+            type: text
+            list: true
+
+      - name: team
+        label: EcoCast Team
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: introduction
+            type: text
+          - name: organizations
+            label: Participating Organizations
+            type: string
+            list: true
+          - name: closing
+            type: text
+
+      - name: funding
+        label: Project Funding
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: introduction
+            type: text
+          - name: organizations
+            label: Funding Organizations
+            type: string
+            list: true
+
+      - name: species
+        label: Target and Bycatch Species
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: items
+            label: Species
+            type: object
+            list: true
+            fields:
+              - name: category
+                type: string
+              - name: image
+                label: Image Path
+                type: string
+              - name: alt
+                type: string
+              - name: caption
+                type: text
+
+      - name: management
+        label: Dynamic Ocean Management
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: introduction
+            type: text
+          - name: comparison_title
+            type: string
+          - name: traditional
+            label: Traditional Ocean Management
+            type: object
+            fields:
+              - name: title
+                type: string
+              - name: points
+                type: string
+                list: true
+          - name: dynamic
+            label: Dynamic Ocean Management
+            type: object
+            fields:
+              - name: title
+                type: string
+              - name: points
+                type: string
+                list: true
+              - name: data_sources
+                label: Data Sources
+                type: string
+                list: true
+
+      - name: why_it_matters
+        label: Why It Matters
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: highlight_title
+            type: string
+          - name: points
+            type: string
+            list: true
+
+      - name: additional
+        label: Additional Information
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: websites
+            label: Related Websites
+            type: object
+            fields:
+              - name: title
+                type: string
+              - name: items
+                type: object
+                list: true
+                fields:
+                  - name: name
+                    type: string
+                  - name: url
+                    type: string
+                  - name: description
+                    type: text
+          - name: references
+            label: References
+            type: object
+            fields:
+              - name: title
+                type: string
+              - name: items
+                type: object
+                list: true
+                fields:
+                  - name: citation
+                    type: text
+                  - name: link_label
+                    type: string
+                  - name: url
+                    type: string
+
+      - name: disclaimer
+        label: Disclaimer
+        type: object
+        fields:
+          - name: text
+            type: text
+
+  # ========================================================
+  # ECOCAST — MAP
+  # ========================================================
+
+  - name: ecocast_map
+    label: EcoCast — Map
+    type: file
+    path: content/ecocast_map.yml
     fields:
       - name: hero
         label: Page Header
@@ -1140,14 +1325,93 @@ content:
           - name: subtitle
             type: text
 
+      - name: map
+        label: Recent EcoCast Maps
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: image_alt
+            type: string
+          - name: dates
+            label: Map Dates and URLs
+            type: object
+            list: true
+            fields:
+              - name: label
+                type: string
+              - name: url
+                type: string
+
+      - name: faq
+        label: Map Information and FAQs
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: questions
+            label: Questions
+            type: object
+            list: true
+            fields:
+              - name: question
+                type: string
+              - name: answer
+                type: text
+              - name: image
+                label: Image Path
+                type: string
+              - name: image_alt
+                type: string
+              - name: links
+                label: Related Links
+                type: object
+                list: true
+                fields:
+                  - name: label
+                    type: string
+                  - name: url
+                    type: string
+
+      - name: downloads
+        label: Download EcoCast Data
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: links
+            label: Download Links
+            type: object
+            list: true
+            fields:
+              - name: label
+                type: string
+              - name: url
+                type: string
+
+      - name: disclaimer
+        label: Disclaimer
+        type: object
+        fields:
+          - name: text
+            type: text
+
   # ========================================================
-  # ECOCAST — PRODUCTS
+  # ECOCAST — EXPLORER
   # ========================================================
 
-  - name: ecocast_products
-    label: EcoCast — Products
+  - name: ecocast_explorer
+    label: EcoCast — Explorer
     type: file
-    path: content/ecocast_products.yml
+    path: content/ecocast_explorer.yml
     fields:
       - name: hero
         label: Page Header
@@ -1158,6 +1422,56 @@ content:
           - name: title
             type: string
           - name: subtitle
+            type: text
+
+      - name: instructions
+        label: Information and Instructions
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: introduction
+            type: text
+          - name: steps
+            label: Instruction Steps
+            type: object
+            list: true
+            fields:
+              - name: text
+                type: text
+              - name: details
+                label: Additional Details
+                type: string
+                list: true
+
+      - name: application
+        label: Interactive Application
+        type: object
+        fields:
+          - name: eyebrow
+            type: string
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: url
+            label: Application URL
+            type: string
+          - name: height
+            label: Embed Height
+            type: number
+          - name: fallback_text
+            type: text
+          - name: button_label
+            type: string
+
+      - name: disclaimer
+        label: Disclaimer
+        type: object
+        fields:
+          - name: text
             type: text
 
   # ========================================================
@@ -1178,6 +1492,133 @@ content:
           - name: title
             type: string
           - name: subtitle
+            type: text
+
+      - name: mission
+        label: Mission and Vision
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+
+      - name: species
+        label: Targeted Species
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: image
+            label: Image Path
+            type: string
+          - name: image_alt
+            type: string
+          - name: caption
+            type: text
+
+      - name: team
+        label: WhaleWatch Team
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: organizations
+            type: string
+            list: true
+          - name: closing
+            type: text
+
+      - name: funding
+        label: Project Funding
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: description
+            type: text
+          - name: organizations
+            label: Funding Organizations
+            type: object
+            list: true
+            fields:
+              - name: name
+                type: string
+              - name: url
+                type: string
+
+      - name: management
+        label: Dynamic Ocean Management
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: introduction
+            type: text
+          - name: comparison_title
+            type: string
+          - name: traditional
+            label: Traditional Ocean Management
+            type: object
+            fields:
+              - name: title
+                type: string
+              - name: points
+                type: string
+                list: true
+          - name: dynamic
+            label: Dynamic Ocean Management
+            type: object
+            fields:
+              - name: title
+                type: string
+              - name: points
+                type: string
+                list: true
+              - name: data_sources
+                type: string
+                list: true
+          - name: importance
+            label: Why It Matters
+            type: object
+            fields:
+              - name: title
+                type: string
+              - name: description
+                type: text
+              - name: highlights_title
+                type: string
+              - name: highlights
+                type: string
+                list: true
+
+      - name: additional
+        label: Additional Information
+        type: object
+        fields:
+          - name: title
+            type: string
+          - name: sections
+            label: Related Websites and References
+            type: object
+            list: true
+            fields:
+              - name: title
+                type: string
+              - name: items
+                type: object
+                list: true
+                fields:
+                  - name: text
+                    type: text
+
+      - name: disclaimer
+        label: Disclaimer
+        type: object
+        fields:
+          - name: text
             type: text
 
   # ========================================================
@@ -1201,7 +1642,7 @@ content:
             type: text
 
       - name: maps
-        label: Recent Maps
+        label: Recent WhaleWatch Maps
         type: object
         fields:
           - name: title
@@ -1227,6 +1668,7 @@ content:
           - name: title
             type: string
           - name: image
+            label: Indicator Image URL
             type: string
           - name: image_alt
             type: string
@@ -1247,6 +1689,7 @@ content:
               - name: answer
                 type: text
               - name: image
+                label: Image Path
                 type: string
               - name: image_alt
                 type: string
@@ -1279,7 +1722,7 @@ content:
             type: text
 
       - name: instructions
-        label: Information & Instructions
+        label: Information and Instructions
         type: object
         fields:
           - name: title
@@ -1287,6 +1730,7 @@ content:
           - name: introduction
             type: text
           - name: steps
+            label: Instruction Steps
             type: string
             list: true
 
@@ -1299,9 +1743,10 @@ content:
           - name: description
             type: text
           - name: app_url
+            label: Application URL
             type: string
           - name: fallback_text
-            type: string
+            type: text
           - name: link_label
             type: string
 
