@@ -66,13 +66,10 @@
   margin-bottom: 3.5rem;
 }
 
-.cw-ecocast-about-heading h2 {
-  color: #123B5D;
-  font-size: clamp(1.6rem, 3vw, 2rem);
-  font-weight: 750;
-  margin: 0;
-  padding-bottom: 0;
-  border-bottom: none !important;
+.cw-ecocast-about-heading {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 2px solid #DCE5EB;
 }
 
 .cw-ecocast-about-heading h2 {
@@ -80,6 +77,8 @@
   font-size: clamp(1.6rem, 3vw, 2rem);
   font-weight: 750;
   margin: 0;
+  padding: 0;
+  border: none !important;
 }
 
 /* ==========================================================
