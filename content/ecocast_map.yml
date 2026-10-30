@@ -9,22 +9,27 @@ hero:
   subtitle: "Explore daily fishing suitability maps designed to help balance target catch and bycatch reduction."
 
 map:
-  title: "Daily EcoCast Map"
-  description: "Select a day to view the corresponding EcoCast Map product."
-  selector_label: "Select Map Date:"
+  title: "Most Recent Daily Maps"
+  description: "Browse the six most recent EcoCast Map products."
   image_alt: "Daily EcoCast fishing suitability map"
+
   dates:
-    - label: "Today"
+    - label: "Most Recent"
       url: "https://oceanview.pfeg.noaa.gov/ecocast/output/latest_week/latest.png"
-    - label: "1 Day Ago"
+
+    - label: "1 Day Earlier"
       url: "https://oceanview.pfeg.noaa.gov/ecocast/output/latest_week/latest1.png"
-    - label: "2 Days Ago"
+
+    - label: "2 Days Earlier"
       url: "https://oceanview.pfeg.noaa.gov/ecocast/output/latest_week/latest2.png"
-    - label: "3 Days Ago"
+
+    - label: "3 Days Earlier"
       url: "https://oceanview.pfeg.noaa.gov/ecocast/output/latest_week/latest3.png"
-    - label: "4 Days Ago"
+
+    - label: "4 Days Earlier"
       url: "https://oceanview.pfeg.noaa.gov/ecocast/output/latest_week/latest4.png"
-    - label: "5 Days Ago"
+
+    - label: "5 Days Earlier"
       url: "https://oceanview.pfeg.noaa.gov/ecocast/output/latest_week/latest5.png"
 
 faq:

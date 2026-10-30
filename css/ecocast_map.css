@@ -71,33 +71,37 @@
 }
 
 /* ==========================================================
-   MAP VIEWER
+   MAP VIEWER — COMPACT CENTERED LAYOUT
    ========================================================== */
 
 .cw-ecocast-map-section {
   width: 100%;
-  margin-bottom: 3.5rem;
+  max-width: 900px;
+  margin: 0 auto 3.5rem;
+
   background: #FFFFFF;
   border: 1px solid var(--map-border);
   border-radius: 14px;
   overflow: hidden;
+
   box-shadow: 0 6px 22px rgba(18, 59, 93, 0.05);
 }
+
+/* Map heading */
 
 .cw-ecocast-map-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   gap: 1.5rem;
 
-  padding: 1.7rem 2rem;
+  padding: 1.4rem 1.8rem;
   background: var(--map-light);
   border-bottom: 1px solid #D1E3EC;
 }
 
 .cw-ecocast-map-toolbar-text {
-  flex: 1 1 350px;
+  flex: 1;
   min-width: 0;
 }
 
@@ -117,46 +121,27 @@
   margin: 0;
 }
 
-/* Date selector */
+/* Map counter */
 
-.cw-ecocast-map-control {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 190px;
-}
-
-.cw-ecocast-map-control label {
-  color: var(--map-navy);
-  font-size: 0.9rem;
-  font-weight: 750;
-}
-
-.cw-ecocast-map-select {
-  width: 100%;
-  padding: 0.8rem 2.5rem 0.8rem 1rem;
+.cw-ecocast-map-counter {
+  flex-shrink: 0;
+  padding: 0.45rem 0.8rem;
 
   background: #FFFFFF;
-  border: 1px solid #B9D2DE;
-  border-radius: 8px;
+  border: 1px solid #D1E3EC;
+  border-radius: 20px;
 
-  color: var(--map-navy);
-  font-size: 0.95rem;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.cw-ecocast-map-select:focus {
-  outline: 2px solid var(--map-teal);
-  outline-offset: 2px;
+  color: var(--map-blue);
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 /* Map image */
 
 .cw-ecocast-map-viewer {
   display: flex;
-  align-items: flex-start;
   justify-content: center;
+  align-items: center;
 
   width: 100%;
   padding: 1.5rem;
@@ -166,10 +151,69 @@
 .cw-ecocast-map-viewer img {
   display: block;
   width: 100%;
-  max-width: 100%;
+  max-width: 750px;
   height: auto;
   object-fit: contain;
   border-radius: 6px;
+}
+
+/* ==========================================================
+   MAP ARROW NAVIGATION
+   ========================================================== */
+
+.cw-ecocast-map-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1.2rem 1.8rem;
+  background: #FFFFFF;
+  border-top: 1px solid var(--map-border);
+}
+
+.cw-ecocast-map-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+
+  min-width: 125px;
+  padding: 0.75rem 1rem;
+
+  background: var(--map-blue);
+  border: 1px solid var(--map-blue);
+  border-radius: 8px;
+
+  color: #FFFFFF;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.cw-ecocast-map-nav-btn:hover:not(:disabled) {
+  background: var(--map-navy);
+  border-color: var(--map-navy);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.cw-ecocast-map-nav-btn:disabled {
+  background: #E9EFF2;
+  border-color: #DCE5EB;
+  color: #91A2AD;
+  cursor: not-allowed;
+}
+
+.cw-ecocast-map-current {
+  color: var(--map-navy);
+  font-size: 0.95rem;
+  font-weight: 750;
+  text-align: center;
 }
 
 /* ==========================================================
@@ -452,13 +496,14 @@
    ========================================================== */
 
 .cw-ecocast-map-faq-item summary:focus-visible,
-.cw-ecocast-download-link:focus-visible {
+.cw-ecocast-download-link:focus-visible,
+.cw-ecocast-map-nav-btn:focus-visible {
   outline: 3px solid var(--map-teal);
   outline-offset: 3px;
 }
 
 /* ==========================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
    ========================================================== */
 
 @media (max-width: 850px) {
@@ -468,6 +513,10 @@
   }
 
 }
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   ========================================================== */
 
 @media (max-width: 650px) {
 
@@ -481,15 +530,27 @@
   }
 
   .cw-ecocast-map-toolbar {
-    padding: 1.3rem;
-  }
-
-  .cw-ecocast-map-control {
-    width: 100%;
+    padding: 1.2rem;
+    align-items: flex-start;
   }
 
   .cw-ecocast-map-viewer {
     padding: 0.5rem;
+  }
+
+  .cw-ecocast-map-navigation {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .cw-ecocast-map-nav-btn {
+    min-width: 0;
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .cw-ecocast-map-current {
+    font-size: 0.85rem;
   }
 
   .cw-ecocast-map-faq-item summary {
@@ -514,4 +575,3 @@
   }
 
 }
-
