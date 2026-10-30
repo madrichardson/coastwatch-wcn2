@@ -1,0 +1,222 @@
+---
+pagetitle: "AFSC Stock Assessment Tool"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: ../../css/afsc.css
+resources:
+  - spreadsheets/**
+  - images/**
+---
+
+```{python}
+#| echo: false
+#| output: asis
+import yaml
+import json
+from html import escape
+from IPython.display import HTML, display
+
+with open("../../content/afsc.yml", encoding="utf-8") as f:
+    content = yaml.safe_load(f) or {}
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+hero = content.get("hero", {})
+map_info = content.get("map", {})
+plots = content.get("plots", {})
+datasets = content.get("datasets", {})
+
+options = "".join(
+    f'<option value="{safe(key)}">{safe(item.get("label"))}</option>'
+    for key, item in datasets.items()
+)
+
+panels = []
+for key, item in datasets.items():
+    groups = {}
+    for link in item.get("links", []):
+        groups.setdefault(link.get("category", "More Information"), []).append(link)
+    link_rows = "".join(
+        f'<dt>{safe(group)}</dt><dd>' + "<br>".join(
+            f'<a href="{safe(link.get("url"))}" target="_blank" rel="noopener noreferrer">{safe(link.get("label"))}</a>'
+            for link in links
+        ) + '</dd>'
+        for group, links in groups.items()
+    )
+    panels.append(f'''
+    <div class="afsc-dataset-panel" id="afsc-info-{safe(key)}" {'hidden' if key != 'chlorophyll' else ''}>
+      <h2>{safe(item.get('heading'))}</h2>
+      <dl class="afsc-details">
+        <dt>Summary</dt><dd>{safe(item.get('summary'))}</dd>
+        <dt>Source</dt><dd>{safe(item.get('source'))}</dd>
+        <dt>Temporal Coverage</dt><dd>{safe(item.get('coverage'))}</dd>
+        {link_rows}
+      </dl>
+    </div>''')
+
+cards = "".join(
+    f'<section class="afsc-chart-card" id="dashboard{i}"><div id="chart_div{i}" class="afsc-chart"></div><div id="filter_div{i}" class="afsc-filter"></div></section>'
+    for i in range(1, 9)
+)
+
+page = f'''
+<div class="afsc-page">
+  <header class="afsc-hero">
+    <span class="afsc-eyebrow">{safe(hero.get('eyebrow'))}</span>
+    <h1>{safe(hero.get('title'))}</h1>
+    <p>{safe(hero.get('subtitle'))}</p>
+  </header>
+  <div class="afsc-overview">
+    <section class="afsc-panel afsc-map-panel">
+      <h2>{safe(map_info.get('title'))}</h2>
+      <img src="{safe(map_info.get('image'))}" alt="{safe(map_info.get('alt'))}" class="afsc-region-map">
+      <label for="datasetSelect">{safe(content.get('selector_label'))}</label>
+      <select id="datasetSelect" class="afsc-select">{options}</select>
+    </section>
+    <section class="afsc-panel afsc-information" aria-live="polite">{''.join(panels)}</section>
+  </div>
+  <section class="afsc-plots">
+    <div class="afsc-section-heading">
+      <span class="afsc-section-eyebrow">{safe(plots.get('eyebrow'))}</span>
+      <h2>{safe(plots.get('title'))}</h2>
+      <p>{safe(plots.get('description'))}</p>
+    </div>
+    <div id="afsc-chart-status" role="status" aria-live="polite"></div>
+    <div class="afsc-dashboard-grid">{cards}</div>
+  </section>
+</div>'''
+display(HTML(page))
+
+# JSON is serialized into a script of type application/json for use by the browser.
+settings = {
+    "datasets": {key: {"label": value.get("label", key), "units": value.get("units", "")}
+                 for key, value in datasets.items()}
+}
+settings_json = json.dumps(settings, ensure_ascii=False).replace('<', '\\u003c')
+display(HTML(f'<script type="application/json" id="afsc-settings">{settings_json}</script>'))
+```
+
+```{=html}
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
+<script>
+(function () {
+  const settings = JSON.parse(document.getElementById('afsc-settings').textContent);
+  const datasetFiles = {
+    chlorophyll: 'spreadsheets/afsc_chlorophyll.csv',
+    sst: 'spreadsheets/afsc_sst.csv',
+    wind: 'spreadsheets/afsc_wind.csv'
+  };
+  // Matches the actual order of the eight regional mean columns in all three CSVs.
+  const regions = [
+    'Northern Bering Sea (NBS)', 'Southern Bering Sea (SBS)',
+    'Western Aleutian Islands (WAI)', 'Central Aleutian Islands (CAI)',
+    'Eastern Aleutian Islands (EAI)', 'Western Gulf of Alaska (WGA)',
+    'Central Gulf of Alaska (CGA)', 'Eastern Gulf of Alaska (EGA)'
+  ];
+  let currentDataset = 'chlorophyll';
+  let dashboards = [];
+  let requestNumber = 0;
+  const status = document.getElementById('afsc-chart-status');
+
+  function updateInfo(key) {
+    document.querySelectorAll('.afsc-dataset-panel').forEach(panel => {
+      panel.hidden = panel.id !== 'afsc-info-' + key;
+    });
+  }
+
+  function drawRegion(index, table, key) {
+    const data = new google.visualization.DataTable();
+    data.addColumn('date', 'Date');
+    data.addColumn('number', regions[index - 1]);
+    table.forEach(row => data.addRow([row[0], row[index]]));
+    const dashboard = new google.visualization.Dashboard(document.getElementById('dashboard' + index));
+    const filter = new google.visualization.ControlWrapper({
+      controlType: 'ChartRangeFilter',
+      containerId: 'filter_div' + index,
+      options: {
+        filterColumnIndex: 0,
+        ui: { chartType: 'LineChart', chartOptions: {
+          height: 65, chartArea: { width: '82%' }, legend: 'none'
+        }}
+      }
+    });
+    const chart = new google.visualization.ChartWrapper({
+      chartType: 'ScatterChart',
+      containerId: 'chart_div' + index,
+      options: {
+        height: 285,
+        chartArea: { width: '78%', height: '67%' },
+        hAxis: { title: 'Date' },
+        vAxis: { title: settings.datasets[key].units },
+        trendlines: { 0: { type: 'linear', color: '#168C96', lineWidth: 2, opacity: 0.6 } },
+        legend: 'none',
+        title: 'Mean Monthly ' + settings.datasets[key].label + ' — ' + regions[index - 1],
+        titleTextStyle: { color: '#123B5D', fontSize: 14, bold: true }
+      }
+    });
+    dashboard.bind(filter, chart);
+    dashboard.draw(data);
+    return { dashboard, data };
+  }
+
+  async function loadDataset(key) {
+    const thisRequest = ++requestNumber;
+    status.textContent = 'Loading regional plots…';
+    try {
+      const response = await fetch(datasetFiles[key]);
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const rows = $.csv.toArrays(await response.text());
+      // Row 0: column names; row 1: units; remaining rows: observations.
+      // Only columns 1–8 are regional means; later columns contain SD and counts.
+      const observations = rows.slice(2).filter(row => row[0]).map(row => {
+        const date = new Date(row[0]);
+        if (Number.isNaN(date.getTime())) return null;
+        return [date, ...row.slice(1, 9).map(value => {
+          const cleaned = String(value ?? '').trim();
+          if (!cleaned || cleaned.toLowerCase() === 'nan') return null;
+          const number = Number(cleaned);
+          return Number.isFinite(number) ? number : null;
+        })];
+      }).filter(Boolean);
+      if (thisRequest !== requestNumber) return;
+      if (!observations.length) throw new Error('No valid observations in CSV');
+      dashboards = [];
+      for (let i = 1; i <= 8; i++) dashboards.push(drawRegion(i, observations, key));
+      status.textContent = '';
+    } catch (error) {
+      if (thisRequest !== requestNumber) return;
+      status.textContent = 'Unable to load charts: ' + error.message;
+      console.error('AFSC chart error:', error);
+    }
+  }
+
+  function init() {
+    const selector = document.getElementById('datasetSelect');
+    selector.addEventListener('change', () => {
+      currentDataset = selector.value;
+      updateInfo(currentDataset);
+      loadDataset(currentDataset);
+    });
+    updateInfo(currentDataset);
+    loadDataset(currentDataset);
+  }
+
+  google.charts.load('current', { packages: ['corechart', 'controls'] });
+  google.charts.setOnLoadCallback(init);
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      dashboards.forEach(item => item.dashboard.draw(item.data));
+    }, 200);
+  });
+})();
+</script>
+```

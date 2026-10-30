@@ -1,0 +1,49 @@
+hero:
+  eyebrow: "AFSC DATA EXPLORER"
+  title: "AFSC Stock Assessment Tool"
+  subtitle: "Explore monthly environmental conditions across eight Alaska Fisheries Science Center management regions."
+map:
+  title: "AFSC Management Regions"
+  image: "images/chl_zones.png"
+  alt: "Map of AFSC management regions"
+selector_label: "Select a Parameter:"
+plots:
+  eyebrow: "REGIONAL TIME SERIES"
+  title: "Plots for Each AFSC Management Region"
+  description: "Explore monthly regional means, use the timeline beneath each chart to adjust the date range, and compare trends across regions."
+datasets:
+  chlorophyll:
+    label: "Chlorophyll"
+    heading: "ESA CCI Ocean Color Data"
+    units: "Chl (mg m⁻³)"
+    summary: "Merge chlorophyll data from the MODIS Aqua, VIIRS, MERIS, and SeaWiFS sensors."
+    source: "Ocean Colour Program, European Space Agency"
+    coverage: "1997-09-04T00:00:00Z – 2018-06-01T00:00:00Z"
+    links:
+      - {label: "AFSC Chlorophyll Time Series", url: "https://polarwatch.noaa.gov/erddap/search/index.html?searchFor=afsc_chlorophyll", category: "Time Series Data"}
+      - {label: "ESA CCI Ocean Color Monthly", url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI31OceanColorMonthly.graph", category: "Satellite Data"}
+      - {label: "ESA Ocean Colour CCI Project Website", url: "http://www.esa-oceancolour-cci.org/", category: "More Information"}
+  sst:
+    label: "Sea Surface Temperature"
+    heading: "AVHRR Pathfinder SST v5.3"
+    units: "SST (°C)"
+    summary: "Sea surface temperature data from AVHRR sensors."
+    source: "NOAA NCEI"
+    coverage: "1981-09-16T00:00:00Z – 2019-06-16T00:00:00Z"
+    links:
+      - {label: "AFSC SST Time Series", url: "https://polarwatch.noaa.gov/erddap/search/index.html?searchFor=afsc_sst", category: "Time Series Data"}
+      - {label: "AVHRR Pathfinder Version 5.3 SST Monthly", url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdPH53sstnmday.graph", category: "Satellite Data"}
+      - {label: "AVHRR Pathfinder Version 5.3 Product Page", url: "https://data.nodc.noaa.gov/cgi-bin/iso?id=gov.noaa.nodc:AVHRR_Pathfinder-NCEI-L3C-v5.3", category: "More Information"}
+  wind:
+    label: "Wind Speeds"
+    heading: "Blended Sea Winds / ASCAT Winds"
+    units: "Wind Speed (m/s)"
+    summary: "NOAA Blended Winds (1987–2011), MetOp ASCAT (2011–present)."
+    source: "NOAA NCEI / NOAA NESDIS"
+    coverage: "1987-07-15T00:00:00Z – 2019-09-16T00:00:00Z"
+    links:
+      - {label: "AFSC Wind Speed Time Series", url: "https://polarwatch.noaa.gov/erddap/search/index.html?searchFor=afsc_wind", category: "Time Series Data"}
+      - {label: "NOAA NCDC Blended Wind Monthly", url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOwMon.graph", category: "Satellite Data"}
+      - {label: "Metop-B ASCAT Wind Divergence Monthly", url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdQBdivmodmday.graph", category: "Satellite Data"}
+      - {label: "NOAA NCDC Blended Sea Winds Data Access", url: "https://www.ncei.noaa.gov/products/blended-sea-winds", category: "More Information"}
+      - {label: "ASCAT Products Page", url: "https://www.ospo.noaa.gov/Products/atmosphere/ascat/", category: "More Information"}

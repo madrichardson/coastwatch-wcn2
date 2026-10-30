@@ -1,0 +1,32 @@
+/* AFSC Stock Assessment Tool */
+.afsc-page { --afsc-navy:#123B5D; --afsc-blue:#176A91; --afsc-teal:#168C96; --afsc-border:#DCE5EB; color:#294457; }
+.afsc-page *, .afsc-page *::before, .afsc-page *::after { box-sizing:border-box; }
+.afsc-page h1, .afsc-page h2 { border:0 !important; padding-bottom:0; }
+.afsc-hero { background:linear-gradient(115deg,#123B5D,#164D70 65%,#176A91); border-radius:16px; padding:clamp(2.4rem,5vw,4rem); margin-bottom:2rem; }
+.afsc-eyebrow,.afsc-section-eyebrow { display:block; font-size:.8rem; letter-spacing:.13em; font-weight:750; margin-bottom:.75rem; }
+.afsc-eyebrow { color:#9ADDE0; }
+.afsc-hero h1 { color:white; font-size:clamp(2rem,4vw,3rem); margin:0 0 .9rem; }
+.afsc-hero p { color:#DCEAF2; font-size:1.06rem; line-height:1.75; margin:0; max-width:850px; }
+.afsc-overview { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:1.5rem; align-items:stretch; margin-bottom:3rem; }
+.afsc-panel { background:#fff; border:1px solid var(--afsc-border); border-top:4px solid var(--afsc-teal); border-radius:12px; padding:1.6rem; box-shadow:0 6px 22px rgba(18,59,93,.05); min-width:0; }
+.afsc-panel h2 { font-size:1.5rem; color:var(--afsc-navy); margin:0 0 1.2rem; }
+.afsc-region-map { width:100%; height:auto; object-fit:contain; display:block; border-radius:8px; margin:0 auto 1.5rem; }
+.afsc-map-panel label { display:block; color:var(--afsc-navy); font-weight:700; margin-bottom:.55rem; }
+.afsc-select { display:block; width:100%; padding:.8rem 1rem; background:#fff; border:1px solid #bacdd9; border-radius:8px; color:var(--afsc-navy); }
+.afsc-select:focus-visible { outline:3px solid var(--afsc-teal); outline-offset:2px; }
+.afsc-dataset-panel[hidden] { display:none !important; }
+.afsc-details { display:grid; grid-template-columns:minmax(125px,32%) 1fr; gap:.7rem 1rem; margin:0; font-size:.94rem; line-height:1.65; }
+.afsc-details dt { color:var(--afsc-navy); font-weight:750; }
+.afsc-details dd { margin:0; overflow-wrap:anywhere; }
+.afsc-details a { color:var(--afsc-blue); text-decoration:underline; }
+.afsc-section-eyebrow { color:var(--afsc-teal); }
+.afsc-section-heading { margin-bottom:1.6rem; }
+.afsc-section-heading h2 { color:var(--afsc-navy); font-size:clamp(1.55rem,2.8vw,2.1rem); margin:0 0 .7rem; }
+.afsc-section-heading p { color:#526878; margin:0; line-height:1.75; }
+#afsc-chart-status { color:var(--afsc-blue); margin-bottom:.5rem; }
+.afsc-dashboard-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; }
+.afsc-chart-card { min-width:0; padding:1.1rem .5rem .7rem; border:1px solid var(--afsc-border); border-top:3px solid var(--afsc-teal); background:#fff; border-radius:12px; box-shadow:0 4px 18px rgba(18,59,93,.05); overflow:hidden; }
+.afsc-chart,.afsc-filter { width:100%; }
+@media(max-width:1000px) { .afsc-overview { grid-template-columns:1fr; } }
+@media(max-width:850px) { .afsc-dashboard-grid { grid-template-columns:1fr; } }
+@media(max-width:600px) { .afsc-hero { padding:2rem 1.4rem; } .afsc-panel { padding:1.2rem; } .afsc-details { grid-template-columns:1fr; gap:.15rem; } .afsc-details dd { margin-bottom:.8rem; } }
