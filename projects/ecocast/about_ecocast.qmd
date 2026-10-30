@@ -1,0 +1,378 @@
+
+---
+pagetitle: "About EcoCast"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css:
+      - ../../css/ecocast.css
+      - ../../css/about_ecocast.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+import markdown
+from html import escape
+from IPython.display import display, HTML
+
+# Use "content/about_ecocast.yml" instead if
+# execute-dir: project is enabled in _quarto.yml.
+with open("../../content/about_ecocast.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+
+def md(value):
+    return markdown.markdown(
+        str(value or ""),
+        extensions=["tables", "sane_lists"]
+    )
+
+
+def bullet_list(items):
+    return "<ul>" + "".join(
+        f"<li>{safe(item)}</li>" for item in items
+    ) + "</ul>"
+
+
+def render_links(items):
+    result = ""
+
+    for item in items:
+        result += f"""
+        <li>
+          <a href="{safe(item.get('url'))}"
+             target="_blank"
+             rel="noopener noreferrer">
+            {safe(item.get('name'))}
+          </a>: {safe(item.get('description'))}
+        </li>
+        """
+
+    return f"<ul>{result}</ul>"
+
+
+def render_references(items):
+    result = ""
+
+    for item in items:
+        result += f"""
+        <li>
+          {safe(item.get('citation'))}
+          <a href="{safe(item.get('url'))}"
+             target="_blank"
+             rel="noopener noreferrer">
+            {safe(item.get('link_label'))}
+          </a>
+        </li>
+        """
+
+    return f"<ul>{result}</ul>"
+
+
+# ----------------------------------------------------------
+# CONTENT
+# ----------------------------------------------------------
+
+hero = data.get("hero", {})
+nav = data.get("navigation", {})
+mission = data.get("mission", {})
+team = data.get("team", {})
+funding = data.get("funding", {})
+species = data.get("species", {})
+management = data.get("management", {})
+why = data.get("why_it_matters", {})
+additional = data.get("additional", {})
+disclaimer = data.get("disclaimer", {})
+
+
+# ----------------------------------------------------------
+# MISSION PARAGRAPHS
+# ----------------------------------------------------------
+
+mission_paragraphs = "".join(
+    f"<p>{safe(p)}</p>"
+    for p in mission.get("paragraphs", [])
+)
+
+
+# ----------------------------------------------------------
+# SPECIES CARDS
+# ----------------------------------------------------------
+
+species_cards = ""
+
+for item in species.get("items", []):
+    species_cards += f"""
+    <article class="cw-ecocast-species-card">
+
+      <span class="cw-ecocast-species-label">
+        {safe(item.get('category'))}
+      </span>
+
+      <div class="cw-ecocast-species-image">
+        <img
+          src="{safe(item.get('image'))}"
+          alt="{safe(item.get('alt'))}"
+        >
+      </div>
+
+      <div class="cw-ecocast-species-caption">
+        {md(item.get('caption'))}
+      </div>
+
+    </article>
+    """
+
+
+# ----------------------------------------------------------
+# DYNAMIC OCEAN MANAGEMENT
+# ----------------------------------------------------------
+
+traditional = management.get("traditional", {})
+dynamic = management.get("dynamic", {})
+
+dynamic_points = ""
+
+for point in dynamic.get("points", []):
+    dynamic_points += f"<li>{safe(point)}"
+
+    if point == "Incorporates diverse data sources:":
+        dynamic_points += bullet_list(
+            dynamic.get("data_sources", [])
+        )
+
+    dynamic_points += "</li>"
+
+
+# ----------------------------------------------------------
+# ADDITIONAL INFORMATION
+# ----------------------------------------------------------
+
+websites = additional.get("websites", {})
+references = additional.get("references", {})
+
+
+# ----------------------------------------------------------
+# PAGE HTML
+# ----------------------------------------------------------
+
+html = f"""
+<div class="cw-ecocast cw-ecocast-about">
+
+  <!-- PROJECT NAVIGATION -->
+  <div class="cw-ecocast-topbar">
+
+    <a class="cw-ecocast-brand" href="ecocast.html">
+      <img
+        src="{safe(nav.get('logo'))}"
+        alt="{safe(nav.get('logo_alt'))}"
+      >
+    </a>
+
+    <nav class="cw-ecocast-tabs"
+         aria-label="EcoCast navigation">
+
+      <a class="cw-ecocast-tab is-active"
+         href="about_ecocast.html"
+         aria-current="page">
+        About EcoCast
+      </a>
+
+      <a class="cw-ecocast-tab"
+         href="ecocast_map.html">
+        EcoCast Map
+      </a>
+
+      <a class="cw-ecocast-tab"
+         href="ecocast_explorer.html">
+        EcoCast Explorer
+      </a>
+
+    </nav>
+
+  </div>
+
+
+  <!-- INTRODUCTION -->
+  <section class="cw-ecocast-about-hero">
+
+    <span class="cw-ecocast-about-eyebrow">
+      {safe(hero.get('eyebrow'))}
+    </span>
+
+    <h1>{safe(hero.get('title'))}</h1>
+
+    <p>{safe(hero.get('subtitle'))}</p>
+
+  </section>
+
+
+  <!-- MISSION -->
+  <section class="cw-ecocast-about-section">
+
+    <div class="cw-ecocast-about-heading">
+      <h2>{safe(mission.get('title'))}</h2>
+    </div>
+
+    <div class="cw-ecocast-mission">
+      {mission_paragraphs}
+    </div>
+
+  </section>
+
+
+  <!-- TEAM AND FUNDING -->
+  <section class="cw-ecocast-about-two-col">
+
+    <article class="cw-ecocast-info-card">
+
+      <h2>{safe(team.get('title'))}</h2>
+
+      <p>{safe(team.get('introduction'))}</p>
+
+      {bullet_list(team.get('organizations', []))}
+
+      <p>{safe(team.get('closing'))}</p>
+
+    </article>
+
+    <article class="cw-ecocast-info-card">
+
+      <h2>{safe(funding.get('title'))}</h2>
+
+      <p>{safe(funding.get('introduction'))}</p>
+
+      {bullet_list(funding.get('organizations', []))}
+
+    </article>
+
+  </section>
+
+
+  <!-- SPECIES -->
+  <section class="cw-ecocast-about-section">
+
+    <div class="cw-ecocast-about-heading">
+      <h2>{safe(species.get('title'))}</h2>
+    </div>
+
+    <div class="cw-ecocast-species-grid">
+      {species_cards}
+    </div>
+
+  </section>
+
+
+  <!-- DYNAMIC OCEAN MANAGEMENT -->
+  <section class="cw-ecocast-about-section">
+
+    <div class="cw-ecocast-about-heading">
+      <h2>{safe(management.get('title'))}</h2>
+    </div>
+
+    <p class="cw-ecocast-management-intro">
+      {safe(management.get('introduction'))}
+    </p>
+
+    <h3 class="cw-ecocast-comparison-heading">
+      {safe(management.get('comparison_title'))}
+    </h3>
+
+    <div class="cw-ecocast-comparison-grid">
+
+      <article class="cw-ecocast-comparison-card traditional">
+
+        <h3>{safe(traditional.get('title'))}</h3>
+
+        {bullet_list(traditional.get('points', []))}
+
+      </article>
+
+      <article class="cw-ecocast-comparison-card dynamic">
+
+        <h3>{safe(dynamic.get('title'))}</h3>
+
+        <ul>{dynamic_points}</ul>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- WHY IT MATTERS -->
+  <section class="cw-ecocast-why">
+
+    <h2>{safe(why.get('title'))}</h2>
+
+    <p>{safe(why.get('description'))}</p>
+
+    <h3>{safe(why.get('highlight_title'))}</h3>
+
+    {bullet_list(why.get('points', []))}
+
+  </section>
+
+
+  <!-- ADDITIONAL INFORMATION -->
+  <section class="cw-ecocast-about-section">
+
+    <div class="cw-ecocast-about-heading">
+      <h2>{safe(additional.get('title'))}</h2>
+    </div>
+
+    <div class="cw-ecocast-about-accordion">
+
+      <details class="cw-ecocast-about-details">
+
+        <summary>
+          {safe(websites.get('title'))}
+          <span aria-hidden="true">+</span>
+        </summary>
+
+        <div class="cw-ecocast-about-details-body">
+          {render_links(websites.get('items', []))}
+        </div>
+
+      </details>
+
+      <details class="cw-ecocast-about-details">
+
+        <summary>
+          {safe(references.get('title'))}
+          <span aria-hidden="true">+</span>
+        </summary>
+
+        <div class="cw-ecocast-about-details-body">
+          {render_references(references.get('items', []))}
+        </div>
+
+      </details>
+
+    </div>
+
+  </section>
+
+
+  <!-- DISCLAIMER -->
+  <section class="cw-ecocast-about-disclaimer">
+    {md(disclaimer.get('text'))}
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
+

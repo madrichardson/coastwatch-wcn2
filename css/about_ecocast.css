@@ -1,0 +1,506 @@
+
+/* ==========================================================
+   ABOUT ECOCAST
+   ========================================================== */
+
+/* Active project navigation */
+
+.cw-ecocast-tab.is-active {
+  background: #176A91;
+  border-color: #176A91;
+  color: #FFFFFF !important;
+}
+
+.cw-ecocast-tab.is-active:hover {
+  background: #123B5D;
+  border-color: #123B5D;
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================
+   INTRODUCTION HERO
+   ========================================================== */
+
+.cw-ecocast-about-hero {
+  padding: 3rem 3.5rem;
+  margin-bottom: 3.5rem;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+}
+
+.cw-ecocast-about-eyebrow {
+  display: block;
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8rem;
+}
+
+.cw-ecocast-about-hero h1 {
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.cw-ecocast-about-hero p {
+  color: #DCEAF2;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ==========================================================
+   GENERAL SECTIONS
+   ========================================================== */
+
+.cw-ecocast-about-section {
+  margin-bottom: 3.5rem;
+}
+
+.cw-ecocast-about-heading h2 {
+  color: #123B5D;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 750;
+  margin: 0;
+  padding-bottom: 0;
+  border-bottom: none !important;
+}
+
+.cw-ecocast-about-heading h2 {
+  color: #123B5D;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 750;
+  margin: 0;
+}
+
+/* ==========================================================
+   MISSION
+   ========================================================== */
+
+.cw-ecocast-mission {
+  padding: 2rem 2.3rem;
+  background: #F1F8FA;
+  border-left: 5px solid #168C96;
+  border-radius: 0 12px 12px 0;
+}
+
+.cw-ecocast-mission p {
+  color: #526878;
+  font-size: 1rem;
+  line-height: 1.85;
+  margin: 0 0 1.1rem;
+}
+
+.cw-ecocast-mission p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================
+   TEAM AND FUNDING
+   ========================================================== */
+
+.cw-ecocast-about-two-col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.cw-ecocast-info-card {
+  padding: 2rem;
+  background: #FFFFFF;
+  border: 1px solid #DCE5EB;
+  border-top: 4px solid #168C96;
+  border-radius: 13px;
+  box-shadow: 0 6px 22px rgba(18, 59, 93, 0.045);
+}
+
+.cw-ecocast-info-card:nth-child(even) {
+  border-top-color: #176A91;
+}
+
+.cw-ecocast-info-card h2 {
+  color: #123B5D;
+  font-size: 1.5rem;
+  font-weight: 750;
+  margin: 0 0 1rem;
+}
+
+.cw-ecocast-info-card p,
+.cw-ecocast-info-card li {
+  color: #526878;
+  line-height: 1.75;
+}
+
+.cw-ecocast-info-card ul {
+  padding-left: 1.3rem;
+  margin: 1rem 0;
+}
+
+.cw-ecocast-info-card li {
+  margin-bottom: 0.5rem;
+}
+
+.cw-ecocast-info-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================
+   SPECIES GALLERY
+   ========================================================== */
+
+.cw-ecocast-species-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.cw-ecocast-species-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  background: #FFFFFF;
+  border: 1px solid #DCE5EB;
+  border-radius: 13px;
+  overflow: hidden;
+
+  box-shadow: 0 4px 16px rgba(18, 59, 93, 0.04);
+}
+
+.cw-ecocast-species-label {
+  display: block;
+  padding: 1rem 1.3rem;
+
+  background: #EAF3F7;
+  color: #123B5D;
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.cw-ecocast-species-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 250px;
+  padding: 1rem;
+  background: #F8FBFC;
+}
+
+.cw-ecocast-species-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cw-ecocast-species-caption {
+  padding: 1.2rem 1.3rem;
+  color: #526878;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.cw-ecocast-species-caption p {
+  margin: 0;
+}
+
+/* ==========================================================
+   DYNAMIC OCEAN MANAGEMENT
+   ========================================================== */
+
+.cw-ecocast-management-intro {
+  color: #526878;
+  font-size: 1rem;
+  line-height: 1.85;
+  margin-bottom: 2rem;
+}
+
+.cw-ecocast-comparison-heading {
+  color: #123B5D;
+  font-size: 1.4rem;
+  font-weight: 750;
+  margin-bottom: 1.5rem;
+}
+
+.cw-ecocast-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.cw-ecocast-comparison-card {
+  padding: 2rem;
+  border-radius: 13px;
+  border: 1px solid #DCE5EB;
+}
+
+.cw-ecocast-comparison-card.traditional {
+  background: #F4F7F9;
+  border-top: 4px solid #7893A5;
+}
+
+.cw-ecocast-comparison-card.dynamic {
+  background: #EAF6F5;
+  border-top: 4px solid #168C96;
+}
+
+.cw-ecocast-comparison-card h3 {
+  color: #123B5D;
+  font-size: 1.3rem;
+  font-weight: 750;
+  margin: 0 0 1.3rem;
+}
+
+.cw-ecocast-comparison-card ul {
+  padding-left: 1.3rem;
+  margin: 0;
+}
+
+.cw-ecocast-comparison-card li {
+  color: #526878;
+  line-height: 1.75;
+  margin-bottom: 0.8rem;
+}
+
+.cw-ecocast-comparison-card li:last-child {
+  margin-bottom: 0;
+}
+
+.cw-ecocast-comparison-card li ul {
+  margin-top: 0.6rem;
+}
+
+/* ==========================================================
+   WHY IT MATTERS
+   ========================================================== */
+
+.cw-ecocast-why {
+  padding: 2.5rem 3rem;
+  margin-bottom: 3.5rem;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #176A91 100%
+  );
+
+  border-radius: 15px;
+}
+
+.cw-ecocast-why h2 {
+  color: #FFFFFF;
+  font-size: 1.9rem;
+  font-weight: 750;
+  margin: 0 0 1rem;
+}
+
+.cw-ecocast-why h3 {
+  color: #A9E3E4;
+  font-size: 1.15rem;
+  font-weight: 750;
+  margin: 1.5rem 0 0.8rem;
+}
+
+.cw-ecocast-why p,
+.cw-ecocast-why li {
+  color: #E2EEF4;
+  line-height: 1.8;
+}
+
+.cw-ecocast-why ul {
+  margin-bottom: 0;
+  padding-left: 1.3rem;
+}
+
+/* ==========================================================
+   ADDITIONAL INFORMATION
+   ========================================================== */
+
+.cw-ecocast-about-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cw-ecocast-about-details {
+  background: #EAF3F7;
+  border: 1px solid #C8DEE8;
+  border-left: 5px solid #168C96;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cw-ecocast-about-details summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1.2rem 1.5rem;
+
+  color: #123B5D;
+  font-size: 1.05rem;
+  font-weight: 750;
+
+  cursor: pointer;
+  list-style: none;
+}
+
+.cw-ecocast-about-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.cw-ecocast-about-details summary::marker {
+  content: "";
+}
+
+.cw-ecocast-about-details summary:hover {
+  background: #DDEFF4;
+}
+
+.cw-ecocast-about-details summary span {
+  font-size: 1.5rem;
+  color: #176A91;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+
+.cw-ecocast-about-details[open] summary span {
+  transform: rotate(45deg);
+}
+
+.cw-ecocast-about-details-body {
+  padding: 1.5rem;
+  background: #FFFFFF;
+  border-top: 1px solid #DCE5EB;
+}
+
+.cw-ecocast-about-details-body ul {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.cw-ecocast-about-details-body li {
+  color: #526878;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.cw-ecocast-about-details-body li:last-child {
+  margin-bottom: 0;
+}
+
+.cw-ecocast-about-details-body a {
+  color: #176A91;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cw-ecocast-about-details-body a:hover {
+  color: #168C96;
+}
+
+/* ==========================================================
+   DISCLAIMER
+   ========================================================== */
+
+.cw-ecocast-about-disclaimer {
+  padding: 1.5rem 1.8rem;
+  background: #F5F7F8;
+  border: 1px solid #DCE5EB;
+  border-radius: 10px;
+}
+
+.cw-ecocast-about-disclaimer p {
+  color: #687D8B;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.cw-ecocast-about-disclaimer a {
+  color: #176A91;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+  .cw-ecocast-about-two-col,
+  .cw-ecocast-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-ecocast-species-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   ========================================================== */
+
+@media (max-width: 650px) {
+
+  .cw-ecocast-about-hero {
+    padding: 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .cw-ecocast-about-section,
+  .cw-ecocast-about-two-col,
+  .cw-ecocast-why {
+    margin-bottom: 2.5rem;
+  }
+
+  .cw-ecocast-mission {
+    padding: 1.5rem;
+  }
+
+  .cw-ecocast-info-card {
+    padding: 1.5rem;
+  }
+
+  .cw-ecocast-species-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-ecocast-comparison-card {
+    padding: 1.5rem;
+  }
+
+  .cw-ecocast-why {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-ecocast-about-details summary {
+    padding: 1rem 1.2rem;
+  }
+
+  .cw-ecocast-about-details-body {
+    padding: 1.2rem;
+  }
+
+  .cw-ecocast-about-disclaimer {
+    padding: 1.2rem;
+  }
+
+}
+
