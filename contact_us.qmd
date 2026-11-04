@@ -1,0 +1,198 @@
+---
+pagetitle: "Contact and Feedback"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: css/contact_us.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+from html import escape
+from IPython.display import display, HTML
+
+with open("content/contact.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+page = data.get("page", {})
+contacts = data.get("contacts", [])
+feedback = data.get("feedback", {})
+
+def safe(value):
+    return escape(str(value or ""), quote=True)
+
+contact_cards = ""
+
+for person in contacts:
+    name = safe(person.get("name"))
+    role = safe(person.get("role"))
+    address1 = safe(person.get("address_line1"))
+    address2 = safe(person.get("address_line2"))
+    email = safe(person.get("email"))
+    phone = safe(person.get("phone"))
+    phone_link = "".join(
+        c for c in str(person.get("phone", ""))
+        if c.isdigit() or c == "+"
+    )
+
+    contact_cards += f"""
+    <article class="cw-person-card">
+      <div class="cw-person-icon" aria-hidden="true">✉</div>
+      <h3>{name}</h3>
+      <p class="cw-person-role">{role}</p>
+      <div class="cw-person-details">
+        <p>{address1}<br>{address2}</p>
+        <p><a href="mailto:{email}">{email}</a></p>
+        <p><a href="tel:{phone_link}">{phone}</a></p>
+      </div>
+    </article>
+    """
+
+categories = "".join(
+    f'<option value="{safe(category)}">{safe(category)}</option>'
+    for category in feedback.get("categories", [])
+)
+
+form_id = safe(feedback.get("formspree_id", "YOUR_FORM_ID"))
+
+html = f"""
+<div class="cw-contact-page">
+
+  <header class="cw-contact-hero">
+    <div class="cw-contact-hero-inner">
+      <p class="cw-contact-eyebrow">NOAA CoastWatch West Coast</p>
+      <h1>{safe(page.get("heading"))}</h1>
+      <p>{safe(page.get("description"))}</p>
+    </div>
+  </header>
+
+  <section class="cw-contact-section">
+    <div class="cw-contact-section-heading">
+      <h2>Contact Our Team</h2>
+      <p>Reach out directly to our CoastWatch staff.</p>
+    </div>
+
+    <div class="cw-contact-grid">
+      {contact_cards}
+    </div>
+  </section>
+
+  <section class="cw-feedback-section">
+    <div class="cw-contact-section-heading">
+      <h2>{safe(feedback.get("heading"))}</h2>
+      <p>{safe(feedback.get("description"))}</p>
+    </div>
+
+    <div class="cw-feedback-card">
+
+      <form
+        id="cw-feedback-form"
+        action="https://formspree.io/f/{form_id}"
+        method="POST"
+      >
+
+        <input type="hidden"
+               name="_subject"
+               value="CoastWatch Website Feedback">
+
+        <div class="cw-form-grid">
+
+          <div class="cw-form-field">
+            <label for="cw-name">
+              Full Name <span>*</span>
+            </label>
+            <input id="cw-name" type="text"
+                   name="name" autocomplete="name" required>
+          </div>
+
+          <div class="cw-form-field">
+            <label for="cw-email">
+              Email Address <span>*</span>
+            </label>
+            <input id="cw-email" type="email"
+                   name="email" autocomplete="email" required>
+          </div>
+
+          <div class="cw-form-field">
+            <label for="cw-organization">
+              Organization <span>*</span>
+            </label>
+            <input id="cw-organization" type="text"
+                   name="organization" required>
+          </div>
+
+          <div class="cw-form-field">
+            <label for="cw-phone">Phone Number</label>
+            <input id="cw-phone" type="tel"
+                   name="phone" autocomplete="tel">
+          </div>
+
+          <div class="cw-form-field">
+            <label for="cw-address">Address</label>
+            <input id="cw-address" type="text"
+                   name="address" autocomplete="street-address">
+          </div>
+
+          <div class="cw-form-field">
+            <label for="cw-location">
+              City, State, ZIP, Country
+            </label>
+            <input id="cw-location" type="text"
+                   name="location">
+          </div>
+
+          <div class="cw-form-field cw-form-full">
+            <label for="cw-category">
+              Organization Category <span>*</span>
+            </label>
+            <select id="cw-category" name="category" required>
+              <option value="" disabled selected>
+                Select a category
+              </option>
+              {categories}
+            </select>
+          </div>
+
+          <div class="cw-form-field cw-form-full">
+            <label for="cw-comment">
+              Comments or Feedback <span>*</span>
+            </label>
+            <textarea
+              id="cw-comment"
+              name="comment"
+              rows="6"
+              placeholder="Please enter your comments here..."
+              required
+            ></textarea>
+          </div>
+
+        </div>
+
+        <p class="cw-form-required">* Required fields</p>
+
+        <div class="cw-form-actions">
+          <button type="submit" class="cw-submit-btn">
+            Submit Feedback
+          </button>
+
+          <button type="reset" class="cw-reset-btn">
+            Clear Form
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```

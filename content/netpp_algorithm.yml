@@ -1,0 +1,117 @@
+
+# ==========================================================
+# VIIRS NETPP — ALGORITHM & DATA
+# ==========================================================
+
+navigation:
+  links:
+    - label: "VIIRS NetPP Products"
+      url: "netpp.qmd"
+    - label: "Algorithm & Data"
+      url: "algorithm-data.qmd"
+    - label: "Statistical Analysis"
+      url: "statistical-analysis.qmd"
+    - label: "User Resources"
+      url: "user-resources.qmd"
+
+header:
+  eyebrow: "VIIRS PRIMARY PRODUCTIVITY"
+  title: "Algorithm & Data"
+  description: >-
+    Explore the satellite measurements, derived parameters,
+    and data sources used to estimate marine primary productivity.
+
+algorithm:
+  title: "Primary Productivity (netPP) Algorithm"
+  description: >-
+    The Behrenfeld and Falkowski (1997) algorithm estimates primary
+    productivity using satellite measurements and derived parameters.
+    The algorithm formulation is listed below:
+
+measurements:
+  title: "Satellite Measurements"
+  introduction: "The algorithm uses three satellite measurements:"
+  items:
+    - abbreviation: "CHL"
+      title: "Chlorophyll a"
+      description: "Surface Chlorophyll a Concentration"
+
+    - abbreviation: "PAR"
+      title: "Photosynthetically Active Radiation"
+      description: "Photosynthetically Active Radiation"
+
+    - abbreviation: "SST"
+      title: "Sea Surface Temperature"
+      description: "Sea Surface Temperature"
+
+parameters:
+  title: "Derived Parameters"
+  introduction: "The derived parameters are:"
+
+  popt:
+    description: >-
+      **Poptᵇ** — Maximum Carbon fixation rate within the water column.
+      Units: mg C mg⁻² chl h⁻¹.
+
+  light:
+    description: >-
+      **PAR/(PAR + 4.1)** — Relative change in the light-saturated
+      fraction of the euphotic zone.
+
+  zeu:
+    description: >-
+      **Zeu** — Depth where light is 1% of that at the surface.
+      Units: meters (m).
+
+  chleu:
+    description: >-
+      Zeu is derived from an estimate of the total chlorophyll
+      concentration within the euphotic layer (CHL_eu) based on
+      the Case I models of Morel and Berthon (1989):
+
+  daylength:
+    description: >-
+      **DL** — Daylength determined from the day of the year
+      and latitude. Units: hours.
+
+data:
+  title: "Satellite Data Used in the Algorithm"
+
+  products:
+    - tag: "LEGACY MODIS"
+      title: "Legacy Product"
+      period: "2002–2024"
+      description: >-
+        The original netPP product made by CoastWatch West Coast Node
+        uses chlorophyll, sea surface temperature, and photosynthetically
+        active radiation derived from the MODIS sensor on the Aqua satellite.
+        The dataset began in 2002 and ends in 2024, offering daily,
+        weekly, and monthly versions of the dataset.
+
+    - tag: "VIIRS SNPP"
+      title: "VIIRS SNPP Interim Product"
+      period: "2012–Present"
+      description: >-
+        The VIIRS SNPP interim netPP product uses chlorophyll, sea
+        surface temperature, and photosynthetically active radiation
+        derived from the VIIRS sensor on the SNPP satellite. The dataset
+        began in 2012 and continues to the present, offering daily
+        and monthly versions of the dataset.
+
+    - tag: "VIIRS NOAA-20"
+      title: "VIIRS NOAA20 Interim Product"
+      period: "2018–Present"
+      description: >-
+        The VIIRS NOAA20 interim netPP product uses chlorophyll,
+        sea surface temperature, and photosynthetically active radiation
+        derived from the VIIRS sensor on the NOAA20 satellite. The dataset
+        began in 2018 and continues to the present, offering daily
+        and monthly versions of the dataset.
+
+  resource_title: "Looking for Algorithm Input Data?"
+  resource_description: >-
+    Access the satellite measurements and input datasets used
+    in the primary productivity algorithm.
+  resource_button: "View User Resources"
+  resource_url: "user-resources.qmd#download-algorithm-input-data"
+

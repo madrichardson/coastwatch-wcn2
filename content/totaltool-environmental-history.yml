@@ -1,0 +1,793 @@
+environmental_conditions:
+- year: 2003
+  month: Mar
+  status: Not Active
+  forecast: N/A
+  temp: 14.9
+  anomaly: 0.2
+- year: 2003
+  month: Apr
+  status: Not Active
+  forecast: N/A
+  temp: 14.8
+  anomaly: -0.2
+- year: 2003
+  month: May
+  status: Not Active
+  forecast: N/A
+  temp: 15.3
+  anomaly: -0.5
+- year: 2003
+  month: Jun
+  status: Not Active
+  forecast: N/A
+  temp: 16.2
+  anomaly: -0.6
+- year: 2003
+  month: Jul
+  status: Not Active
+  forecast: N/A
+  temp: 18.4
+  anomaly: 0.1
+- year: 2003
+  month: Aug
+  status: Not Active
+  forecast: N/A
+  temp: 19.5
+  anomaly: 0.1
+- year: 2004
+  month: Mar
+  status: Not Active
+  forecast: N/A
+  temp: 14.8
+  anomaly: 0.1
+- year: 2004
+  month: Apr
+  status: Not Active
+  forecast: N/A
+  temp: 18.2
+  anomaly: -0.2
+- year: 2004
+  month: May
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue during the next three months.
+  temp: 16.2
+  anomaly: 0.3
+- year: 2004
+  month: Jun
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue during the next three months.
+  temp: 16.4
+  anomaly: -0.4
+- year: 2004
+  month: Jul
+  status: El Niño Advisory
+  forecast: ENSO-neutral conditions are expected to continue during the next three months.
+  temp: 18.2
+  anomaly: -0.2
+- year: 2004
+  month: Aug
+  status: El Niño Advisory
+  forecast: El Niño conditions are expected to develop during the next 3 months.
+  temp: 18.9
+  anomaly: -0.5
+- year: 2005
+  month: Mar
+  status: El Niño Advisory
+  forecast: A transition from weak warm-episode (El Niño) conditions to ENSO-neutral conditions is expected to continue during the next three months.
+  temp: 15.7
+  anomaly: 1.0
+- year: 2005
+  month: Apr
+  status: El Niño Advisory
+  forecast: A transition from weak warm-episode (El Niño) conditions to ENSO-neutral conditions is expected to continue during the next three months.
+  temp: 15.4
+  anomaly: 0.4
+- year: 2005
+  month: May
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to prevail during the northern summer (June-August), in spite of recent increases in SST anomalies associated with strong Madden-Julian Oscillation (MJO) activity.
+  temp: 16.4
+  anomaly: 0.5
+- year: 2005
+  month: Jun
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected during the northern summer and fall (June-November) 2005.
+  temp: 16.3
+  anomaly: -0.4
+- year: 2005
+  month: Jul
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected during the next 3-6 months.
+  temp: 17.5
+  anomaly: -0.8
+- year: 2005
+  month: Aug
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected during the next 3-6 months.
+  temp: 19.4
+  anomaly: 0.1
+- year: 2006
+  month: Mar
+  status: La Niña Watch
+  forecast: La Niña conditions are expected to continue during the next 3-6 months.
+  temp: 14.1
+  anomaly: -0.6
+- year: 2006
+  month: Apr
+  status: La Niña Watch
+  forecast: La Niña conditions are expected to continue during the next 1-3 months.
+  temp: 15.3
+  anomaly: 0.3
+- year: 2006
+  month: May
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to prevail during the next 3-6 months.
+  temp: 16.3
+  anomaly: 0.5
+- year: 2006
+  month: Jun
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to prevail during the next 3 months.
+  temp: 17.8
+  anomaly: 1.0
+- year: 2006
+  month: Jul
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to prevail during the next 3 months.
+  temp: 19.7
+  anomaly: 1.3
+- year: 2006
+  month: Aug
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue for the next one to three months, with a 50% chance that weak El Niño conditions will develop by the end of 2006.
+  temp: 20.5
+  anomaly: 1.2
+- year: 2007
+  month: Mar
+  status: La Niña Watch
+  forecast: A transition from ENSO-neutral to La Niña conditions is possible within the next 3 months.
+  temp: 14.7
+  anomaly: 0.0
+- year: 2007
+  month: Apr
+  status: La Niña Watch
+  forecast: A transition from ENSO-neutral to La Niña conditions is possible within the next 2-3 months.
+  temp: 14.6
+  anomaly: -0.4
+- year: 2007
+  month: May
+  status: La Niña Watch
+  forecast: A transition from ENSO-neutral to La Niña conditions is possible within the next 1-3 months.
+  temp: 15.2
+  anomaly: -0.6
+- year: 2007
+  month: Jun
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue during the next 2 months, with ENSO-neutral or La Niña conditions equally likely thereafter.
+  temp: 16.4
+  anomaly: -0.4
+- year: 2007
+  month: Jul
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue through August 2007, with a slightly greater than 50% chance of La Niña developing during the next couple of months.
+  temp: 18.3
+  anomaly: 0.0
+- year: 2007
+  month: Aug
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue through August 2007, with a slightly greater than 50% chance of La Niña developing during the next couple of months.
+  temp: 19.4
+  anomaly: 0.1
+- year: 2008
+  month: Mar
+  status: La Niña Advisory
+  forecast: La Niña is expected to continue through the Northern Hemisphere spring 2008.
+  temp: 14.4
+  anomaly: -0.3
+- year: 2008
+  month: Apr
+  status: La Niña Advisory
+  forecast: La Niña is expected to continue for the next 3 months.
+  temp: 14.6
+  anomaly: -0.5
+- year: 2008
+  month: May
+  status: La Niña Advisory
+  forecast: A transition from La Niña to ENSO-neutral conditions is possible during June- July 2008.
+  temp: 15.3
+  anomaly: -0.6
+- year: 2008
+  month: Jun
+  status: La Niña Advisory
+  forecast: A transition from La Niña to ENSO-neutral conditions is expected during June- July 2008.
+  temp: 17.3
+  anomaly: 0.5
+- year: 2008
+  month: Jul
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue into Northern Hemisphere Fall 2008.
+  temp: 18.6
+  anomaly: 0.2
+- year: 2008
+  month: Aug
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue through the Northern Hemisphere Fall 2008.
+  temp: 19.8
+  anomaly: 0.4
+- year: 2009
+  month: Mar
+  status: La Niña Advisory
+  forecast: La Niña is expected to gradually weaken with increasing chances (greater than 50%) for ENSO-neutral conditions during the Northern Hemisphere Spring.
+  temp: 14.4
+  anomaly: -0.3
+- year: 2009
+  month: Apr
+  status: El Niño Advisory
+  forecast: A transition to ENSO-neutral conditions is expected during April 2009.
+  temp: 14.6
+  anomaly: -0.5
+- year: 2009
+  month: May
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue into the Northern Hemisphere Summer.
+  temp: 15.5
+  anomaly: -0.3
+- year: 2009
+  month: Jun
+  status: El Niño Advisory
+  forecast: Conditions are favorable for a transition from ENSO-neutral to El Niño conditions during June - August 2009.
+  temp: 17.3
+  anomaly: 0.5
+- year: 2009
+  month: Jul
+  status: El Niño Advisory
+  forecast: El Niño conditions will continue to develop and are expected to last through the Northern Hemisphere Winter 2009-2010.
+  temp: 18.8
+  anomaly: 0.4
+- year: 2009
+  month: Aug
+  status: El Niño Advisory
+  forecast: El Niño is expected to strengthen and last through the Northern Hemisphere Winter 2009-2010.
+  temp: 19.4
+  anomaly: 0.1
+- year: 2010
+  month: Mar
+  status: El Niño Advisory
+  forecast: El Niño is expected to continue at least through the Northern Hemisphere spring 2010.
+  temp: 15.2
+  anomaly: 0.5
+- year: 2010
+  month: Apr
+  status: El Niño Advisory
+  forecast: El Niño is expected to continue through the Northern Hemisphere spring 2010 and transition to ENSO-neutral conditions by Northern Hemisphere summer 2010.
+  temp: 15.2
+  anomaly: 0.2
+- year: 2010
+  month: May
+  status: El Niño Advisory
+  forecast: A transition to ENSO-neutral conditions is expected by June 2010, which will continue into the Northern Hemisphere summer 2010.
+  temp: 15.1
+  anomaly: -0.8
+- year: 2010
+  month: Jun
+  status: La Niña Watch
+  forecast: Conditions are favorable for a transition to La Niña conditions during June – August 2010.
+  temp: 16.0
+  anomaly: -0.7
+- year: 2010
+  month: Jul
+  status: La Niña Watch
+  forecast: La Niña conditions are likely to develop during July - August 2010.
+  temp: 16.9
+  anomaly: -1.5
+- year: 2010
+  month: Aug
+  status: La Niña Advisory
+  forecast: 'Synopsis: La Niña conditions are expected to strengthen and last through the Northern Hemisphere winter 2010-11.'
+  temp: 17.7
+  anomaly: -1.6
+- year: 2011
+  month: Mar
+  status: La Niña Advisory
+  forecast: ENSO-neutral conditions are expected by June 2011.
+  temp: 14.2
+  anomaly: -0.5
+- year: 2011
+  month: Apr
+  status: La Niña Advisory
+  forecast: A transition to ENSO-neutral conditions is expected by June 2011.
+  temp: 15.2
+  anomaly: 0.2
+- year: 2011
+  month: May
+  status: La Niña Advisory
+  forecast: ENSO-neutral conditions are expected to develop during May-June 2011 and continue through the Northern Hemisphere summer 2011.
+  temp: 15.6
+  anomaly: -0.2
+- year: 2011
+  month: Jun
+  status: Final La Niña Advisory
+  forecast: ENSO-neutral conditions have developed and are expected to continue at least through the Northern Hemisphere summer 2011.
+  temp: 16.2
+  anomaly: -0.6
+- year: 2011
+  month: Jul
+  status: Not Active
+  forecast: ENSO-neutral conditions are expected to continue into the Northern Hemisphere fall 2011.
+  temp: 18.2
+  anomaly: -0.2
+- year: 2011
+  month: Aug
+  status: La Niña Watch
+  forecast: ENSO-neutral is expected to continue into the Northern Hemisphere fall 2011, with ENSO-neutral or La Niña equally likely thereafter.
+  temp: 18.5
+  anomaly: -0.9
+- year: 2012
+  month: Mar
+  status: La Niña Advisory
+  forecast: La Niña is expected to transition to ENSO-neutral conditions by the end of April 2012.
+  temp: 14.0
+  anomaly: -0.7
+- year: 2012
+  month: Apr
+  status: La Niña Advisory
+  forecast: La Niña is expected to transition to ENSO-neutral conditions during April 2012.
+  temp: 14.7
+  anomaly: -0.4
+- year: 2012
+  month: May
+  status: El Niño Watch
+  forecast: Chance of El Niño increases during the remainder of the year, exceeding 65% during summer.
+  temp: 16.0
+  anomaly: 0.1
+- year: 2012
+  month: Jun
+  status: El Niño Watch
+  forecast: There is a 50% chance that El Niño conditions will develop during the second half of 2012.
+  temp: 16.5
+  anomaly: -0.3
+- year: 2012
+  month: Jul
+  status: El Niño Watch
+  forecast: Chances increase for El Niño beginning in July-September 2012.
+  temp: 17.5
+  anomaly: -0.9
+- year: 2012
+  month: Aug
+  status: El Niño Watch
+  forecast: El Niño conditions are likely to develop during August or September 2012.
+  temp: 19.5
+  anomaly: 0.2
+- year: 2013
+  month: Mar
+  status: Not Active
+  forecast: ENSO-neutral is favored into the Northern Hemisphere summer 2013.
+  temp: 14.6
+  anomaly: -0.2
+- year: 2013
+  month: Apr
+  status: Not Active
+  forecast: ENSO-neutral is favored into the Northern Hemisphere summer 2013.
+  temp: 15.0
+  anomaly: 0.0
+- year: 2013
+  month: May
+  status: Not Active
+  forecast: ENSO-neutral is favored into the late Northern Hemisphere summer 2013.
+  temp: 16.5
+  anomaly: 0.6
+- year: 2013
+  month: Jun
+  status: Not Active
+  forecast: ENSO-neutral is favored through the Northern Hemisphere summer 2013.
+  temp: 17.2
+  anomaly: 0.4
+- year: 2013
+  month: Jul
+  status: Not Active
+  forecast: ENSO-neutral is favored into the Northern Hemisphere fall 2013.
+  temp: 18.7
+  anomaly: 0.3
+- year: 2013
+  month: Aug
+  status: Not Active
+  forecast: ENSO-neutral is favored into the Northern Hemisphere fall 2013.
+  temp: 18.7
+  anomaly: -0.6
+- year: 2014
+  month: Mar
+  status: El Niño Watch
+  forecast: ENSO-neutral is expected to continue through the Northern Hemisphere spring 2014, with about a 50% chance of El Niño developing during the summer or fall.
+  temp: 15.7
+  anomaly: 1.0
+- year: 2014
+  month: Apr
+  status: El Niño Watch
+  forecast: While ENSO-neutral is favored for Northern Hemisphere spring, the chances of El Niño increase during the remainder of the year, exceeding 50% by summer.
+  temp: 16.0
+  anomaly: 1.0
+- year: 2014
+  month: May
+  status: El Niño Watch
+  forecast: Chance of El Niño increases during the remainder of the year, exceeding 65% during summer.
+  temp: 17.1
+  anomaly: 1.2
+- year: 2014
+  month: Jun
+  status: El Niño Watch
+  forecast: The chance of El Niño is 70% during the Northern Hemisphere summer and reaches 80% during the fall and winter.
+  temp: 18.1
+  anomaly: 1.3
+- year: 2014
+  month: Jul
+  status: El Niño Watch
+  forecast: The chance of El Niño is about 70% during the Northern Hemisphere summer and is close to 80% during the fall and early winter.
+  temp: 20.0
+  anomaly: 1.7
+- year: 2014
+  month: Aug
+  status: El Niño Watch
+  forecast: The chance of El Niño has decreased to about 65% during the Northern Hemisphere fall and early winter.
+  temp: 20.9
+  anomaly: 1.6
+- year: 2015
+  month: Mar
+  status: El Niño Watch
+  forecast: There is an approximately 50-60% chance that El Niño conditions will continue through Northern Hemisphere summer 2015.
+  temp: 17.1
+  anomaly: 2.4
+- year: 2015
+  month: Apr
+  status: El Niño Watch
+  forecast: There is an approximately 70% chance that El Niño will continue through Northern Hemisphere summer 2015, and a greater than 60% chance it will last through autumn.
+  temp: 17.1
+  anomaly: 2.1
+- year: 2015
+  month: May
+  status: El Niño Watch
+  forecast: There is an approximately 90% chance that El Niño will continue through Northern Hemisphere summer 2015, and a greater than 80% chance it will last through 2015.
+  temp: 16.8
+  anomaly: 0.9
+- year: 2015
+  month: Jun
+  status: El Niño Watch
+  forecast: There is a greater than 90% chance that El Niño will continue through Northern Hemisphere fall 2015, and around an 85% chance it will last through the 2015-16 winter.
+  temp: 18.0
+  anomaly: 1.2
+- year: 2015
+  month: Jul
+  status: El Niño Watch
+  forecast: There is a greater than 90% chance that El Niño will continue through Northern Hemisphere winter 2015-16, and around an 80% chance it will last into early spring 2016.
+  temp: 19.9
+  anomaly: 1.6
+- year: 2015
+  month: Aug
+  status: El Niño Watch
+  forecast: There is a greater than 90% chance that El Niño will continue through Northern Hemisphere winter 2015-16, and around an 85% chance it will last into early spring 2016.
+  temp: 21.1
+  anomaly: 1.7
+- year: 2016
+  month: Mar
+  status: El Niño Advisory
+  forecast: A transition to ENSO-neutral is likely during late Northern Hemisphere spring or early summer 2016, with close to a 50 percent chance for La Niña conditions to develop by the fall.
+  temp: 16.1
+  anomaly: 1.4
+- year: 2016
+  month: Apr
+  status: El Niño / La Niña Watch
+  forecast: A transition to ENSO-neutral is likely during late Northern Hemisphere spring or early summer 2016, with an increasing chance of La Niña during the second half of the year.
+  temp: 16.2
+  anomaly: 1.1
+- year: 2016
+  month: May
+  status: El Niño / La Niña Watch
+  forecast: La Niña is favored to develop during the Northern Hemisphere summer 2016, with about a 75% chance of La Niña during the fall and winter 2016-17.
+  temp: 16.4
+  anomaly: 0.5
+- year: 2016
+  month: Jun
+  status: Final El Niño / La Niña Watch
+  forecast: ENSO-neutral conditions are present and La Niña is favored to develop during the Northern Hemisphere summer 2016, with about a 75% chance of La Niña during the fall and winter 2016-17.
+  temp: 17.7
+  anomaly: 0.9
+- year: 2016
+  month: Jul
+  status: La Niña Advisory
+  forecast: La Niña is favored to develop during August - October 2016, with about a 55-60% chance of La Niña during the fall and winter 2016-17.
+  temp: 19.5
+  anomaly: 1.1
+- year: 2016
+  month: Aug
+  status: La Niña Watch
+  forecast: La Niña is slightly favored to develop during August - October 2016, with about a 55-60% chance of La Niña during the fall and winter 2016-17.
+  temp: 20.0
+  anomaly: 0.7
+- year: 2017
+  month: Mar
+  status: Not Active
+  forecast: ENSO-neutral conditions are favored to continue through at least the Northern Hemisphere spring 2017, with increasing chances for El Niño development into the fall.
+  temp: 15.1
+  anomaly: 0.8
+- year: 2017
+  month: Apr
+  status: Not Active
+  forecast: ENSO-neutral conditions are favored to continue through at least the Northern Hemisphere spring 2017, with increasing chances for El Niño development by late summer and fall.
+  temp: 15.4
+  anomaly: 0.6
+- year: 2017
+  month: May
+  status: Not Active
+  forecast: ENSO-neutral and El Niño are nearly equally favored during the Northern Hemisphere summer and fall 2017.
+  temp: 16.2
+  anomaly: 0.2
+- year: 2017
+  month: Jun
+  status: Not Active
+  forecast: ENSO-neutral is favored (50 to ~55% chance) through the Northern Hemisphere fall 2017.
+  temp: 17.7
+  anomaly: 0.4
+- year: 2017
+  month: Jul
+  status: Not Active
+  forecast: ENSO-neutral is favored (~50 to 55% chance) into the Northern Hemisphere winter 2017-18.
+  temp: 20.1
+  anomaly: 1.1
+- year: 2017
+  month: Aug
+  status: Not Active
+  forecast: ENSO-neutral is favored (~85% chance during Jul-Sep, decreasing to ~55% during Dec-Feb) through the Northern Hemisphere winter 2017-18.
+  temp: 20.5
+  anomaly: 0.8
+- year: 2018
+  month: Mar
+  status: La Niña Advisory
+  forecast: A transition from La Niña to ENSO-neutral is most likely (~55% chance) during the March-May season, with neutral conditions likely to continue into the second half of the year.
+  temp: 15.0
+  anomaly: 0.6
+- year: 2018
+  month: Apr
+  status: La Niña Advisory
+  forecast: La Niña is expected to transition to ENSO-neutral during April-May, with ENSO-neutral then likely (greater than 50% chance) to continue through the Northern Hemisphere summer 2018.
+  temp: 15.0
+  anomaly: 0.2
+- year: 2018
+  month: May
+  status: Final La Niña Advisory
+  forecast: ENSO-neutral is favored through September-November 2018, with the possibility of El Niño nearing 50% by Northern Hemisphere winter 2018-19.
+  temp: 15.9
+  anomaly: 0.0
+- year: 2018
+  month: Jun
+  status: El Niño Watch
+  forecast: ENSO-neutral is favored through Northern Hemisphere summer 2018, with the chance for El Niño increasing to 50% during fall, and ~65% during winter 2018-19.
+  temp: 17.8
+  anomaly: 0.5
+- year: 2018
+  month: Jul
+  status: El Niño Watch
+  forecast: ENSO-neutral is favored through Northern Hemisphere summer 2018, with the chance for El Niño increasing to about 65% during fall, and to about 70% during winter 2018-19.
+  temp: 20.6
+  anomaly: 1.6
+- year: 2018
+  month: Aug
+  status: El Niño Watch
+  forecast: There is ~60% chance of El Niño in the Northern Hemisphere fall 2018 (September-November), increasing to ~70% during winter 2018-19.
+  temp: 22.1
+  anomaly: 2.4
+- year: 2019
+  month: Mar
+  status: El Niño Advisory
+  forecast: Weak El Niño conditions are likely to continue through the Northern Hemisphere spring 2019 (~80% chance) and summer (~60% chance).
+  temp: 15.0
+  anomaly: 0.6
+- year: 2019
+  month: Apr
+  status: El Niño Advisory
+  forecast: A weak El Niño is likely to continue through the Northern Hemisphere summer 2019 (65% chance) and possibly fall (50-55% chance).
+  temp: 15.6
+  anomaly: 0.8
+- year: 2019
+  month: May
+  status: El Niño Advisory
+  forecast: El Niño is likely to continue through the Northern Hemisphere summer 2019 (70% chance) and fall (55-60% chance).
+  temp: 16.4
+  anomaly: 0.5
+- year: 2019
+  month: Jun
+  status: El Niño Advisory
+  forecast: El Niño is predicted to persist through the Northern Hemisphere summer 2019 (66% chance), with lower odds of continuing through the fall and winter (50-55% chance).
+  temp: 17.7
+  anomaly: 0.5
+- year: 2019
+  month: Jul
+  status: El Niño Advisory
+  forecast: A transition from El Niño to ENSO-neutral is expected in the next month or two, with ENSO-neutral most likely to continue through Northern Hemisphere fall and winter.
+  temp: 18.1
+  anomaly: 0.1
+- year: 2019
+  month: Aug
+  status: Final El Niño Advisory
+  forecast: El Niño has transitioned to ENSO-neutral, which is most likely to continue through Northern Hemisphere winter 2019-20 (50-55% chance).
+  temp: 19.0
+  anomaly: 0.1
+- year: 2020
+  month: Mar
+  status: Not Active
+  forecast: ENSO-neutral is favored for the Northern Hemisphere spring 2020 (~65% chance), continuing through summer 2020 (~55% chance).
+  temp: 15.0
+  anomaly: 0.6
+- year: 2020
+  month: Apr
+  status: Not Active
+  forecast: ENSO-neutral is favored for the Northern Hemisphere summer 2020 (~60% chance), remaining the most likely outcome through autumn.
+  temp: 15.6
+  anomaly: 0.8
+- year: 2020
+  month: May
+  status: Not Active
+  forecast: There is a ~65% chance of ENSO-neutral during Northern Hemisphere summer 2020, with chances decreasing through the autumn (to 45-50%).
+  temp: 16.4
+  anomaly: 0.5
+- year: 2020
+  month: Jun
+  status: Not Active
+  forecast: There is a ~60% chance of ENSO-neutral during Northern Hemisphere summer 2020, with roughly equal chances (~40-50%) of La Niña or ENSO-neutral during the autumn and winter 2020-21.
+  temp: 17.7
+  anomaly: 0.5
+- year: 2020
+  month: Jul
+  status: La Niña Watch
+  forecast: ENSO-neutral is favored to continue through the summer, with a 50-55% chance of La Niña development during Northern Hemisphere fall 2020 and continuing through winter 2020-21 (~50% chance).
+  temp: 18.1
+  anomaly: 0.1
+- year: 2020
+  month: Aug
+  status: La Niña Watch
+  forecast: There is a ~60% chance of La Niña development during Northern Hemisphere fall 2020 and continuing through winter 2020-21 (~55% chance).
+  temp: 19.0
+  anomaly: 0.1
+- year: 2021
+  month: Mar
+  status: La Niña Advisory
+  forecast: There is a ~60% chance of a transition from La Niña to ENSO-Neutral during the Northern Hemisphere spring 2021 (April-June).
+  temp: 15.0
+  anomaly: 0.6
+- year: 2021
+  month: Apr
+  status: La Niña Advisory
+  forecast: A transition from La Niña to ENSO-Neutral is likely in the next month or so, with an 80% chance of ENSO-neutral during May-July 2021.
+  temp: 15.6
+  anomaly: 0.8
+- year: 2021
+  month: May
+  status: Final La Niña Advisory
+  forecast: La Niña has ended, with ENSO-neutral likely to continue through the Northern Hemisphere summer (67% chance in June-August 2021).
+  temp: 16.4
+  anomaly: 0.5
+- year: 2021
+  month: Jun
+  status: Not Active
+  forecast: ENSO-neutral is favored through the Northern Hemisphere summer (78% chance for the June-August season) and fall (50% chance for the September-November season).
+  temp: 17.7
+  anomaly: 0.5
+- year: 2021
+  month: Jul
+  status: La Niña Watch
+  forecast: ENSO-neutral is favored through the Northern Hemisphere summer and into the fall (51% chance for the August-October season), with La Niña potentially emerging during the September-November season and lasting through the 2021-22 winter (66% chance during November-January).
+  temp: 18.1
+  anomaly: 0.1
+- year: 2021
+  month: Aug
+  status: La Niña Watch
+  forecast: ENSO-neutral is favored for the remainder of summer (~60% chance in the July-September season), with La Niña possibly emerging during the August-October season and lasting through the 2021-22 winter (~70% chance during November-January).
+  temp: 19.0
+  anomaly: 0.1
+- year: 2022
+  month: Mar
+  status: La Niña Advisory
+  forecast: La Niña is favored to continue into the Northern Hemisphere summer (53% chance during June-August 2022), with a 40-50% chance of La Niña or ENSO-neutral thereafter.
+  temp: 15.0
+  anomaly: 0.6
+- year: 2022
+  month: Apr
+  status: La Niña Advisory
+  forecast: La Niña is favored to continue through the Northern Hemisphere summer (59% chance during June-August 2022), with a 50-55% chance through the fall.
+  temp: 15.6
+  anomaly: 0.8
+- year: 2022
+  month: May
+  status: La Niña Advisory
+  forecast: Though La Niña is favored to continue, the odds for La Niña decrease into the late Northern Hemisphere summer (58% chance in August-October 2022) before slightly increasing through the Northern Hemisphere fall and early winter 2022 (61% chance).
+  temp: 16.4
+  anomaly: 0.5
+- year: 2022
+  month: Jun
+  status: La Niña Advisory
+  forecast: Though La Niña is favored to continue through the end of the year, the odds for La Niña decrease into the Northern Hemisphere late summer (52% chance in July-September 2022) before slightly increasing through the Northern Hemisphere fall and early winter 2022 (58-59% chance).
+  temp: 17.7
+  anomaly: 0.5
+- year: 2022
+  month: Jul
+  status: La Niña Advisory
+  forecast: La Niña is favored to continue through 2022 with the odds for La Niña decreasing into the Northern Hemisphere late summer (60% chance in July-September 2022) before increasing through the Northern Hemisphere fall and early winter 2022 (62-66% chance).
+  temp: 18.1
+  anomaly: 0.1
+- year: 2022
+  month: Aug
+  status: La Niña Advisory
+  forecast: La Niña is expected to continue, with chances for La Niña gradually decreasing from 86% in the coming season to 60% during December-February 2022-23
+  temp: 19.0
+  anomaly: 0.1
+- year: 2023
+  month: Mar
+  status: Final La Niña Advisory
+  forecast: La Niña has ended and ENSO-neutral conditions are expected to continue through the Northern Hemisphere spring and early summer 2023.
+  temp: 13.5
+  anomaly: -0.9
+- year: 2023
+  month: Apr
+  status: El Niño Watch
+  forecast: ENSO-neutral conditions are expected to continue through the Northern Hemisphere spring, followed by a 62% chance of El Niño developing during May-July 2023.
+  temp: 13.8
+  anomaly: -0.9
+- year: 2023
+  month: May
+  status: El Niño Watch
+  forecast: A transition from ENSO-neutral is expected in the next couple of months, with a greater than 90% chance of El Niño persisting into the Northern Hemisphere winter.
+  temp: 15.6
+  anomaly: -0.4
+- year: 2023
+  month: Jun
+  status: El Niño Advisory
+  forecast: El Niño conditions are present and are expected to gradually strengthen into the Northern Hemisphere winter 2023-24.
+  temp: 17.3
+  anomaly: 0.1
+- year: 2023
+  month: Jul
+  status: El Niño Advisory
+  forecast: There is a greater than 90% chance that El Niño will continue through the Northern Hemisphere winter.
+  temp: 18.1
+  anomaly: 0.0
+- year: 2023
+  month: Aug
+  status: El Niño Advisory
+  forecast: El Niño is anticipated to continue through the Northern Hemisphere winter (with greater than 95% chance through December 2023 -February 2024).
+  temp: 19.4
+  anomaly: 0.5
+- year: 2024
+  month: Mar
+  status: El Niño Advisory / La Niña Watch
+  forecast: A transition from El Niño to ENSO-neutral is likely by April-June 2024 (83% chance), with the odds of La Niña developing by June-August 2024 (62% chance).
+  temp: 13.5
+  anomaly: 0.8
+- year: 2024
+  month: Apr
+  status: El Niño Advisory / La Niña Watch
+  forecast: A transition from El Niño to ENSO-neutral is likely by April-June 2024 (85% chance), with the odds of La Niña developing by June-August 2024 (60% chance).
+  temp: 13.8
+  anomaly: 0.3
+- year: 2024
+  month: May
+  status: El Niño Advisory / La Niña Watch
+  forecast: A transition from El Niño to ENSO-neutral is likely in the next month. La Niña may develop in June-August (49% chance) or July-September (69% chance).
+  temp: 15.6
+  anomaly: -0.1
+- year: 2024
+  month: Jun
+  status: Final El Niño Advisory / La Niña Watch
+  forecast: ENSO-neutral conditions are present. La Niña is favored to develop during July-September (65% chance) and persist into the Northern Hemisphere winter 2024-25 (85% chance during November-January).
+  temp: 17.3
+  anomaly: 0.1
+- year: 2024
+  month: Jul
+  status: La Niña Watch
+  forecast: ENSO-neutral is expected to continue for the next several months, with La Niña favored to emerge during August-October (70% chance) and persist into the Northern Hemisphere winter 2024-25 (79% chance during November-January).
+  temp: 18.1
+  anomaly: 0.3
+- year: 2024
+  month: Aug
+  status: La Niña Watch
+  forecast: ENSO-neutral is expected to continue for the next several months, with La Niña favored to emerge during September-November (66% chance) and persist through the Northern Hemisphere winter 2024-25 (74% chance during November-January).
+  temp: 19.4
+  anomaly: 0.2

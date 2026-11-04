@@ -1,0 +1,532 @@
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // ========================================================
+  // ELEMENTS
+  // ========================================================
+
+  const yearSelect = document.getElementById("year-select-input");
+  const unitRadios = document.querySelectorAll('input[name="unit"]');
+
+  const tableBody = document.querySelector("#elnino-table tbody");
+  const tempHeader = document.getElementById("temp-header");
+  const anomHeader = document.getElementById("anom-header");
+  const elninoYear = document.getElementById("elnino-year");
+
+  const closureText = document.getElementById("closure-text");
+  const closureYear = document.getElementById("closure-year");
+
+  const bycatchYear = document.getElementById("bycatch-year");
+  const bycatchRange = document.getElementById("bycatch-range");
+  const bycatchImg = document.getElementById("bycatch-img");
+  const bycatchEmpty = document.getElementById("bycatch-empty");
+
+  const sstImg = document.getElementById("sst-dash-image");
+  const anomImg = document.getElementById("anom-dash-image");
+
+  const sstYear = document.getElementById("sst-year");
+  const anomYear = document.getElementById("anom-year");
+
+  const sstCaption = document.getElementById("sst-caption");
+  const anomCaption = document.getElementById("anom-caption");
+
+  const sstEmpty = document.getElementById("sst-empty");
+  const anomEmpty = document.getElementById("anom-empty");
+
+  const sstPrev = document.querySelector(".sst-dash-slider .prev");
+  const sstNext = document.querySelector(".sst-dash-slider .next");
+  const anomPrev = document.querySelector(".anom-dash-slider .prev");
+  const anomNext = document.querySelector(".anom-dash-slider .next");
+
+  if (!yearSelect || !tableBody) return;
+
+  // ========================================================
+  // EMBEDDED YAML DATA
+  // ========================================================
+
+  function readEmbeddedJSON(id, fallback) {
+    const el = document.getElementById(id);
+    if (!el) return fallback;
+
+    try {
+      return JSON.parse(el.textContent);
+    } catch (error) {
+      console.error("Unable to read embedded data:", id, error);
+      return fallback;
+    }
+  }
+
+  const historicalData = readEmbeddedJSON(
+    "historical-environment-data", []
+  );
+
+  const pageContent = readEmbeddedJSON(
+    "dashboard-content-data", {}
+  );
+
+  const closureContent = pageContent.closure || {};
+  const environmentContent = pageContent.environment || {};
+  const tableLabels = environmentContent.table || {};
+
+  // ========================================================
+  // STATE
+  // ========================================================
+
+  let currentUnit = "C";
+  let ensoData = {};
+  let allData = {};
+  let closureData = [];
+
+  let sstImages = [];
+  let anomImages = [];
+
+  let sstIndex = 0;
+  let anomIndex = 0;
+
+  const monthsMap = {
+    "01": "January",
+    "02": "February",
+    "03": "March",
+    "04": "April",
+    "05": "May",
+    "06": "June",
+    "07": "July",
+    "08": "August",
+    "09": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+  };
+
+  const mapMonths = ["03", "04", "05", "06", "07", "08"];
+
+  // ========================================================
+  // UTILITIES
+  // ========================================================
+
+  function numeric(value) {
+    if (value === null || value === undefined || value === "") {
+      return NaN;
+    }
+    return Number(value);
+  }
+
+  function formatNumber(value, unit, isAnomaly = false) {
+    const number = numeric(value);
+    if (!Number.isFinite(number)) return "N/A";
+
+    const converted = unit === "F"
+      ? isAnomaly ? number * 9 / 5 : number * 9 / 5 + 32
+      : number;
+
+    return converted.toFixed(1);
+  }
+
+  function addCell(row, value, className = "") {
+    const cell = document.createElement("td");
+    cell.textContent = value ?? "N/A";
+    if (className) cell.className = className;
+    row.appendChild(cell);
+    return cell;
+  }
+
+  function showTableMessage(message) {
+    tableBody.replaceChildren();
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 5;
+    cell.textContent = message;
+    row.appendChild(cell);
+    tableBody.appendChild(row);
+  }
+
+  function formatDate(value) {
+    if (!value) return "";
+
+    // Handle YYYY-MM-DD without timezone shifts.
+    const match = String(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+
+    const date = match
+      ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]))
+      : new Date(value);
+
+    return Number.isNaN(date.getTime())
+      ? String(value)
+      : date.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        });
+  }
+
+  function setImage(img, emptyEl, path) {
+    if (!img) return;
+
+    img.onload = () => {
+      img.style.display = "block";
+      if (emptyEl) emptyEl.hidden = true;
+    };
+
+    img.onerror = () => {
+      img.style.display = "none";
+      if (emptyEl) emptyEl.hidden = false;
+    };
+
+    img.src = path;
+
+    if (img.complete && img.naturalWidth > 0) {
+      img.style.display = "block";
+      if (emptyEl) emptyEl.hidden = true;
+    }
+  }
+
+  // ========================================================
+  // ENVIRONMENTAL CONDITIONS TABLE
+  // ========================================================
+
+  function renderTable(year, unit) {
+    if (elninoYear) elninoYear.textContent = year;
+
+    tempHeader.textContent =
+      `${tableLabels.temperature || "SST"} (°${unit})`;
+
+    anomHeader.textContent =
+      `${tableLabels.anomaly || "Anomaly"} (°${unit})`;
+
+    tableBody.replaceChildren();
+
+    let rows = [];
+
+    if (Number(year) <= 2024) {
+
+      // Historical data embedded from Pages CMS YAML.
+      rows = historicalData
+        .filter(row => String(row.year) === String(year))
+        .map(row => ({
+          month: row.month,
+          status: row.status,
+          forecast: row.forecast,
+          temp: row.temp,
+          anomaly: row.anomaly
+        }));
+
+    } else {
+
+      // Preserve the original JSON source for 2025 onward.
+      // latest.json is not assumed to contain every year.
+      rows = Object.entries(allData)
+        .filter(([key, row]) => {
+          const explicitYear = row?.year;
+          const dateString = String(
+            row?.date || row?.time || row?.month || key
+          );
+
+          if (explicitYear !== undefined && explicitYear !== null) {
+            return String(explicitYear) === String(year);
+          }
+
+          const dateYear = dateString.match(/\b(20\d{2})\b/);
+          return dateYear
+            ? dateYear[1] === String(year)
+            : String(year) === String(new Date().getFullYear());
+        })
+        .map(([key, row]) => ({
+          month: row.month || key,
+          status: ensoData.status || "N/A",
+          forecast: ensoData.synopsis || "N/A",
+          temp: row.sst,
+          anomaly: row.anom
+        }));
+    }
+
+    if (!rows.length) {
+      showTableMessage("No environmental records are available for this year.");
+      return;
+    }
+
+    rows.forEach(record => {
+      const tr = document.createElement("tr");
+
+      addCell(tr, record.month);
+      addCell(tr, record.status);
+      addCell(tr, record.forecast);
+      addCell(tr, formatNumber(record.temp, unit));
+
+      const anomaly = numeric(record.anomaly);
+
+      const anomalyClass = !Number.isFinite(anomaly)
+        ? ""
+        : anomaly > 0
+          ? "anomaly-positive"
+          : anomaly < 0
+            ? "anomaly-negative"
+            : "";
+
+      addCell(
+        tr,
+        formatNumber(record.anomaly, unit, true),
+        anomalyClass
+      );
+
+      tableBody.appendChild(tr);
+    });
+  }
+
+  // ========================================================
+  // CLOSURE HISTORY
+  // ========================================================
+
+  function updateClosure(year) {
+    if (closureYear) closureYear.textContent = year;
+    if (!closureText) return;
+
+    const record = closureData.find(
+      row => String(row.year) === String(year)
+    );
+
+    closureText.replaceChildren();
+
+    if (record && record.start && record.end) {
+      const text = document.createElement("p");
+
+      text.append(
+        `${closureContent.closure_prefix || "NMFS prohibited fishing with large-mesh drift gillnet gear in the Pacific Loggerhead Conservation Area from"} `
+      );
+
+      const start = document.createElement("strong");
+      start.textContent = formatDate(record.start);
+      text.appendChild(start);
+
+      text.append(
+        ` ${closureContent.closure_between || "to"} `
+      );
+
+      const end = document.createElement("strong");
+      end.textContent = formatDate(record.end);
+      text.appendChild(end);
+      text.append(".");
+
+      closureText.appendChild(text);
+
+      if (record.cl_link) {
+        const link = document.createElement("a");
+
+        try {
+          const url = new URL(
+            String(record.cl_link).replace(/^\/+/, ""),
+            "https://www.federalregister.gov/"
+          );
+
+          if (url.origin === "https://www.federalregister.gov") {
+            link.href = url.href;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.textContent =
+              closureContent.notice_label || "View Federal Register Notice";
+            closureText.appendChild(link);
+          }
+        } catch (error) {
+          console.warn("Invalid Federal Register URL:", error);
+        }
+      }
+
+    } else {
+      closureText.textContent =
+        closureContent.no_closure_text ||
+        "NMFS did not prohibit fishing with large-mesh drift gillnet gear in the Loggerhead Conservation Area this season.";
+    }
+  }
+
+  // ========================================================
+  // TOTAL TIME SERIES
+  // ========================================================
+
+  function updateBycatch(year) {
+    if (bycatchYear) bycatchYear.textContent = year;
+
+    if (bycatchRange) {
+      bycatchRange.textContent = `January – December ${year}`;
+    }
+
+    if (!bycatchImg) return;
+
+    const imagePath = `data/images/indicator_${year}.png`;
+
+    setImage(bycatchImg, bycatchEmpty, imagePath);
+  }
+
+  // ========================================================
+  // MONTHLY MAPS
+  // ========================================================
+
+  function makeMapImages(year, prefix) {
+    return mapMonths.map(month => ({
+      url: `data/images/${prefix}_${year}${month}16.png`,
+      month: monthsMap[month]
+    }));
+  }
+
+  function updateSST() {
+    const item = sstImages[sstIndex];
+    if (!item) return;
+
+    if (sstYear) sstYear.textContent = yearSelect.value;
+    if (sstCaption) {
+      sstCaption.textContent = `${item.month} ${yearSelect.value}`;
+    }
+
+    setImage(sstImg, sstEmpty, item.url);
+
+    if (sstPrev) sstPrev.disabled = sstIndex === 0;
+    if (sstNext) sstNext.disabled = sstIndex === sstImages.length - 1;
+  }
+
+  function updateAnom() {
+    const item = anomImages[anomIndex];
+    if (!item) return;
+
+    if (anomYear) anomYear.textContent = yearSelect.value;
+    if (anomCaption) {
+      anomCaption.textContent = `${item.month} ${yearSelect.value}`;
+    }
+
+    setImage(anomImg, anomEmpty, item.url);
+
+    if (anomPrev) anomPrev.disabled = anomIndex === 0;
+    if (anomNext) anomNext.disabled = anomIndex === anomImages.length - 1;
+  }
+
+  // ========================================================
+  // YEAR SELECTION
+  // ========================================================
+
+  function updateDashboard() {
+    const year = yearSelect.value;
+
+    renderTable(year, currentUnit);
+    updateClosure(year);
+    updateBycatch(year);
+
+    sstImages = makeMapImages(year, "sst");
+    anomImages = makeMapImages(year, "anom");
+
+    sstIndex = 0;
+    anomIndex = 0;
+
+    updateSST();
+    updateAnom();
+  }
+
+  yearSelect.addEventListener("change", updateDashboard);
+
+  // ========================================================
+  // TEMPERATURE UNITS
+  // ========================================================
+
+  unitRadios.forEach(radio => {
+    radio.addEventListener("change", () => {
+      if (!radio.checked) return;
+      currentUnit = radio.value;
+      renderTable(yearSelect.value, currentUnit);
+    });
+  });
+
+  // ========================================================
+  // MAP NAVIGATION
+  // ========================================================
+
+  if (sstPrev) {
+    sstPrev.addEventListener("click", () => {
+      if (sstIndex > 0) {
+        sstIndex--;
+        updateSST();
+      }
+    });
+  }
+
+  if (sstNext) {
+    sstNext.addEventListener("click", () => {
+      if (sstIndex < sstImages.length - 1) {
+        sstIndex++;
+        updateSST();
+      }
+    });
+  }
+
+  if (anomPrev) {
+    anomPrev.addEventListener("click", () => {
+      if (anomIndex > 0) {
+        anomIndex--;
+        updateAnom();
+      }
+    });
+  }
+
+  if (anomNext) {
+    anomNext.addEventListener("click", () => {
+      if (anomIndex < anomImages.length - 1) {
+        anomIndex++;
+        updateAnom();
+      }
+    });
+  }
+
+  // ========================================================
+  // LOAD REMAINING AUTOMATED DATA
+  // ========================================================
+
+  function loadClosureData() {
+    if (typeof Papa === "undefined") {
+      console.error("PapaParse is unavailable.");
+      return;
+    }
+
+    Papa.parse("data/resources/ltca_closure.csv", {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete(results) {
+        closureData = results.data || [];
+        updateClosure(yearSelect.value);
+      },
+      error(error) {
+        console.error("Closure history could not be loaded:", error);
+      }
+    });
+  }
+
+  async function loadRecentEnvironment() {
+    try {
+      const [ensoResponse, sstResponse] = await Promise.all([
+        fetch("data/json/elnino_last.json"),
+        fetch("data/json/latest.json")
+      ]);
+
+      if (!ensoResponse.ok || !sstResponse.ok) {
+        throw new Error("Unable to load environmental JSON files");
+      }
+
+      ensoData = await ensoResponse.json();
+      allData = await sstResponse.json();
+
+      renderTable(yearSelect.value, currentUnit);
+
+    } catch (error) {
+      console.error("Recent environmental data unavailable:", error);
+    }
+  }
+
+  // ========================================================
+  // INITIALIZE
+  // ========================================================
+
+  updateDashboard();
+  loadClosureData();
+  loadRecentEnvironment();
+
+});
+</script>
+

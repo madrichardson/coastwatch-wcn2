@@ -1,0 +1,780 @@
+
+/* ==========================================================
+   TOTAL — DATA DASHBOARD
+   Matches Conservation Area Status styling
+   Full-width layout without Quarto column restrictions
+   ========================================================== */
+
+
+/* ==========================================================
+   MAIN DASHBOARD CONTAINER
+   ========================================================== */
+
+.cw-totaltool-dash {
+  --navy: #123B5D;
+  --blue: #176A91;
+  --teal: #168C96;
+  --light: #EAF3F7;
+  --border: #DCE5EB;
+  --text: #263746;
+  --muted: #526878;
+
+  /* Break out of the narrower Quarto output column */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min(1280px, calc(100vw - 3rem));
+  max-width: none;
+  margin: 0;
+
+  padding: 2rem 1.5rem 4rem;
+  color: var(--text);
+}
+
+.cw-totaltool-dash *,
+.cw-totaltool-dash *::before,
+.cw-totaltool-dash *::after {
+  box-sizing: border-box;
+}
+
+.cw-totaltool-dash p,
+.cw-totaltool-dash li {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.cw-totaltool-dash p {
+  margin: 0 0 1rem;
+}
+
+.cw-totaltool-dash a {
+  color: var(--blue);
+  text-underline-offset: 3px;
+}
+
+
+/* ==========================================================
+   NAVIGATION
+   ========================================================== */
+
+.cw-totaltool-dash-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  padding: 1.2rem 1.8rem;
+  margin-bottom: 2rem;
+
+  background: linear-gradient(
+    110deg,
+    #E8F4F8,
+    #F0F8FA 55%,
+    #DCEEF4
+  );
+
+  border: 1px solid #C8E0E9;
+  border-left: 5px solid var(--teal);
+  border-radius: 12px;
+}
+
+.cw-totaltool-dash-brand {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none !important;
+}
+
+.cw-totaltool-dash-brand strong {
+  color: var(--navy);
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.cw-totaltool-dash-brand span {
+  color: #34495B;
+  font-size: 0.7rem;
+  font-weight: 650;
+}
+
+.cw-totaltool-dash-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.cw-totaltool-dash-tab {
+  padding: 0.8rem 1.15rem;
+
+  background: #FFFFFF;
+  border: 1px solid #D2E5EC;
+  border-radius: 8px;
+
+  color: var(--navy) !important;
+  font-size: 0.91rem;
+  font-weight: 700;
+  text-decoration: none !important;
+
+  transition: background 0.2s;
+}
+
+.cw-totaltool-dash-tab:hover,
+.cw-totaltool-dash-tab.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #FFFFFF !important;
+}
+
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-totaltool-dash-hero {
+  padding: 3rem 3.5rem;
+  margin-bottom: 3rem;
+
+  background: linear-gradient(
+    115deg,
+    #123B5D,
+    #164D70 65%,
+    #176A91
+  );
+
+  border-radius: 16px;
+}
+
+.cw-totaltool-dash-hero-eyebrow {
+  display: block;
+  margin-bottom: 0.8rem;
+
+  color: #9ADDE0;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+}
+
+.cw-totaltool-dash-hero h1 {
+  margin: 0 0 1rem;
+
+  color: #FFFFFF;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 750;
+}
+
+.cw-totaltool-dash-hero p {
+  margin: 0;
+
+  color: #DCEAF2;
+  font-size: 1.1rem;
+}
+
+
+/* ==========================================================
+   SECTION CONTAINERS
+   ========================================================== */
+
+.cw-totaltool-dash-section {
+  padding: 2rem 2.25rem;
+  margin-bottom: 2rem;
+
+  background: #F7FAFC;
+  border: 1px solid #E2EAF0;
+  border-radius: 14px;
+}
+
+.cw-totaltool-dash-heading {
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.5rem;
+
+  border-bottom: 2px solid var(--border);
+}
+
+.cw-totaltool-dash-kicker,
+.cw-totaltool-dash-card-label {
+  display: block;
+  margin-bottom: 0.45rem;
+
+  color: var(--teal);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.cw-totaltool-dash-heading h2 {
+  margin: 0;
+  border: none !important;
+
+  color: var(--navy);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+}
+
+.cw-totaltool-dash-section-intro {
+  max-width: 1050px;
+}
+
+.cw-totaltool-dash-section-intro p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ==========================================================
+   GENERAL CONTENT CARDS
+   ========================================================== */
+
+.cw-totaltool-dash-card,
+.cw-totaltool-dash-map-card {
+  min-width: 0;
+  padding: 1.75rem;
+
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  box-shadow: 0 2px 10px rgba(18, 59, 93, 0.035);
+}
+
+.cw-totaltool-dash-card {
+  border-top: 4px solid var(--teal);
+}
+
+.cw-totaltool-dash-card h3,
+.cw-totaltool-dash-map-card h3,
+.cw-totaltool-dash-total-panel h3 {
+  margin: 0 0 1.2rem;
+
+  color: var(--navy);
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.cw-totaltool-dash-source {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+}
+
+.cw-totaltool-dash-source a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cw-totaltool-dash-source a:hover {
+  text-decoration: underline;
+}
+
+
+/* ==========================================================
+   INTRODUCTION AND YEAR SELECTOR
+   ========================================================== */
+
+.cw-totaltool-dash-intro-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.cw-totaltool-dash-intro-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.cw-totaltool-dash-year-panel {
+  display: flex;
+  flex: 0 0 210px;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  padding: 1.3rem;
+
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--teal);
+  border-radius: 12px;
+}
+
+.cw-totaltool-dash-year-panel label {
+  color: var(--navy);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.cw-totaltool-dash-year-panel select {
+  display: block;
+  width: 100%;
+  min-height: 45px;
+  padding: 0.65rem 0.8rem;
+
+  background: #FFFFFF;
+  border: 1px solid #C8DEE8;
+  border-radius: 8px;
+
+  color: var(--navy);
+  font-size: 1rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.cw-totaltool-dash-year-panel select:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.cw-totaltool-dash-year-hint {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+
+/* ==========================================================
+   HISTORICAL CLOSURE INFORMATION
+   ========================================================== */
+
+.cw-totaltool-dash-closure-card {
+  border-top-color: var(--blue);
+}
+
+.cw-totaltool-dash-closure-text {
+  padding: 1.25rem 1.5rem;
+
+  background: #EAF3F7;
+  border: 1px solid #DCE9EF;
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.cw-totaltool-dash-closure-text p:last-child {
+  margin-bottom: 0;
+}
+
+.cw-totaltool-dash-closure-text a {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+
+/* ==========================================================
+   ENVIRONMENTAL CONDITIONS CARD
+   ========================================================== */
+
+.cw-totaltool-dash-environment-card {
+  border-top-color: var(--blue);
+}
+
+.cw-totaltool-dash-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cw-totaltool-dash-card-heading h3 {
+  margin: 0;
+}
+
+
+/* ==========================================================
+   TEMPERATURE UNIT TOGGLE
+   ========================================================== */
+
+.cw-totaltool-dash-unit-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+
+  margin: 0;
+  padding: 0.45rem 0.8rem;
+
+  background: #F5F9FB;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.cw-totaltool-dash-unit-toggle legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.cw-totaltool-dash-unit-toggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+
+  margin: 0;
+  color: var(--navy);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cw-totaltool-dash-unit-toggle input {
+  margin: 0;
+  accent-color: var(--teal);
+}
+
+
+/* ==========================================================
+   ENVIRONMENTAL CONDITIONS TABLE
+   ========================================================== */
+
+.cw-totaltool-dash-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+
+.cw-totaltool-dash-table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+  font-size: 0.87rem;
+}
+
+.cw-totaltool-dash-table th,
+.cw-totaltool-dash-table td {
+  padding: 0.75rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.cw-totaltool-dash-table th:first-child,
+.cw-totaltool-dash-table td:first-child {
+  text-align: left;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.cw-totaltool-dash-table thead {
+  background: var(--light);
+}
+
+.cw-totaltool-dash-table thead th {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.cw-totaltool-dash-table tbody tr:nth-child(even) {
+  background: #F5F9FB;
+}
+
+.cw-totaltool-dash-table tbody tr:hover {
+  background: #EDF5F8;
+}
+
+.cw-totaltool-dash-table .anomaly-positive {
+  color: #B84B38;
+  font-weight: 700;
+}
+
+.cw-totaltool-dash-table .anomaly-negative {
+  color: #176A91;
+  font-weight: 700;
+}
+
+
+/* ==========================================================
+   TOTAL BYCATCH AVOIDANCE TOOL
+   ========================================================== */
+
+.cw-totaltool-dash-total-panel {
+  min-width: 0;
+  padding: 2rem;
+
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  box-shadow: 0 2px 10px rgba(18, 59, 93, 0.035);
+}
+
+.cw-totaltool-dash-period-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  max-width: 350px;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem 1.4rem;
+
+  background: #EAF3F7;
+  border: 1px solid #DCE9EF;
+  border-radius: 9px;
+}
+
+.cw-totaltool-dash-period-panel span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cw-totaltool-dash-period-panel strong {
+  color: var(--navy);
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.cw-totaltool-dash-total-description {
+  max-width: 1050px;
+  margin: 1.5rem 0;
+}
+
+.cw-totaltool-dash-total-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================
+   TOTAL INDICATOR PLOT
+   ========================================================== */
+
+.cw-totaltool-dash-indicator-figure {
+  width: 100%;
+  max-width: 850px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.cw-totaltool-dash-indicator-figure img {
+  display: block;
+  width: 100%;
+  max-width: 850px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.cw-totaltool-dash-indicator-figure img:not([src]) {
+  display: none;
+}
+
+.cw-totaltool-dash-indicator-figure [hidden] {
+  display: none !important;
+}
+
+
+/* ==========================================================
+   MONTHLY SEA SURFACE MAPS
+   ========================================================== */
+
+.cw-totaltool-dash-map-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.cw-totaltool-dash-map-card {
+  display: flex;
+  flex-direction: column;
+  border-top: 4px solid var(--teal);
+}
+
+.cw-totaltool-dash-map-card h3 {
+  margin-bottom: 1.2rem;
+}
+
+
+/* ==========================================================
+   MONTHLY MAP NAVIGATION
+   ========================================================== */
+
+.cw-totaltool-dash-map-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.cw-totaltool-dash-map-controls button {
+  padding: 0.6rem 0.8rem;
+
+  background: #FFFFFF;
+  border: 1px solid #C8DEE8;
+  border-radius: 7px;
+
+  color: var(--navy);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: background 0.2s;
+}
+
+.cw-totaltool-dash-map-controls button:hover:not(:disabled) {
+  background: var(--navy);
+  color: #FFFFFF;
+}
+
+.cw-totaltool-dash-map-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cw-totaltool-dash-map-controls strong {
+  color: var(--navy);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+
+/* ==========================================================
+   MONTHLY MAP IMAGES
+   ========================================================== */
+
+.cw-totaltool-dash-map-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 250px;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem;
+
+  background: #F8FBFC;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.cw-totaltool-dash-map-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+.cw-totaltool-dash-map-image img:not([src]) {
+  display: none;
+}
+
+.cw-totaltool-dash-map-image [hidden] {
+  display: none !important;
+}
+
+.cw-totaltool-dash-map-description {
+  margin-top: 0.5rem;
+}
+
+.cw-totaltool-dash-map-description p:last-child {
+  margin-bottom: 0;
+}
+
+.cw-totaltool-dash-map-card > .cw-totaltool-dash-source {
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+.cw-totaltool-dash-empty {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+
+/* ==========================================================
+   DISCLAIMER
+   ========================================================== */
+
+.cw-totaltool-dash-disclaimer {
+  padding: 1.5rem 2rem;
+
+  background: #F5F8FA;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.cw-totaltool-dash-disclaimer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.75;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 950px) {
+
+  .cw-totaltool-dash-map-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-totaltool-dash-topbar {
+    align-items: flex-start;
+  }
+
+}
+
+@media (max-width: 750px) {
+
+  .cw-totaltool-dash-intro-layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cw-totaltool-dash-year-panel {
+    flex-basis: auto;
+    max-width: 250px;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .cw-totaltool-dash {
+    width: calc(100vw - 1rem);
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cw-totaltool-dash-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-totaltool-dash-section {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cw-totaltool-dash-topbar,
+  .cw-totaltool-dash-card,
+  .cw-totaltool-dash-map-card,
+  .cw-totaltool-dash-total-panel {
+    padding: 1.4rem;
+  }
+
+  .cw-totaltool-dash-card-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cw-totaltool-dash-map-controls button {
+    padding: 0.45rem;
+    font-size: 0.75rem;
+  }
+
+  .cw-totaltool-dash-map-controls strong {
+    font-size: 0.8rem;
+  }
+
+  .cw-totaltool-dash-disclaimer {
+    padding: 1.25rem;
+  }
+
+}

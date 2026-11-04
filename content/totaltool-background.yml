@@ -1,0 +1,330 @@
+
+# ==========================================================
+# TOTAL TOOL — BACKGROUND PAGE
+# ==========================================================
+
+navigation:
+  brand: "TOTAL"
+  brand_subtitle: "Temperature Observations To Avoid Loggerheads"
+  links:
+    - label: "Background"
+      url: "totaltool-background.qmd"
+    - label: "Closure Rules"
+      url: "totaltool-closure-rules.qmd"
+    - label: "Conservation Area Status"
+      url: "totaltool-closure-status.qmd"
+    - label: "Data Dashboard"
+      url: "totaltool-data-dashboard.qmd"
+
+
+# ==========================================================
+# PAGE INTRODUCTION
+# ==========================================================
+
+intro:
+  eyebrow: "TOTAL / BACKGROUND"
+  title: "Loggerhead Sea Turtles & Fisheries"
+  subtitle: >-
+    Understanding loggerhead sea turtle life history, fisheries
+    interactions, and the conservation measures established
+    along the U.S. West Coast.
+
+
+
+# ==========================================================
+# BACKGROUND SECTIONS
+# ==========================================================
+
+sections:
+
+  - title: "Life History"
+    image_side: "left"
+    image:
+      path: "images/noaa_loggerhead_turtle.png"
+      alt: "Loggerhead sea turtle"
+      caption: "Photo copyright: NOAA Fisheries"
+    paragraphs:
+      - >-
+        Loggerhead turtles reach maturity at about 35 years, but
+        can live 50 years or more. Females lay about four clutches
+        of eggs during the nesting season, each with 100-120 eggs.
+        When the hatchlings emerge from the nests, they quickly
+        move across the beach to the surf and swim offshore.
+        Post-hatchling and juvenile loggerheads can travel great
+        distances to reach food-rich coastal areas, where they
+        remain until they mature. Adults return to nest at the
+        beach where they hatched, known as the natal beach.
+        The North Pacific population of loggerhead turtles in
+        Southern California waters are juveniles that crossed
+        the entire Pacific Ocean from natal beaches in Japan.
+        They migrate back to natal beaches to nest and then
+        remain in the Western Pacific Ocean as adults.
+
+  - title: "U.S. West Coast Strandings and Fisheries Bycatch"
+    paragraphs:
+      - >-
+        Strandings of loggerheads are rare events along the Pacific
+        coast of North America. Since 1980, approximately 60 reports
+        of stranded loggerheads have been recorded for the U.S.
+        west coast and Alaska. Most stranded animals were found
+        south of Point Conception within the northern extent of
+        the Southern California Bight. The causes were largely
+        undetermined, although entrainment in coastal power plants,
+        entanglement in marine debris and fishing gear, and
+        health-related incidents have been reported.
+
+      - >-
+        The unintentional capture of loggerheads during commercial
+        fishing activities, or bycatch, has been documented off
+        the U.S. West Coast only for the California large-mesh
+        drift gillnet fishery that targets swordfish and thresher
+        sharks. Since the federal observer program began documenting
+        protected species interactions in this fishery in 1990,
+        16 observations of bycaught loggerheads have been recorded.
+        All of the interactions took place south of Point
+        Conception, and the loggerheads taken were most likely
+        early and late oceanic stage juveniles.
+
+  - title: "Endangered Species Status"
+    paragraphs:
+      - >-
+        The loggerhead turtle was listed under the Endangered
+        Species Act (ESA) as threatened throughout its range on
+        28 July 1978. Following a review by the National Marine
+        Fisheries Service and the U.S. Fish and Wildlife Service,
+        9 distinct population segments were identified. In 2011,
+        five of these populations were reclassified as endangered
+        under the ESA. This includes the North Pacific population,
+        which ranges from the East China Sea to the waters off
+        California and Mexico.
+
+  - title: "California Drift Gillnet Fishery"
+    image_side: "right"
+    image:
+      path: "images/drift_gillnet.png"
+      alt: "California drift gillnet fishing gear"
+      caption: "Photo copyright: NOAA Fisheries"
+    paragraphs:
+      - >-
+        The [California drift gillnet (DGN) fishery](https://www.westcoast.fisheries.noaa.gov/fisheries/migratory_species/hms_DGN_gear.html)
+        for swordfish and thresher shark is federally managed under
+        the Federal Fishery Management Plan for U.S. West Coast
+        Fisheries for Highly Migratory Species
+        ([HMS FMP](https://www.westcoast.fisheries.noaa.gov/publications/fishery_management/hms_program/hms-fmp-jul11.pdf)),
+        implemented in 2004. The fishery is also managed by
+        California and Oregon via regulations to conserve target
+        and non-target species. A drift gillnet is an unanchored
+        panel of stretched mesh (14 inches or greater) suspended
+        vertically in the water by floats along the top and
+        weights along the bottom. Regulations require large mesh
+        drift gillnet fishing off the West Coast to be equipped
+        with acoustic pingers and extenders (> 36 ft. buoy lines
+        to protect marine mammals).
+
+
+# ==========================================================
+# REGULATORY HISTORY TIMELINE
+# ==========================================================
+
+timeline:
+  title: "Regulatory History"
+  introduction: ""
+  details_title: ""
+
+  items:
+
+    # ------------------------------------------------------
+    # 1982 — SEASONAL FISHERY CLOSURES
+    # ------------------------------------------------------
+
+    - year: "1982"
+      title: "Seasonal Drift Gillnet Closures"
+      description: >-
+        The DGN fishery has been subject to a number of seasonal
+        closures. Since 1982, it has been closed inside the entire
+        U.S. West Coast exclusive economic zone (EEZ) from
+        February 1 to April 30 of each year.
+
+    # ------------------------------------------------------
+    # 1986 — CALIFORNIA COASTAL CLOSURE
+    # ------------------------------------------------------
+
+    - year: "1986"
+      title: "California Mainland Closure"
+      description: >-
+        In 1986, a closure was established within 75 miles of
+        the California mainland from June 1 through Aug 14 of
+        each year to conserve common thresher sharks; this
+        closure was extended to include May in 1990 and later
+        years.
+
+    # ------------------------------------------------------
+    # 1990 — OBSERVER COVERAGE
+    # ------------------------------------------------------
+
+    - year: "1990"
+      title: "Fishery Observer Coverage"
+      description: >-
+        Since 1990, NMFS has targeted 20 percent observer
+        coverage of the DGN fishery each year, per
+        recommendations from the Southwest Fisheries Science
+        Center.
+
+    # ------------------------------------------------------
+    # 2001 — LEATHERBACK CONSERVATION AREA
+    # ------------------------------------------------------
+
+    - year: "2001"
+      title: "Leatherback Sea Turtle Conservation Area"
+      description: >-
+        NOAA Fisheries designated two Pacific sea turtle
+        conservation areas off the U.S. West Coast with
+        seasonal restrictions on the DGN fishery to protect
+        endangered sea turtles. The larger of the two
+        conservation areas, created in 2001, spans the EEZ
+        north of Point Conception, CA (34°27’ N. latitude)
+        to mid-Oregon (45° N. latitude) and west to 129° W.
+        longitude. DGN fishing is prohibited annually within
+        this conservation area from August 15 to November 15
+        to protect leatherback sea turtles.
+
+    # ------------------------------------------------------
+    # 2003 — LOGGERHEAD CONSERVATION AREA
+    # ------------------------------------------------------
+
+    - year: "2003"
+      title: "Pacific Loggerhead Conservation Area"
+      description: >-
+        A smaller conservation area located south of Point
+        Conception, CA, and east of 120° W. longitude was
+        created in 2003, and amended in 2007, to protect
+        Pacific loggerhead turtles (Federal Register
+        [72 FR 31756](https://www.federalregister.gov/documents/2007/06/08/E7-11124/fisheries-off-west-coast-states-highly-migratory-species-fisheries)).
+        Within this conservation area, fishing with DGN gear
+        is prohibited from June 1 – August 31 of each year
+        during a forecasted or occurring El Niño event.
+
+    # ------------------------------------------------------
+    # 2003 — FLEET ACTIVITY
+    # ------------------------------------------------------
+
+    - year: "2003–2015"
+      title: "Drift Gillnet Fleet Activity"
+      description: >-
+        The number of active vessels in the DGN fishery has
+        remained under 50 vessels since 2003, and there has
+        been an average of 20 active vessels per year from
+        2010 through 2015.
+
+    # ------------------------------------------------------
+    # 2011 — UNOBSERVABLE VESSELS
+    # ------------------------------------------------------
+
+    - year: "2011"
+      title: "Observer Coverage Limitations"
+      description: >-
+        Four to six DGN vessels have been unobservable during
+        each fishing season from 2011 to present.
+
+    # ------------------------------------------------------
+    # 2013 — INCREASED OBSERVER COVERAGE
+    # ------------------------------------------------------
+
+    - year: "2013"
+      title: "Increased Observer Coverage Target"
+      description: >-
+        The NMFS fleet-wide observer coverage target has
+        been 30 percent since 2013. Since some DGN vessels
+        are unobservable due to safety or accommodations
+        requirements, the observable vessels are observed
+        at a rate higher than 30 percent to attain the
+        fleet-wide 30 percent coverage.
+
+    # ------------------------------------------------------
+    # 2014–2016 — LOGGERHEAD CLOSURES
+    # ------------------------------------------------------
+
+    - year: "2014–2016"
+      title: "Loggerhead Conservation Area Closures"
+      description: >-
+        DGN closures have been implemented three times,
+        in 2014, 2015, and 2016, since the creation of
+        the Pacific loggerhead conservation area.
+
+
+# ==========================================================
+# ADDITIONAL RESOURCES
+# ==========================================================
+
+resources:
+  heading: "Resources & Contact"
+  title: "Additional Information"
+
+  links:
+    - label: "Loggerhead turtles resources"
+      url: "https://www.nmfs.noaa.gov/pr/species/turtles/loggerhead.html"
+      description: " – NOAA Office of Protected Resources"
+
+    - label: "Bycatch information"
+      url: "https://www.fisheries.noaa.gov/topic/bycatch"
+      description: " – NOAA Office of Protected Resources"
+
+    - label: "El Niño diagnostics – NOAA Climate Prediction Center"
+      url: "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
+      description: ""
+
+    - prefix: "Loggerhead conservation fishing closures notices:"
+      links:
+        - label: "2014"
+          url: "https://www.federalregister.gov/documents/2014/07/25/2014-17644/fisheries-off-west-coast-states-the-highly-migratory-species-fishery-closure"
+        - label: "2015"
+          url: "https://www.federalregister.gov/documents/2015/06/03/2015-13601/fisheries-off-west-coast-states-the-highly-migratory-species-fishery-closure"
+        - label: "2016"
+          url: "https://www.federalregister.gov/documents/2016/06/03/2016-13137/fisheries-off-west-coast-states-the-highly-migratory-species-fishery-closure"
+
+
+# ==========================================================
+# FEEDBACK / CONTACT FORM
+# ==========================================================
+
+contact:
+  title: "Feedback / Contact Us"
+  notice: >-
+    The contact form is awaiting submission configuration.
+    Please use the official NOAA Fisheries contact channels
+    until this form is enabled.
+
+  submit_label: "Submit Comments"
+  reset_label: "Clear Form"
+
+  fields:
+    - name: "name"
+      label: "Name"
+      type: "text"
+      placeholder: "Name (required)"
+      required: true
+
+    - name: "email"
+      label: "Email"
+      type: "email"
+      placeholder: "Email (required)"
+      required: true
+
+    - name: "organization"
+      label: "Organization"
+      type: "text"
+      placeholder: "Organization (required)"
+      required: true
+
+    - name: "phone"
+      label: "Phone"
+      type: "tel"
+      placeholder: "Phone"
+      required: false
+
+    - name: "comments"
+      label: "Comments"
+      type: "textarea"
+      placeholder: "Please enter comments here..."
+      required: false
+

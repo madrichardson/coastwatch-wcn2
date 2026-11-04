@@ -1756,3 +1756,1209 @@ content:
         fields:
           - name: text
             type: text
+
+  # ========================================================
+  # VIIRS PRIMARY PRODUCTIVITY — HOMEPAGE
+  # ========================================================
+
+  - name: netpp
+    label: VIIRS Primary Productivity — Homepage
+    type: file
+    path: content/netpp.yml
+    fields:
+
+      # ----------------------------------------------------
+      # HERO
+      # ----------------------------------------------------
+
+      - name: hero
+        label: Page Header and Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Main Title
+            type: string
+          - name: subtitle
+            label: Subtitle
+            type: text
+          - name: description
+            label: Hero Description
+            type: text
+          - name: image
+            label: Hero Image Path
+            type: string
+          - name: image_alt
+            label: Image Description
+            type: string
+          - name: button_label
+            label: Button Text
+            type: string
+          - name: button_url
+            label: Button Link
+            type: string
+
+      # ----------------------------------------------------
+      # PROJECT NAVIGATION
+      # ----------------------------------------------------
+
+      - name: navigation
+        label: Project Navigation
+        type: object
+        fields:
+          - name: links
+            label: Navigation Tabs
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Tab Label
+                type: string
+              - name: url
+                label: Tab URL
+                type: string
+
+      # ----------------------------------------------------
+      # PROJECT OVERVIEW
+      # ----------------------------------------------------
+
+      - name: overview
+        label: Project Overview
+        type: object
+        fields:
+          - name: title
+            label: Section Title
+            type: string
+          - name: paragraphs
+            label: Overview Paragraphs
+            type: text
+            list: true
+
+      # ----------------------------------------------------
+      # PROJECT GOALS
+      # ----------------------------------------------------
+
+      - name: goals
+        label: Project Goals
+        type: object
+        fields:
+          - name: title
+            label: Section Title
+            type: string
+          - name: introduction
+            label: Introduction
+            type: text
+          - name: items
+            label: Project Goals
+            type: text
+            list: true
+          - name: conclusion
+            label: Statistical Evaluation and Resources
+            type: text
+
+      # ----------------------------------------------------
+      # IMPORTANCE OF PRIMARY PRODUCTIVITY
+      # ----------------------------------------------------
+
+      - name: importance
+        label: Importance of Primary Productivity
+        type: object
+        fields:
+          - name: title
+            label: Section Title
+            type: string
+          - name: description
+            label: Scientific Explanation
+            type: text
+
+      # ----------------------------------------------------
+      # DATA DOWNLOADS
+      # ----------------------------------------------------
+
+      - name: downloads
+        label: Interim Product Downloads
+        type: object
+        fields:
+          - name: title
+            label: Section Title
+            type: string
+          - name: introduction
+            label: Introduction
+            type: text
+          - name: products
+            label: VIIRS Product Cards
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Product Title
+                type: string
+              - name: links
+                label: ERDDAP Download Links
+                type: object
+                list: true
+                fields:
+                  - name: label
+                    label: Link Text
+                    type: string
+                  - name: url
+                    label: ERDDAP URL
+                    type: string
+
+      # ----------------------------------------------------
+      # PROJECT TEAM AND FUNDING
+      # ----------------------------------------------------
+
+      - name: team
+        label: Project Team and Funding
+        type: object
+        fields:
+          - name: title
+            label: Section Title
+            type: string
+          - name: paragraphs
+            label: Team, Acknowledgments and Funding
+            type: text
+            list: true
+
+      # ----------------------------------------------------
+      # REFERENCES
+      # ----------------------------------------------------
+
+      - name: references
+        label: Scientific References
+        type: object
+        fields:
+          - name: title
+            label: Section Title
+            type: string
+          - name: items
+            label: References
+            type: object
+            list: true
+            fields:
+              - name: text
+                label: Citation
+                type: text
+
+  # ========================================================
+  # VIIRS PRIMARY PRODUCTIVITY — ALGORITHM & DATA
+  # ========================================================
+
+  - name: netpp_algorithm
+    label: VIIRS Primary Productivity — Algorithm & Data
+    type: file
+    path: content/netpp_algorithm.yml
+    fields:
+
+      - name: navigation
+        label: Project Navigation
+        type: object
+        fields:
+          - name: links
+            label: Navigation Tabs
+            type: object
+            list: true
+            fields:
+              - {name: label, label: Tab Label, type: string}
+              - {name: url, label: Tab URL, type: string}
+
+      - name: header
+        label: Page Header
+        type: object
+        fields:
+          - {name: eyebrow, label: Eyebrow, type: string}
+          - {name: title, label: Page Title, type: string}
+          - {name: description, label: Introduction, type: text}
+
+      - name: algorithm
+        label: Primary Productivity Algorithm
+        type: object
+        fields:
+          - {name: title, label: Section Title, type: string}
+          - {name: description, label: Algorithm Description, type: text}
+
+      - name: measurements
+        label: Satellite Measurements
+        type: object
+        fields:
+          - {name: title, label: Section Title, type: string}
+          - {name: introduction, label: Introduction, type: text}
+          - name: items
+            label: Satellite Measurements
+            type: object
+            list: true
+            fields:
+              - {name: abbreviation, label: Abbreviation, type: string}
+              - {name: title, label: Measurement Name, type: string}
+              - {name: description, label: Description, type: text}
+
+      - name: parameters
+        label: Derived Parameters
+        type: object
+        fields:
+          - {name: title, label: Section Title, type: string}
+          - {name: introduction, label: Introduction, type: text}
+
+          - name: popt
+            label: Maximum Carbon Fixation Rate
+            type: object
+            fields:
+              - {name: description, label: Description, type: text}
+
+          - name: light
+            label: Light-Saturated Fraction
+            type: object
+            fields:
+              - {name: description, label: Description, type: text}
+
+          - name: zeu
+            label: Euphotic Zone Depth
+            type: object
+            fields:
+              - {name: description, label: Description, type: text}
+
+          - name: chleu
+            label: Euphotic-Layer Chlorophyll
+            type: object
+            fields:
+              - {name: description, label: Description, type: text}
+
+          - name: daylength
+            label: Daylength
+            type: object
+            fields:
+              - {name: description, label: Description, type: text}
+
+      - name: data
+        label: Satellite Data Products
+        type: object
+        fields:
+          - {name: title, label: Section Title, type: string}
+
+          - name: products
+            label: Satellite Products
+            type: object
+            list: true
+            fields:
+              - {name: tag, label: Product Tag, type: string}
+              - {name: title, label: Product Title, type: string}
+              - {name: period, label: Data Availability, type: string}
+              - {name: description, label: Product Description, type: text}
+
+          - {name: resource_title, label: Resource Callout Title, type: string}
+          - {name: resource_description, label: Resource Callout Description, type: text}
+          - {name: resource_button, label: Resource Button Text, type: string}
+          - {name: resource_url, label: Resource Button URL, type: string}
+
+  # ========================================================
+  # VIIRS PRIMARY PRODUCTIVITY — STATISTICAL ANALYSIS
+  # ========================================================
+
+  - name: statistical_analysis
+    label: VIIRS Primary Productivity — Statistical Analysis
+    type: file
+    path: content/statistical-analysis.yml
+    fields:
+
+      - name: navigation
+        label: Project Navigation
+        type: object
+        fields:
+          - name: links
+            label: Navigation Tabs
+            type: object
+            list: true
+            fields:
+              - {name: label, label: Tab Label, type: string}
+              - {name: url, label: Tab URL, type: string}
+
+      - name: header
+        label: Page Header
+        type: object
+        fields:
+          - {name: eyebrow, label: Eyebrow, type: string}
+          - {name: title, label: Page Title, type: string}
+          - {name: description, label: Description, type: text}
+
+      - name: introduction
+        label: Statistical Analysis Overview
+        type: object
+        fields:
+          - {name: title, label: Section Title, type: string}
+          - {name: description, label: Introduction, type: text}
+          - {name: methods, label: Statistical Methods, type: text}
+          - {name: periods, label: Analysis Periods, type: text}
+
+      - name: summary
+        label: Summary of Results
+        type: object
+        fields:
+          - {name: title, label: Section Title, type: string}
+          - {name: findings, label: Key Findings, type: text}
+          - {name: conclusion, label: Conclusion, type: text}
+          - {name: resources, label: Data Resources Link, type: text}
+
+      - name: psi
+        label: Unbiased Relative Difference
+        type: object
+        fields:
+          - {name: title, label: Section Title, type: string}
+          - {name: introduction, label: Introduction, type: text}
+          - {name: method, label: Methodology, type: text}
+
+          - name: workflow
+            label: Figure 1 — Workflow
+            type: object
+            fields:
+              - {name: number, type: string}
+              - {name: title, type: string}
+              - {name: image, type: string}
+              - {name: alt, type: string}
+              - {name: caption, type: text}
+
+          - name: temporal
+            label: Temporal Variability
+            type: object
+            fields:
+              - {name: title, type: string}
+              - {name: description, type: text}
+              - name: figure
+                label: Figure 2 — Time Series
+                type: object
+                fields:
+                  - {name: number, type: string}
+                  - {name: title, type: string}
+                  - {name: image, type: string}
+                  - {name: alt, type: string}
+                  - {name: caption, type: text}
+
+          - name: spatial
+            label: Spatial Variability
+            type: object
+            fields:
+              - {name: title, type: string}
+              - {name: description, type: text}
+              - name: figure
+                label: Figure 3 — Spatial Differences
+                type: object
+                fields:
+                  - {name: number, type: string}
+                  - {name: title, type: string}
+                  - {name: image, type: string}
+                  - {name: alt, type: string}
+                  - {name: caption, type: text}
+
+      - name: trends
+        label: Trends Analysis
+        type: object
+        fields:
+          - {name: title, type: string}
+          - {name: introduction, type: text}
+
+          - name: workflow
+            label: Figure 4 — Trends Workflow
+            type: object
+            fields:
+              - {name: number, type: string}
+              - {name: title, type: string}
+              - {name: image, type: string}
+              - {name: alt, type: string}
+              - {name: caption, type: text}
+
+          - {name: results, label: Trends Results, type: text}
+
+          - name: maps
+            label: Figure 5 — Trend Maps
+            type: object
+            fields:
+              - {name: number, type: string}
+              - {name: title, type: string}
+              - {name: image, type: string}
+              - {name: alt, type: string}
+              - {name: caption, type: text}
+
+          - name: contingency
+            label: Contingency Matrices and Cohen's Kappa
+            type: object
+            fields:
+              - {name: title, type: string}
+              - {name: introduction, type: text}
+
+              - name: diagram
+                label: Figure 6 — Contingency Diagram
+                type: object
+                fields:
+                  - {name: number, type: string}
+                  - {name: title, type: string}
+                  - {name: image, type: string}
+                  - {name: alt, type: string}
+                  - {name: caption, type: text}
+
+              - {name: interpretation, type: text}
+
+              - name: scale
+                label: Table 1 — Kappa Scale
+                type: object
+                fields:
+                  - {name: number, type: string}
+                  - {name: title, type: string}
+                  - {name: image, type: string}
+                  - {name: alt, type: string}
+                  - {name: caption, type: text}
+
+              - {name: results, type: text}
+
+              - name: results_figure
+                label: Figure 7 — Contingency Results
+                type: object
+                fields:
+                  - {name: number, type: string}
+                  - {name: title, type: string}
+                  - {name: image, type: string}
+                  - {name: alt, type: string}
+                  - {name: caption, type: text}
+
+      - name: references
+        label: References
+        type: object
+        fields:
+          - {name: title, type: string}
+          - {name: items, label: Citations, type: text, list: true}
+
+      - name: appendix
+        label: Appendix
+        type: object
+        fields:
+          - {name: title, type: string}
+          - {name: introduction, type: text}
+
+          - name: psi
+            label: Unbiased Relative Difference
+            type: object
+            fields:
+              - {name: introduction, type: text}
+              - {name: explanation, type: text}
+
+          - name: trends
+            label: Trends Analysis
+            type: object
+            fields:
+              - {name: description, type: text}
+
+          - name: contingency
+            label: Contingency Matrix
+            type: object
+            fields:
+              - {name: description, type: text}
+              - {name: interpretation, type: text}
+
+          - name: kappa
+            label: Cohen's Kappa
+            type: object
+            fields:
+              - {name: introduction, type: text}
+
+  # ========================================================
+  # VIIRS PRIMARY PRODUCTIVITY — USER RESOURCES
+  # ========================================================
+
+  - name: user_resources
+    label: VIIRS Primary Productivity — User Resources
+    type: file
+    path: content/user-resources.yml
+    fields:
+
+      - name: navigation
+        label: Project Navigation
+        type: object
+        fields:
+          - name: links
+            label: Navigation Tabs
+            type: object
+            list: true
+            fields:
+              - {name: label, label: Tab Label, type: string}
+              - {name: url, label: Tab URL, type: string}
+
+      - name: header
+        label: Page Header
+        type: object
+        fields:
+          - {name: eyebrow, label: Eyebrow, type: string}
+          - {name: title, label: Page Title, type: string}
+          - {name: description, label: Description, type: text}
+
+      - name: gallery
+        label: Code Gallery
+        type: object
+        fields:
+          - {name: title, label: Section Title, type: string}
+          - {name: introduction, label: Introduction, type: text}
+
+          - name: groups
+            label: Tutorial Groups
+            type: object
+            list: true
+            fields:
+              - {name: title, label: Group Title, type: string}
+
+              - name: tutorials
+                label: Tutorials
+                type: object
+                list: true
+                fields:
+                  - {name: title, label: Tutorial Title, type: string}
+                  - {name: image, label: Preview Image Path, type: string}
+                  - {name: image_alt, label: Image Description, type: string}
+                  - {name: description, label: Tutorial Description, type: text}
+
+                  - name: links
+                    label: Tutorial Links
+                    type: object
+                    list: true
+                    fields:
+                      - {name: label, label: Button Label, type: string}
+                      - {name: url, label: Tutorial URL, type: string}
+
+      - name: downloads
+        label: Dataset Download Sections
+        type: object
+        list: true
+        fields:
+          - {name: id, label: Section Anchor ID, type: string}
+          - {name: eyebrow, label: Section Eyebrow, type: string}
+          - {name: title, label: Section Title, type: string}
+          - {name: introduction, label: Introduction, type: text}
+
+          - name: products
+            label: Data Products
+            type: object
+            list: true
+            fields:
+              - {name: title, label: Product Title, type: string}
+
+              - name: links
+                label: Dataset Links
+                type: object
+                list: true
+                fields:
+                  - {name: label, label: Dataset Label, type: string}
+                  - {name: url, label: Dataset URL, type: string}
+
+media:
+  input: images
+  output: /images
+
+content:
+  - name: contact
+    label: Contact and Feedback
+    type: file
+    path: content/contact.yml
+    fields:
+      - name: page
+        label: Page Introduction
+        type: object
+        fields:
+          - name: heading
+            label: Page Heading
+            type: string
+          - name: description
+            label: Description
+            type: text
+
+      - name: contacts
+        label: Contact People
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+          - name: role
+            label: Position
+            type: string
+          - name: address_line1
+            label: Address Line 1
+            type: string
+          - name: address_line2
+            label: Address Line 2
+            type: string
+          - name: email
+            label: Email
+            type: string
+          - name: phone
+            label: Phone
+            type: string
+
+      - name: feedback
+        label: Feedback Form
+        type: object
+        fields:
+          - name: heading
+            label: Form Heading
+            type: string
+          - name: description
+            label: Form Description
+            type: text
+          - name: formspree_id
+            label: Formspree Form ID
+            type: string
+          - name: categories
+            label: Organization Categories
+            type: string
+            list: true
+
+  - name: totaltool
+    label: TOTAL — Homepage
+    type: file
+    path: content/totaltool.yml
+    fields:
+
+      - name: hero
+        label: Hero Section
+        type: object
+        fields:
+          - {name: eyebrow, label: Eyebrow, type: string}
+          - {name: title, label: Title, type: string}
+          - {name: subtitle, label: Subtitle, type: text}
+          - {name: image, label: Hero Image Path, type: string}
+          - {name: image_alt, label: Image Description, type: string}
+          - {name: image_caption, label: Photo Credit, type: string}
+          - {name: credit_url, label: Photographer URL, type: string}
+          - {name: credit_link_label, label: Credit Link Label, type: string}
+          - {name: credit_suffix, label: Credit Note, type: string}
+
+      - name: navigation
+        label: Project Navigation
+        type: object
+        fields:
+          - name: links
+            label: Navigation Links
+            type: object
+            list: true
+            fields:
+              - {name: label, label: Link Label, type: string}
+              - {name: url, label: Page URL, type: string}
+
+      - name: cards
+        label: Homepage Cards
+        type: object
+        list: true
+        fields:
+          - {name: title, label: Card Title, type: string}
+          - {name: description, label: Description, type: text}
+
+          - name: buttons
+            label: Card Buttons
+            type: object
+            list: true
+            fields:
+              - {name: label, label: Button Label, type: string}
+              - {name: url, label: Button URL, type: string}
+
+
+  # ==========================================================
+  # TOTAL TOOL — BACKGROUND PAGE
+  # ==========================================================
+
+  - name: totaltool-background
+    label: TOTAL — Background
+    type: file
+    path: content/totaltool-background.yml
+
+    fields:
+
+      # ------------------------------------------------------
+      # PROJECT NAVIGATION
+      # ------------------------------------------------------
+
+      - name: navigation
+        label: Project Navigation
+        type: object
+        fields:
+
+          - name: brand
+            label: Project Name
+            type: string
+
+          - name: brand_subtitle
+            label: Brand Subtitle
+            type: string
+
+          - name: links
+            label: Navigation Links
+            type: object
+            list: true
+            fields:
+
+              - name: label
+                label: Link Label
+                type: string
+
+              - name: url
+                label: Page URL
+                type: string
+
+
+      # ------------------------------------------------------
+      # PAGE INTRODUCTION
+      # ------------------------------------------------------
+
+      - name: intro
+        label: Page Introduction
+        type: object
+        fields:
+
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+
+          - name: title
+            label: Page Title
+            type: string
+
+          - name: subtitle
+            label: Page Subtitle
+            type: text
+
+
+      # ------------------------------------------------------
+      # BACKGROUND CONTENT SECTIONS
+      # ------------------------------------------------------
+
+      - name: sections
+        label: Background Sections
+        type: object
+        list: true
+        fields:
+
+          - name: title
+            label: Section Heading
+            type: string
+
+          - name: image_side
+            label: Image Position
+            type: select
+            options:
+              - label: Left
+                value: left
+              - label: Right
+                value: right
+
+          - name: image
+            label: Section Image
+            type: object
+            fields:
+
+              - name: path
+                label: Image Path
+                type: string
+
+              - name: alt
+                label: Image Description
+                type: string
+
+              - name: caption
+                label: Image Caption
+                type: string
+
+          - name: paragraphs
+            label: Section Paragraphs
+            type: string
+            list: true
+
+
+      # ------------------------------------------------------
+      # REGULATORY HISTORY TIMELINE
+      # ------------------------------------------------------
+
+      - name: timeline
+        label: Regulatory History Timeline
+        type: object
+        fields:
+
+          - name: title
+            label: Timeline Heading
+            type: string
+
+          - name: introduction
+            label: Timeline Introduction
+            type: text
+
+          - name: details_title
+            label: Regulatory Background Heading
+            type: string
+
+          - name: items
+            label: Timeline Milestones
+            type: object
+            list: true
+            fields:
+
+              - name: year
+                label: Year or Date Range
+                type: string
+
+              - name: title
+                label: Milestone Title
+                type: string
+
+              - name: description
+                label: Milestone Description
+                type: text
+
+
+      # ------------------------------------------------------
+      # ADDITIONAL RESOURCES
+      # ------------------------------------------------------
+
+      - name: resources
+        label: Additional Resources
+        type: object
+        fields:
+
+          - name: heading
+            label: Resources Section Heading
+            type: string
+
+          - name: title
+            label: Expandable Panel Title
+            type: string
+
+          - name: links
+            label: Resource Links
+            type: object
+            list: true
+            fields:
+
+              - name: label
+                label: Link Label
+                type: string
+
+              - name: url
+                label: URL
+                type: string
+
+              - name: description
+                label: Description
+                type: string
+
+              - name: prefix
+                label: Group Prefix
+                type: string
+
+              - name: suffix
+                label: Group Suffix
+                type: string
+
+              - name: links
+                label: Grouped Resource Links
+                type: object
+                list: true
+                fields:
+
+                  - name: label
+                    label: Link Label
+                    type: string
+
+                  - name: url
+                    label: URL
+                    type: string
+
+
+      # ------------------------------------------------------
+      # FEEDBACK / CONTACT FORM
+      # ------------------------------------------------------
+
+      - name: contact
+        label: Feedback / Contact Form
+        type: object
+        fields:
+
+          - name: title
+            label: Panel Title
+            type: string
+
+          - name: notice
+            label: Form Notice
+            type: text
+
+          - name: submit_label
+            label: Submit Button Label
+            type: string
+
+          - name: reset_label
+            label: Reset Button Label
+            type: string
+
+          - name: fields
+            label: Form Fields
+            type: object
+            list: true
+            fields:
+
+              - name: name
+                label: Field Name
+                type: string
+
+              - name: label
+                label: Field Label
+                type: string
+
+              - name: type
+                label: Input Type
+                type: select
+                options:
+                  - label: Text
+                    value: text
+                  - label: Email
+                    value: email
+                  - label: Phone
+                    value: tel
+                  - label: Text Area
+                    value: textarea
+
+              - name: placeholder
+                label: Placeholder Text
+                type: string
+
+              - name: required
+                label: Required Field
+                type: boolean
+
+  # ==========================================================
+  # TOTAL TOOL — CLOSURE RULES
+  # ==========================================================
+
+  - name: totaltool-closure-rules
+    label: TOTAL — Closure Rules
+    type: file
+    path: content/totaltool-closure-rules.yml
+
+    fields:
+
+      - name: navigation
+        label: Project Navigation
+        type: object
+        fields:
+          - name: brand
+            label: Project Name
+            type: string
+          - name: brand_subtitle
+            label: Brand Subtitle
+            type: string
+          - name: links
+            label: Navigation Links
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Link Label
+                type: string
+              - name: url
+                label: Page URL
+                type: string
+
+      - name: hero
+        label: Page Introduction
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Page Title
+            type: string
+          - name: subtitle
+            label: Page Subtitle
+            type: text
+
+      - name: conservation_area
+        label: Loggerhead Conservation Area
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: title
+            label: Section Heading
+            type: string
+          - name: paragraphs
+            label: Paragraphs
+            type: string
+            list: true
+          - name: image
+            label: Conservation Area Image
+            type: object
+            fields:
+              - name: path
+                label: Image Path
+                type: string
+              - name: alt
+                label: Image Description
+                type: text
+              - name: caption
+                label: Image Caption
+                type: string
+
+      - name: standing_rule
+        label: Standing Closure Rule
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: title
+            label: Section Heading
+            type: string
+          - name: introduction
+            label: Introduction Paragraphs
+            type: string
+            list: true
+          - name: conditions
+            label: Closure Conditions
+            type: string
+            list: true
+          - name: explanation
+            label: Explanation Paragraphs
+            type: string
+            list: true
+          - name: closing_text
+            label: Closing Text
+            type: string
+          - name: period_label
+            label: Closure Period Label
+            type: string
+          - name: period
+            label: Closure Period
+            type: string
+          - name: period_note
+            label: Closure Period Explanation
+            type: text
+
+      - name: total_tool
+        label: Proposed TOTAL Bycatch Avoidance Tool
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: title
+            label: Section Heading
+            type: string
+          - name: paragraphs
+            label: Paragraphs
+            type: string
+            list: true
+          - name: threshold_label
+            label: Threshold Label
+            type: string
+          - name: threshold
+            label: Indicator Threshold
+            type: string
+          - name: threshold_note
+            label: Threshold Explanation
+            type: text
+          - name: image
+            label: Bycatch Indicator Image
+            type: object
+            fields:
+              - name: path
+                label: Image Path
+                type: string
+              - name: alt
+                label: Image Description
+                type: text
+              - name: caption
+                label: Image Caption
+                type: string
+
+      - name: references
+        label: Additional Information
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: heading
+            label: Section Heading
+            type: string
+          - name: title
+            label: Expandable Panel Title
+            type: string
+          - name: items
+            label: References
+            type: object
+            list: true
+            fields:
+              - name: citation
+                label: Citation
+                type: text
+              - name: link_label
+                label: Link Label
+                type: string
+              - name: url
+                label: Reference URL
+                type: string
+
+  - name: totaltool-data-dashboard
+    label: "TOTAL - Data Dashboard"
+    type: file
+    path: content/totaltool-data-dashboard.yml
+    fields:
+      - name: navigation
+        label: Navigation
+        type: object
+      - name: hero
+        label: Page Header
+        type: object
+      - name: introduction
+        label: Introduction
+        type: object
+      - name: closure
+        label: Closure History
+        type: object
+      - name: environment
+        label: Environmental Conditions
+        type: object
+      - name: bycatch
+        label: TOTAL Bycatch Tool
+        type: object
+      - name: maps
+        label: Monthly Sea Surface Maps
+        type: object
+      - name: disclaimer
+        label: Disclaimer
+        type: object
+
+  - name: totaltool-environmental-history
+    label: "TOTAL - Historical Environmental Data"
+    type: file
+    path: content/totaltool-environmental-history.yml
+    fields:
+      - name: environmental_conditions
+        label: Historical Environmental Records
+        type: object
+        list: true
+        fields:
+          - name: year
+            label: Year
+            type: number
+          - name: month
+            label: Month
+            type: string
+          - name: status
+            label: El Niño Status
+            type: string
+          - name: forecast
+            label: El Niño Forecast
+            type: text
+          - name: temp
+            label: Sea Surface Temperature (°C)
+            type: number
+          - name: anomaly
+            label: Temperature Anomaly (°C)
+            type: number

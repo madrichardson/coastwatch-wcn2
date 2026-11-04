@@ -1,0 +1,479 @@
+
+/* ==========================================================
+   NETPP — USER RESOURCES
+   Standalone Stylesheet
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. PAGE CONTAINER
+   ---------------------------------------------------------- */
+
+.netpp-page {
+  --netpp-navy: #123B5D;
+  --netpp-blue: #176A91;
+  --netpp-teal: #168C96;
+  --netpp-pale: #EAF3F7;
+  --netpp-border: #DCE7ED;
+  --netpp-text: #293E4D;
+  --netpp-muted: #536B7B;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.25rem 1.75rem 4rem;
+  color: var(--netpp-text);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.netpp-page *,
+.netpp-page *::before,
+.netpp-page *::after {
+  box-sizing: border-box;
+}
+
+/* ----------------------------------------------------------
+   2. PROJECT NAVIGATION
+   ---------------------------------------------------------- */
+
+.netpp-project-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.65rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--netpp-border);
+}
+
+.netpp-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.1rem;
+  border-radius: 7px 7px 0 0;
+  background: transparent;
+  color: var(--netpp-navy);
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none !important;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.netpp-nav-link:hover {
+  background: var(--netpp-pale);
+  color: var(--netpp-blue);
+}
+
+.netpp-nav-link.active,
+.netpp-nav-link.active:hover {
+  background: var(--netpp-navy);
+  color: #FFFFFF;
+}
+
+/* ----------------------------------------------------------
+   3. PAGE HEADER
+   ---------------------------------------------------------- */
+
+.netpp-subpage-header {
+  max-width: 960px;
+  padding: 2rem 0 2.75rem;
+}
+
+.netpp-eyebrow,
+.netpp-section-eyebrow {
+  display: block;
+  color: var(--netpp-teal);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.netpp-subpage-header h1 {
+  color: var(--netpp-navy);
+  font-size: clamp(2.1rem, 3.5vw, 3.1rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.netpp-subpage-header > p {
+  color: var(--netpp-muted);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ----------------------------------------------------------
+   4. CONTENT SECTIONS
+   ---------------------------------------------------------- */
+
+.netpp-section {
+  padding: 2.5rem 0;
+  border-top: 1px solid #E4EDF1;
+  scroll-margin-top: 100px;
+}
+
+.netpp-section-heading {
+  margin-bottom: 1.35rem;
+}
+
+.netpp-section-heading h2 {
+  color: var(--netpp-navy);
+  font-size: clamp(1.55rem, 2.3vw, 2rem);
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+}
+
+.netpp-section p {
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.netpp-section a {
+  color: var(--netpp-blue);
+  text-underline-offset: 3px;
+}
+
+/* ----------------------------------------------------------
+   5. TUTORIAL GROUPS
+   ---------------------------------------------------------- */
+
+.netpp-tutorial-group {
+  margin: 2rem 0 3rem;
+}
+
+.netpp-tutorial-group:last-child {
+  margin-bottom: 0;
+}
+
+.netpp-group-title {
+  color: var(--netpp-navy);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--netpp-border);
+}
+
+.netpp-tutorial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  align-items: stretch;
+}
+
+/* ----------------------------------------------------------
+   6. TUTORIAL CARDS
+   ---------------------------------------------------------- */
+
+.netpp-tutorial-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid var(--netpp-border);
+  border-radius: 12px;
+  box-shadow: 0 5px 22px rgba(18, 59, 93, 0.045);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.netpp-tutorial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(18, 59, 93, 0.09);
+}
+
+.netpp-image-trigger {
+  display: block;
+  width: 100%;
+  height: 210px;
+  padding: 0.75rem;
+  border: none;
+  border-bottom: 1px solid var(--netpp-border);
+  background: #F3F8FA;
+  cursor: zoom-in;
+}
+
+.netpp-image-trigger img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.netpp-tutorial-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.5rem;
+}
+
+.netpp-tutorial-content h4 {
+  color: var(--netpp-navy);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.45;
+  margin: 0 0 0.85rem;
+}
+
+.netpp-tutorial-content p {
+  color: var(--netpp-muted);
+  font-size: 0.93rem;
+  line-height: 1.75;
+  margin: 0 0 1.4rem;
+}
+
+.netpp-tutorial-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: auto;
+}
+
+.netpp-tutorial-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 115px;
+  padding: 0.7rem 0.85rem;
+  border-radius: 7px;
+  background: var(--netpp-blue);
+  border: 1px solid var(--netpp-blue);
+  color: #FFFFFF !important;
+  font-size: 0.85rem;
+  font-weight: 650;
+  text-align: center;
+  text-decoration: none !important;
+  transition: background 0.2s ease;
+}
+
+.netpp-tutorial-button:hover {
+  background: var(--netpp-navy);
+  border-color: var(--netpp-navy);
+  color: #FFFFFF !important;
+}
+
+/* ----------------------------------------------------------
+   7. DOWNLOAD CARDS
+   ---------------------------------------------------------- */
+
+.netpp-download-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.netpp-download-card {
+  min-width: 0;
+  padding: 1.65rem;
+  background: #FFFFFF;
+  border: 1px solid var(--netpp-border);
+  border-radius: 12px;
+  box-shadow: 0 5px 22px rgba(18, 59, 93, 0.045);
+}
+
+.netpp-download-card h3 {
+  color: var(--netpp-navy);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.45;
+  margin: 0 0 1.2rem;
+}
+
+.netpp-download-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.netpp-download-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background: #F3F8FA;
+  border: 1px solid #E1EBF0;
+  border-radius: 7px;
+  color: var(--netpp-blue) !important;
+  font-size: 0.91rem;
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: none !important;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.netpp-download-link:hover {
+  background: #E6F2F6;
+  border-color: var(--netpp-teal);
+  color: var(--netpp-navy) !important;
+}
+
+.netpp-external-arrow {
+  flex-shrink: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--netpp-teal);
+}
+
+/* ----------------------------------------------------------
+   8. IMAGE LIGHTBOX
+   ---------------------------------------------------------- */
+
+.netpp-lightbox[hidden] {
+  display: none !important;
+}
+
+.netpp-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 2rem 2rem;
+  background: rgba(7, 20, 35, 0.92);
+  cursor: zoom-out;
+}
+
+.netpp-lightbox img {
+  display: block;
+  max-width: 95vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px;
+  cursor: default;
+}
+
+.netpp-lightbox-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 1.5rem;
+  padding: 0.2rem 0.65rem;
+  border: none;
+  background: transparent;
+  color: #FFFFFF;
+  font-size: 2.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.netpp-lightbox-close:hover {
+  color: #B5E5E8;
+}
+
+body.netpp-lightbox-open {
+  overflow: hidden;
+}
+
+/* ----------------------------------------------------------
+   9. RESPONSIVE — TABLETS
+   ---------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+  .netpp-tutorial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .netpp-page {
+    padding: 1rem 1.25rem 3rem;
+  }
+
+  .netpp-download-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ----------------------------------------------------------
+   10. RESPONSIVE — MOBILE
+   ---------------------------------------------------------- */
+
+@media (max-width: 650px) {
+  .netpp-page {
+    padding: 0.75rem 1rem 2.5rem;
+  }
+
+  .netpp-project-nav {
+    gap: 0.35rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .netpp-nav-link {
+    flex: 1 1 calc(50% - 0.35rem);
+    padding: 0.7rem 0.6rem;
+    font-size: 0.83rem;
+    border-radius: 7px;
+  }
+
+  .netpp-subpage-header {
+    padding: 1.5rem 0 2rem;
+  }
+
+  .netpp-subpage-header h1 {
+    font-size: 2rem;
+  }
+
+  .netpp-section {
+    padding: 1.75rem 0;
+  }
+
+  .netpp-tutorial-grid,
+  .netpp-download-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .netpp-tutorial-content {
+    padding: 1.25rem;
+  }
+
+  .netpp-image-trigger {
+    height: 200px;
+  }
+
+  .netpp-download-card {
+    padding: 1.3rem;
+  }
+
+  .netpp-lightbox {
+    padding: 3rem 0.75rem 1rem;
+  }
+
+  .netpp-lightbox img {
+    max-width: 98vw;
+    max-height: 82vh;
+  }
+}
+
+/* ----------------------------------------------------------
+   11. ACCESSIBILITY
+   ---------------------------------------------------------- */
+
+.netpp-page a:focus-visible,
+.netpp-image-trigger:focus-visible,
+.netpp-lightbox-close:focus-visible {
+  outline: 3px solid var(--netpp-teal);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .netpp-page *,
+  .netpp-page *::before,
+  .netpp-page *::after {
+    transition: none !important;
+  }
+}
+

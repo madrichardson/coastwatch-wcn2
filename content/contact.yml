@@ -1,0 +1,36 @@
+
+page:
+  heading: "Contact and Feedback"
+  description: "Have questions about CoastWatch data products, tools, or services? We'd love to hear from you."
+
+contacts:
+  - name: "Cara Wilson"
+    role: "Manager, CoastWatch West Coast"
+    address_line1: "99 Pacific Street, Suite 255A"
+    address_line2: "Monterey, CA 93940"
+    email: "cara.wilson@noaa.gov"
+    phone: "831-648-5337"
+
+  - name: "Dale Robinson"
+    role: "Development Lead, CoastWatch West Coast"
+    address_line1: "110 Shaffer Road"
+    address_line2: "Santa Cruz, CA 95060"
+    email: "dale.robinson@noaa.gov"
+    phone: "831-420-3667"
+
+feedback:
+  heading: "Guest Book and Feedback Form"
+  description: "Share your thoughts about our website, data products, and services. Your feedback helps us improve CoastWatch resources."
+  formspree_id: "xoeeyvyp"
+  categories:
+    - "NOAA (intra-agency)"
+    - "US Government (non-NOAA)"
+    - "State Government"
+    - "Local Government"
+    - "Foreign Government"
+    - "Academic (US)"
+    - "Academic (Foreign)"
+    - "Private"
+    - "Military"
+    - "Other"
+

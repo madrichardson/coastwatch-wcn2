@@ -1,0 +1,219 @@
+
+# ==========================================================
+# VIIRS NETPP — USER RESOURCES
+# ==========================================================
+
+navigation:
+  links:
+    - label: "VIIRS NetPP Products"
+      url: "netpp.qmd"
+    - label: "Algorithm & Data"
+      url: "algorithm-data.qmd"
+    - label: "Statistical Analysis"
+      url: "statistical-analysis.qmd"
+    - label: "User Resources"
+      url: "user-resources.qmd"
+
+header:
+  eyebrow: "VIIRS PRIMARY PRODUCTIVITY"
+  title: "User Resources"
+  description: >-
+    Access Python and R tutorials, satellite-derived primary
+    productivity datasets, algorithm inputs, and statistical
+    analysis products.
+
+gallery:
+  title: "Code Gallery"
+  introduction: >-
+    Explore tutorials designed to help users analyze and compare
+    legacy and interim primary productivity products using Python or R.
+
+  groups:
+    - title: "Customizable Regional Analysis Tutorials"
+      tutorials:
+
+        - title: "Unbiased Relative Difference Analysis of the Legacy and Interim Products"
+          image: "images/ccal_psi_netpp.png"
+          image_alt: "Regional unbiased relative difference analysis"
+          description: >-
+            Calculate the mean unbiased relative difference (ψ)
+            between the legacy and interim products for a
+            user-specified region.
+          links:
+            - label: "Python Tutorial"
+              url: "https://github.com/coastwatch-wcn/coastwatch-wcn/tree/main/tutorials/Python/longhurst/unbiased_relative_difference/longhurst_unbiased_relative_difference.ipynb"
+            - label: "R Tutorial"
+              url: "https://github.com/coastwatch-wcn/primary_productivity/tree/main/tutorials/R/longhurst/unbiased_relative_difference/longhurst_unbiased_relative_difference.Rmd"
+
+        - title: "Absolute Relative Difference Analysis of the Legacy and Interim Products"
+          image: "images/carb_delta_netpp.png"
+          image_alt: "Regional absolute relative difference analysis"
+          description: >-
+            Calculate the absolute relative difference (Δ)
+            between the legacy and interim products for a
+            user-specified region.
+          links:
+            - label: "Python Tutorial"
+              url: "https://github.com/coastwatch-wcn/primary_productivity/tree/main/tutorials/Python/longhurst/absolute_relative_difference/longhurst_absolute_relative_difference.ipynb"
+            - label: "R Tutorial"
+              url: "https://github.com/coastwatch-wcn/primary_productivity/tree/main/tutorials/R/longhurst/absolute_relative_difference/longhurst_absolute_relative_difference.Rmd"
+
+        - title: "Contingency Tables: Assessing the Similarity Between Two Primary Productivity Products"
+          image: "images/CCAL_3x3_contingency.png"
+          image_alt: "Regional contingency matrix analysis"
+          description: >-
+            Construct a contingency matrix to compare the trends
+            between the legacy and interim products for a
+            user-specified region.
+          links:
+            - label: "Python Tutorial"
+              url: "https://github.com/coastwatch-wcn/primary_productivity/tree/main/tutorials/Python/longhurst/contingency_matrix/longhurst_contingency_matrices.ipynb"
+            - label: "R Tutorial"
+              url: "https://github.com/coastwatch-wcn/primary_productivity/tree/main/tutorials/R/longhurst/contigency_matrix/longhurst_contingency_matrices.Rmd"
+
+    - title: "Full Statistical Analysis Tutorials"
+      tutorials:
+
+        - title: "Primary Productivity Unbiased Relative Difference Analysis"
+          description: >-
+            Calculate the mean unbiased relative difference (ψ)
+            of the interim VIIRS netPP and legacy MODIS netPP
+            products for each month from the time series shared
+            between the two sensors.
+          links:
+            - label: "Python Tutorial"
+              url: "https://github.com/coastwatch-wcn/coastwatch-wcn.github.io/tree/main/projects/primary-productivity/tutorials/Python/raw_calculations/unbiased_relative_difference/raw_unbiased_relative_difference.ipynb"
+            - label: "R Tutorial"
+              url: "https://github.com/coastwatch-wcn/coastwatch-wcn.github.io/tree/main/projects/primary-productivity/tutorials/R/raw_calculations/unbiased_relative_difference/raw_unbiased_relative_difference.Rmd"
+
+        - title: "Primary Productivity Absolute Relative Difference Analysis"
+          description: >-
+            Calculate the mean absolute relative difference (Δ)
+            of the interim VIIRS netPP product and legacy MODIS
+            netPP product for each month from a time series
+            shared between the two sensors.
+          links:
+            - label: "Python Tutorial"
+              url: "https://github.com/coastwatch-wcn/coastwatch-wcn.github.io/tree/main/projects/primary-productivity/tutorials/Python/raw_calculations/absolute_relative_difference/raw_absolute_relative_difference.ipynb"
+            - label: "R Tutorial"
+              url: "https://github.com/coastwatch-wcn/coastwatch-wcn.github.io/tree/main/projects/primary-productivity/tutorials/R/raw_calculations/absolute_relative_difference/raw_absolute_relative_difference.Rmd"
+
+        - title: "Calculating Trends and P-Values for Legacy and Interim NetPP Products"
+          description: >-
+            Generate trends for satellite-derived hourly means
+            of legacy or interim primary productivity products.
+          links:
+            - label: "Python Tutorial"
+              url: "https://github.com/coastwatch-wcn/coastwatch-wcn.github.io/tree/main/projects/primary-productivity/tutorials/Python/raw_calculations/trends/raw_trends_primary_productivity.ipynb"
+            - label: "R Tutorial"
+              url: "https://github.com/coastwatch-wcn/coastwatch-wcn.github.io/tree/main/projects/primary-productivity/tutorials/R/raw_calculations/trends/raw_trends_primary_productivity.Rmd"
+
+# ==========================================================
+# DATA DOWNLOADS
+# ==========================================================
+
+downloads:
+
+  # --------------------------------------------------------
+  # INTERIM PRODUCTS
+  # --------------------------------------------------------
+
+  - id: "download-interim-product-data"
+    eyebrow: "PRIMARY PRODUCTIVITY DATA"
+    title: "Download Interim Product Data"
+
+    products:
+
+      - title: "VIIRS SNPP Interim Primary Productivity"
+        links:
+          - label: "Daily Composites, Near Real-time"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/productivity_viirs_snpp_nrt_daily.graph"
+          - label: "Daily Composites, Science Quality"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/productivity_viirs_snpp_daily.graph"
+          - label: "Monthly Composites, Science Quality"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/productivity_viirs_snpp_monthly.graph"
+
+      - title: "VIIRS NOAA-20 Interim Primary Productivity"
+        links:
+          - label: "Daily Composites, Near Real-time"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/productivity_viirs_noaa20_daily_nrt.graph"
+          - label: "Daily Composites, Science Quality"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/productivity_viirs_noaa20_daily.graph"
+          - label: "Monthly Composites, Science Quality"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/productivity_viirs_noaa20_monthly.graph"
+
+  # --------------------------------------------------------
+  # ALGORITHM INPUT DATA
+  # --------------------------------------------------------
+
+  - id: "download-algorithm-input-data"
+    eyebrow: "SATELLITE INPUTS"
+    title: "Download Algorithm Input Data"
+
+    products:
+
+      - title: "MODIS Aqua netPP"
+        links:
+          - label: "Daily Composite"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdMH1pp1day.graph"
+          - label: "Monthly Composite"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdMH1ppmday.graph"
+
+      - title: "MODIS Aqua Input Data for Legacy netPP"
+        links:
+          - label: "MODIS Chlorophyll-a"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdMH1chlamday_R2022SQ.graph"
+          - label: "MODIS PAR"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdMH1par0mday_R2022SQ.graph"
+          - label: "MODIS SST"
+            url: "https://www.earthdata.nasa.gov/"
+
+      - title: "VIIRS SNPP Input Data for Interim netPP"
+        links:
+          - label: "VIIRS SNPP Chlorophyll-a"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdVH2018chlamday.graph"
+          - label: "VIIRS SNPP PAR"
+            url: "https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdVH2018parmday.graph"
+          - label: "VIIRS SNPP SST"
+            url: "https://www.earthdata.nasa.gov/"
+
+      - title: "VIIRS NOAA-20 Input Data for Interim netPP"
+        links:
+          - label: "VIIRS NOAA20 Chlorophyll-a"
+            url: "https://www.earthdata.nasa.gov/"
+          - label: "VIIRS NOAA20 PAR"
+            url: "https://www.earthdata.nasa.gov/"
+          - label: "VIIRS NOAA20 SST"
+            url: "https://www.earthdata.nasa.gov/"
+
+  # --------------------------------------------------------
+  # STATISTICAL ANALYSIS PRODUCTS
+  # --------------------------------------------------------
+
+  - id: "download-statistical-analysis-data-products"
+    eyebrow: "STATISTICAL PRODUCTS"
+    title: "Download Statistical Analysis Data Products"
+
+    products:
+
+      - title: "Unbiased Relative Difference (ψ)"
+        links:
+          - label: "VIIRS-SNPP - MODIS-Aqua"
+            url: "https://coastwatch.pfeg.noaa.gov/wcn/erddap/griddap/netpp_psi_snpp_modis.graph"
+          - label: "VIIRS-NOAA-20 - MODIS-Aqua"
+            url: "https://coastwatch.pfeg.noaa.gov/wcn/erddap/griddap/netpp_psi_noaa20_modis.graph"
+
+      - title: "Absolute Relative Difference (Δ)"
+        links:
+          - label: "VIIRS-SNPP - MODIS-Aqua"
+            url: "https://coastwatch.pfeg.noaa.gov/wcn/erddap/griddap/netpp_delta_snpp_modis.graph"
+          - label: "VIIRS-NOAA-20 - MODIS-Aqua"
+            url: "https://coastwatch.pfeg.noaa.gov/wcn/erddap/griddap/netpp_delta_noaa20_modis.graph"
+
+      - title: "Linear Regression Trends"
+        links:
+          - label: "MODIS-Aqua & VIIRS-SNPP"
+            url: "https://coastwatch.pfeg.noaa.gov/wcn/erddap/griddap/netpp_trends_viirssnpp_and_modisaqua.graph"
+          - label: "MODIS-Aqua & VIIRS-NOAA-20"
+            url: "https://coastwatch.pfeg.noaa.gov/wcn/erddap/griddap/netpp_trends_viirsnoaa20_and_modisaqua.graph"
+

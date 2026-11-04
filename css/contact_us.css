@@ -1,0 +1,320 @@
+/* ==========================================================
+   COASTWATCH — CONTACT AND FEEDBACK
+   ========================================================== */
+
+.cw-contact-page {
+  --cw-navy: #123B5D;
+  --cw-blue: #176A91;
+  --cw-teal: #168C96;
+  --cw-light: #EAF3F7;
+  --cw-border: #DCE5EB;
+  --cw-muted: #526878;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #263746;
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+.cw-contact-page .cw-contact-hero {
+  background: linear-gradient(
+    115deg,
+    #123B5D 0%,
+    #164D70 65%,
+    #176A91 100%
+  );
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 8px 28px rgba(18, 59, 93, 0.07);
+}
+
+.cw-contact-page .cw-contact-hero h1 {
+  color: #FFFFFF;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 750;
+  line-height: 1.2;
+  margin: 0 0 0.8rem;
+  border: none;
+}
+
+.cw-contact-page .cw-contact-hero p {
+  color: #EAF3F7;
+  max-width: 800px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.cw-contact-page .cw-contact-eyebrow {
+  color: #9ADDE0 !important;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem !important;
+}
+
+/* ==========================================================
+   SECTION HEADINGS
+   ========================================================== */
+
+.cw-contact-page .cw-contact-section,
+.cw-contact-page .cw-feedback-section {
+  margin-bottom: 3rem;
+}
+
+.cw-contact-page .cw-contact-section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.cw-contact-page .cw-contact-section-heading h2 {
+  color: var(--cw-navy);
+  font-size: 1.65rem;
+  font-weight: 750;
+  margin: 0 0 0.5rem;
+  border: none;
+}
+
+.cw-contact-page .cw-contact-section-heading p {
+  color: var(--cw-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==========================================================
+   CONTACT CARDS
+   ========================================================== */
+
+.cw-contact-page .cw-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.cw-contact-page .cw-person-card {
+  background: #F8FAFC;
+  border: 1px solid var(--cw-border);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 5px 22px rgba(18, 59, 93, 0.05);
+  transition: box-shadow 0.2s, transform 0.2s;
+  min-width: 0;
+}
+
+.cw-contact-page .cw-person-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(18, 59, 93, 0.09);
+}
+
+.cw-contact-page .cw-person-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background: #DDEEF3;
+  color: var(--cw-blue);
+  border-radius: 10px;
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+}
+
+.cw-contact-page .cw-person-card h3 {
+  color: var(--cw-navy);
+  font-size: 1.3rem;
+  font-weight: 750;
+  margin: 0 0 0.4rem;
+  border: none;
+}
+
+.cw-contact-page .cw-person-role {
+  color: var(--cw-blue);
+  font-size: 0.95rem;
+  font-weight: 650;
+  margin: 0 0 1.3rem;
+}
+
+.cw-contact-page .cw-person-details {
+  color: #435969;
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.cw-contact-page .cw-person-details p {
+  margin: 0 0 0.9rem;
+}
+
+.cw-contact-page .cw-person-details a {
+  color: var(--cw-blue);
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.cw-contact-page .cw-person-details a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ==========================================================
+   FEEDBACK FORM CARD
+   ========================================================== */
+
+.cw-contact-page .cw-feedback-card {
+  background: #F8FAFC;
+  border: 1px solid var(--cw-border);
+  border-radius: 14px;
+  padding: 2.5rem;
+  box-shadow: 0 5px 22px rgba(18, 59, 93, 0.05);
+}
+
+.cw-contact-page .cw-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.cw-contact-page .cw-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.cw-contact-page .cw-form-full {
+  grid-column: 1 / -1;
+}
+
+.cw-contact-page .cw-form-field label {
+  display: block;
+  color: var(--cw-navy);
+  font-size: 0.95rem;
+  font-weight: 650;
+  margin: 0;
+}
+
+.cw-contact-page .cw-form-field label span {
+  color: #B42318;
+}
+
+/* ==========================================================
+   FORM INPUTS
+   ========================================================== */
+
+.cw-contact-page .cw-form-field input,
+.cw-contact-page .cw-form-field select,
+.cw-contact-page .cw-form-field textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
+  background: #FFFFFF;
+  color: #263746;
+  border: 1px solid #C9D5DF;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cw-contact-page .cw-form-field textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.cw-contact-page .cw-form-field input:focus,
+.cw-contact-page .cw-form-field select:focus,
+.cw-contact-page .cw-form-field textarea:focus {
+  outline: none;
+  border-color: var(--cw-blue);
+  box-shadow: 0 0 0 3px rgba(23, 106, 145, 0.14);
+}
+
+/* ==========================================================
+   REQUIRED TEXT AND BUTTONS
+   ========================================================== */
+
+.cw-contact-page .cw-form-required {
+  color: var(--cw-muted);
+  font-size: 0.85rem;
+  margin: 1.3rem 0;
+}
+
+.cw-contact-page .cw-form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cw-contact-page .cw-submit-btn,
+.cw-contact-page .cw-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.6rem;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.cw-contact-page .cw-submit-btn {
+  background: var(--cw-blue);
+  color: #FFFFFF;
+  border: 1px solid var(--cw-blue);
+}
+
+.cw-contact-page .cw-submit-btn:hover {
+  background: var(--cw-navy);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.cw-contact-page .cw-reset-btn {
+  background: transparent;
+  color: var(--cw-navy);
+  border: 1px solid #B9C9D7;
+}
+
+.cw-contact-page .cw-reset-btn:hover {
+  background: #EAF3F7;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 767px) {
+
+  .cw-contact-page {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cw-contact-page .cw-contact-hero {
+    padding: 2rem 1.5rem;
+  }
+
+  .cw-contact-page .cw-contact-grid,
+  .cw-contact-page .cw-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-contact-page .cw-feedback-card {
+    padding: 1.5rem;
+  }
+
+  .cw-contact-page .cw-form-full {
+    grid-column: auto;
+  }
+
+}

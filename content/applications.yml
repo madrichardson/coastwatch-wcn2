@@ -28,7 +28,7 @@ projects:
   description: The TOTAL (Temperature Observations To Avoid Loggerheads) project uses satellite-based environmental indicators within a dynamic ocean management framework to deliver a tool that helps minimize loggerhead bycatch without causing undue impact on the industry. The CoastWatch West Coast Node provides satellite data products and a web presence for the project.
   funding: NOAA Fisheries Bycatch Reduction Engineering Program (grant number NA16NMF4720278), with support from NOAA Southwest Fisheries Science Center and NOAA CoastWatch.
   homepage_url: ''
-  project_href: projects/turtlewatch/turtlewatch.qmd
+  project_href: projects/totaltool/totaltool.qmd
 - image: images/whalewatch.png
   alt: WhaleWatch Image
   category_title: Blue Whale Conservation

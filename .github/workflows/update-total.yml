@@ -1,0 +1,107 @@
+name: Update Loggerhead TOTAL Dashboard
+
+on:
+  schedule:
+    - cron: "0 12 3 * *"   # run on the 3rd of each month at 12:00 UTC
+    - cron: "0 12 16 * *" # run on the 16th of each month at 12:00 UTC
+    - cron: "0 12 28 * *" # run on the 28th of each month at 12:00 UTC
+  workflow_dispatch:         # manual trigger option
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    outputs:
+      missing_data: ${{ steps.total_controller.outputs.missing_data }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+         python -m pip install --upgrade pip
+         python -m pip install -r requirements.txt
+     
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Run TOTAL update controller
+        id: total_controller
+        run: python projects/totaltool/scripts/control_total_data_2025.py
+
+      - name: Scrape ENSO status
+        run: python projects/totaltool/scripts/scape_elnino_2025.py
+
+      - name: Scrape Heatwave status
+        run: python projects/totaltool/scripts/update_heatwave_2025.py
+
+      - name: Update closure history from Federal Register
+        run: python projects/totaltool/scripts/update_Itca_closure.py
+
+      - name: Commit updated Total Tool Files
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add projects/turtlewatch/data/json/
+          git add projects/totaltool/data/resources/
+          git add projects/totaltool/data/images/
+
+          git diff --cached --quiet || git commit -m "Update Total Tool dashboard data"
+          git push     
+
+      - name: Render Quarto site (to docs/)
+        run: quarto render
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs   # must match output-dir: docs in _quarto.yml
+
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+
+  notify_missing_data:
+    needs: update
+    if: ${{ always() && needs.update.outputs.missing_data == 'true' }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+
+    steps:
+      - name: Create missing-data notification
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh issue create \
+            --title "TOTAL Dashboard: Missing Monthly Data" \
+            --body "The TOTAL processing script detected missing monthly data in ERDDAP.
+
+          The indicator update was skipped, and the existing CSV and indicator plot were preserved.
+
+          GitHub Actions run: ${RUN_URL}"

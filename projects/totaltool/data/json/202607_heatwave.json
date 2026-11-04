@@ -1,0 +1,11 @@
+{
+    "heat_status": "Tropical Pacific - With an ongoing El Ni\u00f1o event predicted to peak in boreal winter, MHW likelihoods throughout the remainder of 2026 are very high in the Eastern Tropical Pacific (90-100% [90-100%]; high confidence). | Northeast Pacific - High MHW likelihoods are forecast off the California and Baja California coasts through the end of the year (70-100% [70-90%]; high confidence), with lower but still elevated likelihoods off Oregon and Washington (30-70% [20-50%]; low-medium confidence). | Central and Western North Pacific - Forecast MHWs probabilities in the Kuroshio Extension region remain elevated through September (50-80% [30-60%]; low-medium confidence).",
+    "heat_date": "July 2026",
+    "heat_period": "July 2026 - June 2027",
+    "pacific_regions": {
+        "Tropical Pacific": "With an ongoing El Ni\u00f1o event predicted to peak in boreal winter, MHW likelihoods throughout the remainder of 2026 are very high in the Eastern Tropical Pacific (90-100% [90-100%]; high confidence).",
+        "Northeast Pacific": "High MHW likelihoods are forecast off the California and Baja California coasts through the end of the year (70-100% [70-90%]; high confidence), with lower but still elevated likelihoods off Oregon and Washington (30-70% [20-50%]; low-medium confidence).",
+        "Central and Western North Pacific": "Forecast MHWs probabilities in the Kuroshio Extension region remain elevated through September (50-80% [30-60%]; low-medium confidence)."
+    },
+    "source_url": "https://psl.noaa.gov/marine-heatwaves/"
+}

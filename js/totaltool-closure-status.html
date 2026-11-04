@@ -1,0 +1,459 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const DATA_ROOT = "data";
+
+  const $ = (id) => document.getElementById(id);
+
+  const setText = (id, value) => {
+    const element = $(id);
+    if (element) {
+      element.textContent =
+        value === null || value === undefined || value === ""
+          ? "Not available"
+          : String(value);
+    }
+  };
+
+  async function loadJSON(path) {
+    const response = await fetch(path, { cache: "no-cache" });
+    if (!response.ok) {
+      throw new Error(`${path}: HTTP ${response.status}`);
+    }
+    return response.json();
+  }
+
+
+  // ========================================================
+  // CURRENT DATE — REGULATORY STATUS
+  // ========================================================
+
+  function updateClosureDate() {
+    const element = document.getElementById("closure-today");
+    if (!element) return;
+
+    const today = new Date();
+
+    element.textContent = today.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+  }
+
+  updateClosureDate();
+
+
+  // ========================================================
+  // ENSO
+  // ========================================================
+
+  async function loadENSO() {
+    try {
+      const data = await loadJSON(
+        `${DATA_ROOT}/json/elnino_last.json`
+      );
+
+      setText("nino-status", data.status);
+      setText("nino-date", data.date_print);
+      setText("nino-synopsis", data.synopsis?.trim());
+
+    } catch (error) {
+      console.error("Error loading ENSO:", error);
+      setText("nino-status", "Data unavailable");
+      setText("nino-date", "Not available");
+      setText("nino-synopsis", "Forecast unavailable");
+    }
+  }
+
+
+  // ========================================================
+  // MARINE HEATWAVE
+  // ========================================================
+
+  async function loadHeatwave() {
+    try {
+      const data = await loadJSON(
+        `${DATA_ROOT}/json/heatwave.json`
+      );
+
+      setText("heat-period", data.heat_period);
+      setText("heat-date", data.heat_date);
+
+      if (data.source_url) {
+        $("heat-link").href = data.source_url;
+      }
+
+      const container = $("heat-regions");
+      if (!container) return;
+
+      container.replaceChildren();
+
+      const regions = data.pacific_regions || {};
+
+      if (!Object.keys(regions).length) {
+        container.textContent = "No Pacific forecasts available.";
+        return;
+      }
+
+      Object.entries(regions).forEach(([region, forecast]) => {
+        const paragraph = document.createElement("p");
+        const label = document.createElement("strong");
+
+        label.textContent = `${region}: `;
+        paragraph.appendChild(label);
+        paragraph.appendChild(
+          document.createTextNode(String(forecast ?? ""))
+        );
+
+        container.appendChild(paragraph);
+      });
+
+    } catch (error) {
+      console.error("Error loading marine heatwave:", error);
+      setText("heat-period", "Not available");
+      setText("heat-date", "Not available");
+      setText("heat-regions", "Forecast unavailable");
+    }
+  }
+
+
+  // ========================================================
+  // SEA SURFACE TEMPERATURE TABLE
+  // ========================================================
+
+  function formatTemperature(value, unit, anomaly = false) {
+    const number = Number(value);
+
+    if (value === null || value === "" ||
+        !Number.isFinite(number)) {
+      return "N/A";
+    }
+
+    if (unit === "F") {
+      return (
+        anomaly
+          ? number * 9 / 5
+          : number * 9 / 5 + 32
+      ).toFixed(1);
+    }
+
+    return number.toFixed(1);
+  }
+
+
+  async function loadTemperatureTable() {
+    const container = $("sst-table-container");
+    if (!container) return;
+
+    try {
+      const data = await loadJSON(
+        `${DATA_ROOT}/json/latest.json`
+      );
+
+      const keys = Object.keys(data).sort(
+        (a, b) => Number(b.slice(1)) - Number(a.slice(1))
+      );
+
+      const months = keys.map(k => data[k].month || "");
+      const sstValues = keys.map(k => data[k].sst);
+      const anomalyValues = keys.map(k => data[k].anom);
+
+      const table = document.createElement("table");
+      table.className = "cw-totaltool-status-table";
+
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+
+      const firstHeader = document.createElement("th");
+      firstHeader.textContent = "Measurement";
+      headerRow.appendChild(firstHeader);
+
+      months.forEach(month => {
+        const th = document.createElement("th");
+        th.textContent = month;
+        headerRow.appendChild(th);
+      });
+
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+
+      function makeRow(label, values, anomaly = false) {
+        const row = document.createElement("tr");
+        const heading = document.createElement("td");
+        heading.textContent = label;
+        row.appendChild(heading);
+
+        values.forEach(value => {
+          const td = document.createElement("td");
+          td.dataset.rawValue = value ?? "";
+          td.dataset.anomaly = String(anomaly);
+
+          if (anomaly && value !== null && value !== "" &&
+              Number.isFinite(Number(value))) {
+            const number = Number(value);
+
+            if (number > 0) {
+              td.classList.add("cw-totaltool-status-positive");
+            } else if (number < 0) {
+              td.classList.add("cw-totaltool-status-negative");
+            }
+          }
+
+          row.appendChild(td);
+        });
+
+        tbody.appendChild(row);
+      }
+
+      makeRow("Temperature", sstValues);
+      makeRow("Anomaly", anomalyValues, true);
+
+      table.appendChild(tbody);
+      container.replaceChildren(table);
+
+      function updateUnits(unit) {
+        tbody.querySelectorAll("td[data-raw-value]")
+          .forEach(cell => {
+            cell.textContent = formatTemperature(
+              cell.dataset.rawValue,
+              unit,
+              cell.dataset.anomaly === "true"
+            );
+          });
+      }
+
+      document.querySelectorAll(
+        'input[name="temp-unit"]'
+      ).forEach(radio => {
+        radio.addEventListener("change", () => {
+          if (radio.checked) updateUnits(radio.value);
+        });
+      });
+
+      const selectedUnit = document.querySelector(
+        'input[name="temp-unit"]:checked'
+      );
+
+      updateUnits(selectedUnit?.value || "C");
+
+    } catch (error) {
+      console.error("Error loading temperature data:", error);
+      container.textContent = "Temperature data unavailable.";
+    }
+  }
+
+
+  // ========================================================
+  // TOTAL INDICATOR
+  // ========================================================
+
+  async function loadTOTAL() {
+    try {
+      const data = await loadJSON(
+        `${DATA_ROOT}/json/web_data.json`
+      );
+
+      setText("total-fcdate", data.fc_date);
+      setText("total-status", data.alert);
+      setText("total-index", data.new_index);
+      setText("total-updated", data.update_date);
+
+    } catch (error) {
+      console.error("Error loading TOTAL:", error);
+
+      ["total-fcdate", "total-status",
+       "total-index", "total-updated"].forEach(id => {
+        setText(id, "Not available");
+      });
+    }
+  }
+
+
+  // ========================================================
+  // MONTHLY SST AND ANOMALY MAPS
+  // ========================================================
+
+  function availableMonthCandidates(count = 6) {
+    const today = new Date();
+    const months = [];
+
+    // Last six completed calendar months.
+    for (let i = count; i >= 1; i--) {
+      const date = new Date(
+        today.getFullYear(),
+        today.getMonth() - i,
+        16
+      );
+
+      const year = date.getFullYear();
+      const month = String(
+        date.getMonth() + 1
+      ).padStart(2, "0");
+
+      const stamp = `${year}${month}16`;
+
+      months.push({
+        label: date.toLocaleString("en-US", {
+          month: "long",
+          year: "numeric"
+        }),
+        sst: `${DATA_ROOT}/images/sst_${stamp}.png`,
+        anom: `${DATA_ROOT}/images/anom_${stamp}.png`
+      });
+    }
+
+    return months;
+  }
+
+
+  function imageExists(src) {
+    return new Promise(resolve => {
+      const image = new Image();
+      image.onload = () => resolve(true);
+      image.onerror = () => resolve(false);
+      image.src = src;
+    });
+  }
+
+
+  function initializeSlider({
+    imageId,
+    prevId,
+    nextId,
+    labelId,
+    emptyId,
+    months,
+    type
+  }) {
+    const image = $(imageId);
+    const previous = $(prevId);
+    const next = $(nextId);
+    const label = $(labelId);
+    const empty = $(emptyId);
+
+    if (!image || !previous || !next || !label) return;
+
+    let currentIndex = months.length - 1;
+
+    function update() {
+      if (!months.length) {
+        image.removeAttribute("src");
+        image.hidden = true;
+        if (empty) empty.hidden = false;
+        label.textContent = "No maps available";
+        previous.disabled = true;
+        next.disabled = true;
+        return;
+      }
+
+      const month = months[currentIndex];
+
+      image.hidden = false;
+      if (empty) empty.hidden = true;
+
+      image.src = month[type];
+      label.textContent = month.label;
+
+      previous.disabled = currentIndex === 0;
+      next.disabled = currentIndex === months.length - 1;
+    }
+
+    previous.addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        update();
+      }
+    });
+
+    next.addEventListener("click", () => {
+      if (currentIndex < months.length - 1) {
+        currentIndex++;
+        update();
+      }
+    });
+
+    update();
+  }
+
+
+  async function loadMonthlyMaps() {
+    try {
+      const candidates = availableMonthCandidates(6);
+
+      const checked = await Promise.all(
+        candidates.map(async month => {
+          const [sstAvailable, anomAvailable] =
+            await Promise.all([
+              imageExists(month.sst),
+              imageExists(month.anom)
+            ]);
+
+          return {
+            ...month,
+            sstAvailable,
+            anomAvailable
+          };
+        })
+      );
+
+      const sstMonths = checked.filter(
+        month => month.sstAvailable
+      );
+
+      const anomalyMonths = checked.filter(
+        month => month.anomAvailable
+      );
+
+      initializeSlider({
+        imageId: "sst-dash-image",
+        prevId: "sst-prev",
+        nextId: "sst-next",
+        labelId: "sst-month-label",
+        emptyId: "sst-empty",
+        months: sstMonths,
+        type: "sst"
+      });
+
+      initializeSlider({
+        imageId: "anom-image",
+        prevId: "anom-prev",
+        nextId: "anom-next",
+        labelId: "anom-month-label",
+        emptyId: "anom-empty",
+        months: anomalyMonths,
+        type: "anom"
+      });
+
+      checked.forEach(month => {
+        if (!month.sstAvailable) {
+          console.warn("Missing SST map:", month.sst);
+        }
+
+        if (!month.anomAvailable) {
+          console.warn("Missing anomaly map:", month.anom);
+        }
+      });
+
+    } catch (error) {
+      console.error("Error loading monthly maps:", error);
+      setText("sst-month-label", "Maps unavailable");
+      setText("anom-month-label", "Maps unavailable");
+    }
+  }
+
+
+  // ========================================================
+  // INITIALIZE
+  // ========================================================
+
+  loadENSO();
+  loadHeatwave();
+  loadTemperatureTable();
+  loadTOTAL();
+  loadMonthlyMaps();
+
+});
+</script>

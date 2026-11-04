@@ -1,0 +1,470 @@
+
+/* ==========================================================
+   NETPP — ALGORITHM & DATA
+   Standalone Stylesheet
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. PAGE CONTAINER
+   ---------------------------------------------------------- */
+
+.netpp-page {
+  --netpp-navy: #123B5D;
+  --netpp-blue: #176A91;
+  --netpp-teal: #168C96;
+  --netpp-pale: #EAF3F7;
+  --netpp-border: #DCE7ED;
+  --netpp-text: #293E4D;
+  --netpp-muted: #536B7B;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.25rem 1.75rem 4rem;
+  color: var(--netpp-text);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.netpp-page *,
+.netpp-page *::before,
+.netpp-page *::after {
+  box-sizing: border-box;
+}
+
+/* ----------------------------------------------------------
+   2. PROJECT NAVIGATION
+   ---------------------------------------------------------- */
+
+.netpp-project-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.65rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--netpp-border);
+}
+
+.netpp-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.1rem;
+  border-radius: 7px 7px 0 0;
+  background: transparent;
+  color: var(--netpp-navy);
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none !important;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.netpp-nav-link:hover {
+  background: var(--netpp-pale);
+  color: var(--netpp-blue);
+}
+
+.netpp-nav-link.active,
+.netpp-nav-link.active:hover {
+  background: var(--netpp-navy);
+  color: #FFFFFF;
+}
+
+/* ----------------------------------------------------------
+   3. SUBPAGE HEADER
+   ---------------------------------------------------------- */
+
+.netpp-subpage-header {
+  max-width: 900px;
+  padding: 2rem 0 2.75rem;
+}
+
+.netpp-eyebrow,
+.netpp-section-eyebrow {
+  display: block;
+  color: var(--netpp-teal);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.netpp-subpage-header h1 {
+  color: var(--netpp-navy);
+  font-size: clamp(2.1rem, 3.5vw, 3.1rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.netpp-subpage-header > p {
+  color: var(--netpp-muted);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0;
+}
+
+/* ----------------------------------------------------------
+   4. CONTENT SECTIONS
+   ---------------------------------------------------------- */
+
+.netpp-section {
+  padding: 2.5rem 0;
+  border-top: 1px solid #E4EDF1;
+  scroll-margin-top: 100px;
+}
+
+.netpp-section:last-child {
+  border-bottom: 1px solid #E4EDF1;
+}
+
+.netpp-section-heading {
+  margin-bottom: 1.25rem;
+}
+
+.netpp-section-heading h2 {
+  color: var(--netpp-navy);
+  font-size: clamp(1.55rem, 2.3vw, 2rem);
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.75rem;
+}
+
+.netpp-section p,
+.netpp-section li {
+  line-height: 1.8;
+}
+
+.netpp-section-body {
+  max-width: 1050px;
+  color: var(--netpp-text);
+}
+
+.netpp-section-body p {
+  margin-bottom: 1.25rem;
+}
+
+.netpp-section a {
+  color: var(--netpp-blue);
+  text-underline-offset: 3px;
+}
+
+.netpp-section a:hover {
+  color: var(--netpp-navy);
+}
+
+/* ----------------------------------------------------------
+   5. EQUATION PANELS
+   ---------------------------------------------------------- */
+
+.netpp-equation-panel {
+  margin: 1.5rem 0;
+  padding: 1.75rem 2rem;
+  background: #F3F8FA;
+  border: 1px solid var(--netpp-border);
+  border-left: 4px solid var(--netpp-teal);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.netpp-equation-label {
+  color: var(--netpp-teal);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.netpp-equation {
+  color: var(--netpp-navy);
+  font-size: 1.05rem;
+}
+
+.netpp-equation-panel .math.display {
+  margin: 0.75rem 0;
+}
+
+.netpp-equation-panel mjx-container {
+  max-width: 100%;
+}
+
+/* ----------------------------------------------------------
+   6. SATELLITE MEASUREMENT CARDS
+   ---------------------------------------------------------- */
+
+.netpp-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.netpp-info-card {
+  min-width: 0;
+  padding: 1.5rem;
+  background: #FFFFFF;
+  border: 1px solid var(--netpp-border);
+  border-top: 3px solid var(--netpp-teal);
+  border-radius: 11px;
+  box-shadow: 0 4px 18px rgba(18, 59, 93, 0.04);
+}
+
+.netpp-info-tag,
+.netpp-product-tag {
+  display: inline-block;
+  color: var(--netpp-teal);
+  background: #EAF5F5;
+  padding: 0.35rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.netpp-info-card h3 {
+  color: var(--netpp-navy);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 0.65rem;
+}
+
+.netpp-info-card p {
+  color: var(--netpp-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ----------------------------------------------------------
+   7. DERIVED PARAMETER CARDS
+   ---------------------------------------------------------- */
+
+.netpp-parameter-card {
+  margin: 1.5rem 0 1rem;
+  padding: 1.3rem 1.6rem;
+  background: #FFFFFF;
+  border: 1px solid var(--netpp-border);
+  border-radius: 10px;
+}
+
+.netpp-parameter-card h3 {
+  color: var(--netpp-navy);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.65rem;
+}
+
+.netpp-parameter-card p {
+  color: var(--netpp-text);
+  line-height: 1.75;
+  margin-bottom: 0;
+}
+
+/* ----------------------------------------------------------
+   8. SATELLITE DATA PRODUCT CARDS
+   ---------------------------------------------------------- */
+
+.netpp-data-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.netpp-data-card {
+  min-width: 0;
+  padding: 1.65rem;
+  background: #FFFFFF;
+  border: 1px solid var(--netpp-border);
+  border-radius: 12px;
+  box-shadow: 0 5px 22px rgba(18, 59, 93, 0.045);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.netpp-data-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(18, 59, 93, 0.09);
+}
+
+.netpp-data-card h3 {
+  color: var(--netpp-navy);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.7rem;
+}
+
+.netpp-data-period {
+  color: var(--netpp-blue);
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.netpp-data-card p {
+  color: var(--netpp-muted);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ----------------------------------------------------------
+   9. RESOURCE CALLOUT
+   ---------------------------------------------------------- */
+
+.netpp-resource-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 1.75rem 2rem;
+  background: var(--netpp-pale);
+  border: 1px solid var(--netpp-border);
+  border-radius: 12px;
+}
+
+.netpp-resource-callout h3 {
+  color: var(--netpp-navy);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.netpp-resource-callout p {
+  color: var(--netpp-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.netpp-primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0.85rem 1.4rem;
+  background: var(--netpp-blue);
+  border: 1px solid var(--netpp-blue);
+  border-radius: 7px;
+  color: #FFFFFF !important;
+  font-size: 0.94rem;
+  font-weight: 650;
+  text-align: center;
+  text-decoration: none !important;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.netpp-primary-button:hover {
+  background: var(--netpp-navy);
+  border-color: var(--netpp-navy);
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+}
+
+/* ----------------------------------------------------------
+   10. RESPONSIVE — TABLETS
+   ---------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+  .netpp-page {
+    padding: 1rem 1.25rem 3rem;
+  }
+
+  .netpp-info-grid,
+  .netpp-data-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .netpp-resource-callout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
+
+/* ----------------------------------------------------------
+   11. RESPONSIVE — MOBILE
+   ---------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+  .netpp-page {
+    padding: 0.75rem 1rem 2.5rem;
+  }
+
+  .netpp-project-nav {
+    gap: 0.35rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .netpp-nav-link {
+    flex: 1 1 calc(50% - 0.35rem);
+    padding: 0.7rem 0.6rem;
+    font-size: 0.83rem;
+    border-radius: 7px;
+  }
+
+  .netpp-subpage-header {
+    padding: 1.5rem 0 2rem;
+  }
+
+  .netpp-subpage-header h1 {
+    font-size: 2rem;
+  }
+
+  .netpp-section {
+    padding: 1.75rem 0;
+  }
+
+  .netpp-info-grid,
+  .netpp-data-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .netpp-equation-panel {
+    padding: 1.25rem;
+  }
+
+  .netpp-parameter-card {
+    padding: 1.15rem;
+  }
+
+  .netpp-resource-callout {
+    padding: 1.35rem;
+  }
+
+  .netpp-resource-callout .netpp-primary-button {
+    width: 100%;
+  }
+
+}
+
+/* ----------------------------------------------------------
+   12. ACCESSIBILITY
+   ---------------------------------------------------------- */
+
+.netpp-page a:focus-visible {
+  outline: 3px solid var(--netpp-teal);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .netpp-page *,
+  .netpp-page *::before,
+  .netpp-page *::after {
+    transition: none !important;
+  }
+
+}
+

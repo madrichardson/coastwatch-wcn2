@@ -1,0 +1,104 @@
+
+navigation:
+  brand: "TOTAL"
+  brand_subtitle: "Temperature Observations To Avoid Loggerhead"
+  links:
+    - label: "Background"
+      url: "totaltool-background.qmd"
+    - label: "Closure Rules"
+      url: "totaltool-closure-rules.qmd"
+    - label: "Conservation Area Status"
+      url: "totaltool-closure-status.qmd"
+    - label: "Data Dashboard"
+      url: "totaltool-data-dashboard.qmd"
+
+hero:
+  eyebrow: "LOGGERHEAD CONSERVATION"
+  title: "Data Dashboard"
+  subtitle: "Explore historical closure information, environmental conditions, TOTAL indicator values, and monthly ocean temperature maps."
+
+introduction:
+  eyebrow: "HISTORICAL RECORDS"
+  title: "Historical Closure and Environmental Information"
+  description: >-
+    View the closure status of the Pacific Loggerhead Conservation Area
+    and the seasonal (March-August) or annual (January-December)
+    prevailing oceanic environmental conditions from the years
+    2003 to the present.
+  year_label: "Select Year"
+
+closure:
+  eyebrow: "REGULATORY HISTORY"
+  title: "Closure History"
+  subtitle: "Pacific Loggerhead Conservation Area Closures"
+  season_suffix: "Season"
+  no_closure_text: >-
+    NMFS did not prohibit fishing with large-mesh drift gillnet gear
+    in the Loggerhead Conservation Area this season.
+  closure_prefix: >-
+    NMFS prohibited fishing with large-mesh drift gillnet gear
+    in the Pacific Loggerhead Conservation Area from
+  closure_between: "to"
+  notice_label: "View Federal Register Notice"
+  source_label: "Closure status provided by NOAA Fisheries West Coast Regional Office"
+  source_url: "https://www.westcoast.fisheries.noaa.gov/"
+
+environment:
+  eyebrow: "OCEAN CONDITIONS"
+  title: "Environmental Conditions"
+  subtitle: "El Niño Conditions and Coastal Water Temperatures"
+  season_suffix: "Season"
+  table:
+    month: "Month"
+    status: "El Niño Status"
+    forecast: "El Niño Forecast"
+    temperature: "SST"
+    anomaly: "Anomaly"
+
+bycatch:
+  eyebrow: "BYCATCH AVOIDANCE"
+  title: "TOTAL Bycatch Avoidance Tool"
+  subtitle: "TOTAL Time Series"
+  description: >-
+    **Temperature Observations To Avoid Loggerhead (TOTAL)**
+    values for the Loggerhead Conservation Area.
+    An alert is indicated when indicator values (the time series)
+    exceed a threshold of **0.77 (red horizontal line)**.
+  missing_image: "No TOTAL indicator plot is available for the selected year."
+
+maps:
+  eyebrow: "SATELLITE OBSERVATIONS"
+  title: "Monthly Sea Surface Maps"
+  previous_label: "Previous"
+  next_label: "Next"
+  sst:
+    title: "Sea Surface Temperature"
+    description: >-
+      Monthly mean sea surface temperature off Southern California.
+      The Pacific Loggerhead Conservation Area is located within
+      the black lines and the coast. Use arrows to view the
+      last six months of measurements.
+  anomaly:
+    title: "Sea Surface Temperature Anomaly"
+    description: >-
+      Monthly mean surface temperature anomaly (deviation from
+      the average temperature) off Southern California.
+      The loggerhead conservation area is located within
+      the black lines and the coast. Use arrows to view
+      the last six months of measurements.
+  missing_image: "No map is available for this month."
+
+disclaimer:
+  title: "Data Use & Disclaimer"
+  text: >-
+    The information on this page may be used and redistributed freely,
+    but is not intended for legal use. Neither the data contributors,
+    CoastWatch, NOAA SWFSC, nor any of their employees or contractors,
+    makes any warranty, express or implied, including warranties of
+    merchantability and fitness for a particular purpose, or assumes
+    any legal liability for the accuracy, completeness, or usefulness
+    of this information. For official information about El Niño/La Niña
+    contact [NOAA's Climate Prediction Center](https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml).
+    For official information about regulation of the drift gillnet
+    (DGN) fishery contact [NOAA Fisheries West Coast Regional Office](https://www.westcoast.fisheries.noaa.gov/).
+

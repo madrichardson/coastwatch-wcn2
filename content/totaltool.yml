@@ -1,0 +1,73 @@
+# ==========================================================
+# TOTAL TOOL — HOMEPAGE CONTENT
+# ==========================================================
+
+hero:
+  eyebrow: "COASTWATCH PROJECT"
+  title: "TOTAL"
+  subtitle: "Supporting turtle conservation and sustainable fisheries with dynamic ocean management"
+  image: "images/loggerhead_hero.png"
+  image_alt: "Loggerhead sea turtle swimming underwater"
+  image_caption: "Photo copyright: Ralph Pace"
+  credit_url: "https://www.ralphpace.com/"
+  credit_link_label: "Contact"
+  credit_suffix: "for use outside NOAA"
+
+
+# ==========================================================
+# PROJECT NAVIGATION
+# ==========================================================
+
+navigation:
+  links:
+    - label: "Background"
+      url: "totaltool-background.qmd"
+
+    - label: "Closure Rules"
+      url: "totaltool-closure-rules.qmd"
+
+    - label: "Conservation Area Status"
+      url: "totaltool-closure-status.qmd"
+
+    - label: "Data Dashboard"
+      url: "totaltool-data-dashboard.qmd"
+
+
+# ==========================================================
+# PROJECT CARDS
+# ==========================================================
+
+cards:
+
+  - title: "Turtle Bycatch Overview"
+    description: >-
+      The Temperature Observations To Avoid Loggerheads (TOTAL)
+      program brings together agencies, universities, and the
+      fishing industry to reduce bycatch of endangered North
+      Pacific loggerhead turtles, which migrate near California
+      during warm seasons and risk unintended capture by
+      commercial fisheries.
+    buttons:
+      - label: "Learn More"
+        url: "totaltool-background.qmd"
+
+  - title: "Conservation Area Status"
+    description: >-
+      The Pacific Loggerhead Conservation Area off Southern
+      California closes to drift gillnet fishing when warm ocean
+      conditions bring loggerheads into fishing grounds, with
+      closure rules and real-time status available online.
+    buttons:
+      - label: "Closure Rules"
+        url: "totaltool-closure-rules.qmd"
+      - label: "Closure Status"
+        url: "totaltool-closure-status.qmd"
+
+  - title: "Historical Data Dashboard"
+    description: >-
+      Historical data since 2003 provide sea surface temperature,
+      anomalies, El Niño status, and closure history for the
+      Pacific Loggerhead Conservation Area off Southern California.
+    buttons:
+      - label: "View Data"
+        url: "totaltool-data-dashboard.qmd"

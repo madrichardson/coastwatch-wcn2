@@ -1,0 +1,533 @@
+---
+pagetitle: "TOTAL Background"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: ../../css/totaltool-background.css
+---
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+import markdown
+
+from html import escape
+from urllib.parse import urlsplit, urlunsplit
+from IPython.display import display, HTML
+
+
+# ==========================================================
+# LOAD CONTENT
+# ==========================================================
+
+with open("../../content/totaltool-background.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+navigation = data.get("navigation", {})
+intro = data.get("intro", {})
+sections = data.get("sections", [])
+timeline = data.get("timeline", {})
+resources = data.get("resources", {})
+contact = data.get("contact", {})
+
+
+# ==========================================================
+# HELPERS
+# ==========================================================
+
+def safe(value):
+    return escape(
+        str(value if value is not None else ""),
+        quote=True
+    )
+
+
+def md(value):
+    """Render CMS-managed Markdown text."""
+    return markdown.markdown(
+        str(value or ""),
+        extensions=["tables", "sane_lists"]
+    )
+
+
+def page_url(value):
+    """Convert Quarto .qmd links to rendered .html links."""
+    parts = urlsplit(str(value or ""))
+
+    if parts.path.endswith(".qmd"):
+        parts = parts._replace(
+            path=parts.path[:-4] + ".html"
+        )
+
+    return urlunsplit(parts)
+
+
+def render_paragraphs(items):
+    """Render all paragraphs without changing their content."""
+    return "".join(
+        md(item if isinstance(item, str) else item.get("text", ""))
+        for item in (items or [])
+    )
+
+
+def get_section(title):
+    """Find an existing YAML section by its title."""
+    for section in sections:
+        if section.get("title") == title:
+            return section
+
+    return {}
+
+
+def render_image(section):
+    image = section.get("image") or {}
+
+    if not image.get("path"):
+        return ""
+
+    return f"""
+    <figure class="cw-totaltool-bg-figure">
+      <div class="cw-totaltool-bg-image-frame">
+        <img
+          src="{safe(image.get('path'))}"
+          alt="{safe(image.get('alt'))}"
+          loading="lazy"
+        >
+      </div>
+      <figcaption>
+        {safe(image.get('caption'))}
+      </figcaption>
+    </figure>
+    """
+
+
+def section_heading(kicker, title):
+    return f"""
+    <div class="cw-totaltool-bg-section-heading">
+      <span class="cw-totaltool-bg-kicker">
+        {safe(kicker)}
+      </span>
+      <h2>{safe(title)}</h2>
+    </div>
+    """
+
+
+def render_resources(items):
+    result = ""
+
+    for item in items or []:
+
+        if item.get("links"):
+            grouped = " | ".join(
+                f'<a href="{safe(link.get("url"))}" '
+                f'target="_blank" rel="noopener noreferrer">'
+                f'{safe(link.get("label"))}</a>'
+                for link in item["links"]
+            )
+
+            result += f"""
+            <li>
+              {safe(item.get('prefix'))}
+              {grouped}
+              {safe(item.get('suffix'))}
+            </li>
+            """
+
+        else:
+            result += f"""
+            <li>
+              <a href="{safe(item.get('url'))}"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                {safe(item.get('label'))}
+              </a>
+              {safe(item.get('description'))}
+            </li>
+            """
+
+    return f"""
+    <ul class="cw-totaltool-bg-resource-list">
+      {result}
+    </ul>
+    """
+
+
+# ==========================================================
+# NAVIGATION
+# ==========================================================
+
+nav_links = ""
+
+for link in navigation.get("links", []):
+    target = page_url(link.get("url"))
+    active = target == "totaltool-background.html"
+
+    nav_links += f"""
+    <a
+      class="cw-totaltool-bg-tab{' is-active' if active else ''}"
+      href="{safe(target)}"
+      {'aria-current="page"' if active else ''}
+    >
+      {safe(link.get('label'))}
+    </a>
+    """
+
+
+# ==========================================================
+# EXISTING CONTENT SECTIONS
+# ==========================================================
+
+life = get_section("Life History")
+
+strandings = get_section(
+    "U.S. West Coast Strandings and Fisheries Bycatch"
+)
+
+status = get_section("Endangered Species Status")
+
+fishery = get_section("California Drift Gillnet Fishery")
+
+
+
+# ==========================================================
+# REGULATORY TIMELINE
+# ==========================================================
+
+timeline_items = ""
+
+for item in timeline.get("items", []):
+
+    timeline_items += f"""
+    <article class="cw-totaltool-bg-timeline-item">
+
+      <div class="cw-totaltool-bg-timeline-marker"
+           aria-hidden="true"></div>
+
+      <div class="cw-totaltool-bg-timeline-content">
+
+        <span class="cw-totaltool-bg-timeline-year">
+          {safe(item.get('year'))}
+        </span>
+
+        <h3>{safe(item.get('title'))}</h3>
+
+        <div class="cw-totaltool-bg-timeline-description">
+          {md(item.get('description'))}
+        </div>
+
+      </div>
+
+    </article>
+    """
+
+
+timeline_html = ""
+
+if timeline_items:
+    timeline_html = f"""
+    <div class="cw-totaltool-bg-timeline">
+
+      <div class="cw-totaltool-bg-timeline-list">
+        {timeline_items}
+      </div>
+
+    </div>
+    """
+
+
+# ==========================================================
+# CONTACT FORM
+# ==========================================================
+
+form_fields = ""
+
+allowed_types = {"text", "email", "tel"}
+
+for field in contact.get("fields", []):
+
+    field_type = str(field.get("type", "text"))
+
+    required = "required" if field.get("required") else ""
+    marker = " *" if field.get("required") else ""
+
+    if field_type == "textarea":
+
+        control = f"""
+        <textarea
+          name="{safe(field.get('name'))}"
+          rows="6"
+          placeholder="{safe(field.get('placeholder'))}"
+          {required}
+        ></textarea>
+        """
+
+    else:
+
+        if field_type not in allowed_types:
+            field_type = "text"
+
+        control = f"""
+        <input
+          type="{safe(field_type)}"
+          name="{safe(field.get('name'))}"
+          placeholder="{safe(field.get('placeholder'))}"
+          {required}
+        >
+        """
+
+    form_fields += f"""
+    <label class="cw-totaltool-bg-field">
+
+      <span>
+        {safe(field.get('label'))}{marker}
+      </span>
+
+      {control}
+
+    </label>
+    """
+
+
+# ==========================================================
+# PAGE HTML
+# ==========================================================
+
+html = f"""
+<div class="cw-totaltool-bg">
+
+
+  <!-- ====================================================
+       PROJECT NAVIGATION
+       ==================================================== -->
+
+  <header class="cw-totaltool-bg-topbar">
+
+    <a class="cw-totaltool-bg-brand"
+       href="totaltool.html">
+
+      <span class="cw-totaltool-bg-brand-name">
+        {safe(navigation.get('brand', 'TOTAL'))}
+      </span>
+
+      <span class="cw-totaltool-bg-brand-subtitle">
+        {safe(navigation.get('brand_subtitle'))}
+      </span>
+
+    </a>
+
+    <nav class="cw-totaltool-bg-tabs"
+         aria-label="TOTAL navigation">
+      {nav_links}
+    </nav>
+
+  </header>
+
+
+  <!-- ====================================================
+       INTRODUCTION
+       ==================================================== -->
+
+  <section class="cw-totaltool-bg-intro">
+
+    <div class="cw-totaltool-bg-intro-inner">
+
+      <span class="cw-totaltool-bg-eyebrow">
+        {safe(intro.get('eyebrow'))}
+      </span>
+
+      <h1>{safe(intro.get('title'))}</h1>
+
+      <p>{safe(intro.get('subtitle'))}</p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ====================================================
+       LIFE HISTORY
+       ==================================================== -->
+
+  <section class="cw-totaltool-bg-section">
+
+    {section_heading("LOGGERHEAD SEA TURTLES", life.get("title"))}
+
+    <div class="cw-totaltool-bg-feature-grid">
+
+      <div class="cw-totaltool-bg-feature-image">
+        {render_image(life)}
+      </div>
+
+      <div class="cw-totaltool-bg-feature-text">
+        {render_paragraphs(life.get('paragraphs'))}
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ====================================================
+       STRANDINGS AND FISHERIES BYCATCH
+       ==================================================== -->
+
+  <section class="cw-totaltool-bg-section">
+
+    {section_heading(
+        "FISHERIES INTERACTIONS",
+        strandings.get("title")
+    )}
+
+    <div class="cw-totaltool-bg-reading">
+      {render_paragraphs(strandings.get('paragraphs'))}
+    </div>
+
+  </section>
+
+
+  <!-- ====================================================
+       ENDANGERED SPECIES STATUS
+       ==================================================== -->
+
+  <section class="cw-totaltool-bg-section">
+
+    {section_heading(
+        "SPECIES CONSERVATION",
+        status.get("title")
+    )}
+
+    <div class="cw-totaltool-bg-highlight">
+      {render_paragraphs(status.get('paragraphs'))}
+    </div>
+
+  </section>
+
+
+  <!-- ====================================================
+       CALIFORNIA DRIFT GILLNET FISHERY
+       ==================================================== -->
+
+  <section class="cw-totaltool-bg-section">
+
+    {section_heading(
+        "COMMERCIAL FISHERIES",
+        fishery.get("title")
+    )}
+
+    <div class="cw-totaltool-bg-feature-grid is-reversed">
+
+      <div class="cw-totaltool-bg-feature-text">
+        {render_paragraphs(fishery.get('paragraphs'))}
+      </div>
+
+      <div class="cw-totaltool-bg-feature-image">
+        {render_image(fishery)}
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ====================================================
+      REGULATORY HISTORY
+      ==================================================== -->
+
+  <section class="cw-totaltool-bg-section cw-totaltool-bg-regulatory">
+
+    {section_heading(
+        "CONSERVATION MANAGEMENT",
+        timeline.get("title", "Regulatory History")
+    )}
+
+    <!-- Complete regulatory history organized chronologically -->
+    {timeline_html}
+
+  </section>
+
+
+
+  <!-- ====================================================
+       RESOURCES AND CONTACT
+       ==================================================== -->
+
+  <section class="cw-totaltool-bg-resources">
+
+    {section_heading(
+        "SUPPORTING INFORMATION",
+        resources.get("heading", "Resources & Contact")
+    )}
+
+    <div class="cw-totaltool-bg-accordion">
+
+      <details class="cw-totaltool-bg-details">
+
+        <summary>
+          {safe(resources.get('title', 'Additional Information'))}
+        </summary>
+
+        <div class="cw-totaltool-bg-details-body">
+          {render_resources(resources.get('links'))}
+        </div>
+
+      </details>
+
+
+      <details class="cw-totaltool-bg-details">
+
+        <summary>
+          {safe(contact.get('title', 'Feedback / Contact Us'))}
+        </summary>
+
+        <div class="cw-totaltool-bg-details-body">
+
+          <p class="cw-totaltool-bg-form-note">
+            {safe(contact.get('notice'))}
+          </p>
+
+          <form class="cw-totaltool-bg-form">
+
+            <div class="cw-totaltool-bg-form-grid">
+              {form_fields}
+            </div>
+
+            <div class="cw-totaltool-bg-form-actions">
+
+              <button
+                type="submit"
+                class="cw-totaltool-bg-btn"
+                disabled
+              >
+                {safe(contact.get('submit_label', 'Submit Comments'))}
+              </button>
+
+              <button
+                type="reset"
+                class="cw-totaltool-bg-btn secondary"
+              >
+                {safe(contact.get('reset_label', 'Clear Form'))}
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </details>
+
+    </div>
+
+  </section>
+
+
+</div>
+"""
+
+display(HTML(html))
+```

@@ -2,6 +2,14 @@ project:
   type: website
   output-dir: _site
 
+  render:
+    - "**/*.qmd"
+    - "!projects/netpp/tutorials/**"
+
+  resources:
+    - projects/netpp/tutorials/**
+    - "projects/totaltool/data/**"
+
 website:
   title: "CoastWatch West Coast Node"
   favicon: images/coastwatch.png

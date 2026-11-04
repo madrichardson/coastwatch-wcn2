@@ -1,0 +1,385 @@
+
+---
+pagetitle: "Closure Rules"
+anchor-sections: false
+page-layout: full
+jupyter: python3
+format:
+  html:
+    toc: false
+    css: ../../css/totaltool-closure-rules.css
+---
+
+::: {.column-page}
+
+```{python}
+#| echo: false
+#| output: asis
+
+import yaml
+import markdown
+from html import escape
+from urllib.parse import urlsplit, urlunsplit
+from IPython.display import display, HTML
+
+# ==========================================================
+# LOAD CONTENT
+# ==========================================================
+
+with open("../../content/totaltool-closure-rules.yml", encoding="utf-8") as f:
+    data = yaml.safe_load(f) or {}
+
+nav = data.get("navigation", {})
+hero = data.get("hero", {})
+conservation = data.get("conservation_area", {})
+standing = data.get("standing_rule", {})
+total = data.get("total_tool", {})
+references = data.get("references", {})
+
+
+# ==========================================================
+# HELPERS
+# ==========================================================
+
+def safe(value):
+    return escape(
+        str(value if value is not None else ""),
+        quote=True
+    )
+
+
+def md(value):
+    """Render CMS-managed Markdown, including inline links."""
+    return markdown.markdown(
+        str(value or ""),
+        extensions=["tables", "sane_lists"]
+    )
+
+
+def render_paragraphs(items):
+    return "\n".join(
+        md(item if isinstance(item, str) else item.get("text", ""))
+        for item in (items or [])
+    )
+
+
+def page_url(value):
+    """Convert local QMD links to rendered HTML links."""
+    parts = urlsplit(str(value or ""))
+
+    if parts.path.endswith(".qmd"):
+        parts = parts._replace(
+            path=parts.path[:-4] + ".html"
+        )
+
+    return urlunsplit(parts)
+
+
+def render_image(image):
+    image = image or {}
+
+    if not image.get("path"):
+        return ""
+
+    caption = image.get("caption", "")
+    caption_html = (
+        f"<figcaption>{md(caption)}</figcaption>"
+        if caption else ""
+    )
+
+    return f"""
+    <figure class="cw-totaltool-rules-figure">
+      <div class="cw-totaltool-rules-image-frame">
+        <img
+          src="{safe(image.get('path'))}"
+          alt="{safe(image.get('alt'))}"
+          loading="lazy"
+        >
+      </div>
+      {caption_html}
+    </figure>
+    """
+
+
+def section_heading(title, eyebrow=""):
+    eyebrow_html = (
+        f'<span class="cw-totaltool-rules-kicker">{safe(eyebrow)}</span>'
+        if eyebrow else ""
+    )
+
+    return f"""
+    <div class="cw-totaltool-rules-heading">
+      {eyebrow_html}
+      <h2>{safe(title)}</h2>
+    </div>
+    """
+
+
+# ==========================================================
+# NAVIGATION
+# ==========================================================
+
+nav_links = ""
+
+for link in nav.get("links", []):
+    target = page_url(link.get("url"))
+
+    active = (
+        urlsplit(target).path.rsplit("/", 1)[-1]
+        == "totaltool-closure-rules.html"
+    )
+
+    nav_links += f"""
+    <a
+      class="cw-totaltool-rules-tab{' is-active' if active else ''}"
+      href="{safe(target)}"
+      {'aria-current="page"' if active else ''}
+    >
+      {safe(link.get('label'))}
+    </a>
+    """
+
+
+# ==========================================================
+# ENVIRONMENTAL CONDITION CARDS
+# ==========================================================
+
+condition_cards = ""
+
+for index, condition in enumerate(
+    standing.get("conditions", []),
+    start=1
+):
+    condition_cards += f"""
+    <article class="cw-totaltool-rules-condition-card">
+
+      <span class="cw-totaltool-rules-condition-index">
+        CONDITION {index:02d}
+      </span>
+
+      <h3>{safe(condition.get('title'))}</h3>
+
+      <p>{safe(condition.get('description'))}</p>
+
+    </article>
+    """
+
+
+# ==========================================================
+# REFERENCES
+# ==========================================================
+
+reference_items = ""
+
+for item in references.get("items", []):
+    reference_items += f"""
+    <li>
+      {safe(item.get('citation'))}
+      <a
+        href="{safe(item.get('url'))}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {safe(item.get('link_label'))}
+      </a>
+    </li>
+    """
+
+
+# ==========================================================
+# PAGE HTML
+# ==========================================================
+
+html = f"""
+<div class="cw-totaltool-rules">
+
+  <!-- =====================================================
+       PROJECT NAVIGATION
+       ===================================================== -->
+
+  <header class="cw-totaltool-rules-topbar">
+
+    <a class="cw-totaltool-rules-brand" href="totaltool.html">
+
+      <span class="cw-totaltool-rules-brand-name">
+        {safe(nav.get('brand', 'TOTAL'))}
+      </span>
+
+      <span class="cw-totaltool-rules-brand-subtitle">
+        {safe(nav.get('brand_subtitle'))}
+      </span>
+
+    </a>
+
+    <nav class="cw-totaltool-rules-tabs"
+         aria-label="TOTAL navigation">
+      {nav_links}
+    </nav>
+
+  </header>
+
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+
+  <section class="cw-totaltool-rules-hero">
+
+    <span class="cw-totaltool-rules-hero-eyebrow">
+      {safe(hero.get('eyebrow'))}
+    </span>
+
+    <h1>{safe(hero.get('title'))}</h1>
+
+    <p>{safe(hero.get('subtitle'))}</p>
+
+  </section>
+
+
+  <!-- =====================================================
+       LOGGERHEAD CONSERVATION AREA
+       ===================================================== -->
+
+  <section class="cw-totaltool-rules-section">
+
+    {section_heading(
+        conservation.get('title'),
+        conservation.get('eyebrow')
+    )}
+
+    <div class="cw-totaltool-rules-intro-panel">
+      {render_paragraphs(conservation.get('paragraphs'))}
+    </div>
+
+    <div class="cw-totaltool-rules-media">
+      {render_image(conservation.get('image'))}
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STANDING CLOSURE RULE
+       ===================================================== -->
+
+  <section class="cw-totaltool-rules-section">
+
+    {section_heading(
+        standing.get('title'),
+        standing.get('eyebrow')
+    )}
+
+    <div class="cw-totaltool-rules-reading">
+      {render_paragraphs(standing.get('introduction'))}
+    </div>
+
+    <div class="cw-totaltool-rules-conditions-grid">
+      {condition_cards}
+    </div>
+
+    <div class="cw-totaltool-rules-reading">
+      {render_paragraphs(standing.get('explanation'))}
+    </div>
+
+    <div class="cw-totaltool-rules-season">
+
+      <span class="cw-totaltool-rules-season-label">
+        {safe(standing.get('period_label'))}
+      </span>
+
+      <strong class="cw-totaltool-rules-season-dates">
+        {safe(standing.get('period'))}
+      </strong>
+
+      <p>{safe(standing.get('period_note'))}</p>
+
+    </div>
+
+    <p class="cw-totaltool-rules-closure-label">
+      {safe(standing.get('closing_text'))}
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       PROPOSED TOTAL BYCATCH AVOIDANCE TOOL
+       ===================================================== -->
+
+  <section class="cw-totaltool-rules-section">
+
+    {section_heading(
+        total.get('title'),
+        total.get('eyebrow')
+    )}
+
+    <div class="cw-totaltool-rules-reading">
+      {render_paragraphs(total.get('paragraphs'))}
+    </div>
+
+    <div class="cw-totaltool-rules-threshold">
+
+      <div class="cw-totaltool-rules-threshold-number">
+
+        <span class="cw-totaltool-rules-threshold-label">
+          {safe(total.get('threshold_label'))}
+        </span>
+
+        <strong class="cw-totaltool-rules-threshold-value">
+          {safe(total.get('threshold'))}
+        </strong>
+
+      </div>
+
+      <p>{safe(total.get('threshold_note'))}</p>
+
+    </div>
+
+    <div class="cw-totaltool-rules-media">
+      {render_image(total.get('image'))}
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       ADDITIONAL INFORMATION
+       ===================================================== -->
+
+  <section class="cw-totaltool-rules-section">
+
+    {section_heading(
+        references.get('heading'),
+        references.get('eyebrow')
+    )}
+
+    <div class="cw-totaltool-rules-accordion">
+
+      <details class="cw-totaltool-rules-details">
+
+        <summary>
+          {safe(references.get('title', 'References'))}
+          <span aria-hidden="true">+</span>
+        </summary>
+
+        <div class="cw-totaltool-rules-details-body">
+
+          <ul>
+            {reference_items}
+          </ul>
+
+        </div>
+
+      </details>
+
+    </div>
+
+  </section>
+
+</div>
+"""
+
+display(HTML(html))
+```
+
+:::
