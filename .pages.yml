@@ -2348,11 +2348,6 @@ content:
                   - {name: label, label: Dataset Label, type: string}
                   - {name: url, label: Dataset URL, type: string}
 
-media:
-  input: images
-  output: /images
-
-content:
   - name: contact
     label: Contact and Feedback
     type: file
