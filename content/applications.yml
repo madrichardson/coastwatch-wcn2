@@ -61,7 +61,7 @@ projects:
   description: NOAA CoastWatch developed interim primary productivity products to bridge the gap created by the upcoming retirement of the MODIS-Aqua sensor, which has supported the legacy global product since 2007. These interim products, driven by VIIRS-SNPP and VIIRS-NOAA20 data using the established VPGM algorithm, provide continuity for users until the next generation of primary productivity products is available.
   funding: The project was supported by funding from the Portfolio Management Branch of NESDIS, NOAA CoastWatch, and CSU COAST.
   homepage_url: ''
-  project_href: projects/primary-productivity/netpp.qmd
+  project_href: projects/netpp/netpp.qmd
 - image: images/polarwatch.png
   alt: PolarWatch Image
   category_title: Polar Regions Satellite Data
@@ -83,7 +83,7 @@ projects:
   description: 'Watch My Ocean is an interactive dashboard developed by NOAA CoastWatch West Coast Node that enables users to explore oceanographic conditions using satellite . It supports both regional analysis around CalCOFI stations and vessel-based monitoring, allowing users to examine conditions near NOAA ships in near real time. '
   funding: NOAA CoastWatch.
   homepage_url: ''
-  project_href: projects/watch-my-ocean/calcofi.html
+  project_href: projects/watchmyocean/calcofi.html
 - image: images/poc.png
   alt: Particulate Organic Carbon Image
   category_title: POC Algorithm Development
@@ -127,7 +127,7 @@ projects:
   description: CoastWatch West Coast Node has created satellite indices for the Alaskan Fishery Management areas to be used in the Ecosystem and Socioeconomic Profiles (ESP), which are submitted as part of the annual Stock Assessment and Fishery Evaluation (SAFE) Reports.
   funding: NOAA Alaska Fisheries Science Center and CoastWatch West Coast Node.
   homepage_url: ''
-  project_href: projects/afsc-stock-assessment/AFSC-Stock-Assessment-Tool.qmd
+  project_href: projects/afsc/AFSC-Stock-Assessment-Tool.qmd
 - image: images/non-traditional-erddap.png
   alt: Non-Traditional Use of ERDDAP Image
   category_title: Non-Traditional Use of ERDDAP
