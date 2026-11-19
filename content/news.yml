@@ -1,4 +1,8 @@
 news:
+  - title: "Testing "
+    description: This is a test
+    date: 2026-11-19
+    expiration: 2026-11-27
   - title: Mission end for S-NPP VIIRS sensor
     description: The mission of the S-NPP VIIRS sensor has ended. Delivery of new
       data from the sensor stopped after 13:00 UTC on November 1, 2026. Please
