@@ -11,12 +11,12 @@ news:
       the job, go to https://jobs.ucsc.edu/. Click on the External or Internal
       Candidate Gateway. Enter the ID 80980 to the “Search Jobs” field.
     date: 2025-09-08
-    expiration: 2026-02-24
+    expiration: 2026-12-31
   - title: Monthly NOAA Gridded Super-collated SST
     description: A monthly version of the NOAA Gridded Super-collated SST is
       available on ERDDAP.
     date: 2025-08-28
-    expiration: 2026-11-17
+    expiration: 2026-12-31
   - title: Version 2 of Sardine Habitat Model
     description: 'Version 2 of the Sardine Habitat Model, based on either <a
       href="https://coastwatch.pfeg.noaa.gov/erddap/griddap/sardine_habitat_modis_v2.graph"
